@@ -120,6 +120,7 @@ $arguments = @(
     '--alias', $ModelAlias,
     '--host', '127.0.0.1',
     '--port', [string]$Port,
+    '--cors-origins', 'localhost',
     '--device', 'CUDA0',
     '--ctx-size', [string]$ContextSize,
     '--parallel', '1',
@@ -142,6 +143,7 @@ $arguments = @(
     '--no-reasoning-preserve',
     '--no-agent',
     '--metrics',
+    '--log-verbosity', '4',
     '--log-colors', 'off',
     '--log-timestamps',
     '--log-file', ('"' + $serverLogPath + '"')

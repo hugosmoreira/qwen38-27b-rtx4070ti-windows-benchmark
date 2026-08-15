@@ -136,6 +136,7 @@ $record = [ordered]@{
         backend = 'CUDA'
         api = 'OpenAI-compatible /v1/chat/completions'
         bind = '127.0.0.1'
+        cors_origins = 'localhost'
     }
     model = [ordered]@{
         repository = [string]$modelManifestObject.repository
@@ -175,6 +176,7 @@ $record = [ordered]@{
         top_k = 20
         min_p = 0.0
         max_output_tokens = 128
+        startup_log_verbosity = 4
     }
     server_health = $health
     served_model_ids = $servedModelIds
