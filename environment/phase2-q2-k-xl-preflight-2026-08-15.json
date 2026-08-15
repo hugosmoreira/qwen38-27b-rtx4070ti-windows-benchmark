@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "record_type": "phase_2_candidate_preflight",
+  "verified_date": "2026-08-15",
+  "candidate": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "repository_commit": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "quantization": "UD-Q2_K_XL",
+    "size_bytes": 10676423744,
+    "size_decimal_gb": 10.68,
+    "size_gib": 9.94,
+    "sha256": "46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8",
+    "git_lfs_blob_id": "32867d873b51c56412e13298a77c38d1ef64b587",
+    "download_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/1cff334a4a228324d4ee1f76d55d372588f0d556/Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "planned_relative_local_path": "models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "download_status": "not_downloaded_awaiting_explicit_approval"
+  },
+  "comparison_to_phase_1": {
+    "phase_1_quantization": "UD-IQ2_XXS",
+    "phase_1_size_bytes": 9010048064,
+    "candidate_size_delta_bytes": 1666375680,
+    "candidate_size_delta_mib": 1589.18,
+    "phase_1_loaded_vram_used_mib": 8958,
+    "phase_1_loaded_vram_free_mib": 3037,
+    "rough_projected_candidate_vram_used_mib": 10547.18,
+    "rough_projected_candidate_vram_free_mib": 1734.82
+  },
+  "planned_first_load_controls": {
+    "context_length": 4096,
+    "parallel_slots": 1,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "flash_attention": true,
+    "speculative_decoding": "off",
+    "thinking": false,
+    "preserve_thinking": false,
+    "tools": false,
+    "vision": false,
+    "gpu_memory_mode": "auto"
+  },
+  "estimate_limitations": [
+    "The VRAM projection adds the GGUF file-size difference to one Phase 1 loaded-memory snapshot; file size and runtime VRAM are not identical.",
+    "Different tensor quantization mixes can change GPU buffers and placement behavior.",
+    "Background GPU use and allocator behavior vary between loads.",
+    "Only an actual validated load can establish whether all eligible layers fit and how much headroom remains."
+  ],
+  "decision": {
+    "recommendation": "Proceed as the next controlled candidate because a full-GPU 4K load appears plausible and it changes only the quantization under the planned controls.",
+    "approval_required_before_download": true
+  }
+}

@@ -111,4 +111,15 @@ The script authenticates only through Unsloth Desktop's local secret, verifies t
 
 ## Next gate
 
-Phase 2 evaluates whether a larger quant improves practical response quality enough to justify its memory and speed cost. Before another multi-gigabyte download, its exact filename, byte size, checksum availability, destination, and expected VRAM/offload behavior must be reviewed. No additional model is downloaded automatically.
+Phase 2 evaluates whether a larger quant improves practical response quality enough to justify its memory and speed cost. The next controlled candidate has been preflighted but not downloaded:
+
+| Item | Approval candidate |
+|---|---|
+| File | `Qwen3.8-27B-UD-Q2_K_XL.gguf` |
+| Pinned repository commit | `1cff334a4a228324d4ee1f76d55d372588f0d556` |
+| Size | 10,676,423,744 bytes / 9.94 GiB |
+| SHA-256 | `46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8` |
+| Planned destination | `models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-Q2_K_XL.gguf` |
+| Rough same-settings VRAM projection | 10,547 MiB used / 1,735 MiB free |
+
+The projection is not a measurement; it scales the Phase 1 loaded snapshot by the file-size difference. The [Phase 2 preflight record](environment/phase2-q2-k-xl-preflight-2026-08-15.json) documents its limitations. No additional model is downloaded without explicit approval.
