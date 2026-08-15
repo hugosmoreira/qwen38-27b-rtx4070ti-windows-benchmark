@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "record_type": "phase_2_runtime_and_first_load",
+  "captured_date": "2026-08-15",
+  "runtime": {
+    "desktop_shell": "Unsloth Studio (Desktop) 0.1.800-beta",
+    "unsloth": "2026.8.18",
+    "llama_cpp_release": "unslothai/llama.cpp@b10360-mix-87da1a2",
+    "llama_cpp_installed_tag": "b10360"
+  },
+  "model": {
+    "manifest": "environment/phase2-q2-k-xl-download-manifest.json",
+    "quantization": "UD-Q2_K_XL",
+    "size_bytes": 10676423744,
+    "sha256_validated": true,
+    "preflight_valid": true,
+    "is_gguf": true,
+    "is_vision_without_mmproj": false,
+    "requires_trust_remote_code": false,
+    "requires_security_review": false,
+    "native_context_length": 262144,
+    "layer_count": 65,
+    "moe_layer_count": 0
+  },
+  "preflight_projection_review": {
+    "projected_vram_used_mib": 10547.18,
+    "actual_vram_used_mib": 10542,
+    "used_memory_projection_error_mib": -5.18,
+    "original_projected_free_mib_from_total_minus_used": 1734.82,
+    "corrected_projected_free_mib_from_observed_phase_1_free_minus_file_delta": 1447.82,
+    "actual_vram_free_mib": 1453,
+    "correction": "On this WDDM system, nvidia-smi total VRAM did not equal used plus free VRAM because approximately 287 MiB was reserved or otherwise unavailable. Free-memory projection must start from observed free memory, not total minus used."
+  },
+  "first_load": {
+    "requested": {
+      "context_length": 4096,
+      "parallel_slots": 1,
+      "gpu_memory_mode": "auto",
+      "gpu_layers": -1,
+      "kv_cache_k_type": "q8_0",
+      "kv_cache_v_type": "q8_0",
+      "prompt_batch_size": 512,
+      "prompt_micro_batch_size": 128,
+      "speculative_decoding": "off",
+      "trust_remote_code": false,
+      "vision": false
+    },
+    "effective": {
+      "status": "loaded",
+      "context_length": 4096,
+      "maximum_context_reported_by_auto_fit": 12544,
+      "native_context_length": 262144,
+      "model_layers": 65,
+      "llama_cpp_gpu_layers_argument": -1,
+      "cpu_fallback_reason": null,
+      "parallel_slots": 1,
+      "flash_attention": true,
+      "kv_cache_k_type": "q8_0",
+      "kv_cache_v_type": "q8_0",
+      "speculative_decoding": "off"
+    },
+    "server_process_time_ms": 8781.03,
+    "client_elapsed_ms": 8784.84,
+    "gpu_loaded": {
+      "vram_used_mib": 10542,
+      "vram_free_mib": 1453,
+      "temperature_c": 46,
+      "power_draw_w": 47.42
+    },
+    "process_memory_snapshot": {
+      "llama_server_working_set_mib": 10019.3,
+      "llama_server_private_memory_mib": 11246.29,
+      "system_available_physical_gb": 37.5
+    }
+  },
+  "first_generation_observation": {
+    "thinking_enabled": false,
+    "preserve_thinking": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "prompt_tokens": 54,
+    "completion_tokens": 40,
+    "total_tokens": 94,
+    "end_to_end_latency_ms": 1287.044,
+    "end_to_end_completion_tokens_per_second": 31.079,
+    "engine_prompt_tokens_per_second": 418.6,
+    "engine_generation_tokens_per_second": 38.9,
+    "finish_reason": "stop",
+    "correct_arithmetic_result": true,
+    "gpu_after_generation": {
+      "vram_used_mib": 10560,
+      "vram_free_mib": 1435,
+      "temperature_c": 64,
+      "power_draw_w": 226.75
+    }
+  },
+  "limitations": [
+    "This is a proof-of-life record, not a repeated performance or quality benchmark.",
+    "The first response is too short for a headline throughput comparison.",
+    "GPU and process-memory values are point-in-time snapshots rather than continuously sampled peaks.",
+    "The auto-fit maximum context value is not a practical-context result."
+  ]
+}

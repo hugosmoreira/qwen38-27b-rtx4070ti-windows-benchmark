@@ -109,17 +109,23 @@ The script authenticates only through Unsloth Desktop's local secret, verifies t
 - Use `null`, never invented zeroes, for unavailable metrics.
 - Do not commit GGUF model weights, caches, secrets, or unreviewed private prompt data.
 
-## Next gate
+## Phase 2 preliminary proof of life
 
-Phase 2 evaluates whether a larger quant improves practical response quality enough to justify its memory and speed cost. The next controlled candidate has been preflighted but not downloaded:
+The approved `UD-Q2_K_XL` candidate was downloaded, checksum-validated, and loaded with the same controls as Phase 1:
 
-| Item | Approval candidate |
+| Item | Observed value |
 |---|---|
 | File | `Qwen3.8-27B-UD-Q2_K_XL.gguf` |
 | Pinned repository commit | `1cff334a4a228324d4ee1f76d55d372588f0d556` |
 | Size | 10,676,423,744 bytes / 9.94 GiB |
 | SHA-256 | `46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8` |
-| Planned destination | `models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-Q2_K_XL.gguf` |
-| Rough same-settings VRAM projection | 10,547 MiB used / 1,735 MiB free |
+| Local location | `models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-Q2_K_XL.gguf` |
+| Model layers | 65, launched with llama.cpp `-ngl -1`; no CPU fallback |
+| Context / KV cache / slots | 4,096 / Q8 K+V / 1 |
+| Loaded VRAM snapshot | 10,542 MiB used / 1,453 MiB free |
+| Server-side load time | 8,781.03 ms |
+| First short engine observation | 38.9 generation tok/s; 418.6 prompt tok/s |
 
-The projection is not a measurement; it scales the Phase 1 loaded snapshot by the file-size difference. The [Phase 2 preflight record](environment/phase2-q2-k-xl-preflight-2026-08-15.json) documents its limitations. No additional model is downloaded without explicit approval.
+The original used-memory projection was within 5.18 MiB, but its free-memory calculation incorrectly used total minus used VRAM. WDDM left about 287 MiB reserved or otherwise unavailable, so the correct projection was 1,447.82 MiB free—close to the 1,453 MiB observation. The [runtime record](environment/phase2-q2-k-xl-runtime-2026-08-15.json) preserves the correction.
+
+This remains proof-of-life evidence. A committed canonical smoke run is the next Phase 2 checkpoint; repeated speed and quality comparisons come later.

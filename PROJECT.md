@@ -4,7 +4,7 @@
 
 - Phase 0 completed on 2026-08-15.
 - Phase 1 completed on 2026-08-15 with the pinned `UD-IQ2_XXS` model and a 3/3 passing proof-of-life suite.
-- Phase 2 preflight is complete for `UD-Q2_K_XL`; no second quant has been approved or downloaded.
+- Phase 2 `UD-Q2_K_XL` download and first controlled load are complete; the canonical smoke record is the next checkpoint.
 
 ## Objective
 

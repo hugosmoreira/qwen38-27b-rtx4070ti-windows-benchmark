@@ -1,0 +1,20 @@
+{
+  "verified_date": "2026-08-15",
+  "repository": "unsloth/Qwen3.8-27B-GGUF",
+  "repository_commit": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+  "filename": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+  "quantization": "UD-Q2_K_XL",
+  "relative_local_path": "models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-Q2_K_XL.gguf",
+  "size_bytes": 10676423744,
+  "size_decimal_gb": 10.68,
+  "size_gib": 9.94,
+  "sha256": "46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8",
+  "git_lfs_blob_id": "32867d873b51c56412e13298a77c38d1ef64b587",
+  "download_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/1cff334a4a228324d4ee1f76d55d372588f0d556/Qwen3.8-27B-UD-Q2_K_XL.gguf",
+  "download_status": "downloaded_and_sha256_validated",
+  "validated_date": "2026-08-15",
+  "notes": [
+    "The model file is intentionally excluded from Git.",
+    "The download used a resumable .part file that was promoted only after exact byte-count and SHA-256 validation."
+  ]
+}
