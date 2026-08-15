@@ -139,7 +139,7 @@ $arguments = @(
     '--no-mmproj',
     '--jinja',
     '--reasoning', 'off',
-    '--reasoning-format', 'none',
+    '--reasoning-format', 'deepseek',
     '--no-reasoning-preserve',
     '--no-agent',
     '--metrics',

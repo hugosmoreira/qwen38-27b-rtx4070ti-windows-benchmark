@@ -21,7 +21,7 @@ Current scripts:
 
 `start_native_llama_server.ps1` validates the pinned IQ2 model by size and SHA-256, verifies the official `b10448` executable and `CUDA0` device probe, and starts a hidden loopback-only server on port 8090 with localhost-only CORS. Trace-level startup logging retains CUDA allocation and layer-offload evidence. It creates non-overwriting logs and a launch record under the ignored `runtimes/` tree. Pass `-SkipModelHashValidation` only for later routine restarts after the canonical validation has been recorded.
 
-`run_native_smoke.ps1` calls the native server's OpenAI-compatible `/v1/chat/completions` endpoint with thinking, built-in tools, MCP, and vision disabled. It writes a unique Phase 3 proof-of-life record; this is not the repeated Phase 4 baseline.
+`run_native_smoke.ps1` calls the native server's OpenAI-compatible `/v1/chat/completions` endpoint with thinking, built-in tools, MCP, and vision disabled. The server uses the `deepseek` reasoning parser only to keep Qwen's empty `<think>` wrapper out of answer content; it does not enable reasoning generation. The script writes a unique Phase 3 proof-of-life record; this is not the repeated Phase 4 baseline.
 
 For the Phase 2 quant-triage suite, add:
 

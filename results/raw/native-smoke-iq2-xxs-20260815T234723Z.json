@@ -1,0 +1,201 @@
+{
+  "schema_version": "native-smoke-1.0",
+  "run_id": "native-smoke-iq2-xxs-20260815T234723Z",
+  "timestamp": "2026-08-15T16:47:23.2321160-07:00",
+  "git_commit": "37b844ac902b8d18845852eb7860f45b02e1e390",
+  "classification": "phase3_native_api_proof_of_life_not_formal_benchmark",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_manifest": "environment/llama-cpp-b10448-manifest.json",
+  "model_manifest": "environment/model-download-manifest.json",
+  "prompt_suite": "prompts/phase1-smoke.json",
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "api": "OpenAI-compatible /v1/chat/completions",
+    "bind": "127.0.0.1",
+    "cors_origins": "localhost"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+    "quantization": "UD-IQ2_XXS",
+    "file_size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+    "served_alias": "Qwen3.8-27B-UD-IQ2_XXS"
+  },
+  "configuration": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": -1,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "none",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "seed": 42,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "max_output_tokens": 128,
+    "startup_log_verbosity": 4
+  },
+  "server_health": {
+    "status": "ok"
+  },
+  "served_model_ids": [
+    "Qwen3.8-27B-UD-IQ2_XXS"
+  ],
+  "gpu_before": {
+    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "driver_version": "610.88",
+    "vram_total_mib": 12282,
+    "vram_used_mib": 8968,
+    "vram_free_mib": 3027,
+    "utilization_percent": 0,
+    "temperature_c": 43,
+    "power_draw_w": 32.25
+  },
+  "runs": [
+    {
+      "task_id": "exact-ready",
+      "passed": false,
+      "elapsed_ms": 154.366,
+      "finish_reason": "stop",
+      "response": {
+        "content": "<think>\n\n</think>\n\nLOCAL MODEL READY",
+        "reasoning_content": null,
+        "usage": {
+          "completion_tokens": 4,
+          "prompt_tokens": 39,
+          "total_tokens": 43,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 39,
+          "prompt_ms": 65.138,
+          "prompt_per_token_ms": 1.6702051282051282,
+          "prompt_per_second": 598.7288525898861,
+          "predicted_n": 4,
+          "predicted_ms": 77.105,
+          "predicted_per_token_ms": 25.701666666666668,
+          "predicted_per_second": 38.90798262110109
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8968,
+        "vram_free_mib": 3027,
+        "utilization_percent": 0,
+        "temperature_c": 43,
+        "power_draw_w": 32.25
+      }
+    },
+    {
+      "task_id": "arithmetic-and-explanation",
+      "passed": true,
+      "elapsed_ms": 970.421,
+      "finish_reason": "stop",
+      "response": {
+        "content": "<think>\n\n</think>\n\nGGUF quantization is a method of reducing the precision of large language model weights to decrease file size and memory usage, and 17 multiplied by 19 equals 323.",
+        "reasoning_content": null,
+        "usage": {
+          "completion_tokens": 40,
+          "prompt_tokens": 55,
+          "total_tokens": 95,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 55,
+          "prompt_ms": 70.163,
+          "prompt_per_token_ms": 1.275690909090909,
+          "prompt_per_second": 783.88894431538,
+          "predicted_n": 40,
+          "predicted_ms": 897.066,
+          "predicted_per_token_ms": 23.00169230769231,
+          "predicted_per_second": 43.47506203556929
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8968,
+        "vram_free_mib": 3027,
+        "utilization_percent": 98,
+        "temperature_c": 62,
+        "power_draw_w": 178.78
+      }
+    },
+    {
+      "task_id": "strict-json",
+      "passed": false,
+      "elapsed_ms": 538.654,
+      "finish_reason": "stop",
+      "response": {
+        "content": "<think>\n\n</think>\n\n{\"model\": \"Qwen3.8-27B\", \"status\": \"ready\"}",
+        "reasoning_content": null,
+        "usage": {
+          "completion_tokens": 21,
+          "prompt_tokens": 64,
+          "total_tokens": 85,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 64,
+          "prompt_ms": 71.809,
+          "prompt_per_token_ms": 1.122015625,
+          "prompt_per_second": 891.2531855338468,
+          "predicted_n": 21,
+          "predicted_ms": 463.698,
+          "predicted_per_token_ms": 23.1849,
+          "predicted_per_second": 43.13152094682315
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8968,
+        "vram_free_mib": 3027,
+        "utilization_percent": 90,
+        "temperature_c": 61,
+        "power_draw_w": 241.64
+      }
+    }
+  ],
+  "summary": {
+    "prompts_attempted": 3,
+    "prompts_passed": 1,
+    "all_passed": false,
+    "note": "This verifies the native OpenAI-compatible path. Phase 4 adds warm-up, repetitions, telemetry, and variance analysis."
+  }
+}
