@@ -131,4 +131,6 @@ The original used-memory projection was within 5.18 MiB, but its free-memory cal
 
 The [canonical Q2_K_XL smoke record](results/raw/quant-smoke-ud-q2-k-xl-20260815T232000Z.json) passed 3/3 checks from committed harness revision `d21abea`. The [Phase 2 smoke checkpoint](results/summaries/phase2-smoke-checkpoint.md) compares both quants without presenting the tiny runs as a formal benchmark.
 
-Provisional decision: retain `UD-IQ2_XXS` as the speed configuration and `UD-Q2_K_XL` as the quality candidate. The current smoke suite cannot prove a quality difference because both models passed every check. The next Phase 2 step is a small, controlled, discriminating task suite before deciding whether a 12.52 GiB `UD-Q3_K_XL` download is justified.
+Phase 2 quant triage is complete. On ten identical objective pass@1 tasks, `UD-IQ2_XXS` passed 3/10 and `UD-Q2_K_XL` passed 5/10. Q2 uniquely passed binary conversion and first-unique-character tasks, while IQ2 had no unique wins. See the [quant-triage summary](results/summaries/phase2-quant-triage.md) and its raw source records.
+
+Decision: retain `UD-IQ2_XXS` as the provisional speed configuration and `UD-Q2_K_XL` as the provisional quality-oriented configuration. This small result does not establish general model quality, but it is enough to defer the 12.52 GiB `UD-Q3_K_XL` download. The next project gate is the pinned native llama.cpp runtime and repeated baselines for the two selected models.

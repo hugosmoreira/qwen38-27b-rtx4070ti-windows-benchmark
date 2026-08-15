@@ -1,0 +1,435 @@
+{
+  "schema_version": "quant-smoke-1.0",
+  "run_id": "quant-triage-ud-q2-k-xl-20260815T232426Z",
+  "timestamp": "2026-08-15T16:24:26.4240978-07:00",
+  "git_commit": "4603f0cd19d330619cf7e778b963e41c5786b204",
+  "classification": "phase2_quant_triage_not_formal_quality_benchmark",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase2-q2-k-xl-runtime-2026-08-15.json",
+  "model_manifest": "environment/phase2-q2-k-xl-download-manifest.json",
+  "prompt_suite": "prompts/phase2-quant-triage.json",
+  "runtime": {
+    "name": "Unsloth Desktop",
+    "backend": "bundled llama.cpp",
+    "llama_cpp_installed_tag": "b10360"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-Q2_K_XL.gguf",
+    "quantization": "UD-Q2_K_XL",
+    "file_size_bytes": 10676423744,
+    "sha256": "46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8"
+  },
+  "configuration": {
+    "context_size": 4096,
+    "native_context_size": 262144,
+    "parallel_slots": 1,
+    "model_layers": 65,
+    "gpu_memory_mode": "auto",
+    "gpu_layers": -1,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "seed": 42,
+    "temperature": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "max_output_tokens": 64
+  },
+  "configuration_checks": {
+    "context_length_4096": true,
+    "parallel_slots_1": true,
+    "q8_kv_cache": true,
+    "speculative_decoding_off": true,
+    "text_only": true,
+    "flash_attention_on": true
+  },
+  "gpu_before": {
+    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "driver_version": "610.88",
+    "vram_total_mib": 12282,
+    "vram_used_mib": 10550,
+    "vram_free_mib": 1445,
+    "utilization_percent": 0,
+    "temperature_c": 46,
+    "power_draw_w": 31.29
+  },
+  "runs": [
+    {
+      "task_id": "inventory-percent",
+      "passed": false,
+      "elapsed_ms": 323.259,
+      "end_to_end_completion_tokens_per_second": 15.467,
+      "finish_reason": "stop",
+      "response": {
+        "content": "1305",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 66,
+          "completion_tokens": 5,
+          "total_tokens": 71,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10552,
+        "vram_free_mib": 1443,
+        "utilization_percent": 0,
+        "temperature_c": 46,
+        "power_draw_w": 31.33
+      }
+    },
+    {
+      "task_id": "one-true-label",
+      "passed": true,
+      "elapsed_ms": 239.531,
+      "end_to_end_completion_tokens_per_second": 8.35,
+      "finish_reason": "stop",
+      "response": {
+        "content": "BLUE",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 94,
+          "completion_tokens": 2,
+          "total_tokens": 96,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10552,
+        "vram_free_mib": 1443,
+        "utilization_percent": 21,
+        "temperature_c": 59,
+        "power_draw_w": 63.76
+      }
+    },
+    {
+      "task_id": "python-trace",
+      "passed": false,
+      "elapsed_ms": 257.316,
+      "end_to_end_completion_tokens_per_second": 7.773,
+      "finish_reason": "stop",
+      "response": {
+        "content": "3",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 101,
+          "completion_tokens": 2,
+          "total_tokens": 103,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10552,
+        "vram_free_mib": 1443,
+        "utilization_percent": 21,
+        "temperature_c": 59,
+        "power_draw_w": 63.76
+      }
+    },
+    {
+      "task_id": "strict-json-fields",
+      "passed": true,
+      "elapsed_ms": 647.74,
+      "end_to_end_completion_tokens_per_second": 27.789,
+      "finish_reason": "stop",
+      "response": {
+        "content": "{\"status\":\"ok\",\"count\":2,\"first\":\"alpha\",\"second\":\"beta\"}",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 64,
+          "completion_tokens": 18,
+          "total_tokens": 82,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 98,
+        "temperature_c": 63,
+        "power_draw_w": 171.31
+      }
+    },
+    {
+      "task_id": "binary-conversion",
+      "passed": true,
+      "elapsed_ms": 287.721,
+      "end_to_end_completion_tokens_per_second": 13.902,
+      "finish_reason": "stop",
+      "response": {
+        "content": "363",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 49,
+          "completion_tokens": 4,
+          "total_tokens": 53,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 98,
+        "temperature_c": 63,
+        "power_draw_w": 171.31
+      }
+    },
+    {
+      "task_id": "combined-revenue-change",
+      "passed": false,
+      "elapsed_ms": 347.991,
+      "end_to_end_completion_tokens_per_second": 17.242,
+      "finish_reason": "stop",
+      "response": {
+        "content": "-1.7%",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 104,
+          "completion_tokens": 6,
+          "total_tokens": 110,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 6,
+        "temperature_c": 50,
+        "power_draw_w": 167.7
+      }
+    },
+    {
+      "task_id": "syllogism",
+      "passed": true,
+      "elapsed_ms": 239.81,
+      "end_to_end_completion_tokens_per_second": 8.34,
+      "finish_reason": "stop",
+      "response": {
+        "content": "A",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 88,
+          "completion_tokens": 2,
+          "total_tokens": 90,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 56,
+        "temperature_c": 60,
+        "power_draw_w": 156.41
+      }
+    },
+    {
+      "task_id": "string-transform",
+      "passed": false,
+      "elapsed_ms": 282.322,
+      "end_to_end_completion_tokens_per_second": 14.168,
+      "finish_reason": "stop",
+      "response": {
+        "content": "rchtrct",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 55,
+          "completion_tokens": 4,
+          "total_tokens": 59,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 56,
+        "temperature_c": 60,
+        "power_draw_w": 156.41
+      }
+    },
+    {
+      "task_id": "sort-middle-product",
+      "passed": false,
+      "elapsed_ms": 311.656,
+      "end_to_end_completion_tokens_per_second": 16.043,
+      "finish_reason": "stop",
+      "response": {
+        "content": "1452",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 67,
+          "completion_tokens": 5,
+          "total_tokens": 72,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 0,
+        "temperature_c": 57,
+        "power_draw_w": 135.71
+      }
+    },
+    {
+      "task_id": "first-unique-index",
+      "passed": true,
+      "elapsed_ms": 226.217,
+      "end_to_end_completion_tokens_per_second": 8.841,
+      "finish_reason": "stop",
+      "response": {
+        "content": "1",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 54,
+          "completion_tokens": 2,
+          "total_tokens": 56,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10548,
+        "vram_free_mib": 1447,
+        "utilization_percent": 0,
+        "temperature_c": 57,
+        "power_draw_w": 135.71
+      }
+    }
+  ],
+  "summary": {
+    "prompts_attempted": 10,
+    "prompts_passed": 5,
+    "all_passed": false,
+    "note": "Short end-to-end rates include API and orchestration overhead and are not decode-only benchmark results."
+  }
+}

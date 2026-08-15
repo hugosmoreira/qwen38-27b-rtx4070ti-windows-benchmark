@@ -4,7 +4,7 @@
 
 - Phase 0 completed on 2026-08-15.
 - Phase 1 completed on 2026-08-15 with the pinned `UD-IQ2_XXS` model and a 3/3 passing proof-of-life suite.
-- Phase 2 `UD-Q2_K_XL` download, controlled load, and canonical 3/3 smoke record are complete. A small discriminating task suite is the next checkpoint before considering `UD-Q3_K_XL`.
+- Phase 2 is complete. `UD-IQ2_XXS` is the provisional speed configuration and `UD-Q2_K_XL` is the provisional quality-oriented configuration after a controlled 3/10 versus 5/10 quant-triage result. `UD-Q3_K_XL` is deferred.
 
 ## Objective
 
@@ -76,6 +76,8 @@ Test one new quant at a time in this order:
 4. `UD-Q4_K_XL`, only if earlier results justify the download
 
 Exit condition: select one speed-oriented and one quality-oriented configuration.
+
+Status: completed on 2026-08-15. Selected `UD-IQ2_XXS` for speed and `UD-Q2_K_XL` as the quality-oriented candidate. The ten-task triage is selection evidence, not the final quality evaluation.
 
 ### Phase 3 — Pinned llama.cpp runtime
 

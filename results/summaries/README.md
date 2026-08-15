@@ -5,3 +5,4 @@ Comparison tables and charts are stored here together with enough metadata to id
 Current summary:
 
 - `phase2-smoke-checkpoint.md` compares the two proof-of-life configurations and explicitly limits interpretation before repeated benchmarking and quality evaluation.
+- `phase2-quant-triage.md` records the objective ten-task pass@1 checkpoint used to select the two provisional configurations.
