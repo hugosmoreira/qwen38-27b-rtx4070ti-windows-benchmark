@@ -1,0 +1,67 @@
+{
+  "schema_version": "0.1-draft",
+  "run_id": "TBD",
+  "timestamp": null,
+  "git_commit": null,
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime": {
+    "name": null,
+    "version": null,
+    "backend": null
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": null,
+    "filename": null,
+    "quantization": null,
+    "file_size_bytes": null
+  },
+  "configuration": {
+    "context_size": null,
+    "parallel_slots": 1,
+    "gpu_layers": null,
+    "kv_cache_k_type": null,
+    "kv_cache_v_type": null,
+    "flash_attention": null,
+    "thinking_mode": null,
+    "reasoning_effort": null,
+    "preserve_thinking": false,
+    "mtp_enabled": false,
+    "vision_enabled": false,
+    "seed": null,
+    "temperature": null,
+    "top_p": null,
+    "top_k": null,
+    "min_p": null,
+    "presence_penalty": null,
+    "repetition_penalty": null,
+    "max_output_tokens": null
+  },
+  "workload": {
+    "task_id": null,
+    "repetition": null,
+    "warmup": null,
+    "prompt_tokens": null,
+    "output_tokens": null
+  },
+  "measurements": {
+    "model_load_ms": null,
+    "ttft_ms": null,
+    "total_latency_ms": null,
+    "prompt_tokens_per_second": null,
+    "generation_tokens_per_second": null,
+    "loaded_vram_mib": null,
+    "peak_vram_mib": null,
+    "loaded_ram_mib": null,
+    "peak_ram_mib": null,
+    "peak_gpu_utilization_percent": null,
+    "peak_cpu_utilization_percent": null
+  },
+  "outcome": {
+    "status": "not_run",
+    "error_type": null,
+    "error_message": null,
+    "grader_result": null
+  }
+}
+

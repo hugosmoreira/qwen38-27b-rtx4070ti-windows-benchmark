@@ -1,0 +1,53 @@
+{
+  "captured_date": "2026-08-15",
+  "timezone": "America/Los_Angeles",
+  "status": "phase_0_static_snapshot",
+  "operating_system": {
+    "family": "Windows",
+    "edition": "Home",
+    "display_version": "25H2",
+    "build": "26200.9168"
+  },
+  "cpu": {
+    "name": "Intel(R) Core(TM) i7-14700K",
+    "logical_processors": 28
+  },
+  "memory": {
+    "total_physical_gb": 63.77,
+    "available_physical_gb_at_inspection": 47.07
+  },
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "vram_total_mib": 12282,
+    "vram_free_mib_at_inspection": 11612,
+    "driver_version": "610.88",
+    "driver_cuda_runtime": "13.3",
+    "driver_model": "WDDM"
+  },
+  "storage": [
+    {
+      "drive": "C:",
+      "free_gb_at_inspection": 195.99
+    },
+    {
+      "drive": "E:",
+      "free_gb_at_inspection": 1534.31
+    }
+  ],
+  "software": {
+    "git": "2.43.0.windows.1",
+    "unsloth_desktop": "0.1.800-beta",
+    "python_available_on_path": false,
+    "winget_available_on_path": false,
+    "standalone_llama_cpp_available_on_path": false,
+    "wsl_installed": false,
+    "docker_installed_or_available_on_path": false,
+    "docker_installers_downloaded": true
+  },
+  "notes": [
+    "Values that change over time are explicitly labeled at_inspection.",
+    "No model was loaded when the Phase 0 GPU-memory snapshot was recorded.",
+    "Docker Desktop installer files were present, but Docker was not installed or callable."
+  ]
+}
+

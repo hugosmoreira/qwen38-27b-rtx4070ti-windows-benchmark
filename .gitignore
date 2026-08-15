@@ -1,0 +1,49 @@
+# Model weights and large ML artifacts
+*.gguf
+*.gguf.*
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+models/
+model-cache/
+
+# Hugging Face and application caches
+.cache/
+huggingface/
+hf-cache/
+
+# Python environments and generated files
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Private local learning materials (never publish)
+/LEARNING_PATH.md
+/LEARNING_LOG.md
+
+# Temporary benchmark output
+*.tmp
+*.temp
+*.log
+results/tmp/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
