@@ -8,6 +8,7 @@
 *.onnx
 models/
 model-cache/
+/runtimes/
 
 # Hugging Face and application caches
 .cache/

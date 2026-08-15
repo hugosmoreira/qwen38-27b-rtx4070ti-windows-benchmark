@@ -1,0 +1,57 @@
+{
+  "schema_version": "llama-cpp-release-manifest-1.0",
+  "selected_date": "2026-08-15",
+  "source": {
+    "project": "ggml-org/llama.cpp",
+    "release_tag": "b10448",
+    "release_name": "b10448",
+    "release_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b10448",
+    "target_commitish": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "published_at": "2026-08-15T20:48:35Z"
+  },
+  "selection": {
+    "platform": "Windows x86_64",
+    "backend": "CUDA",
+    "cuda_runtime": "13.3",
+    "reason": "The installed NVIDIA 610.88 driver reports CUDA 13.3 support, and the release provides matching official Windows x64 binary and CUDA runtime archives."
+  },
+  "assets": [
+    {
+      "name": "llama-b10448-bin-win-cuda-13.3-x64.zip",
+      "role": "llama.cpp executables and backend libraries",
+      "size_bytes": 146699660,
+      "sha256": "56bef9038109ccae82e1c3843d400d6ca51aee406649a69c206769c8cbc7c89c",
+      "download_url": "https://github.com/ggml-org/llama.cpp/releases/download/b10448/llama-b10448-bin-win-cuda-13.3-x64.zip",
+      "size_validated": true,
+      "sha256_validated": true,
+      "unsafe_zip_entries": 0,
+      "relative_extract_path": "runtimes/llama.cpp/b10448/bin"
+    },
+    {
+      "name": "cudart-llama-bin-win-cuda-13.3-x64.zip",
+      "role": "CUDA 13.3 runtime DLLs required by the official binary",
+      "size_bytes": 390970417,
+      "sha256": "1462a050eb4c684921ba51dcc4cc488a036674c3e73e9945ee705b854808d03e",
+      "download_url": "https://github.com/ggml-org/llama.cpp/releases/download/b10448/cudart-llama-bin-win-cuda-13.3-x64.zip",
+      "size_validated": true,
+      "sha256_validated": true,
+      "unsafe_zip_entries": 0,
+      "relative_extract_path": "runtimes/llama.cpp/b10448/cuda-13.3"
+    }
+  ],
+  "installation": {
+    "relative_runtime_root": "runtimes/llama.cpp/b10448",
+    "runtime_is_gitignored": true,
+    "binary_file_count": 52,
+    "cuda_runtime_file_count": 3,
+    "dependency_loading": "The launch script prepends only the versioned CUDA and binary directories to the child process PATH.",
+    "version_output": "version: 0.1.0-dev (build 10448, commit ad1de39e0)",
+    "compiler_output": "built with Clang 20.1.8 for Windows x86_64",
+    "device_probe": "CUDA0: NVIDIA GeForce RTX 4070 Ti (12281 MiB)"
+  },
+  "notes": [
+    "The two archives total 537670077 bytes (512.76 MiB).",
+    "Release archives, extracted executables, DLLs, logs, and PID records are intentionally excluded from Git.",
+    "The CUDA runtime archive is not the CUDA Toolkit; nvcc is not required to run these prebuilt binaries."
+  ]
+}

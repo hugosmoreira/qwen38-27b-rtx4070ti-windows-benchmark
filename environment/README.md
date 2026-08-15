@@ -8,6 +8,7 @@ This directory records the machine and software environment used for measurement
 - `phase2-q2-k-xl-preflight-2026-08-15.json` records the next candidate's pinned size and checksum, a clearly labeled memory estimate, and its approval-gated download state.
 - `phase2-q2-k-xl-download-manifest.json` records the approved download and checksum validation.
 - `phase2-q2-k-xl-runtime-2026-08-15.json` records the actual Q2_K_XL load, corrects the WDDM free-memory projection, and preserves first-generation observations.
+- `llama-cpp-b10448-manifest.json` pins the official Windows CUDA 13.3 release assets, published sizes and SHA-256 values, isolated runtime layout, build identity, and CUDA device probe.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.
