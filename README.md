@@ -25,7 +25,7 @@ This is not yet a formal benchmark. Short smoke-test rates include API overhead,
 | Server-side load time | 7,125.47 ms |
 | Smoke checks | 3/3 passed |
 
-The first short generation reported 44.3 generation tokens/s and 364.9 prompt tokens/s in Unsloth's engine log. These are diagnostic observations, not headline benchmark claims. See the [runtime record](environment/phase1-unsloth-runtime-2026-08-15.json) and [raw smoke result](results/raw/phase1-smoke-20260815T225505Z.json).
+The first short generation reported 44.3 generation tokens/s and 364.9 prompt tokens/s in Unsloth's engine log. These are diagnostic observations, not headline benchmark claims. See the [runtime record](environment/phase1-unsloth-runtime-2026-08-15.json) and [canonical raw smoke result](results/raw/phase1-smoke-20260815T225920Z.json).
 
 ## Research question
 

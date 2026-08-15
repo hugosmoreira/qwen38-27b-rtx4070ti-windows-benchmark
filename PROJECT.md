@@ -64,7 +64,7 @@ Exit condition: the repository is self-explanatory and the first proposed downlo
 
 Exit condition: several prompts complete reliably and the settings are recorded.
 
-Status: completed on 2026-08-15. Evidence is stored in `environment/phase1-unsloth-runtime-2026-08-15.json` and `results/raw/phase1-smoke-20260815T225505Z.json`.
+Status: completed on 2026-08-15. Evidence is stored in `environment/phase1-unsloth-runtime-2026-08-15.json` and `results/raw/phase1-smoke-20260815T225920Z.json`.
 
 ### Phase 2 — Practical quant selection
 
