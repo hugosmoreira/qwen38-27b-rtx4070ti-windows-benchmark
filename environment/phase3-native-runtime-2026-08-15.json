@@ -1,0 +1,141 @@
+{
+  "schema_version": "phase3-native-runtime-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "completed",
+  "classification": "native_runtime_and_api_proof_of_life_not_formal_benchmark",
+  "runtime": {
+    "project": "ggml-org/llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "version_output": "version: 0.1.0-dev (build 10448, commit ad1de39e0)",
+    "compiler": "Clang 20.1.8 for Windows x86_64",
+    "backend": "CUDA 13.3",
+    "release_manifest": "environment/llama-cpp-b10448-manifest.json",
+    "archive_bytes_total": 537670077,
+    "archive_size_and_sha256_validated": true,
+    "runtime_files_gitignored": true
+  },
+  "canonical_launch": {
+    "run_id": "native-server-20260815T234825034Z",
+    "launcher_git_commit": "924554af9235c3e09728c49f0dbed16ba2cc8d8c",
+    "model_manifest": "environment/model-download-manifest.json",
+    "model_sha256_validated_at_launch": true,
+    "model_alias": "Qwen3.8-27B-UD-IQ2_XXS",
+    "base_uri": "http://127.0.0.1:8090",
+    "network_scope": "loopback_only",
+    "cors_origins": "localhost",
+    "openai_compatible_endpoint": "/v1/chat/completions",
+    "arguments": [
+      "--model models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-IQ2_XXS.gguf",
+      "--alias Qwen3.8-27B-UD-IQ2_XXS",
+      "--host 127.0.0.1",
+      "--port 8090",
+      "--cors-origins localhost",
+      "--device CUDA0",
+      "--ctx-size 4096",
+      "--parallel 1",
+      "--batch-size 512",
+      "--ubatch-size 128",
+      "--threads 2",
+      "--threads-batch 2",
+      "--gpu-layers -1",
+      "--fit off",
+      "--flash-attn on",
+      "--cache-type-k q8_0",
+      "--cache-type-v q8_0",
+      "--cache-ram 0",
+      "--ctx-checkpoints 0",
+      "--no-context-shift",
+      "--no-mmproj",
+      "--jinja",
+      "--reasoning off",
+      "--reasoning-format deepseek",
+      "--no-reasoning-preserve",
+      "--no-agent",
+      "--metrics",
+      "--log-verbosity 4",
+      "--log-colors off",
+      "--log-timestamps"
+    ]
+  },
+  "startup_evidence": {
+    "device_probe": "CUDA0: NVIDIA GeForce RTX 4070 Ti (12281 MiB, 11056 MiB free)",
+    "selected_device": "CUDA0 (NVIDIA GeForce RTX 4070 Ti)",
+    "layers_offloaded": 66,
+    "layers_total": 66,
+    "all_layers_offloaded": true,
+    "cuda_model_buffer_mib": 7974.14,
+    "cpu_mapped_model_buffer_mib": 397.85,
+    "cuda_kv_buffer_mib": 136.0,
+    "cuda_recurrent_state_buffer_mib": 149.62,
+    "cuda_compute_buffer_mib": 37.27,
+    "startup_to_model_loaded_ms": 2843.821,
+    "startup_to_listening_ms": 2843.822,
+    "startup_log_retained_locally": true,
+    "startup_log_publication_status": "not_committed_because_runtime_logs_may_contain_local_paths",
+    "interpretation": "The log explicitly reports 66/66 layers offloaded to CUDA0. The additional CPU_Mapped buffer means system-memory use is not zero and should be reported separately from layer placement."
+  },
+  "point_in_time_memory": {
+    "gpu_after_load": {
+      "vram_total_mib": 12282,
+      "vram_used_mib": 8944,
+      "vram_free_mib": 3051,
+      "gpu_utilization_percent": 0,
+      "temperature_c": 44,
+      "power_draw_w": 51.35
+    },
+    "process_after_smoke": {
+      "working_set_bytes": 9007779840,
+      "private_memory_bytes": 10334134272
+    },
+    "note": "These are point-in-time observations, not Phase 4 peak telemetry. Windows WDDM may reserve VRAM not represented by total minus used."
+  },
+  "api_proof_of_life": {
+    "raw_result": "results/raw/native-smoke-iq2-xxs-20260815T234835Z.json",
+    "harness_git_commit": "924554af9235c3e09728c49f0dbed16ba2cc8d8c",
+    "prompts_attempted": 3,
+    "prompts_passed": 3,
+    "all_passed": true,
+    "server_reported_prompt_tokens_per_second": [
+      328.38233808224714,
+      769.909150720215,
+      888.4940026654821
+    ],
+    "server_reported_generation_tokens_per_second": [
+      37.5685626267939,
+      43.811905379764966,
+      43.396844615428016
+    ],
+    "reasoning_content": null,
+    "limits": "The three tiny requests verify endpoint behavior only. They have no warm-up policy, repetitions, continuous telemetry, or variance analysis."
+  },
+  "recorded_setup_incidents": [
+    {
+      "stage": "smoke_record_assembly",
+      "git_commit": "7d4fbe7",
+      "result_file": null,
+      "error": "PowerShell treated bare false literals as commands after the requests completed.",
+      "resolution": "Use the native $false literal and commit the correction before rerunning."
+    },
+    {
+      "stage": "smoke_result_write",
+      "git_commit": "37b844a",
+      "result_file": null,
+      "error": "The sandboxed shell lacked permission to create the append-only result file.",
+      "resolution": "Rerun the unchanged committed harness with the approved repository filesystem context."
+    },
+    {
+      "stage": "strict_response_validation",
+      "git_commit": "37b844a",
+      "result_file": "results/raw/native-smoke-iq2-xxs-20260815T234723Z.json",
+      "error": "Two strict validators failed because reasoning-format none left an empty <think> wrapper in message.content.",
+      "resolution": "Preserve the failed raw record, keep reasoning generation off, and use the deepseek parser to separate the wrapper from answer content."
+    }
+  ],
+  "exit_condition": {
+    "selected_model_runs_on_local_openai_compatible_server": true,
+    "cuda_not_cpu_or_vulkan_verified": true,
+    "material_flags_pinned": true,
+    "phase3_complete": true
+  }
+}

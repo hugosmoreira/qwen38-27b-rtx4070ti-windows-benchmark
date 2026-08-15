@@ -4,7 +4,7 @@
 
 ## Status
 
-**Phase 1 completed locally on 2026-08-15 — Qwen3.8-27B runs successfully on the RTX 4070 Ti.** The pinned `UD-IQ2_XXS` GGUF passed checksum validation, loaded through Unsloth Desktop's bundled llama.cpp backend, and passed a three-prompt proof-of-life suite.
+**Phase 3 completed locally on 2026-08-15 — Qwen3.8-27B runs through a pinned official llama.cpp CUDA server on the RTX 4070 Ti.** The `b10448` Windows CUDA 13.3 archives and `UD-IQ2_XXS` model passed checksum validation; startup logs reported CUDA0 and 66/66 layers offloaded; the native OpenAI-compatible smoke suite passed 3/3.
 
 This is not yet a formal benchmark. Short smoke-test rates include API overhead, and Phase 4 will add warm-up handling, repeated trials, continuous telemetry, and variance analysis. Never treat a proof-of-life number or placeholder field as a publication-ready result.
 
@@ -133,4 +133,22 @@ The [canonical Q2_K_XL smoke record](results/raw/quant-smoke-ud-q2-k-xl-20260815
 
 Phase 2 quant triage is complete. On ten identical objective pass@1 tasks, `UD-IQ2_XXS` passed 3/10 and `UD-Q2_K_XL` passed 5/10. Q2 uniquely passed binary conversion and first-unique-character tasks, while IQ2 had no unique wins. See the [quant-triage summary](results/summaries/phase2-quant-triage.md) and its raw source records.
 
-Decision: retain `UD-IQ2_XXS` as the provisional speed configuration and `UD-Q2_K_XL` as the provisional quality-oriented configuration. This small result does not establish general model quality, but it is enough to defer the 12.52 GiB `UD-Q3_K_XL` download. The next project gate is the pinned native llama.cpp runtime and repeated baselines for the two selected models.
+Decision: retain `UD-IQ2_XXS` as the provisional speed configuration and `UD-Q2_K_XL` as the provisional quality-oriented configuration. This small result does not establish general model quality, but it is enough to defer the 12.52 GiB `UD-Q3_K_XL` download. Phase 3 has now pinned the native runtime; the next gate is a repeated baseline for the two selected models.
+
+## Phase 3 pinned native runtime
+
+| Item | Observed value |
+|---|---|
+| Runtime | Official llama.cpp `b10448`, commit `ad1de39e0` |
+| Binary target | Windows x64, CUDA 13.3 |
+| Release archive validation | 537,670,077 bytes total; both SHA-256 values matched |
+| Device | `CUDA0` — NVIDIA GeForce RTX 4070 Ti |
+| Layer placement | 66/66 layers offloaded to GPU |
+| Context / slots | 4,096 / 1 |
+| KV cache | Q8 K and V; 136.00 MiB CUDA buffer |
+| CUDA model / recurrent / compute buffers | 7,974.14 / 149.62 / 37.27 MiB |
+| Loaded VRAM snapshot | 8,944 MiB used / 3,051 MiB free |
+| Network scope | `127.0.0.1:8090`, localhost-only CORS |
+| Native smoke checks | 3/3 passed |
+
+See the [release manifest](environment/llama-cpp-b10448-manifest.json), [runtime record](environment/phase3-native-runtime-2026-08-15.json), [canonical raw result](results/raw/native-smoke-iq2-xxs-20260815T234835Z.json), and [Phase 3 checkpoint](results/summaries/phase3-native-checkpoint.md). The server-reported 37.57–43.81 tok/s values came from tiny smoke requests and are not a repeated baseline.

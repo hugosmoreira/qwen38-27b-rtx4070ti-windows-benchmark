@@ -5,6 +5,7 @@
 - Phase 0 completed on 2026-08-15.
 - Phase 1 completed on 2026-08-15 with the pinned `UD-IQ2_XXS` model and a 3/3 passing proof-of-life suite.
 - Phase 2 is complete. `UD-IQ2_XXS` is the provisional speed configuration and `UD-Q2_K_XL` is the provisional quality-oriented configuration after a controlled 3/10 versus 5/10 quant-triage result. `UD-Q3_K_XL` is deferred.
+- Phase 3 completed on 2026-08-15 with official llama.cpp `b10448`: both release archives were checksum-validated, CUDA0 startup logs reported 66/66 layers offloaded to the RTX 4070 Ti, and the native OpenAI-compatible smoke suite passed 3/3.
 
 ## Objective
 
@@ -87,6 +88,8 @@ Status: completed on 2026-08-15. Selected `UD-IQ2_XXS` for speed and `UD-Q2_K_XL
 - Pin all material flags.
 
 Exit condition: the selected model runs through a local OpenAI-compatible server.
+
+Status: completed on 2026-08-15. The canonical runtime record is `environment/phase3-native-runtime-2026-08-15.json`, and the successful raw API result is `results/raw/native-smoke-iq2-xxs-20260815T234835Z.json`.
 
 ### Phase 4 — Trustworthy baseline
 
