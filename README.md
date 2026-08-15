@@ -4,9 +4,28 @@
 
 ## Status
 
-**Phase 0 completed on 2026-08-15 — local repository and learning setup.** No model weights have been downloaded and no performance measurements exist yet.
+**Phase 1 completed locally on 2026-08-15 — Qwen3.8-27B runs successfully on the RTX 4070 Ti.** The pinned `UD-IQ2_XXS` GGUF passed checksum validation, loaded through Unsloth Desktop's bundled llama.cpp backend, and passed a three-prompt proof-of-life suite.
 
-Never treat placeholder fields or plans in this repository as measured results. Published numbers must trace back to saved raw runs on this machine.
+This is not yet a formal benchmark. Short smoke-test rates include API overhead, and Phase 4 will add warm-up handling, repeated trials, continuous telemetry, and variance analysis. Never treat a proof-of-life number or placeholder field as a publication-ready result.
+
+## Phase 1 proof of life
+
+| Item | Observed value |
+|---|---:|
+| Model | `Qwen3.8-27B-UD-IQ2_XXS.gguf` |
+| Model SHA-256 | `8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524` |
+| Context | 4,096 tokens |
+| Model layers | 65, launched with llama.cpp `-ngl -1` |
+| KV cache | Q8 for K and V |
+| Parallel slots | 1 |
+| Flash attention | Enabled |
+| Speculative decoding / MTP | Disabled |
+| Thinking / tools / vision | Disabled for the smoke requests |
+| Loaded VRAM snapshot | 8,958 MiB used; 3,037 MiB free |
+| Server-side load time | 7,125.47 ms |
+| Smoke checks | 3/3 passed |
+
+The first short generation reported 44.3 generation tokens/s and 364.9 prompt tokens/s in Unsloth's engine log. These are diagnostic observations, not headline benchmark claims. See the [runtime record](environment/phase1-unsloth-runtime-2026-08-15.json) and [raw smoke result](results/raw/phase1-smoke-20260815T225505Z.json).
 
 ## Research question
 
@@ -36,7 +55,7 @@ This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit c
 
 | Configuration | File size | Intended role |
 |---|---:|---|
-| `UD-IQ2_XXS` | 8.39 GiB | Safest first run and GPU-resident speed candidate |
+| `UD-IQ2_XXS` | 8.39 GiB | Phase 1 proof of life completed; speed candidate |
 | `UD-Q2_K_XL` | 9.94 GiB | Higher-quality 2-bit candidate with tight VRAM headroom |
 | `UD-Q3_K_XL` | 12.52 GiB | Main partial-offload candidate |
 | `UD-Q4_K_XL` | 16.69 GiB | Higher-quality, heavier-offload candidate |
@@ -70,6 +89,16 @@ Only one quant will be downloaded at a time, beginning after Phase 0 review.
 - `src/` — benchmark client and telemetry code.
 - `tests/` — tests for our code, schemas, and calculations.
 
+## Reproduce the Phase 1 smoke check
+
+With Unsloth Desktop running and the pinned model already loaded using the Phase 1 settings:
+
+```powershell
+.\scripts\run_phase1_smoke.ps1
+```
+
+The script authenticates only through Unsloth Desktop's local secret, verifies the active model and configuration, disables thinking and tools in every request, and creates a unique non-overwriting JSON record under `results/raw/`. It never writes a password, token, or local username to the result.
+
 ## Reproducibility commitments
 
 - Pin model filename and repository revision.
@@ -82,13 +111,4 @@ Only one quant will be downloaded at a time, beginning after Phase 0 review.
 
 ## Next gate
 
-Review Phase 0, choose the exact `E:` model directory, and approve or reject the proposed first large download:
-
-```text
-Repository: unsloth/Qwen3.8-27B-GGUF
-File: Qwen3.8-27B-UD-IQ2_XXS.gguf
-Size: approximately 9.01 GB decimal / 8.39 GiB
-Destination: an explicit model directory on E:
-```
-
-The download must be approved separately after its destination and available disk space are rechecked.
+Phase 2 evaluates whether a larger quant improves practical response quality enough to justify its memory and speed cost. Before another multi-gigabyte download, its exact filename, byte size, checksum availability, destination, and expected VRAM/offload behavior must be reviewed. No additional model is downloaded automatically.

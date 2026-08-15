@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase1-smoke-v1",
+  "purpose": "Proof-of-life checks only; this is not a quality benchmark.",
+  "prompts": [
+    {
+      "task_id": "exact-ready",
+      "system": "You are completing a local model smoke test. Follow the output constraint exactly.",
+      "user": "Reply with exactly: LOCAL MODEL READY",
+      "validator": {
+        "type": "exact",
+        "expected": "LOCAL MODEL READY"
+      }
+    },
+    {
+      "task_id": "arithmetic-and-explanation",
+      "system": "You are completing a local model smoke test. Be concise.",
+      "user": "In one sentence, explain what GGUF quantization is, then state the result of 17 multiplied by 19.",
+      "validator": {
+        "type": "contains",
+        "expected": "323"
+      }
+    },
+    {
+      "task_id": "strict-json",
+      "system": "You are completing a local model smoke test. Follow the output constraint exactly.",
+      "user": "Return only one compact JSON object with exactly these two string fields and values: model is Qwen3.8-27B, and status is ready.",
+      "validator": {
+        "type": "json_object",
+        "expected": {
+          "model": "Qwen3.8-27B",
+          "status": "ready"
+        }
+      }
+    }
+  ]
+}

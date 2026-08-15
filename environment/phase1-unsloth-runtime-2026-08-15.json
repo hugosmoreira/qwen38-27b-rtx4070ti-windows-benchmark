@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "record_type": "phase_1_runtime_and_first_load",
+  "captured_date": "2026-08-15",
+  "runtime": {
+    "desktop_shell": "Unsloth Studio (Desktop) 0.1.800-beta",
+    "managed_python": "3.13.15",
+    "unsloth": "2026.8.18",
+    "pytorch": "2.10.0+cu130",
+    "xformers": "0.0.34",
+    "torchao": "0.17.0",
+    "triton_windows": "3.6.0.post26",
+    "llama_cpp_release": "unslothai/llama.cpp@b10360-mix-87da1a2",
+    "llama_cpp_installed_tag": "b10360"
+  },
+  "setup_observations": {
+    "managed_backend_was_installed_on_first_launch": true,
+    "temporary_error": "The first torchao metadata request returned HTTP 502 after retries.",
+    "recovery": "The installer continued, completed all 12 dependency steps, installed torchao 0.17.0, validated the bundled llama.cpp binary, and started the local API.",
+    "local_api_binding": "127.0.0.1:8888",
+    "external_network_exposure": false,
+    "docker_used": false
+  },
+  "model_preflight": {
+    "manifest": "environment/model-download-manifest.json",
+    "valid": true,
+    "is_gguf": true,
+    "is_vision_without_mmproj": false,
+    "requires_trust_remote_code": false,
+    "native_context_length": 262144,
+    "layer_count": 65,
+    "moe_layer_count": 0
+  },
+  "first_load": {
+    "requested": {
+      "context_length": 4096,
+      "parallel_slots": 1,
+      "gpu_memory_mode": "auto",
+      "gpu_layers": -1,
+      "kv_cache_k_type": "q8_0",
+      "kv_cache_v_type": "q8_0",
+      "prompt_batch_size": 512,
+      "prompt_micro_batch_size": 128,
+      "speculative_decoding": "off",
+      "trust_remote_code": false,
+      "vision": false
+    },
+    "effective": {
+      "status": "loaded",
+      "context_length": 4096,
+      "maximum_context_reported_by_auto_fit": 41728,
+      "native_context_length": 262144,
+      "model_layers": 65,
+      "llama_cpp_gpu_layers_argument": -1,
+      "cpu_fallback_reason": null,
+      "parallel_slots": 1,
+      "flash_attention": true,
+      "kv_cache_k_type": "q8_0",
+      "kv_cache_v_type": "q8_0",
+      "speculative_decoding": "off"
+    },
+    "server_process_time_ms": 7125.47,
+    "gpu_before": {
+      "vram_used_mib": 445,
+      "vram_free_mib": 11550,
+      "temperature_c": 46,
+      "power_draw_w": 31.51
+    },
+    "gpu_loaded": {
+      "vram_used_mib": 8958,
+      "vram_free_mib": 3037,
+      "temperature_c": 48,
+      "power_draw_w": 54.42
+    }
+  },
+  "first_generation_observation": {
+    "thinking_enabled": false,
+    "preserve_thinking": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "prompt_tokens": 54,
+    "completion_tokens": 41,
+    "total_tokens": 95,
+    "end_to_end_latency_ms": 1227,
+    "engine_prompt_tokens_per_second": 364.9,
+    "engine_generation_tokens_per_second": 44.3,
+    "finish_reason": "stop",
+    "correct_arithmetic_result": true
+  },
+  "limitations": [
+    "This is a proof-of-life record, not a repeated benchmark.",
+    "The first generation is a short response and is unsuitable for a headline throughput claim.",
+    "The reported 262144-token native context is model metadata, not evidence that such a context is practical on this PC.",
+    "Peak VRAM and RAM were not sampled continuously during this phase."
+  ]
+}

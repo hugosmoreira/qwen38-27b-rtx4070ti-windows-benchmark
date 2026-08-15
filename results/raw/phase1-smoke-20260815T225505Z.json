@@ -1,0 +1,181 @@
+{
+  "schema_version": "phase1-smoke-1.0",
+  "run_id": "phase1-smoke-20260815T225505Z",
+  "timestamp": "2026-08-15T15:55:05.4844904-07:00",
+  "git_commit": "d716cba660b675651dbe3222a2dbcb1f30d4150d",
+  "classification": "proof_of_life_not_formal_benchmark",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase1-unsloth-runtime-2026-08-15.json",
+  "prompt_suite": "prompts/phase1-smoke.json",
+  "runtime": {
+    "name": "Unsloth Desktop",
+    "backend": "bundled llama.cpp",
+    "llama_cpp_installed_tag": "b10360"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+    "quantization": "UD-IQ2_XXS",
+    "file_size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524"
+  },
+  "configuration": {
+    "context_size": 4096,
+    "native_context_size": 262144,
+    "parallel_slots": 1,
+    "model_layers": 65,
+    "gpu_memory_mode": "auto",
+    "gpu_layers": -1,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "flash_attention": true,
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "seed": 42,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "max_output_tokens": 128
+  },
+  "configuration_checks": {
+    "context_length_4096": true,
+    "parallel_slots_1": true,
+    "q8_kv_cache": true,
+    "speculative_decoding_off": true,
+    "text_only": true
+  },
+  "gpu_before": {
+    "name": "NVIDIA GeForce RTX 4070 Ti",
+    "driver_version": "610.88",
+    "vram_total_mib": 12282,
+    "vram_used_mib": 8978,
+    "vram_free_mib": 3017,
+    "utilization_percent": 0,
+    "temperature_c": 43,
+    "power_draw_w": 32.19
+  },
+  "runs": [
+    {
+      "task_id": "exact-ready",
+      "passed": true,
+      "elapsed_ms": 284.216,
+      "end_to_end_completion_tokens_per_second": 14.074,
+      "finish_reason": "stop",
+      "response": {
+        "content": "LOCAL MODEL READY",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 39,
+          "completion_tokens": 4,
+          "total_tokens": 43,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8978,
+        "vram_free_mib": 3017,
+        "utilization_percent": 67,
+        "temperature_c": 47,
+        "power_draw_w": 41.32
+      }
+    },
+    {
+      "task_id": "arithmetic-and-explanation",
+      "passed": true,
+      "elapsed_ms": 1097.078,
+      "end_to_end_completion_tokens_per_second": 36.461,
+      "finish_reason": "stop",
+      "response": {
+        "content": "GGUF quantization is a method of reducing the precision of large language model weights to decrease file size and memory usage, and 17 multiplied by 19 equals 323.",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 55,
+          "completion_tokens": 40,
+          "total_tokens": 95,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8973,
+        "vram_free_mib": 3022,
+        "utilization_percent": 98,
+        "temperature_c": 61,
+        "power_draw_w": 192.01
+      }
+    },
+    {
+      "task_id": "strict-json",
+      "passed": true,
+      "elapsed_ms": 664.315,
+      "end_to_end_completion_tokens_per_second": 31.612,
+      "finish_reason": "stop",
+      "response": {
+        "content": "{\"model\": \"Qwen3.8-27B\", \"status\": \"ready\"}",
+        "reasoning_content": null,
+        "usage": {
+          "prompt_tokens": 64,
+          "completion_tokens": 21,
+          "total_tokens": 85,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "audio_tokens": 0,
+            "accepted_prediction_tokens": 0,
+            "rejected_prediction_tokens": 0
+          }
+        }
+      },
+      "gpu_after": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 8973,
+        "vram_free_mib": 3022,
+        "utilization_percent": 86,
+        "temperature_c": 58,
+        "power_draw_w": 220.04
+      }
+    }
+  ],
+  "summary": {
+    "prompts_attempted": 3,
+    "prompts_passed": 3,
+    "all_passed": true,
+    "note": "Short end-to-end rates include API and orchestration overhead and are not decode-only benchmark results."
+  }
+}

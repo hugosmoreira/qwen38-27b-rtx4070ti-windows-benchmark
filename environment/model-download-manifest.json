@@ -1,0 +1,19 @@
+{
+  "verified_date": "2026-08-15",
+  "repository": "unsloth/Qwen3.8-27B-GGUF",
+  "repository_commit": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+  "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+  "relative_local_path": "models/Qwen3.8-27B-GGUF/Qwen3.8-27B-UD-IQ2_XXS.gguf",
+  "size_bytes": 9010048064,
+  "size_decimal_gb": 9.01,
+  "size_gib": 8.39,
+  "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+  "xet_hash": "33212cc42b8f06081e35b47759f2acdf23388f104cb68f0e13e98776c7cec710",
+  "download_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/1cff334a4a228324d4ee1f76d55d372588f0d556/Qwen3.8-27B-UD-IQ2_XXS.gguf",
+  "download_status": "downloaded_and_sha256_validated",
+  "validated_date": "2026-08-15",
+  "notes": [
+    "The model file is intentionally excluded from Git.",
+    "The repository commit and SHA-256 are pinned so later repository updates cannot silently change the benchmark input."
+  ]
+}

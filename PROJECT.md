@@ -1,5 +1,11 @@
 # Project Execution Plan
 
+## Current status
+
+- Phase 0 completed on 2026-08-15.
+- Phase 1 completed on 2026-08-15 with the pinned `UD-IQ2_XXS` model and a 3/3 passing proof-of-life suite.
+- Phase 2 is the next gate; no second quant has been approved or downloaded.
+
 ## Objective
 
 Measure whether Qwen3.8-27B is practical on a Windows desktop with an RTX 4070 Ti 12GB and 64 GB system RAM. The primary experiment compares lower-bit, mostly GPU-resident inference with higher-bit inference that requires CPU/system-RAM offload.
@@ -57,6 +63,8 @@ Exit condition: the repository is self-explanatory and the first proposed downlo
 - Record actual app settings, VRAM, RAM, offload, and reported speed.
 
 Exit condition: several prompts complete reliably and the settings are recorded.
+
+Status: completed on 2026-08-15. Evidence is stored in `environment/phase1-unsloth-runtime-2026-08-15.json` and `results/raw/phase1-smoke-20260815T225505Z.json`.
 
 ### Phase 2 — Practical quant selection
 
