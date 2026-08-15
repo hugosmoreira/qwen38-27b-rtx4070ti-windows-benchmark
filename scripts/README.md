@@ -16,3 +16,11 @@ Current scripts:
 `run_phase1_smoke.ps1` requires Unsloth Desktop and the pinned Phase 1 model to be running. It verifies the active model and settings before sending three tools-off, thinking-off prompts. Each invocation writes a uniquely named JSON record and refuses to overwrite an existing result.
 
 `run_quant_smoke.ps1` applies the same checks to any downloaded quant described by a compatible manifest. The model must already be loaded with the controlled 4K configuration. It records the current Git commit, exact model provenance, effective settings, responses, usage, and point-in-time GPU snapshots without storing the local authentication secret.
+
+For the Phase 2 quant-triage suite, add:
+
+```powershell
+-PromptFile .\prompts\phase2-quant-triage.json `
+-RunKind quant-triage `
+-Classification phase2_quant_triage_not_formal_quality_benchmark
+```

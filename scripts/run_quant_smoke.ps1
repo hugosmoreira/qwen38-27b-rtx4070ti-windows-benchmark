@@ -4,7 +4,9 @@ param(
     [string]$RuntimeRecord,
     [string]$BaseUri = 'http://127.0.0.1:8888',
     [string]$PromptFile,
-    [string]$OutputDirectory
+    [string]$OutputDirectory,
+    [ValidatePattern('^[a-z0-9-]+$')][string]$RunKind = 'quant-smoke',
+    [string]$Classification = 'proof_of_life_not_formal_benchmark'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -103,6 +105,12 @@ function Test-SmokeResponse {
 
 $manifest = Get-Content -LiteralPath $resolvedManifestPath -Raw | ConvertFrom-Json
 $suite = Get-Content -LiteralPath $PromptFile -Raw | ConvertFrom-Json
+$maxCompletionTokens = if ($null -ne $suite.settings.max_completion_tokens) { [int]$suite.settings.max_completion_tokens } else { 128 }
+$temperature = if ($null -ne $suite.settings.temperature) { [double]$suite.settings.temperature } else { 0.6 }
+$topP = if ($null -ne $suite.settings.top_p) { [double]$suite.settings.top_p } else { 0.95 }
+$topK = if ($null -ne $suite.settings.top_k) { [int]$suite.settings.top_k } else { 20 }
+$minP = if ($null -ne $suite.settings.min_p) { [double]$suite.settings.min_p } else { 0.0 }
+$seed = if ($null -ne $suite.settings.seed) { [int]$suite.settings.seed } else { 42 }
 $accessToken = Get-DesktopAccessToken
 $headers = @{ Authorization = "Bearer $accessToken" }
 $status = Invoke-RestMethod -Uri "$BaseUri/api/inference/status" -Headers $headers -Method Get
@@ -141,10 +149,11 @@ $quantization = if ([string]::IsNullOrWhiteSpace([string]$manifest.quantization)
 }
 $quantSlug = $quantization.ToLowerInvariant().Replace('_', '-')
 $manifestRelative = [System.IO.Path]::GetRelativePath($repositoryRoot, $resolvedManifestPath).Replace('\', '/')
+$promptSuiteRelative = [System.IO.Path]::GetRelativePath($repositoryRoot, (Resolve-Path -LiteralPath $PromptFile).Path).Replace('\', '/')
 $runtimeRecordRelative = if ([string]::IsNullOrWhiteSpace($RuntimeRecord)) { $null } else { $RuntimeRecord.Replace('\', '/') }
 $gitCommit = (& git -c "safe.directory=$($repositoryRoot.Replace('\', '/'))" rev-parse HEAD 2>$null | Select-Object -First 1).Trim()
 $startedAt = Get-Date
-$runId = "quant-smoke-$quantSlug-" + $startedAt.ToUniversalTime().ToString('yyyyMMddTHHmmssZ')
+$runId = "$RunKind-$quantSlug-" + $startedAt.ToUniversalTime().ToString('yyyyMMddTHHmmssZ')
 $gpuBefore = Get-GpuSnapshot
 $runs = @()
 
@@ -155,12 +164,12 @@ foreach ($prompt in $suite.prompts) {
             [ordered]@{ role = 'user'; content = [string]$prompt.user }
         )
         stream = $false
-        max_completion_tokens = 128
-        temperature = 0.6
-        top_p = 0.95
-        top_k = 20
-        min_p = 0.0
-        seed = 42
+        max_completion_tokens = $maxCompletionTokens
+        temperature = $temperature
+        top_p = $topP
+        top_k = $topK
+        min_p = $minP
+        seed = $seed
         enable_thinking = $false
         preserve_thinking = $false
         enable_tools = $false
@@ -197,11 +206,11 @@ $record = [ordered]@{
     run_id = $runId
     timestamp = $startedAt.ToString('o')
     git_commit = $gitCommit
-    classification = 'proof_of_life_not_formal_benchmark'
+    classification = $Classification
     hardware_snapshot = 'environment/machine-snapshot-2026-08-15.json'
     runtime_record = $runtimeRecordRelative
     model_manifest = $manifestRelative
-    prompt_suite = 'prompts/phase1-smoke.json'
+    prompt_suite = $promptSuiteRelative
     runtime = [ordered]@{
         name = 'Unsloth Desktop'
         backend = 'bundled llama.cpp'
@@ -233,12 +242,12 @@ $record = [ordered]@{
         tools_enabled = $false
         mcp_enabled = $false
         vision_enabled = $false
-        seed = 42
-        temperature = 0.6
-        top_p = 0.95
-        top_k = 20
-        min_p = 0.0
-        max_output_tokens = 128
+        seed = $seed
+        temperature = $temperature
+        top_p = $topP
+        top_k = $topK
+        min_p = $minP
+        max_output_tokens = $maxCompletionTokens
     }
     configuration_checks = $configurationChecks
     gpu_before = $gpuBefore

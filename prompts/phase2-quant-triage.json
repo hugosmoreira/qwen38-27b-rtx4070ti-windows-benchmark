@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase2-quant-triage-v1",
+  "purpose": "Small objective quant-selection checkpoint; not a general quality benchmark.",
+  "settings": {
+    "max_completion_tokens": 64,
+    "temperature": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42
+  },
+  "prompts": [
+    {
+      "task_id": "inventory-percent",
+      "system": "Solve the task and return only the requested value with no explanation.",
+      "user": "A warehouse starts with 1,250 units, ships 18% of them, then receives 275 units. Return only the final integer inventory.",
+      "validator": { "type": "exact", "expected": "1300" }
+    },
+    {
+      "task_id": "one-true-label",
+      "system": "Solve the logic task and return only the requested uppercase word.",
+      "user": "A prize is in exactly one of three boxes: RED, BLUE, or GREEN. The RED label says 'the prize is in RED.' The BLUE label says 'the prize is not in BLUE.' The GREEN label says 'the prize is not in RED.' Exactly one label is true. Return only the box color.",
+      "validator": { "type": "exact", "expected": "BLUE" }
+    },
+    {
+      "task_id": "python-trace",
+      "system": "Trace the code and return only the requested integer.",
+      "user": "What does this Python call return?\n\ndef f(xs):\n    total = 0\n    for i, x in enumerate(xs):\n        total += x if i % 2 == 0 else -x\n    return total\n\nf([3, 1, 4, 1, 5, 9])\n\nReturn only the integer.",
+      "validator": { "type": "exact", "expected": "1" }
+    },
+    {
+      "task_id": "strict-json-fields",
+      "system": "Follow the output format exactly and return no prose or markdown.",
+      "user": "Return one JSON object with exactly four fields: status is the string ok, count is the number 2, first is the string alpha, and second is the string beta.",
+      "validator": {
+        "type": "json_object",
+        "expected": { "status": "ok", "count": 2, "first": "alpha", "second": "beta" }
+      }
+    },
+    {
+      "task_id": "binary-conversion",
+      "system": "Solve the task and return only the requested integer.",
+      "user": "Convert binary 101101011 to decimal. Return only the decimal integer.",
+      "validator": { "type": "exact", "expected": "363" }
+    },
+    {
+      "task_id": "combined-revenue-change",
+      "system": "Calculate carefully and return only the requested signed percentage.",
+      "user": "North revenue is 120 in Q1 and 150 in Q2. South revenue is 200 in Q1 and 180 in Q2. What is the percentage change in combined revenue from Q1 to Q2? Round to one decimal place and return exactly a signed percentage such as +1.2% or -1.2%.",
+      "validator": { "type": "exact", "expected": "+3.1%" }
+    },
+    {
+      "task_id": "syllogism",
+      "system": "Choose the necessarily true conclusion and return only its letter.",
+      "user": "All Nors are Vels. No Vels are Paks. Some Tims are Nors. Which conclusion necessarily follows? A) Some Tims are not Paks. B) All Tims are Vels. C) Some Paks are Nors. D) No Tims are Paks.",
+      "validator": { "type": "exact", "expected": "A" }
+    },
+    {
+      "task_id": "string-transform",
+      "system": "Apply the operations exactly and return only the final lowercase string.",
+      "user": "Starting with ARCHITECTURE, remove the vowels A E I O U, reverse the remaining characters, then lowercase the result.",
+      "validator": { "type": "exact", "expected": "rtcthcr" }
+    },
+    {
+      "task_id": "sort-middle-product",
+      "system": "Solve the task and return only the requested integer.",
+      "user": "Sort [12, 7, 19, 4, 11] in ascending order, take the middle three values, and multiply them. Return only the integer result.",
+      "validator": { "type": "exact", "expected": "924" }
+    },
+    {
+      "task_id": "first-unique-index",
+      "system": "Solve the task and return only the zero-based integer index.",
+      "user": "For the string swiss, return the zero-based index of the first character that occurs exactly once in the entire string.",
+      "validator": { "type": "exact", "expected": "1" }
+    }
+  ]
+}

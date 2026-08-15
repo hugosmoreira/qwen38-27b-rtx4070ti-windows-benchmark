@@ -5,6 +5,7 @@ Prompts are versioned here with stable IDs and grading metadata.
 Current suite:
 
 - `phase1-smoke.json` contains three proof-of-life checks for exact text, arithmetic, and strict JSON. It confirms basic local inference and constraint following; it is not a quality benchmark.
+- `phase2-quant-triage.json` contains ten objective exact-answer and JSON checks used only to decide whether the first two quants show an obvious pass@1 difference before another large download.
 
 Each prompt definition should eventually identify:
 
