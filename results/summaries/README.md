@@ -1,6 +1,7 @@
 # Result Summaries
 
-Generated comparison tables and charts will be stored here together with enough metadata to identify their source raw runs.
+Comparison tables and charts are stored here together with enough metadata to identify their source raw runs.
 
-No summaries exist yet.
+Current summary:
 
+- `phase2-smoke-checkpoint.md` compares the two proof-of-life configurations and explicitly limits interpretation before repeated benchmarking and quality evaluation.

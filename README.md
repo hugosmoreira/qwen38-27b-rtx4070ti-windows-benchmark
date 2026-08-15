@@ -125,7 +125,10 @@ The approved `UD-Q2_K_XL` candidate was downloaded, checksum-validated, and load
 | Loaded VRAM snapshot | 10,542 MiB used / 1,453 MiB free |
 | Server-side load time | 8,781.03 ms |
 | First short engine observation | 38.9 generation tok/s; 418.6 prompt tok/s |
+| Canonical smoke checks | 3/3 passed |
 
 The original used-memory projection was within 5.18 MiB, but its free-memory calculation incorrectly used total minus used VRAM. WDDM left about 287 MiB reserved or otherwise unavailable, so the correct projection was 1,447.82 MiB free—close to the 1,453 MiB observation. The [runtime record](environment/phase2-q2-k-xl-runtime-2026-08-15.json) preserves the correction.
 
-This remains proof-of-life evidence. A committed canonical smoke run is the next Phase 2 checkpoint; repeated speed and quality comparisons come later.
+The [canonical Q2_K_XL smoke record](results/raw/quant-smoke-ud-q2-k-xl-20260815T232000Z.json) passed 3/3 checks from committed harness revision `d21abea`. The [Phase 2 smoke checkpoint](results/summaries/phase2-smoke-checkpoint.md) compares both quants without presenting the tiny runs as a formal benchmark.
+
+Provisional decision: retain `UD-IQ2_XXS` as the speed configuration and `UD-Q2_K_XL` as the quality candidate. The current smoke suite cannot prove a quality difference because both models passed every check. The next Phase 2 step is a small, controlled, discriminating task suite before deciding whether a 12.52 GiB `UD-Q3_K_XL` download is justified.
