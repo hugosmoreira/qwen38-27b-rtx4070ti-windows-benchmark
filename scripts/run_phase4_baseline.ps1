@@ -67,6 +67,22 @@ function Read-TelemetrySamples {
     return @(Get-Content -LiteralPath $Path | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | ForEach-Object { $_ | ConvertFrom-Json -DateKind String })
 }
 
+function Get-TelemetryCadence {
+    param([Parameter(Mandatory)][object[]]$Samples)
+    if ($Samples.Count -lt 2) { return $null }
+    $timestamps = @($Samples | ForEach-Object { [DateTimeOffset]::Parse([string]$_.timestamp_utc) })
+    $intervals = @()
+    for ($index = 1; $index -lt $timestamps.Count; $index++) {
+        $intervals += ($timestamps[$index] - $timestamps[$index - 1]).TotalMilliseconds
+    }
+    return [ordered]@{
+        observed_span_milliseconds = [math]::Round(($timestamps[-1] - $timestamps[0]).TotalMilliseconds, 3)
+        observed_mean_interval_milliseconds = [math]::Round((($intervals | Measure-Object -Average).Average), 3)
+        observed_minimum_interval_milliseconds = [math]::Round((($intervals | Measure-Object -Minimum).Minimum), 3)
+        observed_maximum_interval_milliseconds = [math]::Round((($intervals | Measure-Object -Maximum).Maximum), 3)
+    }
+}
+
 if (-not (Test-Path -LiteralPath $expectedServerPath -PathType Leaf)) {
     throw "Pinned llama-server executable not found: $expectedServerPath"
 }
@@ -236,9 +252,14 @@ try {
         }
 
         $samples = Read-TelemetrySamples -Path $telemetryPath
+        $cadence = Get-TelemetryCadence -Samples $samples
         $telemetrySummary = [ordered]@{
-            interval_milliseconds = $TelemetryIntervalMilliseconds
+            target_interval_milliseconds = $TelemetryIntervalMilliseconds
             sample_count = $samples.Count
+            observed_span_milliseconds = $cadence.observed_span_milliseconds
+            observed_mean_interval_milliseconds = $cadence.observed_mean_interval_milliseconds
+            observed_minimum_interval_milliseconds = $cadence.observed_minimum_interval_milliseconds
+            observed_maximum_interval_milliseconds = $cadence.observed_maximum_interval_milliseconds
             peak_vram_used_mib = Get-MaximumOrNull @($samples.gpu.vram_used_mib)
             minimum_vram_free_mib = Get-MinimumOrNull @($samples.gpu.vram_free_mib)
             peak_gpu_utilization_percent = Get-MaximumOrNull @($samples.gpu.utilization_percent)
@@ -363,7 +384,7 @@ $record = [ordered]@{
         ttft_definition = 'Elapsed wall time from HTTP send until the first non-empty assistant content delta was read.'
         total_latency_definition = 'Elapsed wall time from HTTP send through the SSE done marker.'
         prompt_cache_disabled = $true
-        telemetry_interval_milliseconds = $TelemetryIntervalMilliseconds
+        telemetry_target_interval_milliseconds = $TelemetryIntervalMilliseconds
         telemetry_scope = 'NVIDIA GPU plus the pinned llama-server process'
         inter_run_delay_seconds = $InterRunDelaySeconds
     }

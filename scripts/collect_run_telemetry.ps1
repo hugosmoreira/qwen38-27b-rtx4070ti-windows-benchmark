@@ -24,6 +24,7 @@ $previousCpuSeconds = $null
 $previousSampleAt = $null
 
 while (-not (Test-Path -LiteralPath $stopFullPath -PathType Leaf)) {
+    $cycleTimer = [System.Diagnostics.Stopwatch]::StartNew()
     $sampleAt = [DateTimeOffset]::UtcNow
     $gpuLine = & nvidia-smi --query-gpu=memory.total,memory.used,memory.free,utilization.gpu,temperature.gpu,power.draw --format=csv,noheader,nounits 2>$null | Select-Object -First 1
     $gpu = $null
@@ -71,5 +72,8 @@ while (-not (Test-Path -LiteralPath $stopFullPath -PathType Leaf)) {
         process = $processRecord
     }
     [System.IO.File]::AppendAllText($outputFullPath, ($sample | ConvertTo-Json -Depth 6 -Compress) + [Environment]::NewLine, $encoding)
-    Start-Sleep -Milliseconds $IntervalMilliseconds
+    $remainingMilliseconds = $IntervalMilliseconds - $cycleTimer.Elapsed.TotalMilliseconds
+    if ($remainingMilliseconds -gt 0) {
+        Start-Sleep -Milliseconds ([int][math]::Ceiling($remainingMilliseconds))
+    }
 }
