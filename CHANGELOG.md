@@ -5,6 +5,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 ## [Unreleased]
 
 - External repository creation, release publication, and community-report posting remain approval-gated.
+- Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 
 ## [0.1.0] — Release candidate
 

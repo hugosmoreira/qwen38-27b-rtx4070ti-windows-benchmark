@@ -4,7 +4,7 @@
 
 ## Status
 
-**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 60 offline tests; Q3 and Q4 downloads remain deferred.
+**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 61 offline tests; Q3 and Q4 downloads remain deferred.
 
 **Phase 10 release preparation passed its strict local gate on 2026-08-16.** The `v0.1.0` candidate uses Apache-2.0 and includes public citation identity, a private Code of Conduct contact, and final repository coordinates. No GitHub remote has been configured, and nothing has been pushed, tagged, released, or posted; every external action remains approval-gated.
 

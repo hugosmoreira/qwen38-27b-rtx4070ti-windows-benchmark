@@ -152,6 +152,7 @@ def _validate_all_json(root: Path, tracked: list[str]) -> list[str]:
 
 
 def _validate_markdown_links(root: Path, tracked: list[str]) -> list[str]:
+    root = root.resolve()
     issues: list[str] = []
     for relative in tracked:
         if Path(relative).suffix.lower() != ".md":

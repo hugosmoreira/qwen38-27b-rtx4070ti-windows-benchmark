@@ -12,7 +12,7 @@ This release candidate packages an auditable Windows study of Qwen3.8-27B GGUF i
 
 ## Reproduce and inspect
 
-No GPU or model download is required to run the 60-test software suite, validate canonical Phase 5–9 records, check public links, and audit release boundaries. See [REPRODUCING.md](REPRODUCING.md).
+No GPU or model download is required to run the 61-test software suite, validate canonical Phase 5–9 records, check public links, and audit release boundaries. See [REPRODUCING.md](REPRODUCING.md).
 
 ## Publication state
 

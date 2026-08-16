@@ -6,6 +6,19 @@ from qwen_bench.release_audit import _validate_markdown_links
 
 
 class ReleaseAuditTests(unittest.TestCase):
+    def test_unresolved_repository_root_is_normalized(self) -> None:
+        working_directory = Path.cwd().resolve()
+        with tempfile.TemporaryDirectory(dir=working_directory) as directory:
+            resolved_root = Path(directory).resolve()
+            relative_root = resolved_root.relative_to(working_directory)
+            (resolved_root / "target.md").write_text("# Target\n", encoding="utf-8")
+            (resolved_root / "source.md").write_text(
+                "[target](target.md)\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                _validate_markdown_links(relative_root, ["source.md", "target.md"]), []
+            )
+
     def test_relative_markdown_links_are_resolved_from_the_source_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
