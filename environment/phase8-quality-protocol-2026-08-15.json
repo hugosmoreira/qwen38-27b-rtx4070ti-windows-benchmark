@@ -1,0 +1,117 @@
+{
+  "schema_version": "phase8-quality-protocol-1.0",
+  "recorded_date": "2026-08-15",
+  "purpose": "Freeze the 24-task paired pass@1 comparison before either selected quant receives a canonical task.",
+  "comparison_group": "phase8-iq2-vs-q2-objective-quality-v1",
+  "suite": {
+    "path": "prompts/phase8-quality-evaluation.json",
+    "suite_id": "phase8-objective-quality-v1",
+    "size_bytes": 11704,
+    "sha256": "3002269202f0c0ad52c1a1499d9de3c918550c192ce31ed55dd65275b9b59164",
+    "tasks": 24,
+    "previously_unseen_by_models_in_this_study": true,
+    "phase2_task_id_overlap": 0,
+    "categories": {
+      "arithmetic": 5,
+      "logic": 5,
+      "python_trace": 5,
+      "structured_output": 5,
+      "text_data": 4
+    },
+    "grading": {
+      "points_per_task": 1,
+      "partial_credit": false,
+      "exact": "Outer whitespace is ignored; remaining text is case-sensitive and exact.",
+      "json_exact": "The entire response must be valid duplicate-key-free JSON with exact keys, values, types, and array order; object key order is ignored.",
+      "human_override": false,
+      "grading_notes_public": true
+    }
+  },
+  "models": [
+    {
+      "evaluation_order": 1,
+      "role": "quality_oriented_candidate",
+      "quantization": "UD-Q2_K_XL",
+      "manifest": "environment/phase2-q2-k-xl-download-manifest.json",
+      "configuration": "configs/phase8-quality-q2.json",
+      "size_bytes": 10676423744,
+      "sha256": "46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8",
+      "size_and_sha256_revalidated_before_protocol": true
+    },
+    {
+      "evaluation_order": 2,
+      "role": "speed_candidate",
+      "quantization": "UD-IQ2_XXS",
+      "manifest": "environment/model-download-manifest.json",
+      "configuration": "configs/phase8-quality-iq2.json",
+      "size_bytes": 9010048064,
+      "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+      "size_and_sha256_revalidated_before_protocol": true
+    }
+  ],
+  "measurement_order": {
+    "models": ["UD-Q2_K_XL", "UD-IQ2_XXS"],
+    "fresh_server_process_per_model": true,
+    "model_order_randomized": false,
+    "task_order_randomized": false,
+    "task_order_identical_for_both_models": true,
+    "attempts_per_task": 1,
+    "warmup_tasks": 0,
+    "limitation": "A fixed order is auditable but cannot estimate sampling or order variance. Quality scores, not timing, are the target."
+  },
+  "held_constant": {
+    "runtime_release": "llama.cpp b10448",
+    "runtime_commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "device": "CUDA0",
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "gpu_layers_requested": -1,
+    "automatic_fit": "off",
+    "flash_attention": "on",
+    "batch_size": 512,
+    "micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_shift": false,
+    "max_output_tokens": 128,
+    "temperature": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false,
+    "thinking": false,
+    "preserve_thinking": false,
+    "mtp": false,
+    "tools": false,
+    "mcp": false,
+    "vision": false,
+    "inter_task_delay_seconds": 0.25
+  },
+  "pre_measurement_gates": {
+    "suite_and_grader_tests_pass": true,
+    "config_pair_test_allows_only_model_identity_fields_to_differ": true,
+    "server_preflight_requires_model_path_alias_context_and_slots": true,
+    "startup_log_must_report_cuda0_and_observed_layer_placement": true,
+    "all_task_requests_must_preserve_raw_response_usage_and_timings": true,
+    "quality_result_must_pass_semantic_validation": true,
+    "raw_results_are_unique_and_append_only": true
+  },
+  "comparison_rules": {
+    "primary_metric": "overall objective pass@1 count out of 24",
+    "secondary_metrics": [
+      "pass count by category",
+      "both-pass, Q2-only, IQ2-only, and neither-pass paired task counts",
+      "absolute pass-count and percentage-point difference",
+      "two-sided exact McNemar p-value for discordant paired tasks"
+    ],
+    "mcnemar_interpretation": "Reported descriptively; this custom 24-task set does not justify a broad population-quality claim.",
+    "performance_separation": "Phase 6 provides the controlled speed and memory comparison; Phase 8 task timings are retained only for audit and are not a performance benchmark.",
+    "tie_rule": "A tied overall score is reported as a tie; category or paired counts do not override it."
+  },
+  "exit_condition": "Both models attempt all 24 tasks once under identical controls, raw responses and deterministic grades are preserved, paired calculations reproduce independently, and conclusions remain scoped to this suite."
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:qwen38-windows-bench:quality-evaluation-result:1.0.0",
+  "title": "Qwen3.8 objective quality evaluation result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "run_id", "timestamp", "git_commit", "classification",
+    "hardware_snapshot", "runtime_record", "model_manifest", "prompt_suite",
+    "quality_config", "python_runtime", "runtime", "model", "configuration",
+    "methodology", "server_preflight", "tasks", "summary", "outcome"
+  ],
+  "properties": {
+    "schema_version": { "const": "quality-evaluation-result-1.0.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "classification": { "type": "string", "minLength": 1 },
+    "hardware_snapshot": { "$ref": "#/$defs/repositoryReference" },
+    "runtime_record": { "$ref": "#/$defs/repositoryReference" },
+    "model_manifest": { "$ref": "#/$defs/repositoryReference" },
+    "prompt_suite": { "$ref": "#/$defs/repositoryReference" },
+    "quality_config": { "$ref": "#/$defs/repositoryReference" },
+    "python_runtime": { "type": "object", "minProperties": 1 },
+    "runtime": { "type": "object", "minProperties": 1 },
+    "model": { "type": "object", "minProperties": 1 },
+    "configuration": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": ["string", "number", "integer", "boolean", "null"] }
+    },
+    "methodology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pass_definition", "attempts_per_task", "task_order_randomized",
+        "prompt_cache_disabled", "thinking_disabled", "tools_disabled",
+        "inter_task_delay_seconds", "expected_tasks"
+      ],
+      "properties": {
+        "pass_definition": { "type": "string", "minLength": 1 },
+        "attempts_per_task": { "const": 1 },
+        "task_order_randomized": { "type": "boolean" },
+        "prompt_cache_disabled": { "const": true },
+        "thinking_disabled": { "const": true },
+        "tools_disabled": { "const": true },
+        "inter_task_delay_seconds": { "type": "number", "minimum": 0 },
+        "expected_tasks": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "server_preflight": { "$ref": "#/$defs/serverPreflight" },
+    "tasks": { "type": "array", "items": { "$ref": "#/$defs/task" } },
+    "summary": { "$ref": "#/$defs/summary" },
+    "outcome": { "$ref": "#/$defs/outcome" }
+  },
+  "$defs": {
+    "repositoryReference": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*\\\\).+$"
+    },
+    "serverPreflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checks", "served_model_alias"],
+      "properties": {
+        "status": { "enum": ["passed", "failed"] },
+        "checks": { "type": ["object", "null"] },
+        "served_model_alias": { "type": ["string", "null"] }
+      }
+    },
+    "nullableNumber": { "type": ["number", "null"] },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sequence", "task_id", "category", "validator_type", "status", "passed",
+        "grade", "error", "client_measurements", "finish_reason", "content",
+        "reasoning_content", "usage", "timings", "system_fingerprint", "validation"
+      ],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 1 },
+        "task_id": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "validator_type": { "enum": ["exact", "json_exact"] },
+        "status": { "enum": ["completed", "failed_request"] },
+        "passed": { "type": "boolean" },
+        "grade": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["passed", "reason"],
+          "properties": {
+            "passed": { "type": "boolean" },
+            "reason": { "type": "string", "minLength": 1 }
+          }
+        },
+        "error": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "message"],
+              "properties": {
+                "type": { "type": "string", "minLength": 1 },
+                "message": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        },
+        "client_measurements": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["response_headers_ms", "time_to_first_content_token_ms", "total_latency_ms"],
+          "properties": {
+            "response_headers_ms": { "$ref": "#/$defs/nullableNumber" },
+            "time_to_first_content_token_ms": { "$ref": "#/$defs/nullableNumber" },
+            "total_latency_ms": { "$ref": "#/$defs/nullableNumber" }
+          }
+        },
+        "finish_reason": { "type": ["string", "null"] },
+        "content": { "type": "string" },
+        "reasoning_content": { "type": ["string", "null"] },
+        "usage": { "type": ["object", "null"] },
+        "timings": { "type": ["object", "null"] },
+        "system_fingerprint": { "type": ["string", "null"] },
+        "validation": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "boolean" }
+        }
+      }
+    },
+    "categoryResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempted", "expected", "passed", "pass_rate_percent"],
+      "properties": {
+        "attempted": { "type": "integer", "minimum": 0 },
+        "expected": { "type": "integer", "minimum": 1 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "pass_rate_percent": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tasks_expected", "tasks_attempted", "requests_completed", "tasks_passed",
+        "pass_rate_percent", "category_results", "finish_reason_counts",
+        "all_expected_requests_completed"
+      ],
+      "properties": {
+        "tasks_expected": { "type": "integer", "minimum": 1 },
+        "tasks_attempted": { "type": "integer", "minimum": 0 },
+        "requests_completed": { "type": "integer", "minimum": 0 },
+        "tasks_passed": { "type": "integer", "minimum": 0 },
+        "pass_rate_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "category_results": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/categoryResult" }
+        },
+        "finish_reason_counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "all_expected_requests_completed": { "type": "boolean" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "error_type", "error_message"],
+      "properties": {
+        "status": { "enum": ["completed", "failed_preflight", "failed_run"] },
+        "error_type": { "type": ["string", "null"] },
+        "error_message": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

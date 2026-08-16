@@ -17,6 +17,7 @@ Current scripts:
 .\scripts\run_phase5_harness.ps1
 .\scripts\run_phase6_measurement.ps1 -Config configs/phase6-iq2-comparison.json
 .\scripts\run_phase7_measurement.ps1 -Config configs/phase7-iq2-context-4k.json
+.\scripts\run_phase8_quality.ps1 -Config configs/phase8-quality-q2.json
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -40,6 +41,8 @@ Current scripts:
 `run_phase6_measurement.ps1` accepts only one of the two frozen Phase 6 configurations, verifies the selected PID belongs to the pinned native server, and delegates the repeated measurement to the tested Python package. Model switching remains an explicit operator action so a failed launch cannot silently benchmark the wrong quant.
 
 `run_phase7_measurement.ps1` accepts only one of the frozen 4K, 8K, or 16K IQ2 configurations. A fresh server with the matching context must already be running. Python preflight rejects an alias, path, slot count, or context mismatch before a canonical request is sent.
+
+`run_phase8_quality.ps1` accepts only the frozen Q2 or IQ2 quality configuration and requires the pinned native server executable. The Python runner performs server preflight, attempts every committed task once, retains each raw response and deterministic grade, independently re-grades the record against the suite, and writes one unique append-only result.
 
 For the Phase 2 quant-triage suite, add:
 

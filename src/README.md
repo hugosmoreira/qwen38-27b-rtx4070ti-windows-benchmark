@@ -13,9 +13,14 @@
 - `storage.py` — exclusive append-only JSON creation with filename safety checks;
 - `telemetry.py` — fixed-target-cadence NVIDIA and Windows process telemetry;
 - `result_validation.py` — dependency-free structural and semantic result checks;
-- `cli.py` — `run` and `validate` commands.
+- `quality_config.py` — paired quality-suite and controlled-setting validation;
+- `quality_grading.py` — exact text and duplicate-key-free semantic JSON grading;
+- `quality_runner.py` — one-attempt-per-task orchestration and raw-response retention;
+- `quality_result_validation.py` — cross-field checks plus independent re-grading against the committed suite;
+- `quality_comparison.py` — paired contingency counts and two-sided exact McNemar calculation;
+- `cli.py` — performance run/validation and quality run/validation/comparison commands.
 
-The formal interoperable schema is [`schemas/benchmark-result.schema.json`](../schemas/benchmark-result.schema.json). The in-package validator adds cross-field rules that JSON Schema alone does not conveniently express, such as matching measured counts and warm-up counts to the actual run array.
+The formal interoperable schemas are [`schemas/benchmark-result.schema.json`](../schemas/benchmark-result.schema.json) and [`schemas/quality-evaluation-result.schema.json`](../schemas/quality-evaluation-result.schema.json). The in-package validators add cross-field rules that JSON Schema alone does not conveniently express, including count reconciliation and re-grading saved Phase 8 responses from the committed validators.
 
 Large context inputs are described compactly by a versioned fixture generator. Each result retains the generated user-message byte count and SHA-256 so the exact expanded input can be audited without duplicating tens of thousands of words in the repository.
 

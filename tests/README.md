@@ -16,6 +16,10 @@ Current coverage includes:
 - append-only result creation and filename traversal prevention;
 - structural and cross-field result validation;
 - formal schema presence and versioning.
+- Phase 8 paired-config normalization and task independence from Phase 2;
+- exact/JSON grading, including duplicate keys and non-standard numeric constants;
+- quality-record count, category, finish-reason, and independent re-grade checks;
+- paired contingency counts and known-value exact McNemar calculations.
 
 Run all tests with:
 

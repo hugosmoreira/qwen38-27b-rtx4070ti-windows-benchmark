@@ -1,0 +1,211 @@
+{
+  "schema_version": "quality-suite-1.0",
+  "suite_id": "phase8-objective-quality-v1",
+  "purpose": "A small inspectable pass@1 comparison of the selected IQ2 and Q2 quantizations; not a general model-quality benchmark.",
+  "settings": {
+    "max_tokens": 128,
+    "temperature": 0.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "tasks": [
+    {
+      "task_id": "arithmetic-solution-dilution",
+      "category": "arithmetic",
+      "system": "Solve carefully and return only the requested value with no explanation.",
+      "user": "A tank contains 30 liters of a solution that is 40% salt. Ten liters of pure water are added. Return the new salt concentration exactly as a percentage with one decimal place.",
+      "validator": { "type": "exact", "expected": "30.0%" },
+      "grading_notes": "The tank contains 12 liters of salt in 40 total liters."
+    },
+    {
+      "task_id": "arithmetic-discount-tax",
+      "category": "arithmetic",
+      "system": "Calculate carefully and return only the requested value.",
+      "user": "An item costs $240.00. Apply a 15% discount, then apply 10% sales tax to the discounted price. Return the final price exactly in the form $0.00.",
+      "validator": { "type": "exact", "expected": "$224.40" },
+      "grading_notes": "240 × 0.85 × 1.10 = 224.40."
+    },
+    {
+      "task_id": "arithmetic-work-rate",
+      "category": "arithmetic",
+      "system": "Solve the rate problem and return only the requested number.",
+      "user": "Machine A completes a job in 6 hours and machine B completes the same job in 3 hours. Working together at constant rates, how many hours do they need? Return exactly one decimal place.",
+      "validator": { "type": "exact", "expected": "2.0" },
+      "grading_notes": "The combined rate is 1/6 + 1/3 = 1/2 job per hour."
+    },
+    {
+      "task_id": "arithmetic-weighted-average",
+      "category": "arithmetic",
+      "system": "Calculate and return only the requested decimal number.",
+      "user": "Three observations have value 12 and five observations have value 18. Return their combined arithmetic mean exactly with two decimal places.",
+      "validator": { "type": "exact", "expected": "15.75" },
+      "grading_notes": "(3 × 12 + 5 × 18) / 8 = 15.75."
+    },
+    {
+      "task_id": "arithmetic-modular-power",
+      "category": "arithmetic",
+      "system": "Solve and return only the requested integer.",
+      "user": "What is the remainder when 7 to the fourth power is divided by 13? Return only the integer remainder.",
+      "validator": { "type": "exact", "expected": "9" },
+      "grading_notes": "7^4 = 2401 and 2401 mod 13 = 9."
+    },
+    {
+      "task_id": "logic-box-statements",
+      "category": "logic",
+      "system": "Solve the logic problem and return only the requested uppercase letter.",
+      "user": "A key is in exactly one of boxes A, B, or C. Statement A says: 'The key is in A.' Statement B says: 'The key is not in B.' Statement C says: 'The key is in B.' Exactly two statements are true. Return only the box letter containing the key.",
+      "validator": { "type": "exact", "expected": "A" },
+      "grading_notes": "Only key-in-A makes statements A and B true and C false."
+    },
+    {
+      "task_id": "logic-task-order",
+      "category": "logic",
+      "system": "Determine the unique order and return only the five letters separated by single spaces.",
+      "user": "Five tasks P, Q, R, S, and T are scheduled once each. P is before Q. R is immediately after P. T is after Q. S is before P. Return the unique complete order.",
+      "validator": { "type": "exact", "expected": "S P R Q T" },
+      "grading_notes": "The P-R block must occupy positions two and three so Q and T can follow it."
+    },
+    {
+      "task_id": "logic-syllogism",
+      "category": "logic",
+      "system": "Choose the necessarily true conclusion and return only its letter.",
+      "user": "All Arks are Bems. Some Bems are Cots. No Cots are Dens. Which conclusion necessarily follows? A) Some Bems are not Dens. B) No Bems are Dens. C) Some Arks are Cots. D) All Cots are Arks.",
+      "validator": { "type": "exact", "expected": "A" },
+      "grading_notes": "The Bems that are Cots cannot be Dens."
+    },
+    {
+      "task_id": "logic-boolean-expression",
+      "category": "logic",
+      "system": "Evaluate the expression and return only TRUE or FALSE in uppercase.",
+      "user": "Let A be true, B be false, and C be false. Evaluate (A XOR B) AND (NOT C).",
+      "validator": { "type": "exact", "expected": "TRUE" },
+      "grading_notes": "A XOR B is true and NOT C is true."
+    },
+    {
+      "task_id": "logic-report-assignment",
+      "category": "logic",
+      "system": "Solve the assignment and return only the requested comma-separated mapping with no spaces.",
+      "user": "Analysts J, K, and L each review one distinct report numbered 1, 2, and 3. J does not review report 1. K's report number is immediately before L's. L does not review report 3. Return the unique assignment exactly as J=number,K=number,L=number.",
+      "validator": { "type": "exact", "expected": "J=3,K=1,L=2" },
+      "grading_notes": "K and L must be reports 1 and 2, leaving report 3 for J."
+    },
+    {
+      "task_id": "python-list-alias",
+      "category": "python_trace",
+      "system": "Trace the Python 3 code and return only the exact printed output.",
+      "user": "What is printed?\n\na = [1, 2]\nb = a\na += [3]\nb.append(4)\nprint(a)",
+      "validator": { "type": "exact", "expected": "[1, 2, 3, 4]" },
+      "grading_notes": "Both names continue to reference the same mutated list."
+    },
+    {
+      "task_id": "python-mutable-default",
+      "category": "python_trace",
+      "system": "Trace the Python 3 code and return only the exact printed output.",
+      "user": "What is printed?\n\ndef f(x, acc=[]):\n    acc.append(x)\n    return sum(acc)\n\nprint(f(2), f(3))",
+      "validator": { "type": "exact", "expected": "2 5" },
+      "grading_notes": "The default list persists, so the second sum includes 2 and 3."
+    },
+    {
+      "task_id": "python-loop-update",
+      "category": "python_trace",
+      "system": "Trace the Python 3 code and return only the integer printed.",
+      "user": "What is printed?\n\ntotal = 1\nfor i in range(1, 5):\n    total = total * i + i\nprint(total)",
+      "validator": { "type": "exact", "expected": "88" },
+      "grading_notes": "The successive totals are 2, 6, 21, and 88."
+    },
+    {
+      "task_id": "python-dict-comprehension",
+      "category": "python_trace",
+      "system": "Trace the Python 3 code and return only the integer printed.",
+      "user": "What is printed?\n\nxs = [1, 2, 3, 4]\nresult = {x: x * x for x in xs if x % 2 == 0}\nprint(result[2] + result[4])",
+      "validator": { "type": "exact", "expected": "20" },
+      "grading_notes": "The even-number squares are 4 and 16."
+    },
+    {
+      "task_id": "python-recursion-step-two",
+      "category": "python_trace",
+      "system": "Trace the Python 3 code and return only the integer printed.",
+      "user": "What is printed?\n\ndef g(n):\n    if n <= 1:\n        return 1\n    return n + g(n - 2)\n\nprint(g(6))",
+      "validator": { "type": "exact", "expected": "13" },
+      "grading_notes": "g(6) = 6 + 4 + 2 + g(0) = 13."
+    },
+    {
+      "task_id": "structured-nested-object",
+      "category": "structured_output",
+      "system": "Return only valid JSON with no prose or markdown.",
+      "user": "Return one JSON object with exactly these fields: name is the string iris, scores is an array containing the numbers 3 then 5, and active is the boolean true.",
+      "validator": { "type": "json_exact", "expected": { "name": "iris", "scores": [3, 5], "active": true } },
+      "grading_notes": "Semantic JSON comparison ignores object key order but requires exact keys, types, and values."
+    },
+    {
+      "task_id": "structured-sorted-unique-array",
+      "category": "structured_output",
+      "system": "Return only valid JSON with no prose or markdown.",
+      "user": "Remove duplicates from [4, 2, 4, 1, 3, 2], sort ascending, and return only the resulting JSON array.",
+      "validator": { "type": "json_exact", "expected": [1, 2, 3, 4] },
+      "grading_notes": "The unique values in ascending order are 1, 2, 3, and 4."
+    },
+    {
+      "task_id": "structured-group-sums",
+      "category": "structured_output",
+      "system": "Return only valid JSON with no prose or markdown.",
+      "user": "The rows are (a, 2), (b, 1), and (a, 3). Sum values by key and return one JSON object containing exactly the two totals.",
+      "validator": { "type": "json_exact", "expected": { "a": 5, "b": 1 } },
+      "grading_notes": "The two a rows sum to 5 and the b row sums to 1."
+    },
+    {
+      "task_id": "structured-three-lines",
+      "category": "structured_output",
+      "system": "Follow the output format exactly with no surrounding prose or markdown.",
+      "user": "Return exactly three lines. Line 1 is ALPHA in uppercase. Line 2 is beta in lowercase. Line 3 is the digit 3.",
+      "validator": { "type": "exact", "expected": "ALPHA\nbeta\n3" },
+      "grading_notes": "Exact grading requires the three values on separate lines in the requested case."
+    },
+    {
+      "task_id": "structured-csv-row",
+      "category": "structured_output",
+      "system": "Return only the requested CSV row with no spaces or explanation.",
+      "user": "Return one CSV row containing, in order: the lowercase word beta, the integer 7, and the lowercase boolean true.",
+      "validator": { "type": "exact", "expected": "beta,7,true" },
+      "grading_notes": "The requested row has three comma-separated fields and no spaces."
+    },
+    {
+      "task_id": "text-run-length-encoding",
+      "category": "text_data",
+      "system": "Transform the input and return only the final string.",
+      "user": "Run-length encode AAABBCCCCDAA by replacing each consecutive group with its character followed by its count.",
+      "validator": { "type": "exact", "expected": "A3B2C4D1A2" },
+      "grading_notes": "The consecutive group counts are A3, B2, C4, D1, and A2."
+    },
+    {
+      "task_id": "data-rotate-matrix",
+      "category": "text_data",
+      "system": "Return only valid JSON with no prose or markdown.",
+      "user": "Rotate the matrix [[1,2,3],[4,5,6],[7,8,9]] 90 degrees clockwise and return only the resulting JSON array of arrays.",
+      "validator": { "type": "json_exact", "expected": [[7, 4, 1], [8, 5, 2], [9, 6, 3]] },
+      "grading_notes": "A clockwise rotation turns the original columns into the listed rows."
+    },
+    {
+      "task_id": "text-first-unique-character",
+      "category": "text_data",
+      "system": "Solve and return only the single requested lowercase character.",
+      "user": "In the lowercase string levelheaded, return the first character from the left that occurs exactly once in the entire string.",
+      "validator": { "type": "exact", "expected": "v" },
+      "grading_notes": "l and e repeat; v is the first character with one occurrence."
+    },
+    {
+      "task_id": "text-normalize-path",
+      "category": "text_data",
+      "system": "Apply the transformation and return only the final path.",
+      "user": "Normalize //api///v1//users/ by collapsing each consecutive slash group to one slash and removing the trailing slash. Preserve the leading slash.",
+      "validator": { "type": "exact", "expected": "/api/v1/users" },
+      "grading_notes": "Slash groups collapse and the non-root trailing slash is removed."
+    }
+  ]
+}

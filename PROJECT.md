@@ -141,6 +141,8 @@ Status: completed on 2026-08-15. All canonical 4K, 8K, and 16K IQ2 runs passed w
 
 Exit condition: performance and quality can be discussed separately with evidence.
 
+Status: in progress. The 24-task suite, paired configurations, deterministic graders, result schema, comparison calculations, and pre-measurement protocol are prepared for a Q2-then-IQ2 canonical run.
+
 ### Phase 9 — Optional isolated experiments
 
 - MTP on versus off.
