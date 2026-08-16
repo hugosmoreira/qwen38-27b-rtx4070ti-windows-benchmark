@@ -1,0 +1,81 @@
+{
+  "schema_version": "phase10-release-protocol-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "pre_release_audit",
+  "purpose": "Freeze the local GitHub release-readiness criteria before changing the public repository surface.",
+  "candidate_version": "v0.1.0",
+  "starting_state": {
+    "branch": "main",
+    "head_commit": "c7027eb977ab0108546138c1848d07b4f23d65cf",
+    "worktree_clean": true,
+    "git_remote_configured": false,
+    "tracked_files": 141,
+    "tracked_repository_size_bytes": 1794739,
+    "largest_tracked_file_bytes": 168122,
+    "tracked_model_weights": 0,
+    "private_learning_files_ignored": ["LEARNING_PATH.md", "LEARNING_LOG.md"],
+    "offline_tests_passing": 58,
+    "restored_local_server_required_for_release": false
+  },
+  "release_scope": {
+    "included": [
+      "professional repository metadata and navigation",
+      "Windows unit-test CI",
+      "canonical-evidence manifest and validation",
+      "relative Markdown link audit",
+      "tracked secret, local-path, and large-artifact audit",
+      "reproduction and contribution documentation",
+      "v0.1.0 changelog and release notes",
+      "Hugging Face draft preparation with publication placeholders resolved after the GitHub URL exists"
+    ],
+    "excluded_until_explicit_approval": [
+      "creating a GitHub repository",
+      "adding or changing a remote",
+      "pushing commits",
+      "creating or pushing a Git tag",
+      "publishing a GitHub release",
+      "posting the Hugging Face Community report",
+      "publishing social posts"
+    ]
+  },
+  "required_local_gates": {
+    "license_file_and_package_metadata_agree": true,
+    "public_author_and_citation_metadata_confirmed": true,
+    "no_model_weights_or_secret_files_tracked": true,
+    "no_private_learning_files_tracked": true,
+    "no_absolute_local_user_or_workspace_paths_in_public_files": true,
+    "all_repository_relative_markdown_links_resolve": true,
+    "all_committed_json_parses_without_duplicate_keys": true,
+    "all_canonical_performance_and_quality_records_validate": true,
+    "all_offline_tests_pass_on_supported_python": true,
+    "github_actions_workflow_is_least_privilege": true,
+    "readme_distinguishes_canonical_superseded_and_diagnostic_evidence": true,
+    "release_notes_state_limitations_and_deferred_work": true,
+    "git_worktree_clean_after_release_candidate_commit": true
+  },
+  "pending_owner_decisions": [
+    {
+      "decision": "source and documentation license",
+      "reason": "Licensing the owner's work is a legal choice and will not be inferred."
+    },
+    {
+      "decision": "public author display name and citation identity",
+      "reason": "Local Git configuration is not authorization to publish an email address or a preferred professional identity."
+    },
+    {
+      "decision": "GitHub owner and repository name",
+      "reason": "No remote exists; public URLs and release links depend on this choice."
+    }
+  ],
+  "publication_sequence_after_local_gates": [
+    "owner reviews the release diff and resolves pending decisions",
+    "create or select the GitHub repository",
+    "add the approved origin remote",
+    "push main and observe CI",
+    "replace publication URL placeholders and revalidate links",
+    "create and push the approved v0.1.0 tag",
+    "publish GitHub release notes",
+    "request separate approval before posting the Hugging Face report"
+  ],
+  "exit_condition": "A clean local v0.1.0 release candidate passes every automated gate, contains no private or oversized artifacts, and waits only on explicit owner approval for GitHub publication actions."
+}

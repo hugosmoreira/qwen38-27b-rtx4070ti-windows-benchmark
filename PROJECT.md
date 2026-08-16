@@ -12,6 +12,7 @@
 - Phase 7 completed on 2026-08-15. IQ2 passed the 4K, 8K, and 16K ladder with proportionally scaled prompts. At 16K, the 12,831-token prompt plus 128-token output averaged 11.119 seconds TTFT, 39.201 generation tok/s, and 2,507 MiB minimum free VRAM.
 - Phase 8 completed on 2026-08-15. Q2 passed 10/24 objective tasks and IQ2 passed 9/24; paired counts were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 edge is not a meaningful general-quality win, so IQ2 remains the practical default.
 - Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; Q3 and Q4 remain deferred.
+- Phase 10 started on 2026-08-15 with a local `v0.1.0` release-readiness audit. No GitHub remote exists yet, and repository creation, pushes, tags, releases, and external posts remain approval-gated.
 
 ## Objective
 
@@ -161,6 +162,8 @@ Status: completed on 2026-08-15 for MTP off versus `draft-mtp` on with IQ2 at 4K
 - Complete README, methodology, results, limitations, and charts.
 - Tag a versioned release only after review.
 - Never commit model weights.
+
+Status: in progress on 2026-08-15. The frozen local release criteria are in `environment/phase10-release-protocol-2026-08-15.json`. The first audit found no tracked weights, private learning files, or absolute local paths, but licensing, public citation identity, and GitHub owner/repository naming require owner decisions before publication.
 
 ### Phase 11 — Hugging Face Community report
 

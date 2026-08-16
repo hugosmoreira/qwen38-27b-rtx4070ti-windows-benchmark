@@ -6,6 +6,8 @@
 
 **Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 58 offline tests; Q3 and Q4 downloads remain deferred.
 
+**Phase 10 release preparation is in progress.** The local `v0.1.0` candidate is being audited for public metadata, reproducibility, canonical evidence, CI, links, secrets, and artifact boundaries. No GitHub remote has been configured, and nothing has been pushed, tagged, released, or posted.
+
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
 The Phase 9 speed claims come only from four committed five-repetition records. The earlier 64-token capability probe remains excluded and was used only to validate MTP operation and identify `draft_n` and `draft_n_accepted`.
