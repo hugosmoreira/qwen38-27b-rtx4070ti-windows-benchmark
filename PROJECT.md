@@ -10,6 +10,7 @@
 - Phase 5 completed on 2026-08-15. The standard-library Python harness passed 23 offline tests, then one committed end-to-end smoke run passed all 12 validation flags and retained raw streaming plus telemetry evidence.
 - Phase 6 completed on 2026-08-15. Under frozen 4K controls, IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2 and used 1,583 MiB less peak VRAM. Both configurations reported 66/66 GPU layers, so this is not a CPU layer-offload comparison.
 - Phase 7 completed on 2026-08-15. IQ2 passed the 4K, 8K, and 16K ladder with proportionally scaled prompts. At 16K, the 12,831-token prompt plus 128-token output averaged 11.119 seconds TTFT, 39.201 generation tok/s, and 2,507 MiB minimum free VRAM.
+- Phase 8 completed on 2026-08-15. Q2 passed 10/24 objective tasks and IQ2 passed 9/24; paired counts were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 edge is not a meaningful general-quality win, so IQ2 remains the practical default.
 
 ## Objective
 
@@ -141,7 +142,7 @@ Status: completed on 2026-08-15. All canonical 4K, 8K, and 16K IQ2 runs passed w
 
 Exit condition: performance and quality can be discussed separately with evidence.
 
-Status: in progress. The 24-task suite, paired configurations, deterministic graders, result schema, comparison calculations, and pre-measurement protocol are prepared for a Q2-then-IQ2 canonical run.
+Status: completed on 2026-08-15. Both models completed all 24 requests under the amended frozen protocol and passed independent suite-backed re-grading. The comparison is `results/summaries/phase8-quality-comparison.md`. A superseded first Q2 attempt and the narrow empty-answer preservation fix are disclosed in `environment/phase8-quality-protocol-amendment-2026-08-15.json`.
 
 ### Phase 9 — Optional isolated experiments
 

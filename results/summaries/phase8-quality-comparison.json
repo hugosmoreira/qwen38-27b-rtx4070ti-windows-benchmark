@@ -1,0 +1,112 @@
+{
+  "schema_version": "phase8-quality-comparison-1.0",
+  "recorded_date": "2026-08-15",
+  "protocol": {
+    "original": "environment/phase8-quality-protocol-2026-08-15.json",
+    "original_commit": "ee64b11e048bc1a15c063cc41910cccad1e66017",
+    "amendment": "environment/phase8-quality-protocol-amendment-2026-08-15.json",
+    "amendment_commit": "87faba489917eb2140a4ac6702f94d54b0580543",
+    "suite": "prompts/phase8-quality-evaluation.json",
+    "suite_sha256": "3002269202f0c0ad52c1a1499d9de3c918550c192ce31ed55dd65275b9b59164"
+  },
+  "raw_results": {
+    "q2": {
+      "path": "results/raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json",
+      "run_id": "phase8-quality-q2-20260816T033656385280Z-2359f380",
+      "git_commit": "87faba489917eb2140a4ac6702f94d54b0580543",
+      "size_bytes": 37862,
+      "sha256": "b8edf1c0713baf180fa3ff6472e219971ea50a14d11d75fbd5dc580c503edbaf"
+    },
+    "iq2": {
+      "path": "results/raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json",
+      "run_id": "phase8-quality-iq2-20260816T033811840476Z-8c67331b",
+      "git_commit": "87faba489917eb2140a4ac6702f94d54b0580543",
+      "size_bytes": 38185,
+      "sha256": "f2213bc2e6c6952b9509efd4915c9278fb60409b736e89453fff0862d840c945"
+    }
+  },
+  "validation": {
+    "q2_suite_backed_independent_regrade": "passed",
+    "iq2_suite_backed_independent_regrade": "passed",
+    "requests_completed_per_model": 24,
+    "prompt_tokens_total_per_model": 1589,
+    "prompt_cache_n": 0,
+    "reasoning_content": null,
+    "offline_tests": "50/50 passed"
+  },
+  "scores": {
+    "q2": {
+      "passes": 10,
+      "tasks": 24,
+      "pass_rate_percent": 41.667,
+      "categories": {
+        "arithmetic": { "passes": 0, "tasks": 5 },
+        "logic": { "passes": 2, "tasks": 5 },
+        "python_trace": { "passes": 1, "tasks": 5 },
+        "structured_output": { "passes": 5, "tasks": 5 },
+        "text_data": { "passes": 2, "tasks": 4 }
+      }
+    },
+    "iq2": {
+      "passes": 9,
+      "tasks": 24,
+      "pass_rate_percent": 37.5,
+      "categories": {
+        "arithmetic": { "passes": 0, "tasks": 5 },
+        "logic": { "passes": 2, "tasks": 5 },
+        "python_trace": { "passes": 1, "tasks": 5 },
+        "structured_output": { "passes": 4, "tasks": 5 },
+        "text_data": { "passes": 2, "tasks": 4 }
+      }
+    },
+    "q2_minus_iq2_passes": 1,
+    "q2_minus_iq2_percentage_points": 4.167
+  },
+  "paired_analysis": {
+    "both_pass": 7,
+    "q2_only": 3,
+    "iq2_only": 2,
+    "neither_pass": 12,
+    "discordant_tasks": 5,
+    "two_sided_exact_mcnemar_p": 1.0,
+    "interpretation": "The one-task Q2 lead is descriptive and provides no evidence of a general difference on this small custom suite."
+  },
+  "task_outcomes": [
+    { "task_id": "arithmetic-solution-dilution", "category": "arithmetic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "arithmetic-discount-tax", "category": "arithmetic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "arithmetic-work-rate", "category": "arithmetic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "arithmetic-weighted-average", "category": "arithmetic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "arithmetic-modular-power", "category": "arithmetic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "logic-box-statements", "category": "logic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "logic-task-order", "category": "logic", "q2_passed": true, "iq2_passed": false, "paired_outcome": "q2_only" },
+    { "task_id": "logic-syllogism", "category": "logic", "q2_passed": false, "iq2_passed": true, "paired_outcome": "iq2_only" },
+    { "task_id": "logic-boolean-expression", "category": "logic", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "logic-report-assignment", "category": "logic", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "python-list-alias", "category": "python_trace", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "python-mutable-default", "category": "python_trace", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "python-loop-update", "category": "python_trace", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "python-dict-comprehension", "category": "python_trace", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "python-recursion-step-two", "category": "python_trace", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "structured-nested-object", "category": "structured_output", "q2_passed": true, "iq2_passed": false, "paired_outcome": "q2_only" },
+    { "task_id": "structured-sorted-unique-array", "category": "structured_output", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "structured-group-sums", "category": "structured_output", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "structured-three-lines", "category": "structured_output", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "structured-csv-row", "category": "structured_output", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" },
+    { "task_id": "text-run-length-encoding", "category": "text_data", "q2_passed": true, "iq2_passed": false, "paired_outcome": "q2_only" },
+    { "task_id": "data-rotate-matrix", "category": "text_data", "q2_passed": false, "iq2_passed": true, "paired_outcome": "iq2_only" },
+    { "task_id": "text-first-unique-character", "category": "text_data", "q2_passed": false, "iq2_passed": false, "paired_outcome": "neither_pass" },
+    { "task_id": "text-normalize-path", "category": "text_data", "q2_passed": true, "iq2_passed": true, "paired_outcome": "both_pass" }
+  ],
+  "decision": {
+    "speed_default": "UD-IQ2_XXS",
+    "quality_result": "No meaningful winner; Q2 led by one task only and the paired exact p-value was 1.0.",
+    "practical_recommendation": "Keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM. Treat Q2 as an optional strict-output candidate, not a generally better model, based on this suite."
+  },
+  "limitations": [
+    "The 24 custom tasks are inspectable but are not a validated or randomly sampled benchmark population.",
+    "Pass@1 exact grading measures both answer correctness and instruction/format adherence and gives no partial credit.",
+    "One fixed model order and one deterministic attempt do not estimate sampling or order variance.",
+    "The first Q2 attempt was superseded after a pre-write preservation bug; the repeated exposure is disclosed in the protocol amendment.",
+    "Phase 8 task timings are audit data and are not a performance comparison."
+  ]
+}

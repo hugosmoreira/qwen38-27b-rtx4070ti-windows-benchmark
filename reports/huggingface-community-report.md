@@ -1,4 +1,4 @@
-# Performance report: Qwen3.8-27B on RTX 4070 Ti 12GB — IQ2 versus Q2
+# Community report: Qwen3.8-27B on RTX 4070 Ti 12GB — IQ2 versus Q2
 
 > **Draft — the controlled comparison is complete. Do not publish until the GitHub repository URLs are available and the complete report receives final review.**
 
@@ -6,7 +6,7 @@
 
 On one Windows desktop with an RTX 4070 Ti 12GB, both `UD-IQ2_XXS` and `UD-Q2_K_XL` fit with all 66 model layers on the GPU at 4K context. Across three measured 256-token runs per quant, IQ2 averaged 43.643 generation tok/s and Q2 averaged 38.030 tok/s. Relative to IQ2, Q2 decoded 12.861% slower and used 1,583 MiB more peak VRAM. Expressed in the other direction, IQ2 decoded 14.759% faster.
 
-Q2 retains a small, separate quality signal from the earlier ten-task triage, where it passed 5/10 tasks versus IQ2's 3/10. This is candidate-selection evidence, not a broad model-quality estimate.
+In a separate 24-task objective pass@1 evaluation, Q2 passed 10 tasks and IQ2 passed 9. Paired outcomes were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 lead is descriptive and does not show a meaningful general-quality advantage.
 
 In a separate IQ2 context ladder, the tested 16K configuration processed 12,831 prompt tokens plus 128 completion tokens with 11.119-second mean TTFT, 39.201 generation tok/s, and 2,507 MiB minimum sampled VRAM free. All 66 layers remained on the GPU.
 
@@ -28,7 +28,8 @@ In a separate IQ2 context ladder, the tested 16K configuration processed 12,831 
 | CUDA backend | Official Windows x64 CUDA 13.3 archive; NVIDIA driver 610.88 |
 | Model repository revision | `1cff334a4a228324d4ee1f76d55d372588f0d556` |
 | Quant files | `UD-IQ2_XXS` and `UD-Q2_K_XL` |
-| Benchmark protocol commit | `94a27359f287ac5915f6b90664aa7e47844f3560` |
+| Performance protocol commit | `94a27359f287ac5915f6b90664aa7e47844f3560` |
+| Quality protocol / amendment commits | `ee64b11e048bc1a15c063cc41910cccad1e66017` / `87faba489917eb2140a4ac6702f94d54b0580543` |
 
 ## Controlled settings
 
@@ -75,9 +76,18 @@ Each level used a fresh process, one excluded warm-up, three measured repetition
 
 The largest sensible tested context is 16K under the precommitted project thresholds. From 4K to 16K, decode throughput declined 4.676% and peak VRAM increased 460 MiB. The test establishes this specific 12,831-plus-128-token workload, not arbitrary full-window prompts or long-context retrieval quality.
 
-## Quality checks
+## Objective quality evaluation
 
-The earlier Phase 2 pass@1 triage used ten identical objective tasks. IQ2 passed 3/10 and Q2 passed 5/10. Q2's two unique wins support retaining it as the quality-oriented candidate, but ten tasks cannot establish general quality. The Phase 6 long-form response was not graded and adds no quality evidence.
+The quality suite contains 24 new inspectable tasks across arithmetic, logic, Python tracing, structured output, and text/data transformations. Each quant received one deterministic attempt in the same order from a fresh 4K server. Temperature was 0.0, seed was 42, prompt caching and thinking were disabled, and every saved response was independently re-graded against the committed suite. Exact grading gives no partial credit and measures both answer correctness and required-format adherence.
+
+| Quant | Overall | Arithmetic | Logic | Python trace | Structured output | Text/data |
+|---|---:|---:|---:|---:|---:|---:|
+| `UD-Q2_K_XL` | 10/24 | 0/5 | 2/5 | 1/5 | 5/5 | 2/4 |
+| `UD-IQ2_XXS` | 9/24 | 0/5 | 2/5 | 1/5 | 4/5 | 2/4 |
+
+Q2 led by one task, or 4.167 percentage points. Only five pairs were discordant: three favored Q2 and two favored IQ2. The two-sided exact McNemar p-value was 1.0. This custom suite is not a random or validated benchmark population, so the result should not be generalized beyond the tested prompts.
+
+The first Q2 attempt exposed a pre-write preservation bug when one request completed with an empty answer. The server log showed 24/24 requests completed, but the validator disagreed with the runner's failure-reason label and no raw score was written. A public protocol amendment hashes that local log and freezes a narrow correction: a received empty answer is a completed request with zero quality credit. No prompt, expected answer, grader, or inference control changed. The model is stateless and caches were disabled, but the repeated Q2 prompt exposure remains disclosed as a limitation.
 
 ## Failed configurations
 
@@ -85,15 +95,16 @@ Neither Phase 6 configuration failed or ran out of memory. Both fully offloaded 
 
 ## Interpretation
 
-IQ2 is the practical speed default for this fixed 4K workload: it decoded 14.759% faster than Q2 and left approximately 1.55 GiB more VRAM headroom. Q2 processed the prompt and reached the first content token slightly faster, but decode dominated the 256-token response and increased mean total latency by 857.832 ms.
+IQ2 is the practical default for this setup: it decoded 14.759% faster than Q2, left approximately 1.55 GiB more VRAM headroom, and finished only one task behind Q2 in the separate 24-task evaluation. Q2 processed the performance prompt and reached the first content token slightly faster, but decode dominated the 256-token response and increased mean total latency by 857.832 ms.
 
-Q2 remains useful when its small Phase 2 quality signal matters more than the decode and memory cost. Because both models fit fully on the GPU, these measurements do not support a GPU-versus-CPU layer-offload claim.
+Q2's perfect 5/5 structured-output score makes it an optional candidate for strict-output experiments, but its 10/24 versus 9/24 overall result does not justify calling it generally higher quality. Because both models fit fully on the GPU, these measurements also do not support a GPU-versus-CPU layer-offload claim.
 
 ## Limitations
 
 - One Windows desktop and one GPU.
 - Windows display activity shares VRAM with inference.
-- A small quality benchmark cannot establish general model quality.
+- The 24-task custom quality suite cannot establish general model quality, and pass@1 exact grading combines correctness with format adherence.
+- The first Q2 task exposure was superseded after a disclosed pre-write preservation bug; the corrected raw comparison restarted Q2 from a fresh process.
 - The 16K context result used 12,831 prompt tokens and 128 completion tokens; it is not a full-window capacity or retrieval-quality claim.
 - Results depend on runtime, model revision, context, cache precision, sampling, and offload.
 - This is a community benchmark, not an official Qwen or Unsloth evaluation.

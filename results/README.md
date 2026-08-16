@@ -2,7 +2,7 @@
 
 - `raw/` contains append-only run records and raw model responses selected for publication.
 - `summaries/` contains derived tables, statistics, and charts.
-- `../schemas/benchmark-result.schema.json` is the formal result contract implemented in Phase 5.
+- `../schemas/benchmark-result.schema.json` and `../schemas/quality-evaluation-result.schema.json` are the formal performance and objective-quality result contracts.
 
 Phases 1 through 3 include proof-of-life records for `UD-IQ2_XXS`, `UD-Q2_K_XL`, and the pinned native llama.cpp API. They are explicitly classified as proof-of-life rather than formal benchmarks; repeated measurements begin in Phase 4.
 
@@ -23,5 +23,9 @@ The canonical Phase 6 raw files are `raw/phase6-iq2-comparison-20260816T01421989
 Phase 7 adds three controlled IQ2 context levels. Each uses a fresh server and a proportionally scaled deterministic fixture so the actual prompt—not only the allocated KV cache—exercises 4K, 8K, or 16K behavior. All three canonical results passed; the 16K workload is the largest sensible tested context under the frozen study-specific thresholds.
 
 The canonical Phase 7 records are `raw/phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json`, `raw/phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json`, and `raw/phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json`. Their interpretations are `summaries/phase7-context-sensitivity.md` and `summaries/phase7-context-sensitivity.json`.
+
+Phase 8 adds a paired 24-task objective quality evaluation. Q2 passed 10 tasks and IQ2 passed 9; the exact paired McNemar p-value is 1.0, so the one-task difference is descriptive only. The first Q2 attempt is disclosed in the protocol amendment but has no raw score because a pre-write preservation check rejected it. The corrected canonical records both reference amendment commit `87faba4` and pass independent suite-backed re-grading.
+
+The canonical Phase 8 files are `raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json` and `raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json`. Their interpretations are `summaries/phase8-quality-comparison.md` and `summaries/phase8-quality-comparison.json`.
 
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

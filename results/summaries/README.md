@@ -13,3 +13,5 @@ Current summary:
 - `phase6-iq2-vs-q2.json` preserves the same comparison in a machine-readable derived record with explicit formulas and source paths.
 - `phase7-context-sensitivity.md` reports the controlled IQ2 4K/8K/16K ladder, frozen sensible-use gate, allocation changes, variation, telemetry, and capacity-claim boundary.
 - `phase7-context-sensitivity.json` preserves the context ladder, relative changes, telemetry, thresholds, and decision in machine-readable form.
+- `phase8-quality-comparison.md` reports the 24-task Q2-versus-IQ2 pass@1 scores, category counts, paired outcomes, exact McNemar result, protocol incident, and practical decision.
+- `phase8-quality-comparison.json` preserves the same comparison, per-task outcomes, source hashes, validation evidence, and limitations in machine-readable form.

@@ -1,12 +1,12 @@
 # Qwen3.8-27B on an RTX 4070 Ti 12GB
 
-> A reproducible Windows study of low-bit GPU-resident inference versus higher-quality CPU/RAM-offloaded inference.
+> A reproducible Windows study of low-bit quantization, GPU residency, context sensitivity, speed, memory, and objective response quality.
 
 ## Status
 
-**Phase 7 completed locally on 2026-08-15 — IQ2 passed the controlled 4K, 8K, and 16K context ladder.** At the largest tested level, 12,831 prompt tokens plus 128 generated tokens completed with 11.119-second mean TTFT, 39.201 generation tok/s, and 2,507 MiB minimum sampled VRAM free. All 66 layers remained on the RTX 4070 Ti. The expanded package passed 30 offline tests before measurement.
+**Phase 8 completed locally on 2026-08-15.** On 24 inspectable pass@1 tasks, Q2 passed 10 and IQ2 passed 9. The paired split was 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass; the two-sided exact McNemar p-value was 1.0. This is no meaningful general-quality win for Q2. The corrected package passed 50 offline tests, both raw files passed independent suite-backed re-grading, and a fresh hash-validated IQ2 4K server was restored afterward.
 
-The largest sensible tested context is 16K under the study's precommitted thresholds. This is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality. Phase 6 remains the controlled quant comparison: IQ2 was faster and lighter, while Q2 retains the separate preliminary 5/10 versus 3/10 quality-triage signal.
+The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
 ## Phase 1 proof of life
 
@@ -56,7 +56,7 @@ This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit c
 | Configuration | File size | Intended role |
 |---|---:|---|
 | `UD-IQ2_XXS` | 8.39 GiB | Phase 1 proof of life completed; speed candidate |
-| `UD-Q2_K_XL` | 9.94 GiB | Higher-quality 2-bit candidate with tight VRAM headroom |
+| `UD-Q2_K_XL` | 9.94 GiB | Larger 2-bit comparison candidate with tight VRAM headroom |
 | `UD-Q3_K_XL` | 12.52 GiB | Main partial-offload candidate |
 | `UD-Q4_K_XL` | 16.69 GiB | Higher-quality, heavier-offload candidate |
 
@@ -90,7 +90,7 @@ IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until 
 - `results/summaries/` — derived tables and charts.
 - `reports/` — GitHub, Hugging Face, and social-report drafts.
 - `scripts/` — repeatable PowerShell entry points.
-- `schemas/` — the formal Python-harness result contract.
+- `schemas/` — formal performance and quality result contracts.
 - `src/` — benchmark client and telemetry code.
 - `tests/` — tests for our code, schemas, and calculations.
 
@@ -199,7 +199,7 @@ Both quantizations used identical runtime, prompt, context, KV cache, sampling, 
 | Peak VRAM used | 8,976 MiB | 10,559 MiB | +1,583 MiB |
 | Peak process private memory | 9.621 GiB | 11.167 GiB | +16.066% |
 
-IQ2 was 14.759% faster than Q2 by the reciprocal decode-rate comparison and left approximately 1.55 GiB more VRAM headroom. Q2 remains the quality-oriented candidate because it passed 5/10 rather than 3/10 tasks in the separate Phase 2 triage; the Phase 6 response was not graded.
+IQ2 was 14.759% faster than Q2 by the reciprocal decode-rate comparison and left approximately 1.55 GiB more VRAM headroom. At this phase, Q2 remained the quality-oriented candidate only because it passed 5/10 rather than 3/10 tasks in the separate Phase 2 triage; the later Phase 8 evaluation found no meaningful general-quality advantage.
 
 See the [frozen protocol](environment/phase6-comparison-protocol-2026-08-15.json), [completed environment record](environment/phase6-comparison-2026-08-15.json), [human comparison](results/summaries/phase6-iq2-vs-q2.md), and [machine-readable derived result](results/summaries/phase6-iq2-vs-q2.json).
 
@@ -219,3 +219,18 @@ Each level used a fresh IQ2 server, one excluded warm-up, three measured repetit
 From 4K to 16K, decode throughput declined 4.676% and peak VRAM rose by 460 MiB. The 16K level passed the predeclared practical thresholds of at least 1,024 MiB VRAM headroom, no more than 30 seconds mean TTFT, and at least 30 generation tok/s.
 
 See the [Phase 7 protocol](environment/phase7-context-protocol-2026-08-15.json), [completed environment record](environment/phase7-context-2026-08-15.json), [context-sensitivity summary](results/summaries/phase7-context-sensitivity.md), and [machine-readable comparison](results/summaries/phase7-context-sensitivity.json).
+
+## Phase 8 objective quality evaluation
+
+Each quant received the same 24 new tasks once under identical 4K, one-slot, cache-off, thinking-off controls. Exact and semantic-JSON graders were committed before measurement, raw answers were retained, and both records were independently re-graded from the committed suite.
+
+| Quant | Overall | Arithmetic | Logic | Python trace | Structured output | Text/data |
+|---|---:|---:|---:|---:|---:|---:|
+| `UD-Q2_K_XL` | 10/24 | 0/5 | 2/5 | 1/5 | 5/5 | 2/4 |
+| `UD-IQ2_XXS` | 9/24 | 0/5 | 2/5 | 1/5 | 4/5 | 2/4 |
+
+Only five tasks were discordant: Q2 won three and IQ2 won two. The exact paired p-value was 1.0, so the observed one-task Q2 lead is descriptive only. Exact grading also measures format adherence—extra prose, wrong decimal formatting, or fenced JSON fails without partial credit.
+
+The first Q2 attempt exposed a pre-write empty-answer preservation bug. Its 24 server completions and local log hash are disclosed, but it has no usable score. A narrow amendment separated request completion from answer correctness, added two regression tests, and froze the correction before a fresh Q2 restart; prompts, expected answers, graders, and model controls did not change.
+
+See the [original protocol](environment/phase8-quality-protocol-2026-08-15.json), [protocol amendment](environment/phase8-quality-protocol-amendment-2026-08-15.json), [completed environment record](environment/phase8-quality-2026-08-15.json), [human summary](results/summaries/phase8-quality-comparison.md), and [machine-readable comparison](results/summaries/phase8-quality-comparison.json).
