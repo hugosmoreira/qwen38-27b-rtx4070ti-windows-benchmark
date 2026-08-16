@@ -4,9 +4,9 @@
 
 ## Status
 
-**Phase 6 completed locally on 2026-08-15 — the controlled IQ2-versus-Q2 comparison is reproducible from committed raw evidence.** Both selected models fit with 66/66 layers on the RTX 4070 Ti at 4K. IQ2 averaged 43.643 generation tok/s; Q2 averaged 38.030 tok/s while using 1,583 MiB more peak VRAM. The package passed 25 offline tests before the canonical runs.
+**Phase 7 completed locally on 2026-08-15 — IQ2 passed the controlled 4K, 8K, and 16K context ladder.** At the largest tested level, 12,831 prompt tokens plus 128 generated tokens completed with 11.119-second mean TTFT, 39.201 generation tok/s, and 2,507 MiB minimum sampled VRAM free. All 66 layers remained on the RTX 4070 Ti. The expanded package passed 30 offline tests before measurement.
 
-The comparison changes the original premise: this pair did not exercise CPU layer offload. It measures the speed and memory cost of the quality-oriented Q2 candidate against the faster IQ2 candidate. The earlier 3/10 versus 5/10 quality triage remains separate, preliminary evidence; broader context and quality evaluation remain incomplete.
+The largest sensible tested context is 16K under the study's precommitted thresholds. This is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality. Phase 6 remains the controlled quant comparison: IQ2 was faster and lighter, while Q2 retains the separate preliminary 5/10 versus 3/10 quality-triage signal.
 
 ## Phase 1 proof of life
 
@@ -202,3 +202,20 @@ Both quantizations used identical runtime, prompt, context, KV cache, sampling, 
 IQ2 was 14.759% faster than Q2 by the reciprocal decode-rate comparison and left approximately 1.55 GiB more VRAM headroom. Q2 remains the quality-oriented candidate because it passed 5/10 rather than 3/10 tasks in the separate Phase 2 triage; the Phase 6 response was not graded.
 
 See the [frozen protocol](environment/phase6-comparison-protocol-2026-08-15.json), [completed environment record](environment/phase6-comparison-2026-08-15.json), [human comparison](results/summaries/phase6-iq2-vs-q2.md), and [machine-readable derived result](results/summaries/phase6-iq2-vs-q2.json).
+
+## Phase 7 context sensitivity
+
+Each level used a fresh IQ2 server, one excluded warm-up, three measured repetitions, Q8 K/V cache, and a deterministic public synthetic prompt near 78% of the configured window.
+
+| Metric | 4K | 8K | 16K |
+|---|---:|---:|---:|
+| Actual prompt tokens | 3,231 | 6,423 | 12,831 |
+| Prompt throughput | 1,202.952 tok/s | 1,187.733 tok/s | 1,155.757 tok/s |
+| TTFT | 2.693 s | 5.418 s | 11.119 s |
+| Generation throughput | 41.124 tok/s | 40.522 tok/s | 39.201 tok/s |
+| Peak VRAM used | 9,028 MiB | 9,182 MiB | 9,488 MiB |
+| Minimum VRAM free | 2,967 MiB | 2,813 MiB | 2,507 MiB |
+
+From 4K to 16K, decode throughput declined 4.676% and peak VRAM rose by 460 MiB. The 16K level passed the predeclared practical thresholds of at least 1,024 MiB VRAM headroom, no more than 30 seconds mean TTFT, and at least 30 generation tok/s.
+
+See the [Phase 7 protocol](environment/phase7-context-protocol-2026-08-15.json), [completed environment record](environment/phase7-context-2026-08-15.json), [context-sensitivity summary](results/summaries/phase7-context-sensitivity.md), and [machine-readable comparison](results/summaries/phase7-context-sensitivity.json).

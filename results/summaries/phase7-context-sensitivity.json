@@ -1,0 +1,122 @@
+{
+  "schema_version": "phase7-derived-context-comparison-1.0",
+  "recorded_date": "2026-08-15",
+  "protocol_git_commit": "e0230f3a7f95ca011385dd64a0def58ff600edcd",
+  "protocol": "environment/phase7-context-protocol-2026-08-15.json",
+  "relative_change_definition": "((level - 4K) / 4K) * 100",
+  "levels": {
+    "4k": {
+      "context_size": 4096,
+      "source": "results/raw/phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json",
+      "prompt_tokens": 3231,
+      "completion_tokens": 128,
+      "prompt_window_utilization_percent": 78.882,
+      "server_prompt_tokens_per_second": { "mean": 1202.952, "sample_sd": 0.22, "cv_percent": 0.018 },
+      "server_generation_tokens_per_second": { "mean": 41.124, "sample_sd": 0.201, "cv_percent": 0.489 },
+      "time_to_first_content_token_ms": { "mean": 2692.911, "sample_sd": 0.479, "cv_percent": 0.018 },
+      "total_latency_ms": { "mean": 5781.308, "sample_sd": 15.511, "cv_percent": 0.268 },
+      "peak_vram_used_mib": 9028,
+      "minimum_vram_free_mib": 2967,
+      "peak_process_working_set_gib": 8.419,
+      "peak_process_private_memory_gib": 9.691,
+      "startup_cuda_kv_buffer_mib": 136,
+      "startup_cuda_compute_buffer_mib": 37.27,
+      "telemetry": {
+        "measured_sample_counts": [24, 23, 23],
+        "mean_observed_interval_ms": 253.614,
+        "maximum_temperature_c": 72,
+        "maximum_power_draw_w": 274.59
+      },
+      "sensible_context_criteria_passed": true
+    },
+    "8k": {
+      "context_size": 8192,
+      "source": "results/raw/phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json",
+      "prompt_tokens": 6423,
+      "completion_tokens": 128,
+      "prompt_window_utilization_percent": 78.406,
+      "server_prompt_tokens_per_second": { "mean": 1187.733, "sample_sd": 1.404, "cv_percent": 0.118 },
+      "server_generation_tokens_per_second": { "mean": 40.522, "sample_sd": 0.067, "cv_percent": 0.165 },
+      "time_to_first_content_token_ms": { "mean": 5418.174, "sample_sd": 6.243, "cv_percent": 0.115 },
+      "total_latency_ms": { "mean": 8552.468, "sample_sd": 3.717, "cv_percent": 0.043 },
+      "peak_vram_used_mib": 9182,
+      "minimum_vram_free_mib": 2813,
+      "peak_process_working_set_gib": 8.419,
+      "peak_process_private_memory_gib": 9.842,
+      "startup_cuda_kv_buffer_mib": 272,
+      "startup_cuda_compute_buffer_mib": 54.27,
+      "telemetry": {
+        "measured_sample_counts": [34, 34, 35],
+        "mean_observed_interval_ms": 253.175,
+        "maximum_temperature_c": 77,
+        "maximum_power_draw_w": 277.26
+      },
+      "sensible_context_criteria_passed": true
+    },
+    "16k": {
+      "context_size": 16384,
+      "source": "results/raw/phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json",
+      "prompt_tokens": 12831,
+      "completion_tokens": 128,
+      "prompt_window_utilization_percent": 78.314,
+      "server_prompt_tokens_per_second": { "mean": 1155.757, "sample_sd": 1.129, "cv_percent": 0.098 },
+      "server_generation_tokens_per_second": { "mean": 39.201, "sample_sd": 0.007, "cv_percent": 0.018 },
+      "time_to_first_content_token_ms": { "mean": 11118.874, "sample_sd": 10.732, "cv_percent": 0.097 },
+      "total_latency_ms": { "mean": 14358.732, "sample_sd": 10.806, "cv_percent": 0.075 },
+      "peak_vram_used_mib": 9488,
+      "minimum_vram_free_mib": 2507,
+      "peak_process_working_set_gib": 8.425,
+      "peak_process_private_memory_gib": 10.146,
+      "startup_cuda_kv_buffer_mib": 544,
+      "startup_cuda_compute_buffer_mib": 88.27,
+      "telemetry": {
+        "measured_sample_counts": [57, 57, 57],
+        "mean_observed_interval_ms": 253.402,
+        "maximum_temperature_c": 80,
+        "maximum_power_draw_w": 279.36
+      },
+      "sensible_context_criteria_passed": true
+    }
+  },
+  "relative_changes_vs_4k_percent": {
+    "8k": {
+      "prompt_tokens": 98.793,
+      "server_prompt_tokens_per_second": -1.265,
+      "server_generation_tokens_per_second": -1.464,
+      "time_to_first_content_token_ms": 101.201,
+      "total_latency_ms": 47.933,
+      "peak_vram_used_mib": 1.706,
+      "minimum_vram_free_mib": -5.19,
+      "peak_process_private_memory_bytes": 1.559
+    },
+    "16k": {
+      "prompt_tokens": 297.122,
+      "server_prompt_tokens_per_second": -3.923,
+      "server_generation_tokens_per_second": -4.676,
+      "time_to_first_content_token_ms": 312.894,
+      "total_latency_ms": 148.365,
+      "peak_vram_used_mib": 5.095,
+      "minimum_vram_free_mib": -15.504,
+      "peak_process_private_memory_bytes": 4.703
+    }
+  },
+  "criteria": {
+    "minimum_vram_headroom_mib": 1024,
+    "maximum_mean_ttft_ms": 30000,
+    "minimum_mean_generation_tokens_per_second": 30
+  },
+  "decision": {
+    "largest_sensible_tested_context": 16384,
+    "largest_actual_tested_prompt_tokens": 12831,
+    "completion_tokens": 128,
+    "all_layers_on_gpu_every_level": true,
+    "oom_or_failed_canonical_runs": 0,
+    "interpretation": "IQ2 remains practical under the study-specific thresholds at the tested 16K configuration. This proves the 12,831-prompt-token plus 128-completion-token workload, not arbitrary full-window input or larger contexts."
+  },
+  "limitations": [
+    "The context order was fixed and ascending rather than randomized.",
+    "Temperature rose across the sequence, so context size and accumulated thermal state are correlated.",
+    "The repeated synthetic record fixture measures performance, not long-context retrieval quality.",
+    "Only one quant, one slot, one runtime, and one desktop were tested."
+  ]
+}

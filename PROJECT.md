@@ -9,10 +9,11 @@
 - Phase 4 completed on 2026-08-15. One excluded warm-up and three measured 256-token IQ2 repetitions produced 43.171 generation tok/s mean with 0.096% CV, while streaming TTFT averaged 94.950 ms with 1.608% CV.
 - Phase 5 completed on 2026-08-15. The standard-library Python harness passed 23 offline tests, then one committed end-to-end smoke run passed all 12 validation flags and retained raw streaming plus telemetry evidence.
 - Phase 6 completed on 2026-08-15. Under frozen 4K controls, IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2 and used 1,583 MiB less peak VRAM. Both configurations reported 66/66 GPU layers, so this is not a CPU layer-offload comparison.
+- Phase 7 completed on 2026-08-15. IQ2 passed the 4K, 8K, and 16K ladder with proportionally scaled prompts. At 16K, the 12,831-token prompt plus 128-token output averaged 11.119 seconds TTFT, 39.201 generation tok/s, and 2,507 MiB minimum free VRAM.
 
 ## Objective
 
-Measure whether Qwen3.8-27B is practical on a Windows desktop with an RTX 4070 Ti 12GB and 64 GB system RAM. The primary experiment compares lower-bit, mostly GPU-resident inference with higher-bit inference that requires CPU/system-RAM offload.
+Measure whether Qwen3.8-27B is practical on a Windows desktop with an RTX 4070 Ti 12GB and 64 GB system RAM. The study compares selected quantizations, measures context sensitivity, and preserves heavier future configurations if they require CPU/system-RAM offload.
 
 ## Scope
 
@@ -129,6 +130,8 @@ Status: completed on 2026-08-15. Both canonical records passed structural and se
 - Preserve OOM and failed configurations.
 
 Exit condition: identify the largest sensible local context for the selected quant.
+
+Status: completed on 2026-08-15. All canonical 4K, 8K, and 16K IQ2 runs passed with 66/66 GPU layers. The largest sensible tested setting is 16K for the 12,831-prompt-token plus 128-completion-token workload. The checkpoint is `results/summaries/phase7-context-sensitivity.md`.
 
 ### Phase 8 — Small quality evaluation
 

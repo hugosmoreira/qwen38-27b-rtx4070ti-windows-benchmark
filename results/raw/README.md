@@ -16,5 +16,10 @@ Current records:
 - `phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json` — canonical Phase 5 Python-harness smoke from revision `b0481d4`; one short measured run passed all structural, semantic, streaming, cache, reasoning, and telemetry checks.
 - `phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json` — canonical Phase 6 IQ2 record from frozen protocol revision `94a2735`; one excluded warm-up and three measured 256-token runs completed and passed semantic validation.
 - `phase6-q2-comparison-20260816T014417772434Z-91bc350d.json` — canonical Phase 6 Q2 record from the same protocol revision and controls; one excluded warm-up and three measured 256-token runs completed and passed semantic validation.
+- `phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json` — canonical Phase 7 4K IQ2 record from protocol revision `e0230f3`; all runs used 3,231 prompt and 128 completion tokens.
+- `phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json` — canonical Phase 7 8K IQ2 record from the same protocol; all runs used 6,423 prompt and 128 completion tokens.
+- `phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json` — canonical Phase 7 16K IQ2 record; all runs used 12,831 prompt and 128 completion tokens and retained 2,507 MiB minimum sampled VRAM free.
 
 Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. The Phase 6 pair supersedes Phase 4 for the controlled quant comparison while Phase 4 remains the earlier standalone IQ2 baseline.
+
+Each Phase 7 record contains one excluded warm-up plus three measured repetitions, the deterministic fixture hash and byte count, actual prompt/completion aggregates, per-run context-budget validation, and continuous telemetry.

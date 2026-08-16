@@ -20,4 +20,8 @@ Phase 6 adds a controlled IQ2-versus-Q2 pair produced from protocol commit `94a2
 
 The canonical Phase 6 raw files are `raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json` and `raw/phase6-q2-comparison-20260816T014417772434Z-91bc350d.json`. Their human and machine-readable interpretations are `summaries/phase6-iq2-vs-q2.md` and `summaries/phase6-iq2-vs-q2.json`.
 
+Phase 7 adds three controlled IQ2 context levels. Each uses a fresh server and a proportionally scaled deterministic fixture so the actual prompt—not only the allocated KV cache—exercises 4K, 8K, or 16K behavior. All three canonical results passed; the 16K workload is the largest sensible tested context under the frozen study-specific thresholds.
+
+The canonical Phase 7 records are `raw/phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json`, `raw/phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json`, and `raw/phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json`. Their interpretations are `summaries/phase7-context-sensitivity.md` and `summaries/phase7-context-sensitivity.json`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

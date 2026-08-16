@@ -1,0 +1,151 @@
+{
+  "schema_version": "phase7-context-environment-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "completed",
+  "protocol": "environment/phase7-context-protocol-2026-08-15.json",
+  "protocol_git_commit": "e0230f3a7f95ca011385dd64a0def58ff600edcd",
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA 13.3",
+    "device": "CUDA0",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "driver": "610.88"
+  },
+  "model": {
+    "quantization": "UD-IQ2_XXS",
+    "manifest": "environment/model-download-manifest.json",
+    "hash_validated_on_every_canonical_launch": true
+  },
+  "canonical_launches": {
+    "4k": {
+      "run_id": "native-server-20260816T022450915Z",
+      "context_size": 4096,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "cpu_mapped_model_buffer_mib": 397.85,
+      "cuda_model_buffer_mib": 7974.14,
+      "cuda_kv_buffer_mib": 136.0,
+      "cuda_compute_buffer_mib": 37.27,
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 8970,
+        "vram_free_mib": 3025,
+        "temperature_c": 45,
+        "power_draw_w": 54.62
+      }
+    },
+    "8k": {
+      "run_id": "native-server-20260816T022610679Z",
+      "context_size": 8192,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "cpu_mapped_model_buffer_mib": 397.85,
+      "cuda_model_buffer_mib": 7974.14,
+      "cuda_kv_buffer_mib": 272.0,
+      "cuda_compute_buffer_mib": 54.27,
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 9124,
+        "vram_free_mib": 2871,
+        "temperature_c": 47,
+        "power_draw_w": 45.79
+      }
+    },
+    "16k": {
+      "run_id": "native-server-20260816T022733439Z",
+      "context_size": 16384,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "cpu_mapped_model_buffer_mib": 397.85,
+      "cuda_model_buffer_mib": 7974.14,
+      "cuda_kv_buffer_mib": 544.0,
+      "cuda_compute_buffer_mib": 88.27,
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 9430,
+        "vram_free_mib": 2565,
+        "temperature_c": 52,
+        "power_draw_w": 57.54
+      }
+    }
+  },
+  "canonical_results": {
+    "4k": "results/raw/phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json",
+    "8k": "results/raw/phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json",
+    "16k": "results/raw/phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json",
+    "derived_comparison": "results/summaries/phase7-context-sensitivity.json",
+    "human_summary": "results/summaries/phase7-context-sensitivity.md"
+  },
+  "control_audit": {
+    "fresh_server_process_per_context": true,
+    "fixed_ascending_order": true,
+    "same_model_runtime_and_inference_controls": true,
+    "scaled_fixture_generator": "numbered-records-v1",
+    "actual_prompt_tokens_in_frozen_ranges": true,
+    "prompt_plus_completion_within_context_every_run": true,
+    "prompt_cache_disabled_every_run": true,
+    "reasoning_empty_every_run": true,
+    "all_expected_runs_completed": true,
+    "all_run_validation_flags_passed": true,
+    "telemetry_errors": 0,
+    "semantic_validation_passed_all_results": true,
+    "aggregates_recomputed_independently": true
+  },
+  "sensible_context_evaluation": {
+    "criteria": {
+      "minimum_vram_headroom_mib": 1024,
+      "maximum_mean_ttft_ms": 30000,
+      "minimum_mean_generation_tokens_per_second": 30
+    },
+    "4k": {
+      "minimum_vram_headroom_mib": 2967,
+      "mean_ttft_ms": 2692.911,
+      "mean_generation_tokens_per_second": 41.124,
+      "all_criteria_passed": true
+    },
+    "8k": {
+      "minimum_vram_headroom_mib": 2813,
+      "mean_ttft_ms": 5418.174,
+      "mean_generation_tokens_per_second": 40.522,
+      "all_criteria_passed": true
+    },
+    "16k": {
+      "minimum_vram_headroom_mib": 2507,
+      "mean_ttft_ms": 11118.874,
+      "mean_generation_tokens_per_second": 39.201,
+      "all_criteria_passed": true
+    },
+    "largest_sensible_tested_context": 16384,
+    "largest_actual_tested_prompt_tokens": 12831,
+    "completion_tokens": 128
+  },
+  "setup_incidents": [
+    {
+      "stage": "first fresh 4K launch after stopping the restored Phase 6 server",
+      "observation": "The launcher's port-availability probe temporarily reported TCP port 8090 in use.",
+      "inspection": "No llama-server process or TCP connection remained when inspected immediately afterward, and the endpoint refused connections.",
+      "resolution": "Retried only after confirming the port had no listener or owner; the fresh hash-validated 4K launch then succeeded.",
+      "canonical_requests_affected": false
+    }
+  ],
+  "post_phase_restore": {
+    "run_id": "native-server-20260816T022931306Z",
+    "model": "UD-IQ2_XXS",
+    "context_size": 4096,
+    "model_hash_validated": true,
+    "layers_offloaded": 66,
+    "layers_total": 66,
+    "health": "ok",
+    "loaded_gpu_snapshot": {
+      "vram_used_mib": 8970,
+      "vram_free_mib": 3025,
+      "temperature_c": 52,
+      "power_draw_w": 56.47
+    }
+  },
+  "exit_condition": {
+    "all_attempted_contexts_preserved": true,
+    "largest_sensible_tested_context_identified": true,
+    "known_4k_iq2_server_state_restored": true,
+    "phase7_complete": true
+  }
+}

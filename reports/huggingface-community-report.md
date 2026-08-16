@@ -8,6 +8,8 @@ On one Windows desktop with an RTX 4070 Ti 12GB, both `UD-IQ2_XXS` and `UD-Q2_K_
 
 Q2 retains a small, separate quality signal from the earlier ten-task triage, where it passed 5/10 tasks versus IQ2's 3/10. This is candidate-selection evidence, not a broad model-quality estimate.
 
+In a separate IQ2 context ladder, the tested 16K configuration processed 12,831 prompt tokens plus 128 completion tokens with 11.119-second mean TTFT, 39.201 generation tok/s, and 2,507 MiB minimum sampled VRAM free. All 66 layers remained on the GPU.
+
 ## Hardware
 
 | Component | Value |
@@ -61,6 +63,18 @@ Q2 retains a small, separate quality signal from the earlier ten-task triage, wh
 
 `UD-Q3_K_XL` and `UD-Q4_K_XL` are deferred; they will not appear as empty benchmark rows unless a later evidence gate justifies those downloads.
 
+## IQ2 context sensitivity
+
+Each level used a fresh process, one excluded warm-up, three measured repetitions, and a deterministic public prompt near 78% of the configured window.
+
+| Context | Actual prompt | Output | Prompt tok/s | Generation tok/s | TTFT | Peak VRAM | Minimum free VRAM |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 4K | 3,231 | 128 | 1,202.952 | 41.124 | 2,692.911 ms | 9,028 MiB | 2,967 MiB |
+| 8K | 6,423 | 128 | 1,187.733 | 40.522 | 5,418.174 ms | 9,182 MiB | 2,813 MiB |
+| 16K | 12,831 | 128 | 1,155.757 | 39.201 | 11,118.874 ms | 9,488 MiB | 2,507 MiB |
+
+The largest sensible tested context is 16K under the precommitted project thresholds. From 4K to 16K, decode throughput declined 4.676% and peak VRAM increased 460 MiB. The test establishes this specific 12,831-plus-128-token workload, not arbitrary full-window prompts or long-context retrieval quality.
+
 ## Quality checks
 
 The earlier Phase 2 pass@1 triage used ten identical objective tasks. IQ2 passed 3/10 and Q2 passed 5/10. Q2's two unique wins support retaining it as the quality-oriented candidate, but ten tasks cannot establish general quality. The Phase 6 long-form response was not graded and adds no quality evidence.
@@ -80,5 +94,6 @@ Q2 remains useful when its small Phase 2 quality signal matters more than the de
 - One Windows desktop and one GPU.
 - Windows display activity shares VRAM with inference.
 - A small quality benchmark cannot establish general model quality.
+- The 16K context result used 12,831 prompt tokens and 128 completion tokens; it is not a full-window capacity or retrieval-quality claim.
 - Results depend on runtime, model revision, context, cache precision, sampling, and offload.
 - This is a community benchmark, not an official Qwen or Unsloth evaluation.

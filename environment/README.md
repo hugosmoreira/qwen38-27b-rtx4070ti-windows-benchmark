@@ -15,6 +15,7 @@ This directory records the machine and software environment used for measurement
 - `phase6-comparison-protocol-2026-08-15.json` freezes the two model manifests, measurement order, controlled settings, calculations, interpretation rules, and exit gate before either Phase 6 result is generated.
 - `phase6-comparison-2026-08-15.json` records the fresh IQ2 and Q2 launches, buffer placement, load snapshots, control audit, canonical outputs, post-comparison IQ2 restore, and completed Phase 6 gate.
 - `phase7-context-protocol-2026-08-15.json` freezes the selected IQ2 model, 4K/8K/16K order, deterministic fixture sizes and hashes, token budgets, held controls, interpretation thresholds, and failure-preservation rules before canonical context measurement.
+- `phase7-context-2026-08-15.json` records the three hash-validated launches, observed CUDA allocations and layer placement, canonical outputs, validation audit, threshold evaluation, transient port-release incident, and restored 4K IQ2 state.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.

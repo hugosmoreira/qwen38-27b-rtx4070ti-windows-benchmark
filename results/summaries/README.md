@@ -11,3 +11,5 @@ Current summary:
 - `phase5-python-harness-checkpoint.md` records the isolated Python package, 23-test gate, formal/semantic schemas, and successful end-to-end engineering smoke without treating one short run as a performance baseline.
 - `phase6-iq2-vs-q2.md` reports the controlled 4K IQ2-versus-Q2 performance and memory tradeoff, variation, telemetry coverage, separate quality context, and interpretation boundary.
 - `phase6-iq2-vs-q2.json` preserves the same comparison in a machine-readable derived record with explicit formulas and source paths.
+- `phase7-context-sensitivity.md` reports the controlled IQ2 4K/8K/16K ladder, frozen sensible-use gate, allocation changes, variation, telemetry, and capacity-claim boundary.
+- `phase7-context-sensitivity.json` preserves the context ladder, relative changes, telemetry, thresholds, and decision in machine-readable form.
