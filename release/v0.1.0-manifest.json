@@ -1,7 +1,7 @@
 {
   "schema_version": "release-manifest-1.0",
   "candidate_version": "0.1.0",
-  "status": "local_release_candidate_identity_pending",
+  "status": "local_release_candidate_strict_gate_passed",
   "technical_required_files": [
     ".gitattributes",
     ".editorconfig",
@@ -14,6 +14,7 @@
     "SECURITY.md",
     "environment/phase10-release-protocol-2026-08-15.json",
     "environment/phase10-release-readiness-2026-08-15.json",
+    "environment/phase10-release-gate-2026-08-16.json",
     "pyproject.toml",
     "release/v0.1.0-manifest.json"
   ],
@@ -22,16 +23,8 @@
     "CODE_OF_CONDUCT.md",
     "LICENSE"
   ],
-  "pending_owner_decisions": [
-    "public_author_and_citation_identity",
-    "github_owner_and_repository_name"
-  ],
-  "publication_placeholders": [
-    {
-      "path": "reports/huggingface-community-report.md",
-      "text": "TBD GitHub URL"
-    }
-  ],
+  "pending_owner_decisions": [],
+  "publication_placeholders": [],
   "canonical_evidence": {
     "legacy_json": [
       "results/raw/phase1-smoke-20260815T225920Z.json",

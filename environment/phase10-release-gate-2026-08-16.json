@@ -1,0 +1,76 @@
+{
+  "schema_version": "phase10-release-gate-1.0",
+  "validated_at_utc": "2026-08-16T15:33:08.871Z",
+  "candidate_version": "0.1.0",
+  "base_commit": "b80009be122b62dd5926cdbc5941a49100c0b392",
+  "status": "local_strict_gate_passed_awaiting_external_publication_approval",
+  "public_identity": {
+    "author": "Hugo Moreira",
+    "contact": "hugo@webstudiolabs.com",
+    "github_owner": "hugosmoreira",
+    "repository_name": "qwen38-27b-rtx4070ti-windows-benchmark",
+    "planned_repository_url": "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark"
+  },
+  "release_metadata": {
+    "license": "Apache-2.0",
+    "license_text_matches_apache_software_foundation": true,
+    "citation_schema_version": "1.2.0",
+    "citation_validator": "cffconvert 2.0.0",
+    "citation_validation_passed": true,
+    "code_of_conduct": "adapted Contributor Covenant 3.0",
+    "code_of_conduct_private_contact_present": true,
+    "publication_placeholders_remaining": 0,
+    "owner_decisions_remaining": 0
+  },
+  "software_verification": {
+    "python_version": "3.13.15",
+    "tests_run": 60,
+    "tests_failed": 0,
+    "duration_seconds": 0.796
+  },
+  "strict_release_audit": {
+    "status": "passed",
+    "tracked_public_files_before_this_gate_record": 162,
+    "issues": 0,
+    "warnings": 0,
+    "canonical_evidence": {
+      "legacy_json": 6,
+      "benchmark_result": 10,
+      "quality_result": 2
+    },
+    "checks_passed": [
+      "technical release files are tracked",
+      "forbidden artifacts are absent",
+      "tracked files are within the release size limit",
+      "tracked JSON parses with duplicate-key rejection",
+      "repository-relative Markdown links resolve",
+      "public text contains no declared absolute local path markers",
+      "all raw evidence is classified exactly once",
+      "all canonical evidence validates",
+      "private learning documents remain ignored",
+      "strict release metadata is tracked",
+      "owner decisions are resolved",
+      "publication placeholders are resolved"
+    ]
+  },
+  "package_verification": {
+    "method": "isolated PEP 517 wheel build",
+    "filename": "qwen38_windows_bench-0.1.0-py3-none-any.whl",
+    "size_bytes": 57576,
+    "sha256": "c838e51ddc388de049a5d0906417b2f142fe421b397e6278c7ddb7ca48d75804",
+    "author_email_metadata_valid": true,
+    "project_url_metadata_valid": true,
+    "license_metadata_valid": true,
+    "artifact_retention": "temporary verification artifact; not included in the repository"
+  },
+  "publication_boundary": {
+    "github_remote_configured": false,
+    "repository_created": false,
+    "pushed": false,
+    "tag_created": false,
+    "github_release_created": false,
+    "hugging_face_report_posted": false,
+    "private_learning_documents_staged": false
+  },
+  "next_gate": "Obtain explicit approval before creating the GitHub repository or performing any push, tag, release, or Hugging Face action."
+}

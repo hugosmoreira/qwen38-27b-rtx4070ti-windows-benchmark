@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this benchmark software or its evidence bundle, please cite it using the metadata below."
+title: "Qwen3.8-27B on an RTX 4070 Ti 12GB: A Reproducible Windows Benchmark Study"
+type: software
+authors:
+  - family-names: Moreira
+    given-names: Hugo
+    email: hugo@webstudiolabs.com
+abstract: "An auditable Windows benchmark harness and evidence bundle for Qwen3.8-27B GGUF inference on an NVIDIA RTX 4070 Ti 12GB."
+version: "0.1.0"
+license: Apache-2.0
+repository-code: "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark"
+url: "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark"
+keywords:
+  - benchmark
+  - GGUF
+  - llama.cpp
+  - Qwen3.8
+  - RTX 4070 Ti
+  - Windows

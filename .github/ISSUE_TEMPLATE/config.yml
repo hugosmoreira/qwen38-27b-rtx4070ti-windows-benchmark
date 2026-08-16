@@ -1,1 +1,5 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/security/advisories/new
+    about: Report a vulnerability privately instead of opening a public issue.

@@ -16,7 +16,7 @@ No GPU or model download is required to run the 60-test software suite, validate
 
 ## Publication state
 
-This is still a local release candidate. Apache-2.0 is selected; citation identity, GitHub owner/repository name, final report URLs, tag creation, GitHub release publication, and Hugging Face posting still require owner review and explicit approval.
+This is still a local release candidate, but its strict local release gate has passed. Apache-2.0, Hugo Moreira's citation identity, the Code of Conduct contact, repository coordinates, and report URLs are finalized. Repository creation, push, tag creation, GitHub release publication, and Hugging Face posting still require explicit approval.
 
 ## Interpretation boundary
 

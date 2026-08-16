@@ -30,7 +30,7 @@ The ordinary release audit validates the technical public boundary while Phase 1
 .\.venv\Scripts\python.exe -m qwen_bench release-audit --repository-root . --strict
 ```
 
-Strict mode intentionally fails until the citation identity, Code of Conduct contact, and final GitHub URLs are present. Apache-2.0 is already selected.
+Strict mode is the final local publication gate. It requires Apache-2.0 metadata, citation identity, a Code of Conduct, final repository URLs, and every ordinary technical check to pass.
 
 ## Canonical result validation
 

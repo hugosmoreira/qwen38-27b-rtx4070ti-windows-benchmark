@@ -1,6 +1,6 @@
 # Community report: Qwen3.8-27B on RTX 4070 Ti 12GB — IQ2 versus Q2
 
-> **Draft — the controlled comparison is complete. Do not publish until the GitHub repository URLs are available and the complete report receives final review.**
+> **Draft — the controlled comparison and report links are complete. Do not publish until the GitHub repository is live and the complete report receives final approval.**
 
 ## Summary
 
@@ -55,8 +55,8 @@ An isolated IQ2 `draft-mtp` experiment increased 256-token generation throughput
 - Benchmark automation: `qwen_bench` 0.1.0 passed 25 offline tests before measurement
 - Prompt set: `phase4-iq2-baseline-v1`; one fixed 84-token prompt and 256-token output
 - Telemetry interval: 250 ms target; 253.350 ms observed mean cadence for IQ2 and 253.261 ms for Q2
-- Full methodology and scripts: TBD GitHub URL
-- Raw result files: TBD GitHub URL
+- Full methodology and scripts: [GitHub repository](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark)
+- Raw result files: [committed raw evidence](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/tree/main/results/raw)
 
 ## Results
 

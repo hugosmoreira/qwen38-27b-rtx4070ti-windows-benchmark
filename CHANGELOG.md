@@ -4,7 +4,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 
 ## [Unreleased]
 
-- Public citation identity and final GitHub URLs remain pending.
+- External repository creation, release publication, and community-report posting remain approval-gated.
 
 ## [0.1.0] — Release candidate
 

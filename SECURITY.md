@@ -6,7 +6,7 @@ Security fixes will target the latest published `0.1.x` release and the current 
 
 ## Reporting a vulnerability
 
-Do not disclose a suspected vulnerability in a public issue. After publication, use GitHub private vulnerability reporting for this repository. Before publication, report it privately to the repository owner through an already established contact channel.
+Do not disclose a suspected vulnerability in a public issue. After publication, use [GitHub private vulnerability reporting](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/security/advisories/new) when available. Before publication, or if private reporting is unavailable, email [hugo@webstudiolabs.com](mailto:hugo@webstudiolabs.com) with `Security report` in the subject line.
 
 Useful reports identify the affected commit, entry point, expected security property, impact, and a minimal reproduction that contains no real credentials or private data.
 
