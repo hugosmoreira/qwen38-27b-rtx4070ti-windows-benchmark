@@ -48,3 +48,9 @@ results/tmp/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# Local packaging and release-audit output
+build/
+dist/
+*.egg-info/
+release/audit-*.json

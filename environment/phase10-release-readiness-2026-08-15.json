@@ -1,0 +1,68 @@
+{
+  "schema_version": "phase10-release-readiness-1.0",
+  "generated_at_utc": "2026-08-16T04:54:47.548Z",
+  "candidate_version": "0.1.0",
+  "base_commit": "81a21fc1236a221a392511d2f23c03f58bb5efc6",
+  "scope": "local technical release candidate",
+  "software_verification": {
+    "python_version": "3.13.15",
+    "test_command": "python -m unittest discover -s tests -v",
+    "tests_run": 60,
+    "tests_failed": 0,
+    "duration_seconds": 0.777
+  },
+  "ordinary_release_audit": {
+    "status": "passed",
+    "canonical_evidence": {
+      "legacy_json": 6,
+      "benchmark_result": 10,
+      "quality_result": 2
+    },
+    "verified_properties": [
+      "technical release files are tracked",
+      "forbidden private, model, and key artifacts are absent",
+      "tracked files are within the one MiB release limit",
+      "tracked JSON parses with duplicate-key rejection",
+      "repository-relative Markdown links resolve",
+      "public text contains no declared absolute local path markers",
+      "all tracked raw evidence is classified exactly once",
+      "all canonical current-schema evidence independently validates",
+      "private learning documents remain ignored"
+    ]
+  },
+  "strict_release_audit": {
+    "status": "expected_blocked",
+    "technical_issues": [],
+    "pending_files": [
+      "CITATION.cff",
+      "CODE_OF_CONDUCT.md",
+      "LICENSE"
+    ],
+    "pending_owner_decisions": [
+      "license",
+      "public author and citation identity",
+      "GitHub owner and repository name"
+    ],
+    "pending_publication_placeholders": [
+      "reports/huggingface-community-report.md: TBD GitHub URL"
+    ]
+  },
+  "package_verification": {
+    "method": "isolated PEP 517 wheel build",
+    "filename": "qwen38_windows_bench-0.1.0-py3-none-any.whl",
+    "size_bytes": 49095,
+    "sha256": "0c1c70149822ee444fa2633e8610b2e126a0a641b7b0f55db43fef9ba95341da",
+    "wheel_entries": 24,
+    "structure_status": "passed",
+    "artifact_retention": "temporary verification artifact; not included in the repository"
+  },
+  "publication_boundary": {
+    "github_remote_configured": false,
+    "pushed": false,
+    "tag_created": false,
+    "github_release_created": false,
+    "hugging_face_report_posted": false,
+    "private_learning_documents_staged": false
+  },
+  "next_gate": "Owner resolves license, public identity, repository coordinates, and publication URLs before strict audit and any external action."
+}

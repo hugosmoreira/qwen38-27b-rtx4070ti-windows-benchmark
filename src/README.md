@@ -18,7 +18,9 @@
 - `quality_runner.py` — one-attempt-per-task orchestration and raw-response retention;
 - `quality_result_validation.py` — cross-field checks plus independent re-grading against the committed suite;
 - `quality_comparison.py` — paired contingency counts and two-sided exact McNemar calculation;
-- `cli.py` — performance run/validation and quality run/validation/comparison commands.
+- `mtp_comparison.py` — controlled MTP pair checks, acceptance, performance changes, and output hashes;
+- `release_audit.py` — tracked-artifact, JSON, link, evidence-manifest, and public-boundary checks;
+- `cli.py` — performance, quality, MTP-comparison, and release-audit commands.
 
 The formal interoperable schemas are [`schemas/benchmark-result.schema.json`](../schemas/benchmark-result.schema.json) and [`schemas/quality-evaluation-result.schema.json`](../schemas/quality-evaluation-result.schema.json). The in-package validators add cross-field rules that JSON Schema alone does not conveniently express, including count reconciliation and re-grading saved Phase 8 responses from the committed validators.
 

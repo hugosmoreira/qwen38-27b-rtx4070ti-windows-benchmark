@@ -22,6 +22,7 @@ from qwen_bench.quality_result_validation import (
     validate_quality_result,
 )
 from qwen_bench.quality_runner import execute_quality_evaluation
+from qwen_bench.release_audit import audit_repository
 from qwen_bench.mtp_comparison import compare_mtp_results
 from qwen_bench.result_validation import require_valid_result, validate_result
 from qwen_bench.runner import execute_benchmark
@@ -73,6 +74,16 @@ def build_parser() -> argparse.ArgumentParser:
     mtp_compare.add_argument("prose_on", type=Path)
     mtp_compare.add_argument("code_off", type=Path)
     mtp_compare.add_argument("code_on", type=Path)
+
+    release_audit = subparsers.add_parser(
+        "release-audit", help="audit the local public release candidate"
+    )
+    release_audit.add_argument("--repository-root", type=Path, default=_default_repository_root())
+    release_audit.add_argument(
+        "--strict",
+        action="store_true",
+        help="also require owner-selected license, citation identity, and publication URLs",
+    )
     return parser
 
 
@@ -95,6 +106,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 arguments.code_off,
                 arguments.code_on,
             )
+        if arguments.command == "release-audit":
+            return _release_audit_command(arguments.repository_root, arguments.strict)
         if arguments.command == "quality-run":
             return _quality_run_command(
                 arguments.repository_root,
@@ -199,6 +212,12 @@ def _mtp_compare_command(
     ]
     print(json.dumps(compare_mtp_results(*records), indent=2))
     return 0
+
+
+def _release_audit_command(repository_root: Path, strict: bool) -> int:
+    result = audit_repository(repository_root, strict=strict)
+    print(json.dumps(result, indent=2))
+    return 0 if result["status"] == "passed" else 1
 
 
 def _default_repository_root() -> Path:

@@ -28,4 +28,6 @@ Phase 8 adds a paired 24-task objective quality evaluation. Q2 passed 10 tasks a
 
 The canonical Phase 8 files are `raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json` and `raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json`. Their interpretations are `summaries/phase8-quality-comparison.md` and `summaries/phase8-quality-comparison.json`.
 
+Phase 9 adds two IQ2 MTP off/on workload pairs. MTP accelerated both fixed-length workloads but changed the deterministic prose output, so it remains an opt-in experimental mode rather than the default. The canonical raw records and their classification are listed in `release/v0.1.0-manifest.json`; the interpretations are `summaries/phase9-mtp-comparison.md` and `summaries/phase9-mtp-comparison.json`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

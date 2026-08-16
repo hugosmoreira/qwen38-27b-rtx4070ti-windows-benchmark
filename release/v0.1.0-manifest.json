@@ -1,0 +1,94 @@
+{
+  "schema_version": "release-manifest-1.0",
+  "candidate_version": "0.1.0",
+  "status": "local_release_candidate_in_progress",
+  "technical_required_files": [
+    ".gitattributes",
+    ".editorconfig",
+    ".github/workflows/tests.yml",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "README.md",
+    "RELEASE_NOTES.md",
+    "REPRODUCING.md",
+    "SECURITY.md",
+    "environment/phase10-release-protocol-2026-08-15.json",
+    "environment/phase10-release-readiness-2026-08-15.json",
+    "pyproject.toml",
+    "release/v0.1.0-manifest.json"
+  ],
+  "strict_release_required_files": [
+    "CITATION.cff",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE"
+  ],
+  "pending_owner_decisions": [
+    "license",
+    "public_author_and_citation_identity",
+    "github_owner_and_repository_name"
+  ],
+  "publication_placeholders": [
+    {
+      "path": "reports/huggingface-community-report.md",
+      "text": "TBD GitHub URL"
+    }
+  ],
+  "canonical_evidence": {
+    "legacy_json": [
+      "results/raw/phase1-smoke-20260815T225920Z.json",
+      "results/raw/quant-smoke-ud-q2-k-xl-20260815T232000Z.json",
+      "results/raw/quant-triage-ud-q2-k-xl-20260815T232426Z.json",
+      "results/raw/quant-triage-ud-iq2-xxs-20260815T232512Z.json",
+      "results/raw/native-smoke-iq2-xxs-20260815T234835Z.json",
+      "results/raw/phase4-iq2-baseline-20260816T001913Z.json"
+    ],
+    "benchmark_result": [
+      "results/raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json",
+      "results/raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json",
+      "results/raw/phase6-q2-comparison-20260816T014417772434Z-91bc350d.json",
+      "results/raw/phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json",
+      "results/raw/phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json",
+      "results/raw/phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json",
+      "results/raw/phase9-mtp-off-prose-20260816T041445808671Z-76083f38.json",
+      "results/raw/phase9-mtp-on-prose-20260816T041603771264Z-9c3f8aca.json",
+      "results/raw/phase9-mtp-on-code-20260816T041709353404Z-221a5138.json",
+      "results/raw/phase9-mtp-off-code-20260816T041809117916Z-bdba6559.json"
+    ],
+    "quality_result": [
+      "results/raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json",
+      "results/raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json"
+    ]
+  },
+  "noncanonical_evidence": [
+    {
+      "path": "results/raw/phase1-smoke-20260815T225505Z.json",
+      "classification": "diagnostic",
+      "reason": "Development smoke created before the Phase 1 harness was committed; the later committed run is canonical."
+    },
+    {
+      "path": "results/raw/native-smoke-iq2-xxs-20260815T234723Z.json",
+      "classification": "superseded",
+      "reason": "The initial native parser setting retained empty reasoning tags; the corrected 3/3 run is canonical."
+    },
+    {
+      "path": "results/raw/phase4-iq2-baseline-20260816T001639Z.json",
+      "classification": "superseded",
+      "reason": "The nominal 250 ms telemetry sampler ran at 300 ms; the corrected cadence-aware rerun is canonical."
+    }
+  ],
+  "artifact_policy": {
+    "maximum_tracked_file_bytes": 1048576,
+    "forbidden_private_paths": ["LEARNING_PATH.md", "LEARNING_LOG.md"],
+    "forbidden_extensions": [
+      ".gguf",
+      ".safetensors",
+      ".bin",
+      ".pt",
+      ".pth",
+      ".onnx",
+      ".pem",
+      ".key"
+    ],
+    "forbidden_exact_names": [".env"]
+  }
+}

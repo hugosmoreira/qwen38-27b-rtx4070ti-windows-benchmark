@@ -10,6 +10,20 @@ readme = "README.md"
 requires-python = ">=3.11,<3.15"
 authors = [{ name = "Qwen3.8 RTX 4070 Ti study" }]
 dependencies = []
+keywords = ["benchmark", "gguf", "llama.cpp", "qwen", "windows"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: GPU :: NVIDIA CUDA",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 
 [project.scripts]
 qwen-bench = "qwen_bench.cli:main"

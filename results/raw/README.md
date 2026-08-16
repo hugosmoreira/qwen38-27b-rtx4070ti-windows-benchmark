@@ -19,7 +19,15 @@ Current records:
 - `phase7-iq2-context-4k-20260816T022507577973Z-623ca28d.json` — canonical Phase 7 4K IQ2 record from protocol revision `e0230f3`; all runs used 3,231 prompt and 128 completion tokens.
 - `phase7-iq2-context-8k-20260816T022627198977Z-5778e8f6.json` — canonical Phase 7 8K IQ2 record from the same protocol; all runs used 6,423 prompt and 128 completion tokens.
 - `phase7-iq2-context-16k-20260816T022758735205Z-51fce8fc.json` — canonical Phase 7 16K IQ2 record; all runs used 12,831 prompt and 128 completion tokens and retained 2,507 MiB minimum sampled VRAM free.
+- `phase8-quality-q2-20260816T033656385280Z-2359f380.json` — canonical Phase 8 Q2 record; 24/24 requests completed and 10/24 passed independent suite-backed re-grading.
+- `phase8-quality-iq2-20260816T033811840476Z-8c67331b.json` — canonical Phase 8 IQ2 record; 24/24 requests completed and 9/24 passed independent suite-backed re-grading.
+- `phase9-mtp-off-prose-20260816T041445808671Z-76083f38.json` — canonical Phase 9 prose MTP-off control with five measured repetitions.
+- `phase9-mtp-on-prose-20260816T041603771264Z-9c3f8aca.json` — canonical Phase 9 prose MTP-on record; 55.187% draft acceptance and non-equivalent output.
+- `phase9-mtp-on-code-20260816T041709353404Z-221a5138.json` — canonical Phase 9 code MTP-on record; 90.110% draft acceptance and output-equivalent acceleration.
+- `phase9-mtp-off-code-20260816T041809117916Z-bdba6559.json` — canonical Phase 9 code MTP-off control with five measured repetitions.
 
 Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. The Phase 6 pair supersedes Phase 4 for the controlled quant comparison while Phase 4 remains the earlier standalone IQ2 baseline.
 
 Each Phase 7 record contains one excluded warm-up plus three measured repetitions, the deterministic fixture hash and byte count, actual prompt/completion aggregates, per-run context-budget validation, and continuous telemetry.
+
+The authoritative release classification is `release/v0.1.0-manifest.json`. It labels all 21 tracked JSON records as canonical, superseded, or diagnostic so retained failed evidence cannot be mistaken for a current result.

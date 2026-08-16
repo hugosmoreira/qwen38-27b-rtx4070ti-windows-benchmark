@@ -4,7 +4,7 @@
 
 `quality-evaluation-result.schema.json` is the separate Draft 2020-12 contract for Phase 8 pass@1 records. It retains every task response, grade, request validation, usage object, and llama.cpp timing object without treating those timings as a performance benchmark.
 
-The result summary permits optional prompt-token and completion-token aggregates for context experiments while remaining compatible with earlier Phase 5 and Phase 6 records.
+The result summary permits optional prompt-token, completion-token, and MTP draft/acceptance aggregates while remaining compatible with earlier Phase 5 and Phase 6 records.
 
 The Python package also applies semantic checks that span multiple fields, including:
 

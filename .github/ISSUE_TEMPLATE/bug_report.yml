@@ -1,0 +1,51 @@
+name: Harness bug
+description: Report a reproducible defect in the benchmark code, validation, or documentation.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Do not attach model weights, credentials, local authentication files, or private prompts.
+  - type: input
+    id: version
+    attributes:
+      label: Commit or release
+      description: Provide the Git commit or release tag used.
+      placeholder: v0.1.0 or a full commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Configuration validation
+        - HTTP/SSE client
+        - Telemetry
+        - Result validation
+        - Quality grading
+        - Comparison calculations
+        - Release audit
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include commands, expected behavior, and observed behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Relevant environment
+      description: Include Windows, Python, llama.cpp, GPU, and driver versions when relevant.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-data confirmation
+      options:
+        - label: I removed credentials, private paths, model weights, and proprietary prompt data.
+          required: true

@@ -4,7 +4,7 @@
 
 ## Status
 
-**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 58 offline tests; Q3 and Q4 downloads remain deferred.
+**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 60 offline tests; Q3 and Q4 downloads remain deferred.
 
 **Phase 10 release preparation is in progress.** The local `v0.1.0` candidate is being audited for public metadata, reproducibility, canonical evidence, CI, links, secrets, and artifact boundaries. No GitHub remote has been configured, and nothing has been pushed, tagged, released, or posted.
 
@@ -55,14 +55,14 @@ This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit c
 | Driver CUDA runtime | 13.3 |
 | Model/result drive | `E:` with approximately 1.53 TB free at inspection |
 
-## Planned model configurations
+## Model configurations
 
 | Configuration | File size | Intended role |
 |---|---:|---|
-| `UD-IQ2_XXS` | 8.39 GiB | Phase 1 proof of life completed; speed candidate |
-| `UD-Q2_K_XL` | 9.94 GiB | Larger 2-bit comparison candidate with tight VRAM headroom |
-| `UD-Q3_K_XL` | 12.52 GiB | Main partial-offload candidate |
-| `UD-Q4_K_XL` | 16.69 GiB | Higher-quality, heavier-offload candidate |
+| `UD-IQ2_XXS` | 8.39 GiB | Tested practical default and MTP experiment target |
+| `UD-Q2_K_XL` | 9.94 GiB | Tested controlled comparison candidate with tighter VRAM headroom |
+| `UD-Q3_K_XL` | 12.52 GiB | Deferred partial-offload candidate |
+| `UD-Q4_K_XL` | 16.69 GiB | Deferred heavier-offload candidate |
 
 IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until an evidence gate justifies their storage and offload cost.
 
@@ -72,10 +72,14 @@ IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until 
 .
 ├── README.md
 ├── PROJECT.md
+├── REPRODUCING.md
+├── RELEASE_NOTES.md
+├── CONTRIBUTING.md
 ├── configs/
 ├── environment/
 ├── prompts/
 ├── reports/
+├── release/
 ├── results/
 │   ├── raw/
 │   └── summaries/
@@ -87,16 +91,33 @@ IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until 
 ```
 
 - [PROJECT.md](PROJECT.md) — phase gates, scope, methodology, and publication plan.
+- [REPRODUCING.md](REPRODUCING.md) — clean-clone evidence verification and hardware reproduction.
+- [RELEASE_NOTES.md](RELEASE_NOTES.md) — `v0.1.0` findings, boundaries, and publication state.
+- [CONTRIBUTING.md](CONTRIBUTING.md) — evidence, test, and pull-request requirements.
 - `configs/` — versioned experiment inputs that bind runtime, model, prompt, and controls.
 - `environment/` — machine snapshots and environment collection notes.
 - `prompts/` — version-controlled benchmark prompts.
 - `results/raw/` — append-only machine-readable run data.
 - `results/summaries/` — derived tables and charts.
 - `reports/` — GitHub, Hugging Face, and social-report drafts.
+- `release/` — canonical, superseded, and diagnostic evidence classification.
 - `scripts/` — repeatable PowerShell entry points.
 - `schemas/` — formal performance and quality result contracts.
 - `src/` — benchmark client and telemetry code.
 - `tests/` — tests for our code, schemas, and calculations.
+
+## Verify the committed evidence
+
+No GPU or model weights are needed to run the software tests and ordinary release audit:
+
+```powershell
+.\scripts\setup_python.ps1
+.\scripts\run_python_tests.ps1
+$env:PYTHONPATH = (Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m qwen_bench release-audit --repository-root .
+```
+
+The audit parses all tracked JSON with duplicate-key rejection, validates canonical Phase 5–9 records, checks every repository-relative Markdown link, classifies every raw record, and rejects tracked private or oversized artifacts. See [REPRODUCING.md](REPRODUCING.md) for exact result-validation and hardware workflows.
 
 ## Reproduce the Phase 1 smoke check
 

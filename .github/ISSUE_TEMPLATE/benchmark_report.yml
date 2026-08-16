@@ -1,0 +1,42 @@
+name: Reproduction report
+description: Share a controlled reproduction or a methodology discrepancy.
+title: "[Reproduction]: "
+labels: [reproduction]
+body:
+  - type: input
+    id: protocol
+    attributes:
+      label: Protocol commit
+      description: Identify the exact protocol commit or explain every intentional deviation.
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and software
+      description: Include GPU, VRAM, CPU, RAM, OS, driver, runtime build, model revision, and quantization.
+    validations:
+      required: true
+  - type: textarea
+    id: controls
+    attributes:
+      label: Controls and deviations
+      description: State context, slots, cache precision, offload, sampling, thinking, MTP, and any deviations.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Result evidence
+      description: Link to inspectable raw JSON and logs; do not attach model weights or secrets.
+    validations:
+      required: true
+  - type: checkboxes
+    id: interpretation
+    attributes:
+      label: Interpretation boundary
+      options:
+        - label: I distinguish measured observations from estimates and conclusions.
+          required: true
+        - label: I disclose failed, superseded, or out-of-memory attempts relevant to the result.
+          required: true
