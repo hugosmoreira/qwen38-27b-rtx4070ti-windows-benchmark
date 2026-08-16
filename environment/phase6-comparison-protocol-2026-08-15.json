@@ -1,0 +1,95 @@
+{
+  "schema_version": "phase6-comparison-protocol-1.0",
+  "recorded_date": "2026-08-15",
+  "purpose": "Freeze the IQ2-versus-Q2 performance comparison before generating either canonical result.",
+  "comparison_group": "phase6-iq2-vs-q2-fixed-4k-v1",
+  "hypotheses": [
+    "UD-IQ2_XXS will use less VRAM and decode faster than UD-Q2_K_XL.",
+    "UD-Q2_K_XL may justify its performance and memory cost through the separate Phase 2 objective quality signal.",
+    "If both models fully offload, this phase is a quantization and memory comparison rather than a CPU-offload comparison."
+  ],
+  "measurement_order": {
+    "sequence": [
+      "UD-IQ2_XXS",
+      "UD-Q2_K_XL"
+    ],
+    "fresh_server_process_per_model": true,
+    "order_randomized": false,
+    "limitation": "A fixed sequential order does not eliminate thermal or time-order effects; per-run temperature and power telemetry are retained."
+  },
+  "models": [
+    {
+      "role": "speed_candidate",
+      "quantization": "UD-IQ2_XXS",
+      "manifest": "environment/model-download-manifest.json",
+      "configuration": "configs/phase6-iq2-comparison.json",
+      "size_bytes": 9010048064,
+      "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+      "sha256_revalidated_before_protocol": true
+    },
+    {
+      "role": "quality_oriented_candidate",
+      "quantization": "UD-Q2_K_XL",
+      "manifest": "environment/phase2-q2-k-xl-download-manifest.json",
+      "configuration": "configs/phase6-q2-comparison.json",
+      "size_bytes": 10676423744,
+      "sha256": "46151b52a5cad673d90a00222103254864326c251130b8fc4381d6f34386b3c8",
+      "sha256_revalidated_before_protocol": true
+    }
+  ],
+  "held_constant": {
+    "runtime_release": "llama.cpp b10448",
+    "runtime_commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "device": "CUDA0",
+    "host_and_port": "127.0.0.1:8090",
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "gpu_layers_requested": -1,
+    "automatic_fit": "off",
+    "flash_attention": "on",
+    "batch_size": 512,
+    "micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_shift": false,
+    "prompt_suite": "prompts/phase4-baseline.json",
+    "max_output_tokens": 256,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false,
+    "thinking": false,
+    "preserve_thinking": false,
+    "mtp": false,
+    "tools": false,
+    "mcp": false,
+    "vision": false,
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "inter_run_delay_seconds": 2,
+    "telemetry_target_interval_milliseconds": 250
+  },
+  "pre_measurement_gates": {
+    "config_pair_test_requires_only_model_identity_fields_to_differ": true,
+    "server_preflight_requires_model_path_alias_context_and_slots": true,
+    "startup_log_must_report_cuda0_and_requested_layer_placement": true,
+    "all_run_validation_flags_must_pass": true,
+    "raw_results_are_unique_and_append_only": true
+  },
+  "comparison_rules": {
+    "primary_speed_metric": "mean server generation tokens per second",
+    "latency_metric": "mean client total latency for 256 completion tokens",
+    "responsiveness_metric": "mean streaming TTFT",
+    "memory_metric": "peak sampled VRAM used and minimum sampled VRAM free",
+    "variability": "sample standard deviation and coefficient of variation across three measured repetitions",
+    "relative_change_denominator": "UD-IQ2_XXS",
+    "quality_context": "Phase 2 ten-task pass@1 triage is reported separately and is not recomputed from performance runs"
+  },
+  "exit_condition": "Both canonical records complete under the frozen controls, calculations reproduce independently, and the speed/memory tradeoff is documented without generalizing beyond the tested workload."
+}

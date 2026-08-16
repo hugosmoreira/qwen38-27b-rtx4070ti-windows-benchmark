@@ -12,6 +12,7 @@ This directory records the machine and software environment used for measurement
 - `phase3-native-runtime-2026-08-15.json` records the canonical native launch flags, CUDA layer and buffer evidence, point-in-time memory, OpenAI-compatible smoke result, and setup incidents.
 - `phase4-iq2-baseline-2026-08-15.json` records the repeated IQ2 methodology, independently verified aggregates, telemetry cadence and peaks, superseded attempt, and interpretation boundary.
 - `phase5-python-runtime-2026-08-15.json` records the supported interpreter, verified official installer checksum, isolated environment policy, zero runtime dependencies, offline tests, and pre-run telemetry probe for the Python harness.
+- `phase6-comparison-protocol-2026-08-15.json` freezes the two model manifests, measurement order, controlled settings, calculations, interpretation rules, and exit gate before either Phase 6 result is generated.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.
