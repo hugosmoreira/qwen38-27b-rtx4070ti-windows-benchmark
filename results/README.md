@@ -16,4 +16,8 @@ Phase 5 replaces the earlier draft record example with a versioned Draft 2020-12
 
 The canonical Phase 5 raw file is `raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json`; its interpretation checkpoint is `summaries/phase5-python-harness-checkpoint.md`.
 
+Phase 6 adds a controlled IQ2-versus-Q2 pair produced from protocol commit `94a2735`. Both runs used one excluded warm-up, three measured repetitions, and identical 4K controls. Both models placed 66/66 layers on CUDA0; the result is therefore a quantization, speed, and memory comparison rather than a CPU-offload comparison.
+
+The canonical Phase 6 raw files are `raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json` and `raw/phase6-q2-comparison-20260816T014417772434Z-91bc350d.json`. Their human and machine-readable interpretations are `summaries/phase6-iq2-vs-q2.md` and `summaries/phase6-iq2-vs-q2.json`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

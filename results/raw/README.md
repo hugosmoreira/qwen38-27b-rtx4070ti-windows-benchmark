@@ -14,5 +14,7 @@ Current records:
 - `phase4-iq2-baseline-20260816T001639Z.json` — preserved Phase 4 attempt from revision `d89fd0d`; performance data completed, but the nominal 250 ms telemetry interval was actually 300 ms and the record is superseded.
 - `phase4-iq2-baseline-20260816T001913Z.json` — canonical Phase 4 IQ2 baseline from corrected revision `25e51a0`; one warm-up and three measured repetitions completed with observed telemetry cadence recorded.
 - `phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json` — canonical Phase 5 Python-harness smoke from revision `b0481d4`; one short measured run passed all structural, semantic, streaming, cache, reasoning, and telemetry checks.
+- `phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json` — canonical Phase 6 IQ2 record from frozen protocol revision `94a2735`; one excluded warm-up and three measured 256-token runs completed and passed semantic validation.
+- `phase6-q2-comparison-20260816T014417772434Z-91bc350d.json` — canonical Phase 6 Q2 record from the same protocol revision and controls; one excluded warm-up and three measured 256-token runs completed and passed semantic validation.
 
-Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. Phase 4 remains the performance baseline.
+Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. The Phase 6 pair supersedes Phase 4 for the controlled quant comparison while Phase 4 remains the earlier standalone IQ2 baseline.

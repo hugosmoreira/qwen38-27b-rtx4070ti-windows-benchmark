@@ -1,0 +1,101 @@
+{
+  "schema_version": "phase6-comparison-environment-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "completed",
+  "protocol": "environment/phase6-comparison-protocol-2026-08-15.json",
+  "protocol_git_commit": "94a27359f287ac5915f6b90664aa7e47844f3560",
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA 13.3",
+    "device": "CUDA0",
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "driver": "610.88"
+  },
+  "launches": {
+    "iq2_measurement": {
+      "run_id": "native-server-20260816T014209199Z",
+      "model_manifest": "environment/model-download-manifest.json",
+      "model_hash_validated": true,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "all_layers_offloaded": true,
+      "cuda_model_buffer_mib": 7974.14,
+      "cpu_mapped_model_buffer_mib": 397.85,
+      "cuda_kv_buffer_mib": 136.0,
+      "cuda_compute_buffer_mib": 37.27,
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 8956,
+        "vram_free_mib": 3039,
+        "temperature_c": 47,
+        "power_draw_w": 55.13
+      }
+    },
+    "q2_measurement": {
+      "run_id": "native-server-20260816T014355210Z",
+      "model_manifest": "environment/phase2-q2-k-xl-download-manifest.json",
+      "model_hash_validated": true,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "all_layers_offloaded": true,
+      "cuda_model_buffer_mib": 9567.89,
+      "cpu_mapped_model_buffer_mib": 397.85,
+      "cuda_kv_buffer_mib": 136.0,
+      "cuda_compute_buffer_mib": 37.27,
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 10541,
+        "vram_free_mib": 1454,
+        "temperature_c": 46,
+        "power_draw_w": 51.75
+      }
+    },
+    "post_comparison_restore": {
+      "run_id": "native-server-20260816T014606690Z",
+      "restored_model": "UD-IQ2_XXS",
+      "model_hash_validated": true,
+      "layers_offloaded": 66,
+      "layers_total": 66,
+      "health": "ok",
+      "loaded_gpu_snapshot": {
+        "vram_used_mib": 8951,
+        "vram_free_mib": 3044,
+        "temperature_c": 47,
+        "power_draw_w": 57.42
+      }
+    }
+  },
+  "canonical_results": {
+    "iq2": "results/raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json",
+    "q2": "results/raw/phase6-q2-comparison-20260816T014417772434Z-91bc350d.json",
+    "derived_comparison": "results/summaries/phase6-iq2-vs-q2.json",
+    "human_summary": "results/summaries/phase6-iq2-vs-q2.md"
+  },
+  "control_audit": {
+    "same_prompt_suite": true,
+    "same_runtime_record": true,
+    "same_configuration_object": true,
+    "same_methodology_object": true,
+    "same_prompt_and_completion_token_counts_every_run": true,
+    "prompt_cache_disabled_every_run": true,
+    "reasoning_empty_every_run": true,
+    "telemetry_errors": 0,
+    "all_expected_runs_completed": true,
+    "semantic_validation_passed_both_results": true,
+    "aggregates_recomputed_independently": true
+  },
+  "offload_interpretation": {
+    "iq2_all_layers_on_gpu": true,
+    "q2_all_layers_on_gpu": true,
+    "cpu_mapped_buffer_present_for_both": true,
+    "cpu_layer_offload_compared": false,
+    "statement": "Both selected models fit with 66/66 layers on CUDA0 at 4K. Phase 6 is a quantization, speed, and memory comparison rather than a GPU-versus-CPU layer-offload comparison."
+  },
+  "exit_condition": {
+    "both_canonical_records_complete": true,
+    "frozen_controls_verified": true,
+    "speed_and_memory_tradeoff_reproducible": true,
+    "known_iq2_server_state_restored": true,
+    "phase6_complete": true
+  }
+}

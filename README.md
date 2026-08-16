@@ -4,9 +4,9 @@
 
 ## Status
 
-**Phase 5 completed locally on 2026-08-15 — the project now has a tested Python benchmark package and a successful end-to-end raw result.** The package passed 23 offline tests before the canonical smoke request and records streaming timing, NVIDIA/process telemetry, provenance, formal schema conformance, semantic validation, and append-only output.
+**Phase 6 completed locally on 2026-08-15 — the controlled IQ2-versus-Q2 comparison is reproducible from committed raw evidence.** Both selected models fit with 66/66 layers on the RTX 4070 Ti at 4K. IQ2 averaged 43.643 generation tok/s; Q2 averaged 38.030 tok/s while using 1,583 MiB more peak VRAM. The package passed 25 offline tests before the canonical runs.
 
-Phase 4 remains the trustworthy IQ2 performance baseline: three measured 256-token runs averaged 43.171 generation tok/s with 0.096% CV and 94.950 ms TTFT with 1.608% CV. Q2 comparison, broader workloads, and quality evaluation remain incomplete.
+The comparison changes the original premise: this pair did not exercise CPU layer offload. It measures the speed and memory cost of the quality-oriented Q2 candidate against the faster IQ2 candidate. The earlier 3/10 versus 5/10 quality triage remains separate, preliminary evidence; broader context and quality evaluation remain incomplete.
 
 ## Phase 1 proof of life
 
@@ -29,7 +29,7 @@ The first short generation reported 44.3 generation tokens/s and 364.9 prompt to
 
 ## Research question
 
-> Can Qwen3.8-27B be used practically on a 12 GB RTX 4070 Ti under Windows, and when is a low-bit quant kept on the GPU preferable to a higher-quality quant that partially spills into system RAM?
+> Can Qwen3.8-27B be used practically on a 12 GB RTX 4070 Ti under Windows, and how do quantization, GPU residency, context length, speed, memory, and response quality trade off on this machine?
 
 This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit creates an engineering tradeoff between:
 
@@ -60,7 +60,7 @@ This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit c
 | `UD-Q3_K_XL` | 12.52 GiB | Main partial-offload candidate |
 | `UD-Q4_K_XL` | 16.69 GiB | Higher-quality, heavier-offload candidate |
 
-Only one quant will be downloaded at a time, beginning after Phase 0 review.
+IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until an evidence gate justifies their storage and offload cost.
 
 ## Repository map
 
@@ -186,3 +186,19 @@ The controlled Phase 5 configuration performs one short 64-token request with no
 The canonical run completed from harness commit `b0481d4`, retained 7 telemetry samples, and passed all 12 validation flags. It observed 43.479 generation tok/s, 87.340 ms TTFT, and 1,536.353 ms total latency; these single-run values are diagnostic only.
 
 See the [Python environment record](environment/phase5-python-runtime-2026-08-15.json), [canonical raw result](results/raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json), [formal result schema](schemas/benchmark-result.schema.json), and [Phase 5 checkpoint](results/summaries/phase5-python-harness-checkpoint.md).
+
+## Phase 6 controlled quant comparison
+
+Both quantizations used identical runtime, prompt, context, KV cache, sampling, and feature controls. Each received one excluded warm-up followed by three measured 256-token runs from a fresh server process.
+
+| Metric | `UD-IQ2_XXS` | `UD-Q2_K_XL` | Q2 change vs IQ2 |
+|---|---:|---:|---:|
+| GPU layers | 66/66 | 66/66 | No CPU layer offload |
+| Generation throughput | 43.643 tok/s | 38.030 tok/s | −12.861% |
+| Total latency | 5,934.130 ms | 6,791.962 ms | +14.456% |
+| Peak VRAM used | 8,976 MiB | 10,559 MiB | +1,583 MiB |
+| Peak process private memory | 9.621 GiB | 11.167 GiB | +16.066% |
+
+IQ2 was 14.759% faster than Q2 by the reciprocal decode-rate comparison and left approximately 1.55 GiB more VRAM headroom. Q2 remains the quality-oriented candidate because it passed 5/10 rather than 3/10 tasks in the separate Phase 2 triage; the Phase 6 response was not graded.
+
+See the [frozen protocol](environment/phase6-comparison-protocol-2026-08-15.json), [completed environment record](environment/phase6-comparison-2026-08-15.json), [human comparison](results/summaries/phase6-iq2-vs-q2.md), and [machine-readable derived result](results/summaries/phase6-iq2-vs-q2.json).

@@ -8,6 +8,7 @@
 - Phase 3 completed on 2026-08-15 with official llama.cpp `b10448`: both release archives were checksum-validated, CUDA0 startup logs reported 66/66 layers offloaded to the RTX 4070 Ti, and the native OpenAI-compatible smoke suite passed 3/3.
 - Phase 4 completed on 2026-08-15. One excluded warm-up and three measured 256-token IQ2 repetitions produced 43.171 generation tok/s mean with 0.096% CV, while streaming TTFT averaged 94.950 ms with 1.608% CV.
 - Phase 5 completed on 2026-08-15. The standard-library Python harness passed 23 offline tests, then one committed end-to-end smoke run passed all 12 validation flags and retained raw streaming plus telemetry evidence.
+- Phase 6 completed on 2026-08-15. Under frozen 4K controls, IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2 and used 1,583 MiB less peak VRAM. Both configurations reported 66/66 GPU layers, so this is not a CPU layer-offload comparison.
 
 ## Objective
 
@@ -119,6 +120,8 @@ Status: completed on 2026-08-15. The harness provenance commit is `b0481d4`; the
 - Hold runtime, prompt, context, KV cache, thinking, sampling, MTP, and vision settings constant.
 
 Exit condition: the performance tradeoff is reproducible.
+
+Status: completed on 2026-08-15. Both canonical records passed structural and semantic validation with one excluded warm-up and three measured repetitions. The protocol commit is `94a2735`; the derived checkpoint is `results/summaries/phase6-iq2-vs-q2.md`.
 
 ### Phase 7 — Context sensitivity
 

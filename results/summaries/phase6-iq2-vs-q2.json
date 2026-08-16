@@ -1,0 +1,106 @@
+{
+  "schema_version": "phase6-derived-comparison-1.0",
+  "recorded_date": "2026-08-15",
+  "protocol_git_commit": "94a27359f287ac5915f6b90664aa7e47844f3560",
+  "protocol": "environment/phase6-comparison-protocol-2026-08-15.json",
+  "source_results": {
+    "iq2": "results/raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json",
+    "q2": "results/raw/phase6-q2-comparison-20260816T014417772434Z-91bc350d.json"
+  },
+  "controls_equal": {
+    "prompt_suite": true,
+    "runtime_record": true,
+    "configuration": true,
+    "methodology": true
+  },
+  "relative_change_definition": "((Q2 - IQ2) / IQ2) * 100",
+  "metrics": {
+    "server_generation_tokens_per_second": {
+      "iq2": { "mean": 43.643, "sample_sd": 0.004, "cv_percent": 0.009, "minimum": 43.64, "maximum": 43.648 },
+      "q2": { "mean": 38.03, "sample_sd": 0.017, "cv_percent": 0.045, "minimum": 38.018, "maximum": 38.05 },
+      "q2_relative_change_percent": -12.861,
+      "equivalent_iq2_faster_than_q2_percent": 14.759
+    },
+    "server_prompt_tokens_per_second": {
+      "iq2": { "mean": 943.278, "sample_sd": 1.449, "cv_percent": 0.154, "minimum": 942.158, "maximum": 944.914 },
+      "q2": { "mean": 995.095, "sample_sd": 4.684, "cv_percent": 0.471, "minimum": 990.111, "maximum": 999.405 },
+      "q2_relative_change_percent": 5.493
+    },
+    "time_to_first_content_token_ms": {
+      "iq2": { "mean": 91.272, "sample_sd": 0.134, "cv_percent": 0.147, "minimum": 91.141, "maximum": 91.409 },
+      "q2": { "mean": 86.622, "sample_sd": 0.416, "cv_percent": 0.48, "minimum": 86.272, "maximum": 87.082 },
+      "q2_relative_change_percent": -5.095
+    },
+    "total_latency_ms": {
+      "iq2": { "mean": 5934.13, "sample_sd": 0.535, "cv_percent": 0.009, "minimum": 5933.512, "maximum": 5934.443 },
+      "q2": { "mean": 6791.962, "sample_sd": 3.112, "cv_percent": 0.046, "minimum": 6788.369, "maximum": 6793.781 },
+      "q2_relative_change_percent": 14.456,
+      "q2_absolute_increase_ms": 857.832
+    },
+    "peak_vram_used_mib": {
+      "iq2": { "mean": 8976.0, "sample_sd": 0.0, "cv_percent": 0.0, "minimum": 8976.0, "maximum": 8976.0 },
+      "q2": { "mean": 10559.0, "sample_sd": 0.0, "cv_percent": 0.0, "minimum": 10559.0, "maximum": 10559.0 },
+      "q2_relative_change_percent": 17.636,
+      "q2_absolute_increase_mib": 1583
+    },
+    "minimum_vram_free_mib": {
+      "iq2": { "mean": 3019.0, "sample_sd": 0.0, "cv_percent": 0.0, "minimum": 3019.0, "maximum": 3019.0 },
+      "q2": { "mean": 1436.0, "sample_sd": 0.0, "cv_percent": 0.0, "minimum": 1436.0, "maximum": 1436.0 },
+      "q2_relative_change_percent": -52.435,
+      "q2_absolute_change_mib": -1583
+    },
+    "peak_process_working_set_bytes": {
+      "iq2_mean": 9011081216.0,
+      "q2_mean": 10668127573.333,
+      "iq2_mean_gib": 8.392,
+      "q2_mean_gib": 9.935,
+      "q2_relative_change_percent": 18.389
+    },
+    "peak_process_private_memory_bytes": {
+      "iq2_mean": 10330333184.0,
+      "q2_mean": 11989975040.0,
+      "iq2_mean_gib": 9.621,
+      "q2_mean_gib": 11.167,
+      "q2_relative_change_percent": 16.066
+    },
+    "peak_gpu_utilization_percent": {
+      "iq2_mean": 99.0,
+      "q2_mean": 99.0,
+      "q2_relative_change_percent": 0.0
+    }
+  },
+  "telemetry": {
+    "iq2": {
+      "measured_sample_counts": [24, 24, 24],
+      "mean_observed_interval_milliseconds": 253.35,
+      "maximum_temperature_c": 71,
+      "maximum_power_draw_w": 265.16
+    },
+    "q2": {
+      "measured_sample_counts": [27, 28, 28],
+      "mean_observed_interval_milliseconds": 253.261,
+      "maximum_temperature_c": 71,
+      "maximum_power_draw_w": 257.98
+    }
+  },
+  "model_file_comparison": {
+    "iq2_bytes": 9010048064,
+    "q2_bytes": 10676423744,
+    "q2_absolute_increase_bytes": 1666375680,
+    "q2_absolute_increase_gib": 1.552,
+    "q2_relative_change_percent": 18.495
+  },
+  "separate_phase2_quality_context": {
+    "tasks": 10,
+    "iq2_passes": 3,
+    "q2_passes": 5,
+    "q2_absolute_pass_advantage": 2,
+    "limitation": "This small pass@1 triage selected candidates; it is not a general model-quality estimate."
+  },
+  "decision": {
+    "speed_candidate": "UD-IQ2_XXS",
+    "quality_oriented_candidate": "UD-Q2_K_XL",
+    "offload_result": "Both models used 66/66 GPU layers; no CPU layer-offload comparison occurred.",
+    "interpretation": "IQ2 provides substantially faster decode and more VRAM headroom. Q2 retains a small separate quality signal at a measurable decode and memory cost."
+  }
+}
