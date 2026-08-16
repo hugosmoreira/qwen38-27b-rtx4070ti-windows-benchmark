@@ -1,0 +1,51 @@
+{
+  "schema_version": "phase11-publication-protocol-1.0",
+  "date": "2026-08-16",
+  "phase": 11,
+  "purpose": "Publish an evidence-first Hugging Face Community discussion for the completed RTX 4070 Ti study.",
+  "target": {
+    "platform": "Hugging Face Hub",
+    "repository_id": "unsloth/Qwen3.8-27B-GGUF",
+    "repository_type": "model",
+    "publication_type": "discussion",
+    "community_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions",
+    "title": "Qwen3.8-27B on an RTX 4070 Ti 12GB: IQ2 vs Q2, 16K context, and MTP"
+  },
+  "source": {
+    "body": "reports/huggingface-community-report.md",
+    "evidence_repository": "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark",
+    "evidence_manifest": "release/v0.1.0-manifest.json"
+  },
+  "publication_requirements": [
+    "Every headline performance, context, quality, and MTP claim links to its public GitHub evidence.",
+    "Measured facts remain separate from interpretation and limitations.",
+    "The report identifies Q3 and Q4 as deferred rather than implying missing results.",
+    "The report does not claim general model quality, arbitrary 16K capacity, or transparent MTP equivalence.",
+    "The public repository passes the full offline test suite and strict release audit before submission."
+  ],
+  "excluded_actions": [
+    "uploading or redistributing model weights",
+    "uploading runtime archives or local logs",
+    "creating a Hugging Face model, dataset, or Space repository",
+    "running Docker or a hosted inference deployment",
+    "creating or moving the Git v0.1.0 tag",
+    "publishing a GitHub Release",
+    "publishing Phase 12 social posts"
+  ],
+  "current_public_state": {
+    "github_repository": "public",
+    "github_main_commit_before_phase11": "8ae9061e54c45e32e906be636bbf2a26275d9a83",
+    "github_actions_run": "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/actions/runs/31978976746",
+    "github_actions_result": "passed on Windows with Python 3.11 and 3.14",
+    "offline_test_count": 61,
+    "git_tag": null,
+    "github_release": null,
+    "hugging_face_discussion": null
+  },
+  "final_gate": {
+    "browser_authentication_required": true,
+    "action_time_confirmation_required": true,
+    "reason": "Creating the discussion is public representational communication from the authenticated Hugging Face account."
+  },
+  "status": "publication_ready_pending_hugging_face_sign_in_and_action_time_confirmation"
+}

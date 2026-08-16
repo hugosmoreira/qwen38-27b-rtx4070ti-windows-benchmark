@@ -4,7 +4,9 @@ All notable repository changes are documented here. Versions follow semantic ver
 
 ## [Unreleased]
 
-- External repository creation, release publication, and community-report posting remain approval-gated.
+- Publish the repository to GitHub and verify the Windows Python 3.11/3.14 CI matrix.
+- Prepare an evidence-linked Hugging Face Community report without uploading model weights or runtime artifacts.
+- Tag creation, GitHub Release publication, and the final Community-discussion submission remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 
 ## [0.1.0] — Release candidate

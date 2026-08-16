@@ -6,7 +6,9 @@
 
 **Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 61 offline tests; Q3 and Q4 downloads remain deferred.
 
-**Phase 10 release preparation passed its strict local gate on 2026-08-16.** The `v0.1.0` candidate uses Apache-2.0 and includes public citation identity, a private Code of Conduct contact, and final repository coordinates. No GitHub remote has been configured, and nothing has been pushed, tagged, released, or posted; every external action remains approval-gated.
+**Phase 10 is public on GitHub as of 2026-08-16.** The Apache-2.0 `v0.1.0` candidate, citation metadata, canonical evidence, and reproducibility tooling are available at [hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark). The Windows CI matrix passes on Python 3.11 and 3.14 after the hosted-runner path normalization in commit [`8ae9061`](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/commit/8ae9061e54c45e32e906be636bbf2a26275d9a83). The candidate is not yet tagged or published as a GitHub Release.
+
+**Phase 11 publication preparation started on 2026-08-16.** The Hugging Face Community report links its performance, quality, context, and MTP claims directly to the corresponding public evidence. Creating the discussion on `unsloth/Qwen3.8-27B-GGUF` remains the only Phase 11 external publication step.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 

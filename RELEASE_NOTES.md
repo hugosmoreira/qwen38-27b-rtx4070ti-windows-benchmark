@@ -16,7 +16,7 @@ No GPU or model download is required to run the 61-test software suite, validate
 
 ## Publication state
 
-This is still a local release candidate, but its strict local release gate has passed. Apache-2.0, Hugo Moreira's citation identity, the Code of Conduct contact, repository coordinates, and report URLs are finalized. Repository creation, push, tag creation, GitHub release publication, and Hugging Face posting still require explicit approval.
+The release candidate is public on GitHub, and its Windows CI matrix passes on Python 3.11 and 3.14. It remains untagged and has not been published as a GitHub Release. The Phase 11 Hugging Face Community discussion is prepared separately so its claims can point back to this repository as the evidence system of record.
 
 ## Interpretation boundary
 
