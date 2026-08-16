@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase9-mtp-code-v1",
+  "purpose": "A deterministic, fixed-length Python decode workload for the Phase 9 MTP on-versus-off experiment; this is not a quality evaluation.",
+  "settings": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "workload": {
+    "task_id": "bounded-lru-mtp-code",
+    "system": "You are completing a controlled local inference performance run. Return Python source code only, without Markdown fences. Continue adding implementation and tests until the response limit is reached.",
+    "user": "Implement a thread-safe bounded LRU cache using a dataclass, generic type hints, get, put, delete, clear, len, and snapshot methods. Include executable unittest cases for eviction, replacement, deletion, ordering, and concurrent access. Do not add prose outside the Python source.",
+    "acceptance": {
+      "minimum_completion_tokens": 240,
+      "expected_finish_reason": "length"
+    }
+  }
+}

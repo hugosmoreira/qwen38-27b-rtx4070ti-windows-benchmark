@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase9-mtp-prose-v1",
+  "purpose": "A deterministic, fixed-length prose decode workload for the Phase 9 MTP on-versus-off experiment; this is not a quality evaluation.",
+  "settings": {
+    "max_tokens": 256,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "workload": {
+    "task_id": "database-transaction-mtp-prose",
+    "system": "You are completing a controlled local inference performance run. Write clear continuous prose without headings or bullet lists. Continue writing until the response limit is reached.",
+    "user": "Explain how a database transaction moves through validation, write-ahead logging, commit, crash recovery, and rollback. Provide at least 500 words and do not include a concluding summary.",
+    "acceptance": {
+      "minimum_completion_tokens": 240,
+      "expected_finish_reason": "length"
+    }
+  }
+}

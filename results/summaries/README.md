@@ -15,3 +15,4 @@ Current summary:
 - `phase7-context-sensitivity.json` preserves the context ladder, relative changes, telemetry, thresholds, and decision in machine-readable form.
 - `phase8-quality-comparison.md` reports the 24-task Q2-versus-IQ2 pass@1 scores, category counts, paired outcomes, exact McNemar result, protocol incident, and practical decision.
 - `phase8-quality-comparison.json` preserves the same comparison, per-task outcomes, source hashes, validation evidence, and limitations in machine-readable form.
+- Phase 9 MTP summaries will be added only after all four frozen canonical records validate; the capability probe is not a summary result.

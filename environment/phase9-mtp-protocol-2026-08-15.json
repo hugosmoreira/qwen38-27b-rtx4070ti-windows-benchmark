@@ -1,0 +1,122 @@
+{
+  "schema_version": "phase9-mtp-protocol-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "pre_measurement",
+  "purpose": "Freeze an isolated IQ2 in-model MTP on-versus-off experiment before canonical measurement.",
+  "comparison_group": "phase9-iq2-mtp-4k-v1",
+  "scope": {
+    "included": ["MTP off versus draft-mtp on", "deterministic prose decode", "deterministic Python-code decode"],
+    "deferred": ["Q3 download and benchmark", "Q4 download and benchmark", "vision/mmproj", "Unsloth Desktop versus native runtime"]
+  },
+  "hypotheses": [
+    "MTP speedup will depend on workload-specific draft-token acceptance.",
+    "MTP will increase memory use because it activates the embedded NextN layer and a separate F16 draft cache.",
+    "Greedy MTP output should match MTP-off output; any mismatch will be reported rather than assumed away."
+  ],
+  "model": {
+    "quantization": "UD-IQ2_XXS",
+    "manifest": "environment/model-download-manifest.json",
+    "size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+    "embedded_nextn_predict_layers": 1
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "mtp_type": "draft-mtp",
+    "draft_n_max": 2,
+    "draft_n_min": 0,
+    "draft_cache_k": "f16",
+    "draft_cache_v": "f16"
+  },
+  "artifacts": [
+    {
+      "path": "prompts/phase9-mtp-prose.json",
+      "size_bytes": 1031,
+      "sha256": "f632d5372e53b98df8e39ba3255d2c4447be9854fe49ee3c15372c702cd5234f"
+    },
+    {
+      "path": "prompts/phase9-mtp-code.json",
+      "size_bytes": 1132,
+      "sha256": "6af6326de2bc56653dbecf7a3630608e1f6dd751fe6681ddb7ba1329d1c86553"
+    }
+  ],
+  "noncanonical_capability_probe": {
+    "excluded_from_comparison": true,
+    "purpose": "Confirm the pinned runtime actually activates the embedded MTP layer and discover its response timing fields before freezing canonical calculations.",
+    "server_run_id": "native-server-20260816T040901185Z",
+    "launch_record_size_bytes": 2840,
+    "launch_record_sha256": "b5d04fce266eb3ae9228ad7f68062841e1648aded317e0954518e57a709672b5",
+    "prompt_tokens": 45,
+    "completion_tokens": 64,
+    "draft_tokens": 52,
+    "accepted_draft_tokens": 36,
+    "acceptance_percent": 69.23076923076923,
+    "generation_tokens_per_second": 67.85933943780152,
+    "startup_evidence": [
+      "66/66 target layers offloaded to CUDA0",
+      "MTP draft context created against the target GGUF",
+      "draft-mtp n_max=2 and n_min=0",
+      "F16 draft K/V cache",
+      "16 MiB draft KV buffer and 31.50 MiB draft compute buffer"
+    ],
+    "interpretation": "Capability-only evidence; the prompt, seed, request length, and warmed state differ from the canonical protocol, so its speed is not a Phase 9 result."
+  },
+  "measurement_order": {
+    "sequence": [
+      "configs/phase9-mtp-off-prose.json",
+      "configs/phase9-mtp-on-prose.json",
+      "configs/phase9-mtp-on-code.json",
+      "configs/phase9-mtp-off-code.json"
+    ],
+    "fresh_server_process_per_configuration": true,
+    "counterbalanced_mode_order_across_workloads": true,
+    "order_randomized": false,
+    "limitation": "Two workloads and a fixed counterbalanced order reduce neither workload-sampling uncertainty nor all time-order and thermal effects."
+  },
+  "held_constant": {
+    "device": "CUDA0",
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "gpu_layers_requested": -1,
+    "automatic_fit": "off",
+    "flash_attention": "on",
+    "batch_size": 512,
+    "micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "target_kv_cache_k": "q8_0",
+    "target_kv_cache_v": "q8_0",
+    "prompt_cache": false,
+    "thinking": false,
+    "tools": false,
+    "vision": false,
+    "max_output_tokens": 256,
+    "temperature": 0.0,
+    "seed": 42,
+    "warmup_runs": 1,
+    "measured_repetitions": 5,
+    "inter_run_delay_seconds": 2,
+    "telemetry_target_interval_milliseconds": 250
+  },
+  "comparison_rules": {
+    "primary_metric": "mean server generation tokens per second within each workload",
+    "speculation_metrics": ["draft tokens", "accepted draft tokens", "acceptance percentage"],
+    "secondary_metrics": ["total latency", "TTFT", "peak VRAM", "minimum VRAM free", "process private memory"],
+    "output_equivalence": "Compare SHA-256 of every retained greedy response between paired MTP states.",
+    "relative_change_denominator": "MTP off within the same workload",
+    "no_pooled_speed_claim": true
+  },
+  "pre_measurement_gates": {
+    "launcher_record_preflight_requires_speculative_type_and_draft_controls": true,
+    "each_response_must_match_expected_mtp_timing_activity": true,
+    "props_limitation": "llama.cpp b10448 reports speculative.types as none in /props even while startup logs and response timing counters prove draft-mtp is active.",
+    "startup_log_requires_cuda0_full_offload_and_expected_mtp_state": true,
+    "configuration_pairs_must_differ_only_by_mtp_identity": true,
+    "all_harness_tests_must_pass": true,
+    "all_run_validation_flags_must_pass": true,
+    "raw_results_are_unique_and_append_only": true
+  },
+  "exit_condition": "All four canonical records validate, MTP acceptance and output equivalence are derived from raw evidence, and conclusions remain bounded to the tested IQ2 runtime and two workloads."
+}

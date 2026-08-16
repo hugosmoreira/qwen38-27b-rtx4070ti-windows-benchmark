@@ -45,6 +45,10 @@ class BenchmarkConfig:
             must_exist=True,
         )
 
+    @property
+    def expected_speculative_types(self) -> str:
+        return str(self.data["configuration"].get("speculative_type", "none"))
+
 
 def load_benchmark_config(repository_root: Path, config_path: Path) -> BenchmarkConfig:
     root = repository_root.resolve()
@@ -106,9 +110,38 @@ def load_benchmark_config(repository_root: Path, config_path: Path) -> Benchmark
         raise ConfigurationError("Configuration and server context sizes disagree.")
     if configuration.get("parallel_slots") != server["expected_parallel_slots"]:
         raise ConfigurationError("Configuration and server slot counts disagree.")
-    for disabled in ("thinking_mode", "preserve_thinking", "mtp_enabled", "tools_enabled", "vision_enabled"):
+    for disabled in ("thinking_mode", "preserve_thinking", "tools_enabled", "vision_enabled"):
         if configuration.get(disabled) is not False:
             raise ConfigurationError(f"Controlled smoke requires '{disabled}' to be false.")
+    mtp_enabled = configuration.get("mtp_enabled")
+    if not isinstance(mtp_enabled, bool):
+        raise ConfigurationError("'mtp_enabled' must be boolean.")
+    speculative_type = configuration.get("speculative_type", "none")
+    if speculative_type not in {"none", "draft-mtp"}:
+        raise ConfigurationError("'speculative_type' must be 'none' or 'draft-mtp'.")
+    if mtp_enabled != (speculative_type == "draft-mtp"):
+        raise ConfigurationError("MTP enablement and speculative type disagree.")
+    if "speculative_draft_n_max" in configuration:
+        maximum_draft = _require_integer(
+            configuration, "speculative_draft_n_max", minimum=0, maximum=16
+        )
+        minimum_draft = _require_integer(
+            configuration, "speculative_draft_n_min", minimum=0, maximum=maximum_draft
+        )
+        if mtp_enabled and maximum_draft < 1:
+            raise ConfigurationError("MTP requires at least one maximum draft token.")
+        if not mtp_enabled and (maximum_draft != 0 or minimum_draft != 0):
+            raise ConfigurationError("Disabled MTP requires zero draft-token limits.")
+    elif mtp_enabled:
+        raise ConfigurationError("MTP requires explicit draft-token limits.")
+    for cache_key in (
+        "speculative_draft_kv_cache_k_type",
+        "speculative_draft_kv_cache_v_type",
+    ):
+        if cache_key in configuration and configuration[cache_key] != "f16":
+            raise ConfigurationError(f"Controlled MTP requires '{cache_key}' to be 'f16'.")
+        if mtp_enabled and cache_key not in configuration:
+            raise ConfigurationError(f"MTP requires explicit '{cache_key}'.")
 
     telemetry = data["telemetry"]
     _require_integer(telemetry, "interval_milliseconds", minimum=100, maximum=5_000)

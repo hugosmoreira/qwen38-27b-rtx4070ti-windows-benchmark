@@ -87,6 +87,52 @@ class ConfigurationTests(unittest.TestCase):
             with self.assertRaises(ConfigurationError):
                 load_benchmark_config(self.repository_root, temporary_config.relative_to(self.repository_root))
 
+    def test_phase9_mtp_pairs_differ_only_by_declared_mtp_identity(self) -> None:
+        for workload in ("prose", "code"):
+            off = load_benchmark_config(
+                self.repository_root, Path(f"configs/phase9-mtp-off-{workload}.json")
+            )
+            on = load_benchmark_config(
+                self.repository_root, Path(f"configs/phase9-mtp-on-{workload}.json")
+            )
+            self.assertEqual(off.prompt_path, on.prompt_path)
+            self.assertEqual(off.expected_speculative_types, "none")
+            self.assertEqual(on.expected_speculative_types, "draft-mtp")
+            off_data = copy.deepcopy(off.data)
+            on_data = copy.deepcopy(on.data)
+            for data in (off_data, on_data):
+                data["run"].pop("classification")
+                data["run"].pop("result_prefix")
+                for key in (
+                    "mtp_enabled",
+                    "speculative_type",
+                    "speculative_draft_n_max",
+                ):
+                    data["configuration"].pop(key)
+            self.assertEqual(off_data, on_data)
+
+    def test_phase9_workloads_share_identical_sampling_settings(self) -> None:
+        prose = load_benchmark_config(
+            self.repository_root, Path("configs/phase9-mtp-off-prose.json")
+        )
+        code = load_benchmark_config(
+            self.repository_root, Path("configs/phase9-mtp-off-code.json")
+        )
+        self.assertEqual(prose.prompt["settings"], code.prompt["settings"])
+        self.assertEqual(prose.prompt["settings"]["temperature"], 0.0)
+        self.assertEqual(prose.data["run"]["measured_repetitions"], 5)
+
+    def test_phase9_rejects_mtp_flag_and_type_disagreement(self) -> None:
+        source = load_json_object(self.repository_root / "configs/phase9-mtp-on-prose.json")
+        source["configuration"]["speculative_type"] = "none"
+        with tempfile.TemporaryDirectory(dir=self.repository_root) as directory:
+            temporary_config = Path(directory) / "config.json"
+            temporary_config.write_text(json.dumps(source), encoding="utf-8")
+            with self.assertRaises(ConfigurationError):
+                load_benchmark_config(
+                    self.repository_root, temporary_config.relative_to(self.repository_root)
+                )
+
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):
             resolve_repository_path(self.repository_root, "../outside.json")

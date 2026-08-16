@@ -18,6 +18,7 @@ Current scripts:
 .\scripts\run_phase6_measurement.ps1 -Config configs/phase6-iq2-comparison.json
 .\scripts\run_phase7_measurement.ps1 -Config configs/phase7-iq2-context-4k.json
 .\scripts\run_phase8_quality.ps1 -Config configs/phase8-quality-q2.json
+.\scripts\run_phase9_measurement.ps1 -Config configs/phase9-mtp-on-prose.json
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -43,6 +44,8 @@ Current scripts:
 `run_phase7_measurement.ps1` accepts only one of the frozen 4K, 8K, or 16K IQ2 configurations. A fresh server with the matching context must already be running. Python preflight rejects an alias, path, slot count, or context mismatch before a canonical request is sent.
 
 `run_phase8_quality.ps1` accepts only the frozen Q2 or IQ2 quality configuration and requires the pinned native server executable. The Python runner performs server preflight, attempts every committed task once, retains each raw response and deterministic grade, independently re-grades the record against the suite, and writes one unique append-only result.
+
+`start_native_llama_server.ps1` additionally accepts `-SpeculativeType draft-mtp` with bounded draft-token controls. `run_phase9_measurement.ps1` accepts only the four frozen MTP configurations, matches the selected PID to one ignored launch record, verifies the expected MTP mode and F16 draft-cache controls, and then delegates to the Python harness. Every response must contain draft counters when MTP is on and no draft activity when it is off.
 
 For the Phase 2 quant-triage suite, add:
 

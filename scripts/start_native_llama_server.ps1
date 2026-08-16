@@ -5,11 +5,21 @@ param(
     [ValidateRange(1024, 262144)][int]$ContextSize = 4096,
     [ValidateRange(1024, 65535)][int]$Port = 8090,
     [ValidateRange(1, 64)][int]$Threads = 2,
+    [ValidateSet('none', 'draft-mtp')][string]$SpeculativeType = 'none',
+    [ValidateRange(0, 16)][int]$SpeculativeDraftMaximum = 2,
+    [ValidateRange(0, 16)][int]$SpeculativeDraftMinimum = 0,
     [ValidateRange(30, 600)][int]$StartupTimeoutSeconds = 180,
     [switch]$SkipModelHashValidation
 )
 
 $ErrorActionPreference = 'Stop'
+
+if ($SpeculativeType -eq 'draft-mtp' -and $SpeculativeDraftMaximum -lt 1) {
+    throw 'draft-mtp requires SpeculativeDraftMaximum of at least 1.'
+}
+if ($SpeculativeDraftMinimum -gt $SpeculativeDraftMaximum) {
+    throw 'SpeculativeDraftMinimum cannot exceed SpeculativeDraftMaximum.'
+}
 
 $repositoryRoot = Split-Path -Parent $PSScriptRoot
 $releaseTag = 'b10448'
@@ -148,6 +158,15 @@ $arguments = @(
     '--log-timestamps',
     '--log-file', ('"' + $serverLogPath + '"')
 )
+if ($SpeculativeType -eq 'draft-mtp') {
+    $arguments += @(
+        '--spec-type', 'draft-mtp',
+        '--spec-draft-n-max', [string]$SpeculativeDraftMaximum,
+        '--spec-draft-n-min', [string]$SpeculativeDraftMinimum,
+        '--spec-draft-type-k', 'f16',
+        '--spec-draft-type-v', 'f16'
+    )
+}
 
 try {
     $env:PATH = "$cudaDirectory;$binaryDirectory;$previousPath"
@@ -196,6 +215,13 @@ $launchRecord = [ordered]@{
     model_manifest = [System.IO.Path]::GetRelativePath($repositoryRoot, $resolvedModelManifest).Replace('\', '/')
     model_alias = $ModelAlias
     model_hash_validated = -not $SkipModelHashValidation
+    speculative_decoding = [ordered]@{
+        type = $SpeculativeType
+        draft_n_max = if ($SpeculativeType -eq 'draft-mtp') { $SpeculativeDraftMaximum } else { 0 }
+        draft_n_min = if ($SpeculativeType -eq 'draft-mtp') { $SpeculativeDraftMinimum } else { 0 }
+        draft_cache_k = if ($SpeculativeType -eq 'draft-mtp') { 'f16' } else { $null }
+        draft_cache_v = if ($SpeculativeType -eq 'draft-mtp') { 'f16' } else { $null }
+    }
     version_output = $versionOutput
     device_output = $deviceOutput
     arguments = @($arguments | ForEach-Object { $_.Trim('"') } | ForEach-Object { if ($_ -eq $modelPath) { [System.IO.Path]::GetRelativePath($repositoryRoot, $modelPath).Replace('\', '/') } elseif ($_ -eq $serverLogPath) { '<ignored-runtime>/llama-server.log' } else { $_ } })

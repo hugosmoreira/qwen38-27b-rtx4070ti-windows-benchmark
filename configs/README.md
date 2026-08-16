@@ -9,3 +9,5 @@ Configuration files bind a run classification to one server, model manifest, run
 `phase7-iq2-context-4k.json`, `phase7-iq2-context-8k.json`, and `phase7-iq2-context-16k.json` define the ascending IQ2 context ladder. They keep the runtime and inference controls fixed while scaling a deterministic public synthetic prompt to approximately 78% of each configured window. Each level reserves 128 output tokens and enforces an expected actual prompt-token range.
 
 `phase8-quality-q2.json` and `phase8-quality-iq2.json` form a paired objective quality evaluation. A test permits only model-identity fields to differ. Each model receives the same 24 tasks once, in the same order, with a fresh 4K one-slot server, deterministic sampling, prompt caching off, and thinking, MTP, tools, MCP, and vision disabled.
+
+The four `phase9-mtp-*.json` files form two controlled IQ2 pairs: MTP off versus in-model `draft-mtp` for prose and Python code. Each pair differs only in its run identity and declared MTP controls. Both use greedy decoding, one excluded warm-up, five measured repetitions, and response-level checks that draft activity matches the selected state.

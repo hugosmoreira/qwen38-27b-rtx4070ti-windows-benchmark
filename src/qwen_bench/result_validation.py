@@ -204,7 +204,13 @@ def _validate_summary(
         value = summary.get(key)
         if value is not None:
             _validate_statistics(value, f"{path}.{key}", completed, issues)
-    for key in ("prompt_tokens", "completion_tokens"):
+    for key in (
+        "prompt_tokens",
+        "completion_tokens",
+        "server_draft_tokens",
+        "server_accepted_draft_tokens",
+        "server_draft_acceptance_percent",
+    ):
         value = summary.get(key)
         if value is not None:
             _validate_statistics(value, f"{path}.{key}", completed, issues)

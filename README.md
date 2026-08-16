@@ -4,9 +4,11 @@
 
 ## Status
 
-**Phase 8 completed locally on 2026-08-15.** On 24 inspectable pass@1 tasks, Q2 passed 10 and IQ2 passed 9. The paired split was 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass; the two-sided exact McNemar p-value was 1.0. This is no meaningful general-quality win for Q2. The corrected package passed 50 offline tests, both raw files passed independent suite-backed re-grading, and a fresh hash-validated IQ2 4K server was restored afterward.
+**Phase 9 is in progress locally as of 2026-08-15.** The frozen experiment compares IQ2 with MTP off and in-model `draft-mtp` on across deterministic prose and Python-code workloads. A separate excluded capability probe confirmed 66/66 target layers on CUDA, activated the embedded NextN layer, and accepted 36 of 52 drafted tokens. The current package passes 55 offline tests. Q3 and Q4 downloads remain deferred.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
+
+No Phase 9 speed claim is published yet. The 64-token capability probe used different conditions and exists only to validate MTP operation and identify `draft_n` and `draft_n_accepted`; canonical results require the four committed five-repetition records.
 
 ## Phase 1 proof of life
 

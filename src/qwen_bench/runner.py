@@ -135,6 +135,9 @@ def _execute_one(
         "gpu_telemetry_observed": any(isinstance(sample.get("gpu"), dict) for sample in samples),
         "process_telemetry_observed": any(isinstance(sample.get("process"), dict) for sample in samples),
         "telemetry_error_free": not collector_errors,
+        "mtp_activity_matches_configuration": _mtp_activity_matches(
+            timings, bool(config.data["configuration"]["mtp_enabled"])
+        ),
     }
     if "minimum_prompt_tokens" in acceptance:
         prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
@@ -293,6 +296,16 @@ def _measured_summary(
         "server_generation_tokens_per_second": descriptive_statistics(
             _nested(run, "server_measurements", "timings", "predicted_per_second") for run in runs
         ),
+        "server_draft_tokens": descriptive_statistics(
+            _nested(run, "server_measurements", "timings", "draft_n") for run in runs
+        ),
+        "server_accepted_draft_tokens": descriptive_statistics(
+            _nested(run, "server_measurements", "timings", "draft_n_accepted") for run in runs
+        ),
+        "server_draft_acceptance_percent": descriptive_statistics(
+            _draft_acceptance_percent(_nested(run, "server_measurements", "timings"))
+            for run in runs
+        ),
         "peak_vram_used_mib": descriptive_statistics(
             run["telemetry_summary"]["peak_vram_used_mib"] for run in runs
         ),
@@ -328,6 +341,40 @@ def _nested(record: dict[str, Any], *keys: str) -> Any:
             return None
         value = value.get(key)
     return value
+
+
+def _mtp_activity_matches(timings: Any, enabled: bool) -> bool:
+    if not isinstance(timings, dict):
+        return False
+    draft = timings.get("draft_n")
+    accepted = timings.get("draft_n_accepted")
+    if enabled:
+        return (
+            isinstance(draft, int)
+            and not isinstance(draft, bool)
+            and draft > 0
+            and isinstance(accepted, int)
+            and not isinstance(accepted, bool)
+            and 0 <= accepted <= draft
+        )
+    return draft in {None, 0} and accepted in {None, 0}
+
+
+def _draft_acceptance_percent(timings: Any) -> float | None:
+    if not isinstance(timings, dict):
+        return None
+    draft = timings.get("draft_n")
+    accepted = timings.get("draft_n_accepted")
+    if (
+        not isinstance(draft, int)
+        or isinstance(draft, bool)
+        or draft <= 0
+        or not isinstance(accepted, int)
+        or isinstance(accepted, bool)
+        or not 0 <= accepted <= draft
+    ):
+        return None
+    return accepted / draft * 100.0
 
 
 def _create_run_id(prefix: str, started: datetime) -> str:

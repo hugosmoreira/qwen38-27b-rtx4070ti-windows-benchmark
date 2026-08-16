@@ -19,6 +19,7 @@ This directory records the machine and software environment used for measurement
 - `phase8-quality-protocol-2026-08-15.json` freezes the 24-task suite hash, paired model order, model checksums, held controls, deterministic graders, paired calculations, interpretation limits, and exit gate before either quant receives a canonical Phase 8 task.
 - `phase8-quality-protocol-amendment-2026-08-15.json` discloses the superseded first Q2 attempt, hashes its local server log, and narrows request completion so a received empty answer is preserved as a zero-credit quality result rather than mislabeled as a transport failure.
 - `phase8-quality-2026-08-15.json` records both canonical fresh launches, buffer placement, closed local-log hashes, raw-result hashes, control audit, paired result, superseded-attempt boundary, and the healthy fresh IQ2 restore.
+- `phase9-mtp-protocol-2026-08-15.json` freezes the isolated IQ2 MTP experiment, two workload hashes, counterbalanced mode order, draft controls, calculation rules, Q3/Q4 deferral, and the excluded capability probe that established llama.cpp's actual MTP timing fields.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.
