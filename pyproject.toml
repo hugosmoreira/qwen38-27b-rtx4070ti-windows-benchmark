@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qwen38-windows-bench"
+version = "0.1.0"
+description = "Auditable Windows benchmark harness for local Qwen3.8 GGUF inference"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+authors = [{ name = "Qwen3.8 RTX 4070 Ti study" }]
+dependencies = []
+
+[project.scripts]
+qwen-bench = "qwen_bench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

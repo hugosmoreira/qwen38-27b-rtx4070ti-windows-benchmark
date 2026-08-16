@@ -12,6 +12,9 @@ Current scripts:
 .\scripts\start_native_llama_server.ps1
 .\scripts\run_native_smoke.ps1
 .\scripts\run_phase4_baseline.ps1
+.\scripts\setup_python.ps1
+.\scripts\run_python_tests.ps1
+.\scripts\run_phase5_harness.ps1
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -25,6 +28,12 @@ Current scripts:
 `run_native_smoke.ps1` calls the native server's OpenAI-compatible `/v1/chat/completions` endpoint with thinking, built-in tools, MCP, and vision disabled. The server uses the `deepseek` reasoning parser only to keep Qwen's empty `<think>` wrapper out of answer content; it does not enable reasoning generation. The script writes a unique Phase 3 proof-of-life record; this is not the repeated Phase 4 baseline.
 
 `run_phase4_baseline.ps1` verifies the active model and material Phase 3 launch arguments, then runs the committed long-form workload once as warm-up and three times as measured repetitions. It uses streaming SSE to measure time to first non-empty content token, retains llama.cpp's prompt/decode timings, disables prompt caching, and starts `collect_run_telemetry.ps1` in a hidden helper process targeting a 250 ms cadence for GPU, VRAM, llama-server CPU, and process RAM. Every run records both the target and observed cadence. Raw output is unique and append-only.
+
+`setup_python.ps1` accepts CPython 3.11 through 3.14, creates the ignored `.venv`, and verifies the source package. The harness has no runtime package dependencies.
+
+`run_python_tests.ps1` executes the offline `unittest` suite from the isolated environment. Its local mock HTTP server and injected telemetry probes test our code without making model-performance claims.
+
+`run_phase5_harness.ps1` finds exactly one pinned llama.cpp `b10448` process, passes its PID to the Python CLI, and executes `configs/phase5-iq2-smoke.json`. The Python preflight independently verifies loopback scope, model alias, context, slots, and manifest model path before sending the request. A result is created exclusively under `results/raw/`; existing files are never overwritten.
 
 For the Phase 2 quant-triage suite, add:
 

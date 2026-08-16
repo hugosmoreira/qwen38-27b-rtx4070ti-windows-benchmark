@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase5-python-harness-smoke-v1",
+  "purpose": "A short engineering workload that validates the Python harness end to end; its performance is not a benchmark claim.",
+  "settings": {
+    "max_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "workload": {
+    "task_id": "phase5-streaming-telemetry-smoke",
+    "system": "You are completing a controlled local inference harness check. Write continuous prose without headings or bullet lists and continue until the response limit is reached.",
+    "user": "Explain why an append-only benchmark record improves reproducibility and makes failed experiments easier to audit. Include concrete engineering details.",
+    "acceptance": {
+      "minimum_completion_tokens": 64,
+      "expected_finish_reason": "length"
+    }
+  }
+}

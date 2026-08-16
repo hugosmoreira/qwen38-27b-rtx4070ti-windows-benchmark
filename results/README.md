@@ -2,7 +2,7 @@
 
 - `raw/` contains append-only run records and raw model responses selected for publication.
 - `summaries/` contains derived tables, statistics, and charts.
-- `result-schema.example.json` documents the intended record shape before the harness is implemented.
+- `../schemas/benchmark-result.schema.json` is the formal result contract implemented in Phase 5.
 
 Phases 1 through 3 include proof-of-life records for `UD-IQ2_XXS`, `UD-Q2_K_XL`, and the pinned native llama.cpp API. They are explicitly classified as proof-of-life rather than formal benchmarks; repeated measurements begin in Phase 4.
 
@@ -11,5 +11,7 @@ Phase 2 also includes a ten-task objective triage comparison. It supports config
 Phase 3 retains both the failed 1/3 parser-configuration run and the corrected 3/3 run. Failed evidence is not deleted when it explains a configuration decision.
 
 Phase 4 adds the first repeated baseline: one excluded warm-up and three measured IQ2 runs with streaming TTFT and continuous telemetry. The first attempt remains available because its configured 250 ms sampler actually ran at 300 ms; the canonical rerun records target and observed cadence separately.
+
+Phase 5 replaces the earlier draft record example with a versioned Draft 2020-12 schema plus a semantic validator. Its short end-to-end smoke result is engineering evidence for the harness, not a replacement performance baseline.
 
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

@@ -1,0 +1,364 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:qwen38-windows-bench:benchmark-result:1.0.0",
+  "title": "Qwen3.8 Windows benchmark result",
+  "description": "Machine-readable result emitted by qwen-bench 0.1.x.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "timestamp",
+    "git_commit",
+    "classification",
+    "hardware_snapshot",
+    "runtime_record",
+    "model_manifest",
+    "prompt_suite",
+    "benchmark_config",
+    "python_runtime",
+    "runtime",
+    "model",
+    "configuration",
+    "methodology",
+    "server_preflight",
+    "runs",
+    "measured_summary",
+    "outcome"
+  ],
+  "properties": {
+    "schema_version": { "const": "benchmark-result-1.0.0" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "git_commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "classification": { "type": "string", "minLength": 1 },
+    "hardware_snapshot": { "$ref": "#/$defs/repositoryReference" },
+    "runtime_record": { "$ref": "#/$defs/repositoryReference" },
+    "model_manifest": { "$ref": "#/$defs/repositoryReference" },
+    "prompt_suite": { "$ref": "#/$defs/repositoryReference" },
+    "benchmark_config": { "$ref": "#/$defs/repositoryReference" },
+    "python_runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation", "version", "isolated_environment", "runtime_dependencies"],
+      "properties": {
+        "implementation": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "isolated_environment": { "type": "boolean" },
+        "runtime_dependencies": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "release_tag", "commit", "backend", "system_fingerprint"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "release_tag": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "backend": { "type": "string", "minLength": 1 },
+        "system_fingerprint": { "type": ["string", "null"] }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "revision",
+        "filename",
+        "quantization",
+        "file_size_bytes",
+        "sha256",
+        "served_alias"
+      ],
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "filename": { "type": "string", "minLength": 1 },
+        "quantization": { "type": "string", "minLength": 1 },
+        "file_size_bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "served_alias": { "type": "string", "minLength": 1 }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": ["string", "number", "integer", "boolean", "null"] }
+    },
+    "methodology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "warmup_runs",
+        "measured_repetitions",
+        "streaming",
+        "ttft_definition",
+        "total_latency_definition",
+        "prompt_cache_disabled",
+        "telemetry_target_interval_milliseconds",
+        "telemetry_scope",
+        "inter_run_delay_seconds"
+      ],
+      "properties": {
+        "warmup_runs": { "type": "integer", "minimum": 0 },
+        "measured_repetitions": { "type": "integer", "minimum": 1 },
+        "streaming": { "const": true },
+        "ttft_definition": { "type": "string", "minLength": 1 },
+        "total_latency_definition": { "type": "string", "minLength": 1 },
+        "prompt_cache_disabled": { "const": true },
+        "telemetry_target_interval_milliseconds": { "type": "integer", "minimum": 100 },
+        "telemetry_scope": { "type": "string", "minLength": 1 },
+        "inter_run_delay_seconds": { "type": "number", "minimum": 0 }
+      }
+    },
+    "server_preflight": { "$ref": "#/$defs/serverPreflight" },
+    "runs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/run" }
+    },
+    "measured_summary": { "$ref": "#/$defs/measuredSummary" },
+    "outcome": { "$ref": "#/$defs/outcome" }
+  },
+  "$defs": {
+    "repositoryReference": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z]:)(?!/)(?!.*\\\\).+$"
+    },
+    "nullableNumber": { "type": ["number", "null"] },
+    "serverPreflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "checks", "served_model_alias"],
+      "properties": {
+        "status": { "enum": ["passed", "failed"] },
+        "checks": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": { "type": "boolean" },
+              "minProperties": 1
+            }
+          ]
+        },
+        "served_model_alias": { "type": ["string", "null"] }
+      }
+    },
+    "clientMeasurements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["response_headers_ms", "time_to_first_content_token_ms", "total_latency_ms"],
+      "properties": {
+        "response_headers_ms": { "$ref": "#/$defs/nullableNumber" },
+        "time_to_first_content_token_ms": { "$ref": "#/$defs/nullableNumber" },
+        "total_latency_ms": { "$ref": "#/$defs/nullableNumber" }
+      }
+    },
+    "serverMeasurements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["usage", "timings", "system_fingerprint"],
+      "properties": {
+        "usage": { "type": ["object", "null"] },
+        "timings": { "type": ["object", "null"] },
+        "system_fingerprint": { "type": ["string", "null"] }
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["finish_reason", "content", "reasoning_content"],
+      "properties": {
+        "finish_reason": { "type": ["string", "null"] },
+        "content": { "type": "string" },
+        "reasoning_content": { "type": ["string", "null"] }
+      }
+    },
+    "telemetrySummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_interval_milliseconds",
+        "sample_count",
+        "observed_span_milliseconds",
+        "observed_mean_interval_milliseconds",
+        "observed_minimum_interval_milliseconds",
+        "observed_maximum_interval_milliseconds",
+        "peak_vram_used_mib",
+        "minimum_vram_free_mib",
+        "peak_gpu_utilization_percent",
+        "peak_gpu_temperature_c",
+        "peak_gpu_power_draw_w",
+        "peak_process_working_set_bytes",
+        "peak_process_private_memory_bytes",
+        "peak_process_cpu_percent_of_machine"
+      ],
+      "properties": {
+        "target_interval_milliseconds": { "type": "integer", "minimum": 100 },
+        "sample_count": { "type": "integer", "minimum": 0 },
+        "observed_span_milliseconds": { "$ref": "#/$defs/nullableNumber" },
+        "observed_mean_interval_milliseconds": { "$ref": "#/$defs/nullableNumber" },
+        "observed_minimum_interval_milliseconds": { "$ref": "#/$defs/nullableNumber" },
+        "observed_maximum_interval_milliseconds": { "$ref": "#/$defs/nullableNumber" },
+        "peak_vram_used_mib": { "$ref": "#/$defs/nullableNumber" },
+        "minimum_vram_free_mib": { "$ref": "#/$defs/nullableNumber" },
+        "peak_gpu_utilization_percent": { "$ref": "#/$defs/nullableNumber" },
+        "peak_gpu_temperature_c": { "$ref": "#/$defs/nullableNumber" },
+        "peak_gpu_power_draw_w": { "$ref": "#/$defs/nullableNumber" },
+        "peak_process_working_set_bytes": { "$ref": "#/$defs/nullableNumber" },
+        "peak_process_private_memory_bytes": { "$ref": "#/$defs/nullableNumber" },
+        "peak_process_cpu_percent_of_machine": { "$ref": "#/$defs/nullableNumber" }
+      }
+    },
+    "telemetrySample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "timestamp_utc",
+        "monotonic_elapsed_milliseconds",
+        "target_process_id",
+        "process_running",
+        "gpu",
+        "process"
+      ],
+      "properties": {
+        "timestamp_utc": { "type": "string", "format": "date-time" },
+        "monotonic_elapsed_milliseconds": { "type": "number", "minimum": 0 },
+        "target_process_id": { "type": "integer", "minimum": 1 },
+        "process_running": { "type": "boolean" },
+        "gpu": { "type": ["object", "null"] },
+        "process": { "type": ["object", "null"] }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_label",
+        "warmup",
+        "repetition",
+        "status",
+        "error",
+        "client_measurements",
+        "server_measurements",
+        "response",
+        "telemetry_summary",
+        "telemetry_samples",
+        "telemetry_errors",
+        "validation"
+      ],
+      "properties": {
+        "run_label": { "type": "string", "minLength": 1 },
+        "warmup": { "type": "boolean" },
+        "repetition": { "type": "integer", "minimum": 1 },
+        "status": { "enum": ["completed", "failed_validation"] },
+        "error": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type", "message"],
+              "properties": {
+                "type": { "type": "string", "minLength": 1 },
+                "message": { "type": "string", "minLength": 1 }
+              }
+            }
+          ]
+        },
+        "client_measurements": { "$ref": "#/$defs/clientMeasurements" },
+        "server_measurements": { "$ref": "#/$defs/serverMeasurements" },
+        "response": { "$ref": "#/$defs/response" },
+        "telemetry_summary": { "$ref": "#/$defs/telemetrySummary" },
+        "telemetry_samples": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/telemetrySample" }
+        },
+        "telemetry_errors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "validation": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "boolean" }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "count",
+        "mean",
+        "sample_standard_deviation",
+        "coefficient_of_variation_percent",
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "count": { "type": "integer", "minimum": 1 },
+        "mean": { "type": "number" },
+        "sample_standard_deviation": { "type": "number", "minimum": 0 },
+        "coefficient_of_variation_percent": { "$ref": "#/$defs/nullableNumber" },
+        "minimum": { "type": "number" },
+        "maximum": { "type": "number" }
+      }
+    },
+    "nullableStatistics": {
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/statistics" }]
+    },
+    "measuredSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_repetitions",
+        "completed_repetitions",
+        "time_to_first_content_token_ms",
+        "total_latency_ms",
+        "server_prompt_tokens_per_second",
+        "server_generation_tokens_per_second",
+        "peak_vram_used_mib",
+        "minimum_vram_free_mib",
+        "peak_gpu_utilization_percent",
+        "peak_process_working_set_bytes",
+        "peak_process_private_memory_bytes",
+        "peak_process_cpu_percent_of_machine",
+        "all_expected_runs_completed"
+      ],
+      "properties": {
+        "expected_repetitions": { "type": "integer", "minimum": 1 },
+        "completed_repetitions": { "type": "integer", "minimum": 0 },
+        "time_to_first_content_token_ms": { "$ref": "#/$defs/nullableStatistics" },
+        "total_latency_ms": { "$ref": "#/$defs/nullableStatistics" },
+        "server_prompt_tokens_per_second": { "$ref": "#/$defs/nullableStatistics" },
+        "server_generation_tokens_per_second": { "$ref": "#/$defs/nullableStatistics" },
+        "peak_vram_used_mib": { "$ref": "#/$defs/nullableStatistics" },
+        "minimum_vram_free_mib": { "$ref": "#/$defs/nullableStatistics" },
+        "peak_gpu_utilization_percent": { "$ref": "#/$defs/nullableStatistics" },
+        "peak_process_working_set_bytes": { "$ref": "#/$defs/nullableStatistics" },
+        "peak_process_private_memory_bytes": { "$ref": "#/$defs/nullableStatistics" },
+        "peak_process_cpu_percent_of_machine": { "$ref": "#/$defs/nullableStatistics" },
+        "all_expected_runs_completed": { "type": "boolean" }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "error_type", "error_message"],
+      "properties": {
+        "status": { "enum": ["completed", "failed_preflight", "failed_run"] },
+        "error_type": { "type": ["string", "null"] },
+        "error_message": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

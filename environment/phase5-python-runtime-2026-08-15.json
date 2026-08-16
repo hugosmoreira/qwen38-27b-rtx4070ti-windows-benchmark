@@ -1,0 +1,60 @@
+{
+  "schema_version": "phase5-python-runtime-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "harness_implemented_live_end_to_end_pending",
+  "python": {
+    "implementation": "CPython",
+    "version": "3.13.15",
+    "architecture": "64-bit",
+    "supported_project_range": ">=3.11,<3.15",
+    "installation_scope": "existing_per_user_installation",
+    "path_or_file_associations_recorded_publicly": false
+  },
+  "official_installer_validation": {
+    "source": "https://www.python.org/ftp/python/3.13.15/python-3.13.15-amd64.exe",
+    "filename": "python-3.13.15-amd64.exe",
+    "size_class": "28.1 MB",
+    "sha256": "edec09c4853aeae9ac36efb8c9f95b6b8e2fee65eee56d9767a8b7c69c574403",
+    "sha256_matched_python_org_release_page": true,
+    "installer_retained_only_under_gitignored_runtimes": true
+  },
+  "isolated_environment": {
+    "relative_path": ".venv",
+    "gitignored": true,
+    "sys_prefix_differs_from_sys_base_prefix": true,
+    "runtime_dependencies": [],
+    "setup_script": "scripts/setup_python.ps1"
+  },
+  "harness": {
+    "package": "qwen_bench",
+    "version": "0.1.0",
+    "source_root": "src/qwen_bench",
+    "formal_result_schema": "schemas/benchmark-result.schema.json",
+    "configuration": "configs/phase5-iq2-smoke.json",
+    "prompt_suite": "prompts/phase5-harness-smoke.json",
+    "runtime_dependency_policy": "Python standard library only"
+  },
+  "verification_before_live_run": {
+    "offline_tests_passed": 23,
+    "offline_tests_failed": 0,
+    "compile_and_import_check_passed": true,
+    "live_read_only_telemetry_probe": {
+      "sample_count": 3,
+      "target_interval_milliseconds": 250,
+      "observed_mean_interval_milliseconds": 253.507,
+      "gpu_samples_present": true,
+      "process_samples_present": true,
+      "collector_errors": []
+    }
+  },
+  "setup_observation": {
+    "description": "The existing per-user Python installation was not visible in the inherited shell command lookup. The official checksum-verified installer entered maintenance mode instead of creating a duplicate same-version installation.",
+    "resolution": "Restore and verify the existing installation's prior optional components and user PATH registration, then create only the repository-local virtual environment.",
+    "user_files_or_project_evidence_deleted": false
+  },
+  "publication_limits": [
+    "The virtual environment and installer are intentionally not committed.",
+    "No local username or absolute installation path is recorded.",
+    "The live model request and canonical Phase 5 raw result are not yet represented in this pre-run record."
+  ]
+}

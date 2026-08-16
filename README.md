@@ -68,6 +68,7 @@ Only one quant will be downloaded at a time, beginning after Phase 0 review.
 .
 ├── README.md
 ├── PROJECT.md
+├── configs/
 ├── environment/
 ├── prompts/
 ├── reports/
@@ -75,17 +76,21 @@ Only one quant will be downloaded at a time, beginning after Phase 0 review.
 │   ├── raw/
 │   └── summaries/
 ├── scripts/
+├── schemas/
 ├── src/
-└── tests/
+├── tests/
+└── pyproject.toml
 ```
 
 - [PROJECT.md](PROJECT.md) — phase gates, scope, methodology, and publication plan.
+- `configs/` — versioned experiment inputs that bind runtime, model, prompt, and controls.
 - `environment/` — machine snapshots and environment collection notes.
 - `prompts/` — version-controlled benchmark prompts.
 - `results/raw/` — append-only machine-readable run data.
 - `results/summaries/` — derived tables and charts.
 - `reports/` — GitHub, Hugging Face, and social-report drafts.
 - `scripts/` — repeatable PowerShell entry points.
+- `schemas/` — the formal Python-harness result contract.
 - `src/` — benchmark client and telemetry code.
 - `tests/` — tests for our code, schemas, and calculations.
 
@@ -165,3 +170,15 @@ See the [release manifest](environment/llama-cpp-b10448-manifest.json), [runtime
 All three measured runs used 84 prompt tokens, generated 256 tokens with prompt caching disabled, reached 98% sampled GPU utilization, and peaked at 8,987 MiB VRAM used. Telemetry targeted 250 ms and achieved a 256.151 ms observed mean cadence.
 
 See the [Phase 4 environment record](environment/phase4-iq2-baseline-2026-08-15.json), [raw result](results/raw/phase4-iq2-baseline-20260816T001913Z.json), and [interpretation checkpoint](results/summaries/phase4-iq2-baseline.md). The values apply only to this fixed workload and are not a Q2 comparison or quality result.
+
+## Phase 5 Python harness
+
+The new `qwen_bench` package uses only the Python standard library at runtime. It provides a loopback-only streaming client, monotonic TTFT timing, NVIDIA and Windows process telemetry, append-only writes, summary calculations, a Draft 2020-12 result schema, and cross-field semantic validation.
+
+```powershell
+.\scripts\setup_python.ps1
+.\scripts\run_python_tests.ps1
+.\scripts\run_phase5_harness.ps1
+```
+
+The controlled Phase 5 configuration performs one short 64-token request with no warm-up. This validates the software path and is explicitly not comparable to the repeated 256-token Phase 4 baseline.

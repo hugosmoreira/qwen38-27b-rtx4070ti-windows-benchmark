@@ -1,16 +1,28 @@
 # Source Code
 
-The benchmark implementation will be added after the manual baseline is understood.
+`qwen_bench` is a small, standard-library Python package for repeatable local inference measurements. It intentionally has no runtime package dependencies so the code path used for timing and telemetry remains easy to audit.
 
-Planned modules:
+## Module map
 
-- API client
-- benchmark configuration
-- request timing
-- NVIDIA/process telemetry
-- result schema validation
-- raw-result writer
-- summary calculations
+- `client.py` — loopback-only HTTP preflight, OpenAI-compatible streaming requests, and TTFT measurement;
+- `config.py` — duplicate-key rejection, controlled-setting validation, and repository-bound path resolution;
+- `runner.py` — warm-up/measured orchestration, validation, provenance, and summary assembly;
+- `sse.py` — llama.cpp Server-Sent Events parsing;
+- `statistics.py` — mean, sample standard deviation, coefficient of variation, minimum, and maximum;
+- `storage.py` — exclusive append-only JSON creation with filename safety checks;
+- `telemetry.py` — fixed-target-cadence NVIDIA and Windows process telemetry;
+- `result_validation.py` — dependency-free structural and semantic result checks;
+- `cli.py` — `run` and `validate` commands.
 
-The implementation should remain small enough to audit.
+The formal interoperable schema is [`schemas/benchmark-result.schema.json`](../schemas/benchmark-result.schema.json). The in-package validator adds cross-field rules that JSON Schema alone does not conveniently express, such as matching measured counts and warm-up counts to the actual run array.
 
+## Direct invocation
+
+From the repository root:
+
+```powershell
+$env:PYTHONPATH = (Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m qwen_bench --help
+```
+
+Use the PowerShell wrappers under `scripts/` for normal setup, tests, and the controlled Phase 5 smoke run.
