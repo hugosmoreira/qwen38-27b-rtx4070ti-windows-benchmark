@@ -24,7 +24,14 @@ def valid_quality_result() -> dict:
         "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
         "timings": {"cache_n": 0},
         "system_fingerprint": "test",
-        "validation": {"request_succeeded": True},
+        "validation": {
+            "request_succeeded": True,
+            "content_observed": True,
+            "usage_observed": True,
+            "timings_observed": True,
+            "prompt_cache_disabled": True,
+            "reasoning_empty": True,
+        },
     }
     return {
         "schema_version": "quality-evaluation-result-1.0.0",
@@ -109,6 +116,29 @@ class QualityResultValidationTests(unittest.TestCase):
         }
         issues = validate_quality_result(record, suite)
         self.assertTrue(any("independent re-grade" in issue.message for issue in issues))
+
+    def test_received_empty_answer_is_regraded_as_a_quality_failure(self) -> None:
+        record = valid_quality_result()
+        task = record["tasks"][0]
+        task["content"] = ""
+        task["passed"] = False
+        task["grade"] = {"passed": False, "reason": "exact_mismatch"}
+        task["validation"]["content_observed"] = False
+        record["summary"]["tasks_passed"] = 0
+        record["summary"]["pass_rate_percent"] = 0.0
+        category = record["summary"]["category_results"]["arithmetic"]
+        category["passed"] = 0
+        category["pass_rate_percent"] = 0.0
+        suite = {
+            "tasks": [
+                {
+                    "task_id": "task-one",
+                    "category": "arithmetic",
+                    "validator": {"type": "exact", "expected": "answer"},
+                }
+            ]
+        }
+        self.assertEqual(validate_quality_result(record, suite), [])
 
 
 if __name__ == "__main__":

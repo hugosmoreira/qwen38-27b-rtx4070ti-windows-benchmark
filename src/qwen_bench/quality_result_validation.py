@@ -10,6 +10,13 @@ from qwen_bench.result_validation import ValidationIssue
 
 
 _COMMIT = re.compile(r"^[0-9a-f]{40}$")
+_REQUEST_COMPLETION_CHECKS = (
+    "request_succeeded",
+    "usage_observed",
+    "timings_observed",
+    "prompt_cache_disabled",
+    "reasoning_empty",
+)
 
 
 def validate_quality_result(
@@ -138,9 +145,12 @@ def _validate_task(
     else:
         if any(not isinstance(value, bool) for value in validation.values()):
             issues.append(ValidationIssue(f"{path}.validation", "all values must be boolean"))
-        validation_passed = all(value is True for value in validation.values())
+        for check in _REQUEST_COMPLETION_CHECKS:
+            if check not in validation:
+                issues.append(ValidationIssue(f"{path}.validation.{check}", "required check is missing"))
+        validation_passed = all(validation.get(check) is True for check in _REQUEST_COMPLETION_CHECKS)
         if (task.get("status") == "completed") != validation_passed:
-            issues.append(ValidationIssue(f"{path}.status", "must agree with validation booleans"))
+            issues.append(ValidationIssue(f"{path}.status", "must agree with request-completion checks"))
     if task.get("status") != "completed" and task.get("passed") is True:
         issues.append(ValidationIssue(f"{path}.passed", "failed requests cannot pass grading"))
     if not isinstance(task.get("content"), str):
@@ -300,7 +310,7 @@ def _validate_against_suite(
                 issues.append(ValidationIssue(f"{path}.{key}", "must match the referenced suite"))
         if not isinstance(declared_validator, dict) or not isinstance(task.get("content"), str):
             continue
-        if task.get("status") == "failed_request" and not task["content"]:
+        if task.get("error") is not None and not task["content"]:
             regrade = GradeResult(False, "no_response")
         else:
             regrade = grade_response(declared_validator, task["content"])

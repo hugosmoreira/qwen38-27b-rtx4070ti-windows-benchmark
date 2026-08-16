@@ -22,6 +22,8 @@
 
 The formal interoperable schemas are [`schemas/benchmark-result.schema.json`](../schemas/benchmark-result.schema.json) and [`schemas/quality-evaluation-result.schema.json`](../schemas/quality-evaluation-result.schema.json). The in-package validators add cross-field rules that JSON Schema alone does not conveniently express, including count reconciliation and re-grading saved Phase 8 responses from the committed validators.
 
+For quality runs, transport completion and answer quality are separate. A successfully received empty answer remains a completed request, is preserved verbatim, and receives zero credit from its task validator. A request exception with no response is recorded as `no_response`.
+
 Large context inputs are described compactly by a versioned fixture generator. Each result retains the generated user-message byte count and SHA-256 so the exact expanded input can be audited without duplicating tens of thousands of words in the repository.
 
 ## Direct invocation

@@ -1,0 +1,42 @@
+{
+  "schema_version": "phase8-quality-protocol-amendment-1.0",
+  "recorded_date": "2026-08-15",
+  "original_protocol": "environment/phase8-quality-protocol-2026-08-15.json",
+  "original_protocol_commit": "ee64b11e048bc1a15c063cc41910cccad1e66017",
+  "purpose": "Document and correct an evidence-preservation bug exposed by the first Q2 attempt without changing the suite, expected answers, graders, model order, or inference controls.",
+  "superseded_attempt": {
+    "model": "UD-Q2_K_XL",
+    "server_run_id": "native-server-20260816T033206879Z",
+    "server_process_id": 25020,
+    "model_hash_validated": true,
+    "gpu_layers_observed": "66/66",
+    "request_starts_in_server_log": 24,
+    "request_completions_in_server_log": 24,
+    "triggering_task_sequence": 22,
+    "observed_behavior": "The server completed the task with one generated EOG token and no final answer text.",
+    "runner_behavior": "The runner correctly assigned zero quality credit but also treated missing answer text as a failed request.",
+    "validator_behavior": "The independent re-grader called the received empty text no_response while the runner called it invalid_or_duplicate_key_json, so pre-write validation rejected the record.",
+    "raw_result_written": false,
+    "usable_for_quality_score": false,
+    "local_server_log_size_bytes": 69319,
+    "local_server_log_sha256": "94156f194ed280a467041506843fc27ba5c37a0347924e348298314072f6f0a6",
+    "server_log_last_write_utc": "2026-08-16T03:33:11.9107094Z"
+  },
+  "correction": {
+    "request_completion_definition": "A request is complete when transport succeeds, usage and timings are observed, prompt cache remains disabled, and reasoning content remains empty. Non-empty answer text is not a transport requirement.",
+    "empty_answer_quality_rule": "A received empty answer is preserved and deterministically graded as a quality failure.",
+    "no_response_rule": "no_response is reserved for a request exception that produced no StreamResult.",
+    "regression_tests_added": 2,
+    "offline_test_gate": "50/50 passed"
+  },
+  "unchanged_protocol_elements": [
+    "24 task prompts and task order",
+    "all expected answers and grading rules",
+    "Q2 then IQ2 model order",
+    "one pass@1 attempt in each usable record",
+    "runtime, context, slot, KV cache, sampling, seed, and disabled-feature controls",
+    "paired comparison and interpretation rules"
+  ],
+  "restart_rule": "Stop the superseded Q2 process, commit this amendment and correction, then launch a fresh hash-validated Q2 process for the usable canonical record. The model is stateless, cache_ram is zero, request cache_n is zero, and no weights are updated; nevertheless, the repeated exposure is disclosed as a study limitation.",
+  "evidence_policy": "Do not infer a score from the superseded attempt. Use only records whose git_commit equals the amendment commit or a later evidence-only descendant and that pass suite-backed independent validation."
+}

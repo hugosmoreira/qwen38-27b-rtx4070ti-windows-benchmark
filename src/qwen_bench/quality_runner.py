@@ -19,6 +19,15 @@ from qwen_bench.quality_config import QualityConfig
 from qwen_bench.quality_grading import GradeResult, grade_response
 
 
+_REQUEST_COMPLETION_CHECKS = (
+    "request_succeeded",
+    "usage_observed",
+    "timings_observed",
+    "prompt_cache_disabled",
+    "reasoning_empty",
+)
+
+
 def execute_quality_evaluation(config: QualityConfig, server_process_id: int) -> dict[str, Any]:
     if server_process_id <= 0:
         raise ValueError("Server process ID must be positive.")
@@ -92,7 +101,7 @@ def _execute_task(
         "prompt_cache_disabled": isinstance(timings, dict) and timings.get("cache_n") == 0,
         "reasoning_empty": stream_result is not None and stream_result.reasoning_content is None,
     }
-    completed = all(validation.values())
+    completed = _request_completed(validation)
     return {
         "sequence": sequence,
         "task_id": str(task["task_id"]),
@@ -138,6 +147,11 @@ def _request_body(config: QualityConfig, task: dict[str, Any]) -> dict[str, Any]
         "cache_prompt": False,
         "chat_template_kwargs": {"enable_thinking": False, "preserve_thinking": False},
     }
+
+
+def _request_completed(validation: dict[str, bool]) -> bool:
+    """Return whether transport/control evidence is complete, independent of answer quality."""
+    return all(validation.get(check) is True for check in _REQUEST_COMPLETION_CHECKS)
 
 
 def _summarize(results: list[dict[str, Any]], declared_tasks: list[dict[str, Any]]) -> dict[str, Any]:
