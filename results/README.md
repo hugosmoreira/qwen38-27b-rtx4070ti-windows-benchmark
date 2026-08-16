@@ -14,4 +14,6 @@ Phase 4 adds the first repeated baseline: one excluded warm-up and three measure
 
 Phase 5 replaces the earlier draft record example with a versioned Draft 2020-12 schema plus a semantic validator. Its short end-to-end smoke result is engineering evidence for the harness, not a replacement performance baseline.
 
+The canonical Phase 5 raw file is `raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json`; its interpretation checkpoint is `summaries/phase5-python-harness-checkpoint.md`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

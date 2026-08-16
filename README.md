@@ -4,9 +4,9 @@
 
 ## Status
 
-**Phase 4 completed locally on 2026-08-15 — the pinned IQ2 configuration now has a repeated streaming baseline.** After one excluded warm-up, three measured 256-token runs averaged 43.171 generation tok/s with 0.096% CV; TTFT averaged 94.950 ms with 1.608% CV.
+**Phase 5 completed locally on 2026-08-15 — the project now has a tested Python benchmark package and a successful end-to-end raw result.** The package passed 23 offline tests before the canonical smoke request and records streaming timing, NVIDIA/process telemetry, provenance, formal schema conformance, semantic validation, and append-only output.
 
-This is a trustworthy baseline for one fixed prompt, not yet the final comparative study. It includes warm-up handling, streaming TTFT, repeated trials, continuous telemetry, and variance analysis, but Q2 comparison, broader workloads, and quality evaluation remain incomplete.
+Phase 4 remains the trustworthy IQ2 performance baseline: three measured 256-token runs averaged 43.171 generation tok/s with 0.096% CV and 94.950 ms TTFT with 1.608% CV. Q2 comparison, broader workloads, and quality evaluation remain incomplete.
 
 ## Phase 1 proof of life
 
@@ -182,3 +182,7 @@ The new `qwen_bench` package uses only the Python standard library at runtime. I
 ```
 
 The controlled Phase 5 configuration performs one short 64-token request with no warm-up. This validates the software path and is explicitly not comparable to the repeated 256-token Phase 4 baseline.
+
+The canonical run completed from harness commit `b0481d4`, retained 7 telemetry samples, and passed all 12 validation flags. It observed 43.479 generation tok/s, 87.340 ms TTFT, and 1,536.353 ms total latency; these single-run values are diagnostic only.
+
+See the [Python environment record](environment/phase5-python-runtime-2026-08-15.json), [canonical raw result](results/raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json), [formal result schema](schemas/benchmark-result.schema.json), and [Phase 5 checkpoint](results/summaries/phase5-python-harness-checkpoint.md).

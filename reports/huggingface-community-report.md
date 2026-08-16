@@ -1,6 +1,6 @@
 # Performance report: Qwen3.8-27B on RTX 4070 Ti 12GB — IQ2 versus Q2
 
-> **Draft template — only setup and proof-of-life runs exist. Every performance `TBD` must be replaced with repeated Phase 4+ data before publication.**
+> **Draft — the repeated IQ2 baseline and tested Python harness exist, but the controlled Q2 comparison is still missing. Do not publish while any comparison value remains `TBD`.**
 
 ## Summary
 
@@ -44,6 +44,7 @@ TBD after measurements.
 
 - Warm-up runs: 1, excluded from IQ2 statistics
 - Measured repetitions: 3 for the current IQ2 baseline
+- Benchmark automation: `qwen_bench` 0.1.0 passed 23 offline tests and one end-to-end engineering smoke; Phase 6 comparisons will use the committed Python harness
 - Prompt set: `phase4-iq2-baseline-v1`; one fixed 84-token prompt and 256-token output
 - Telemetry interval: 250 ms target; 256.151 ms observed mean cadence
 - Full methodology and scripts: TBD GitHub URL

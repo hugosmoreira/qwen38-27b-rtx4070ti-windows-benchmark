@@ -13,5 +13,6 @@ Current records:
 - `native-smoke-iq2-xxs-20260815T234835Z.json` — canonical Phase 3 native OpenAI-compatible smoke run from revision `924554a`; 3/3 passed.
 - `phase4-iq2-baseline-20260816T001639Z.json` — preserved Phase 4 attempt from revision `d89fd0d`; performance data completed, but the nominal 250 ms telemetry interval was actually 300 ms and the record is superseded.
 - `phase4-iq2-baseline-20260816T001913Z.json` — canonical Phase 4 IQ2 baseline from corrected revision `25e51a0`; one warm-up and three measured repetitions completed with observed telemetry cadence recorded.
+- `phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json` — canonical Phase 5 Python-harness smoke from revision `b0481d4`; one short measured run passed all structural, semantic, streaming, cache, reasoning, and telemetry checks.
 
-This file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead.
+Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. Phase 4 remains the performance baseline.

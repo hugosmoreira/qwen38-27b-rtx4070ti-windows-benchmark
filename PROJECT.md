@@ -7,6 +7,7 @@
 - Phase 2 is complete. `UD-IQ2_XXS` is the provisional speed configuration and `UD-Q2_K_XL` is the provisional quality-oriented configuration after a controlled 3/10 versus 5/10 quant-triage result. `UD-Q3_K_XL` is deferred.
 - Phase 3 completed on 2026-08-15 with official llama.cpp `b10448`: both release archives were checksum-validated, CUDA0 startup logs reported 66/66 layers offloaded to the RTX 4070 Ti, and the native OpenAI-compatible smoke suite passed 3/3.
 - Phase 4 completed on 2026-08-15. One excluded warm-up and three measured 256-token IQ2 repetitions produced 43.171 generation tok/s mean with 0.096% CV, while streaming TTFT averaged 94.950 ms with 1.608% CV.
+- Phase 5 completed on 2026-08-15. The standard-library Python harness passed 23 offline tests, then one committed end-to-end smoke run passed all 12 validation flags and retained raw streaming plus telemetry evidence.
 
 ## Objective
 
@@ -109,6 +110,8 @@ Status: completed on 2026-08-15 for the IQ2 baseline. The canonical raw result i
 - Add tests for our own calculations and parsing.
 
 Exit condition: one end-to-end automated run passes and retains raw output.
+
+Status: completed on 2026-08-15. The harness provenance commit is `b0481d4`; the canonical raw result is `results/raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json`, and the checkpoint is `results/summaries/phase5-python-harness-checkpoint.md`.
 
 ### Phase 6 — Quant/offload comparison
 

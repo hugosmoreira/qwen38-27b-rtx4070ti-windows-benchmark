@@ -1,7 +1,7 @@
 {
   "schema_version": "phase5-python-runtime-1.0",
   "recorded_date": "2026-08-15",
-  "status": "harness_implemented_live_end_to_end_pending",
+  "status": "completed",
   "python": {
     "implementation": "CPython",
     "version": "3.13.15",
@@ -47,6 +47,41 @@
       "collector_errors": []
     }
   },
+  "canonical_live_run": {
+    "raw_result": "results/raw/phase5-python-iq2-smoke-20260816T005922932894Z-a280beda.json",
+    "harness_git_commit": "b0481d479b1a73d82f3539d93f80b6c0803bf2a0",
+    "outcome": "completed",
+    "expected_runs_completed": true,
+    "warmup_runs": 0,
+    "measured_repetitions": 1,
+    "prompt_tokens": 68,
+    "completion_tokens": 64,
+    "finish_reason": "length",
+    "prompt_cache_tokens": 0,
+    "reasoning_content": null,
+    "server_prompt_tokens_per_second": 802.171,
+    "server_generation_tokens_per_second": 43.479,
+    "client_response_headers_ms": 2.525,
+    "client_ttft_ms": 87.34,
+    "client_total_latency_ms": 1536.353,
+    "telemetry": {
+      "sample_count": 7,
+      "target_interval_milliseconds": 250,
+      "observed_mean_interval_milliseconds": 255.471,
+      "peak_vram_used_mib": 8986,
+      "minimum_vram_free_mib": 3009,
+      "peak_gpu_utilization_percent": 99,
+      "peak_gpu_temperature_c": 62,
+      "peak_gpu_power_draw_w": 258.84,
+      "peak_process_working_set_bytes": 9014263808,
+      "peak_process_private_memory_bytes": 10338820096,
+      "peak_process_cpu_percent_of_machine": 3.75,
+      "collector_errors": []
+    },
+    "validation_flags": 12,
+    "all_validation_flags_true": true,
+    "semantic_validator_passed": true
+  },
   "setup_observation": {
     "description": "The existing per-user Python installation was not visible in the inherited shell command lookup. The official checksum-verified installer entered maintenance mode instead of creating a duplicate same-version installation.",
     "resolution": "Restore and verify the existing installation's prior optional components and user PATH registration, then create only the repository-local virtual environment.",
@@ -55,6 +90,14 @@
   "publication_limits": [
     "The virtual environment and installer are intentionally not committed.",
     "No local username or absolute installation path is recorded.",
-    "The live model request and canonical Phase 5 raw result are not yet represented in this pre-run record."
-  ]
+    "The single 64-token run validates engineering behavior and is not a repeated performance estimate."
+  ],
+  "exit_condition": {
+    "isolated_supported_python_environment": true,
+    "api_timing_telemetry_schema_and_unique_writer_implemented": true,
+    "calculation_and_parsing_tests_passed": true,
+    "end_to_end_automated_run_passed": true,
+    "raw_output_retained": true,
+    "phase5_complete": true
+  }
 }

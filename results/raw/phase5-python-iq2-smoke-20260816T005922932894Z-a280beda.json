@@ -1,0 +1,391 @@
+{
+  "schema_version": "benchmark-result-1.0.0",
+  "run_id": "phase5-python-iq2-smoke-20260816T005922932894Z-a280beda",
+  "timestamp": "2026-08-16T00:59:22.932894Z",
+  "git_commit": "b0481d479b1a73d82f3539d93f80b6c0803bf2a0",
+  "classification": "phase5_python_harness_end_to_end_smoke_not_performance_baseline",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase3-native-runtime-2026-08-15.json",
+  "model_manifest": "environment/model-download-manifest.json",
+  "prompt_suite": "prompts/phase5-harness-smoke.json",
+  "benchmark_config": "configs/phase5-iq2-smoke.json",
+  "python_runtime": {
+    "implementation": "CPython",
+    "version": "3.13.15",
+    "isolated_environment": true,
+    "runtime_dependencies": []
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "system_fingerprint": "b10448-ad1de39e0"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+    "quantization": "UD-IQ2_XXS",
+    "file_size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+    "served_alias": "Qwen3.8-27B-UD-IQ2_XXS"
+  },
+  "configuration": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": -1,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "max_output_tokens": 64,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false
+  },
+  "methodology": {
+    "warmup_runs": 0,
+    "measured_repetitions": 1,
+    "streaming": true,
+    "ttft_definition": "Elapsed wall time from HTTP send until the first non-empty assistant content delta was read.",
+    "total_latency_definition": "Elapsed wall time from HTTP send through the SSE done marker.",
+    "prompt_cache_disabled": true,
+    "telemetry_target_interval_milliseconds": 250,
+    "telemetry_scope": "NVIDIA GPU 0 plus the selected llama-server process",
+    "inter_run_delay_seconds": 0.0
+  },
+  "server_preflight": {
+    "status": "passed",
+    "checks": {
+      "health_ok": true,
+      "model_alias_present": true,
+      "context_size_matches": true,
+      "parallel_slots_match": true,
+      "model_path_matches_manifest": true
+    },
+    "served_model_alias": "Qwen3.8-27B-UD-IQ2_XXS"
+  },
+  "runs": [
+    {
+      "run_label": "measured-1",
+      "warmup": false,
+      "repetition": 1,
+      "status": "completed",
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 2.525,
+        "time_to_first_content_token_ms": 87.34,
+        "total_latency_ms": 1536.353
+      },
+      "server_measurements": {
+        "usage": {
+          "completion_tokens": 64,
+          "prompt_tokens": 68,
+          "total_tokens": 132,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 68,
+          "prompt_ms": 84.77,
+          "prompt_per_token_ms": 1.2466176470588235,
+          "prompt_per_second": 802.1705792143447,
+          "predicted_n": 64,
+          "predicted_ms": 1448.969,
+          "predicted_per_token_ms": 22.999507936507936,
+          "predicted_per_second": 43.47919106619948
+        },
+        "system_fingerprint": "b10448-ad1de39e0"
+      },
+      "response": {
+        "finish_reason": "length",
+        "content": "An append-only benchmark record fundamentally transforms the management of experimental data by shifting from a mutable state model to an immutable historical ledger, thereby ensuring that every run is preserved exactly as it occurred without the risk of accidental or malicious alteration. In traditional database systems, updating a record involves overwriting previous values, which means that if an",
+        "reasoning_content": null
+      },
+      "telemetry_summary": {
+        "target_interval_milliseconds": 250,
+        "sample_count": 7,
+        "observed_span_milliseconds": 1532.824,
+        "observed_mean_interval_milliseconds": 255.471,
+        "observed_minimum_interval_milliseconds": 252.503,
+        "observed_maximum_interval_milliseconds": 265.305,
+        "peak_vram_used_mib": 8986.0,
+        "minimum_vram_free_mib": 3009.0,
+        "peak_gpu_utilization_percent": 99.0,
+        "peak_gpu_temperature_c": 62.0,
+        "peak_gpu_power_draw_w": 258.84,
+        "peak_process_working_set_bytes": 9014263808.0,
+        "peak_process_private_memory_bytes": 10338820096.0,
+        "peak_process_cpu_percent_of_machine": 3.75
+      },
+      "telemetry_samples": [
+        {
+          "timestamp_utc": "2026-08-16T00:59:23.028219Z",
+          "monotonic_elapsed_milliseconds": 0.084,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8986,
+            "vram_free_mib": 3009,
+            "utilization_percent": 0,
+            "temperature_c": 43,
+            "power_draw_w": 31.66
+          },
+          "process": {
+            "working_set_bytes": 9013940224,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 76.8125,
+            "cpu_percent_of_machine": null
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:23.281196Z",
+          "monotonic_elapsed_milliseconds": 265.389,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8986,
+            "vram_free_mib": 3009,
+            "utilization_percent": 0,
+            "temperature_c": 43,
+            "power_draw_w": 31.66
+          },
+          "process": {
+            "working_set_bytes": 9014116352,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 77.046875,
+            "cpu_percent_of_machine": 3.155
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:23.535669Z",
+          "monotonic_elapsed_milliseconds": 519.903,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8986,
+            "vram_free_mib": 3009,
+            "utilization_percent": 98,
+            "temperature_c": 58,
+            "power_draw_w": 109.31
+          },
+          "process": {
+            "working_set_bytes": 9014132736,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 77.296875,
+            "cpu_percent_of_machine": 3.508
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:23.802798Z",
+          "monotonic_elapsed_milliseconds": 772.903,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8986,
+            "vram_free_mib": 3009,
+            "utilization_percent": 98,
+            "temperature_c": 58,
+            "power_draw_w": 109.31
+          },
+          "process": {
+            "working_set_bytes": 9014173696,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 77.5625,
+            "cpu_percent_of_machine": 3.75
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:24.042475Z",
+          "monotonic_elapsed_milliseconds": 1026.401,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8985,
+            "vram_free_mib": 3010,
+            "utilization_percent": 98,
+            "temperature_c": 61,
+            "power_draw_w": 212.9
+          },
+          "process": {
+            "working_set_bytes": 9014198272,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 77.796875,
+            "cpu_percent_of_machine": 3.302
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:24.296233Z",
+          "monotonic_elapsed_milliseconds": 1280.405,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8985,
+            "vram_free_mib": 3010,
+            "utilization_percent": 98,
+            "temperature_c": 61,
+            "power_draw_w": 212.9
+          },
+          "process": {
+            "working_set_bytes": 9014235136,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 78.0625,
+            "cpu_percent_of_machine": 3.735
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:59:24.548745Z",
+          "monotonic_elapsed_milliseconds": 1532.908,
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8985,
+            "vram_free_mib": 3010,
+            "utilization_percent": 99,
+            "temperature_c": 62,
+            "power_draw_w": 258.84
+          },
+          "process": {
+            "working_set_bytes": 9014263808,
+            "private_memory_bytes": 10338820096,
+            "cpu_total_seconds": 78.3125,
+            "cpu_percent_of_machine": 3.536
+          }
+        }
+      ],
+      "telemetry_errors": [],
+      "validation": {
+        "request_succeeded": true,
+        "first_content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "minimum_completion_tokens_met": true,
+        "expected_finish_reason": true,
+        "reasoning_empty": true,
+        "telemetry_observed": true,
+        "gpu_telemetry_observed": true,
+        "process_telemetry_observed": true,
+        "telemetry_error_free": true
+      }
+    }
+  ],
+  "measured_summary": {
+    "expected_repetitions": 1,
+    "completed_repetitions": 1,
+    "time_to_first_content_token_ms": {
+      "count": 1,
+      "mean": 87.34,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 87.34,
+      "maximum": 87.34
+    },
+    "total_latency_ms": {
+      "count": 1,
+      "mean": 1536.353,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 1536.353,
+      "maximum": 1536.353
+    },
+    "server_prompt_tokens_per_second": {
+      "count": 1,
+      "mean": 802.171,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 802.171,
+      "maximum": 802.171
+    },
+    "server_generation_tokens_per_second": {
+      "count": 1,
+      "mean": 43.479,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 43.479,
+      "maximum": 43.479
+    },
+    "peak_vram_used_mib": {
+      "count": 1,
+      "mean": 8986.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 8986.0,
+      "maximum": 8986.0
+    },
+    "minimum_vram_free_mib": {
+      "count": 1,
+      "mean": 3009.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 3009.0,
+      "maximum": 3009.0
+    },
+    "peak_gpu_utilization_percent": {
+      "count": 1,
+      "mean": 99.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 99.0,
+      "maximum": 99.0
+    },
+    "peak_process_working_set_bytes": {
+      "count": 1,
+      "mean": 9014263808.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 9014263808.0,
+      "maximum": 9014263808.0
+    },
+    "peak_process_private_memory_bytes": {
+      "count": 1,
+      "mean": 10338820096.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 10338820096.0,
+      "maximum": 10338820096.0
+    },
+    "peak_process_cpu_percent_of_machine": {
+      "count": 1,
+      "mean": 3.75,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 3.75,
+      "maximum": 3.75
+    },
+    "all_expected_runs_completed": true
+  },
+  "outcome": {
+    "status": "completed",
+    "error_type": null,
+    "error_message": null
+  }
+}
