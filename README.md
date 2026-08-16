@@ -4,9 +4,9 @@
 
 ## Status
 
-**Phase 3 completed locally on 2026-08-15 — Qwen3.8-27B runs through a pinned official llama.cpp CUDA server on the RTX 4070 Ti.** The `b10448` Windows CUDA 13.3 archives and `UD-IQ2_XXS` model passed checksum validation; startup logs reported CUDA0 and 66/66 layers offloaded; the native OpenAI-compatible smoke suite passed 3/3.
+**Phase 4 completed locally on 2026-08-15 — the pinned IQ2 configuration now has a repeated streaming baseline.** After one excluded warm-up, three measured 256-token runs averaged 43.171 generation tok/s with 0.096% CV; TTFT averaged 94.950 ms with 1.608% CV.
 
-This is not yet a formal benchmark. Short smoke-test rates include API overhead, and Phase 4 will add warm-up handling, repeated trials, continuous telemetry, and variance analysis. Never treat a proof-of-life number or placeholder field as a publication-ready result.
+This is a trustworthy baseline for one fixed prompt, not yet the final comparative study. It includes warm-up handling, streaming TTFT, repeated trials, continuous telemetry, and variance analysis, but Q2 comparison, broader workloads, and quality evaluation remain incomplete.
 
 ## Phase 1 proof of life
 
@@ -152,3 +152,16 @@ Decision: retain `UD-IQ2_XXS` as the provisional speed configuration and `UD-Q2_
 | Native smoke checks | 3/3 passed |
 
 See the [release manifest](environment/llama-cpp-b10448-manifest.json), [runtime record](environment/phase3-native-runtime-2026-08-15.json), [canonical raw result](results/raw/native-smoke-iq2-xxs-20260815T234835Z.json), and [Phase 3 checkpoint](results/summaries/phase3-native-checkpoint.md). The server-reported 37.57–43.81 tok/s values came from tiny smoke requests and are not a repeated baseline.
+
+## Phase 4 repeated IQ2 baseline
+
+| Metric | Mean | Sample SD | CV | Range |
+|---|---:|---:|---:|---:|
+| TTFT | 94.950 ms | 1.527 ms | 1.608% | 93.935–96.706 ms |
+| Total latency | 6,001.517 ms | 6.525 ms | 0.109% | 5,996.504–6,008.894 ms |
+| Prompt throughput | 935.648 tok/s | 0.441 | 0.047% | 935.266–936.131 |
+| Generation throughput | 43.171 tok/s | 0.041 | 0.096% | 43.124–43.203 |
+
+All three measured runs used 84 prompt tokens, generated 256 tokens with prompt caching disabled, reached 98% sampled GPU utilization, and peaked at 8,987 MiB VRAM used. Telemetry targeted 250 ms and achieved a 256.151 ms observed mean cadence.
+
+See the [Phase 4 environment record](environment/phase4-iq2-baseline-2026-08-15.json), [raw result](results/raw/phase4-iq2-baseline-20260816T001913Z.json), and [interpretation checkpoint](results/summaries/phase4-iq2-baseline.md). The values apply only to this fixed workload and are not a Q2 comparison or quality result.

@@ -1,0 +1,2408 @@
+{
+  "schema_version": "phase4-baseline-1.0",
+  "run_id": "phase4-iq2-baseline-20260816T001913Z",
+  "timestamp": "2026-08-15T17:19:13.5751640-07:00",
+  "git_commit": "25e51a01be6bcda5efbcb852ad77c32064290e5c",
+  "classification": "phase4_repeated_iq2_baseline",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase3-native-runtime-2026-08-15.json",
+  "model_manifest": "environment/model-download-manifest.json",
+  "prompt_suite": "prompts/phase4-baseline.json",
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "system_fingerprint": "b10448-ad1de39e0"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+    "quantization": "UD-IQ2_XXS",
+    "file_size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524",
+    "served_alias": "Qwen3.8-27B-UD-IQ2_XXS"
+  },
+  "configuration": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": -1,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "max_output_tokens": 256,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false
+  },
+  "methodology": {
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "streaming": true,
+    "ttft_definition": "Elapsed wall time from HTTP send until the first non-empty assistant content delta was read.",
+    "total_latency_definition": "Elapsed wall time from HTTP send through the SSE done marker.",
+    "prompt_cache_disabled": true,
+    "telemetry_target_interval_milliseconds": 250,
+    "telemetry_scope": "NVIDIA GPU plus the pinned llama-server process",
+    "inter_run_delay_seconds": 2
+  },
+  "runs": [
+    {
+      "run_label": "warmup-1",
+      "warmup": true,
+      "repetition": 1,
+      "status": "completed",
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 22.162,
+        "time_to_first_content_token_ms": 113.36,
+        "total_latency_ms": 6004.06
+      },
+      "server_measurements": {
+        "usage": {
+          "completion_tokens": 256,
+          "prompt_tokens": 84,
+          "total_tokens": 340,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 84,
+          "prompt_ms": 92.558,
+          "prompt_per_token_ms": 1.1018809523809525,
+          "prompt_per_second": 907.5390565915425,
+          "predicted_n": 256,
+          "predicted_ms": 5894.501,
+          "predicted_per_token_ms": 23.115690196078432,
+          "predicted_per_second": 43.26065938405982
+        },
+        "system_fingerprint": "b10448-ad1de39e0"
+      },
+      "response": {
+        "finish_reason": "length",
+        "content": "The lifecycle of a database transaction is a rigorous sequence of operations designed to maintain data integrity, consistency, and durability amidst the constant threat of hardware failure or system crashes. It begins with the initiation of a transaction, where the database management system allocates a unique transaction identifier and establishes a logical context. At this stage, the system does not immediately write changes to the primary data files; instead, it enters a phase of validation and logical checking. The database verifies that the user has the appropriate permissions to perform the requested operations and checks for potential logical violations, such as foreign key constraints or unique index constraints, often using temporary memory structures to track these dependencies. This initial validation ensures that the transaction is legally sound before any physical state is altered.\n\nOnce the transaction is deemed valid, the system proceeds to the write-ahead logging (WAL) protocol, which is the cornerstone of modern relational database reliability. Before any actual data modification is applied to the main data pages, the system generates a log record describing the operation. This record includes the transaction identifier, the type of operation (insert, update, delete), and the specific data values involved. This log record is then written to a sequential log file, often buffered in memory but aggressively flushed to disk or a dedicated log volume. The critical",
+        "reasoning_content": null
+      },
+      "telemetry_summary": {
+        "target_interval_milliseconds": 250,
+        "sample_count": 24,
+        "observed_span_milliseconds": 5879.634,
+        "observed_mean_interval_milliseconds": 255.636,
+        "observed_minimum_interval_milliseconds": 251.969,
+        "observed_maximum_interval_milliseconds": 271.431,
+        "peak_vram_used_mib": 8987.0,
+        "minimum_vram_free_mib": 3008.0,
+        "peak_gpu_utilization_percent": 98.0,
+        "peak_gpu_temperature_c": 67.0,
+        "peak_gpu_power_draw_w": 260.28,
+        "peak_process_working_set_bytes": 9013903360.0,
+        "peak_process_private_memory_bytes": 10338766848.0,
+        "peak_process_cpu_percent_of_machine": 3.972
+      },
+      "telemetry_samples": [
+        {
+          "timestamp_utc": "2026-08-16T00:19:13.8471058+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 45,
+            "power_draw_w": 32.67
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 50.578125,
+            "cpu_percent_of_machine": null,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:14.1069356+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 45,
+            "power_draw_w": 32.67
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 50.703125,
+            "cpu_percent_of_machine": 1.718,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:14.3783664+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 59,
+            "power_draw_w": 91.81
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 50.96875,
+            "cpu_percent_of_machine": 3.495,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:14.6309747+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 59,
+            "power_draw_w": 91.81
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 51.234375,
+            "cpu_percent_of_machine": 3.755,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:14.8839595+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 63,
+            "power_draw_w": 193.59
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 51.484375,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:15.1361802+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 63,
+            "power_draw_w": 193.59
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 51.734375,
+            "cpu_percent_of_machine": 3.54,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:15.3899087+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 64,
+            "power_draw_w": 256.74
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 51.984375,
+            "cpu_percent_of_machine": 3.519,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:15.6445146+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 64,
+            "power_draw_w": 256.74
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 52.25,
+            "cpu_percent_of_machine": 3.726,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:15.8983654+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 65,
+            "power_draw_w": 258.33
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 52.5,
+            "cpu_percent_of_machine": 3.517,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:16.1523627+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 65,
+            "power_draw_w": 258.33
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 52.75,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:16.4056398+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 65,
+            "power_draw_w": 258.92
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 53.0,
+            "cpu_percent_of_machine": 3.525,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:16.6588525+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 65,
+            "power_draw_w": 258.92
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 53.28125,
+            "cpu_percent_of_machine": 3.967,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:16.9276976+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 65,
+            "power_draw_w": 259.03
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 53.546875,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:17.1797555+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 65,
+            "power_draw_w": 259.03
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 53.796875,
+            "cpu_percent_of_machine": 3.542,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:17.4337231+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 259.06
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 54.0625,
+            "cpu_percent_of_machine": 3.735,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:17.6869580+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 259.06
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 54.3125,
+            "cpu_percent_of_machine": 3.526,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:17.9391817+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 66,
+            "power_draw_w": 259.36
+          },
+          "process": {
+            "working_set_bytes": 9013891072,
+            "private_memory_bytes": 10338754560,
+            "cpu_total_seconds": 54.5625,
+            "cpu_percent_of_machine": 3.54,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:18.2089475+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 66,
+            "power_draw_w": 259.36
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 54.84375,
+            "cpu_percent_of_machine": 3.723,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:18.4609163+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 257.29
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 55.09375,
+            "cpu_percent_of_machine": 3.544,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:18.7134750+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 257.29
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 55.34375,
+            "cpu_percent_of_machine": 3.535,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:18.9675988+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 66,
+            "power_draw_w": 257.65
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 55.59375,
+            "cpu_percent_of_machine": 3.513,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:19.2204645+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 66,
+            "power_draw_w": 257.65
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 55.875,
+            "cpu_percent_of_machine": 3.972,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:19.4724700+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 260.28
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 56.125,
+            "cpu_percent_of_machine": 3.543,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:19.7267401+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 260.28
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 56.390625,
+            "cpu_percent_of_machine": 3.731,
+            "thread_count": 35
+          }
+        }
+      ],
+      "validation": {
+        "request_succeeded": true,
+        "first_content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "minimum_completion_tokens_met": true,
+        "expected_finish_reason": true,
+        "reasoning_empty": true,
+        "telemetry_observed": true
+      }
+    },
+    {
+      "run_label": "measured-1",
+      "warmup": false,
+      "repetition": 1,
+      "status": "completed",
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 5.59,
+        "time_to_first_content_token_ms": 96.706,
+        "total_latency_ms": 6008.894
+      },
+      "server_measurements": {
+        "usage": {
+          "completion_tokens": 256,
+          "prompt_tokens": 84,
+          "total_tokens": 340,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 84,
+          "prompt_ms": 89.731,
+          "prompt_per_token_ms": 1.0682261904761905,
+          "prompt_per_second": 936.1313258517125,
+          "predicted_n": 256,
+          "predicted_ms": 5913.186,
+          "predicted_per_token_ms": 23.188964705882352,
+          "predicted_per_second": 43.123960585714705
+        },
+        "system_fingerprint": "b10448-ad1de39e0"
+      },
+      "response": {
+        "finish_reason": "length",
+        "content": "The lifecycle of a database transaction is a rigorous sequence of operations designed to maintain data integrity, consistency, and durability amidst the constant threat of hardware failure or system crashes. It begins with the initiation of a transaction, where the database management system allocates a unique transaction identifier and establishes a logical context. At this stage, the system does not immediately write changes to the primary data files; instead, it enters a phase of validation and logical checking. The database verifies that the user has the appropriate permissions to perform the requested operations and checks for potential logical violations, such as foreign key constraints or unique index constraints, often using temporary memory structures to track these dependencies. This initial validation ensures that the transaction is legally sound before any physical state is altered.\n\nOnce the transaction is deemed valid, the system proceeds to the write-ahead logging (WAL) protocol, which is the cornerstone of modern relational database reliability. Before any actual data modification is applied to the main data pages, the system generates a log record describing the operation. This record includes the transaction identifier, the type of operation (insert, update, delete), and the specific data values involved. This log record is then written to a sequential log file, often buffered in memory but aggressively flushed to disk or a dedicated log volume. The critical",
+        "reasoning_content": null
+      },
+      "telemetry_summary": {
+        "target_interval_milliseconds": 250,
+        "sample_count": 25,
+        "observed_span_milliseconds": 6154.96,
+        "observed_mean_interval_milliseconds": 256.457,
+        "observed_minimum_interval_milliseconds": 251.717,
+        "observed_maximum_interval_milliseconds": 269.27,
+        "peak_vram_used_mib": 8987.0,
+        "minimum_vram_free_mib": 3008.0,
+        "peak_gpu_utilization_percent": 98.0,
+        "peak_gpu_temperature_c": 69.0,
+        "peak_gpu_power_draw_w": 261.31,
+        "peak_process_working_set_bytes": 9013911552.0,
+        "peak_process_private_memory_bytes": 10338775040.0,
+        "peak_process_cpu_percent_of_machine": 3.75
+      },
+      "telemetry_samples": [
+        {
+          "timestamp_utc": "2026-08-16T00:19:22.2917229+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 49,
+            "power_draw_w": 43.78
+          },
+          "process": {
+            "working_set_bytes": 9013903360,
+            "private_memory_bytes": 10338766848,
+            "cpu_total_seconds": 56.578125,
+            "cpu_percent_of_machine": null,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:22.5579357+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 48,
+            "power_draw_w": 39.31
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 56.65625,
+            "cpu_percent_of_machine": 1.048,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:22.8122399+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 48,
+            "power_draw_w": 39.31
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 56.90625,
+            "cpu_percent_of_machine": 3.511,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:23.0662907+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 62,
+            "power_draw_w": 104.17
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 57.171875,
+            "cpu_percent_of_machine": 3.734,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:23.3180074+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 62,
+            "power_draw_w": 104.17
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 57.421875,
+            "cpu_percent_of_machine": 3.547,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:23.5710177+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 66,
+            "power_draw_w": 200.3
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 57.671875,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:23.8244343+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 259.88
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 57.921875,
+            "cpu_percent_of_machine": 3.523,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:24.0771955+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 66,
+            "power_draw_w": 259.88
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 58.171875,
+            "cpu_percent_of_machine": 3.532,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:24.3303098+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 67,
+            "power_draw_w": 260.46
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 58.421875,
+            "cpu_percent_of_machine": 3.527,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:24.5851717+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 67,
+            "power_draw_w": 260.46
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 58.6875,
+            "cpu_percent_of_machine": 3.722,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:24.8386113+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 261.04
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 58.9375,
+            "cpu_percent_of_machine": 3.523,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:25.0914383+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 261.04
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 59.1875,
+            "cpu_percent_of_machine": 3.531,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:25.3446305+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 260.36
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 59.40625,
+            "cpu_percent_of_machine": 3.086,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:25.5976004+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 260.36
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 59.671875,
+            "cpu_percent_of_machine": 3.75,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:25.8650965+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 68,
+            "power_draw_w": 260.3
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 59.9375,
+            "cpu_percent_of_machine": 3.546,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:26.1190766+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 68,
+            "power_draw_w": 260.3
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 60.1875,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:26.3731526+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 69,
+            "power_draw_w": 261.31
+          },
+          "process": {
+            "working_set_bytes": 9013899264,
+            "private_memory_bytes": 10338762752,
+            "cpu_total_seconds": 60.4375,
+            "cpu_percent_of_machine": 3.514,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:26.6271357+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 69,
+            "power_draw_w": 261.31
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 60.6875,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:26.8964060+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 69,
+            "power_draw_w": 258.7
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 60.96875,
+            "cpu_percent_of_machine": 3.73,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:27.1503780+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 69,
+            "power_draw_w": 258.7
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 61.234375,
+            "cpu_percent_of_machine": 3.735,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:27.4033818+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 96,
+            "temperature_c": 68,
+            "power_draw_w": 258.63
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 61.46875,
+            "cpu_percent_of_machine": 3.308,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:27.6584761+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 96,
+            "temperature_c": 68,
+            "power_draw_w": 258.63
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 61.703125,
+            "cpu_percent_of_machine": 3.281,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:27.9246580+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 261.17
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 61.9375,
+            "cpu_percent_of_machine": 3.145,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:28.1936818+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 261.17
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 62.1875,
+            "cpu_percent_of_machine": 3.319,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:28.4466825+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 69,
+            "power_draw_w": 260.9
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 62.4375,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        }
+      ],
+      "validation": {
+        "request_succeeded": true,
+        "first_content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "minimum_completion_tokens_met": true,
+        "expected_finish_reason": true,
+        "reasoning_empty": true,
+        "telemetry_observed": true
+      }
+    },
+    {
+      "run_label": "measured-2",
+      "warmup": false,
+      "repetition": 2,
+      "status": "completed",
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 4.117,
+        "time_to_first_content_token_ms": 94.209,
+        "total_latency_ms": 5999.153
+      },
+      "server_measurements": {
+        "usage": {
+          "completion_tokens": 256,
+          "prompt_tokens": 84,
+          "total_tokens": 340,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 84,
+          "prompt_ms": 89.787,
+          "prompt_per_token_ms": 1.0688928571428573,
+          "prompt_per_second": 935.5474623275085,
+          "predicted_n": 256,
+          "predicted_ms": 5904.768,
+          "predicted_per_token_ms": 23.15595294117647,
+          "predicted_per_second": 43.185439292449765
+        },
+        "system_fingerprint": "b10448-ad1de39e0"
+      },
+      "response": {
+        "finish_reason": "length",
+        "content": "The lifecycle of a database transaction is a rigorous sequence of operations designed to maintain data integrity, consistency, and durability amidst the constant threat of hardware failure or system crashes. It begins with the initiation of a transaction, where the database management system allocates a unique transaction identifier and establishes a logical context. At this stage, the system does not immediately write changes to the primary data files; instead, it enters a phase of validation and logical checking. The database verifies that the user has the appropriate permissions to perform the requested operations and checks for potential logical violations, such as foreign key constraints or unique index constraints, often using temporary memory structures to track these dependencies. This initial validation ensures that the transaction is legally sound before any physical state is altered.\n\nOnce the transaction is deemed valid, the system proceeds to the write-ahead logging (WAL) protocol, which is the cornerstone of modern relational database reliability. Before any actual data modification is applied to the main data pages, the system generates a log record describing the operation. This record includes the transaction identifier, the type of operation (insert, update, delete), and the specific data values involved. This log record is then written to a sequential log file, often buffered in memory but aggressively flushed to disk or a dedicated log volume. The critical",
+        "reasoning_content": null
+      },
+      "telemetry_summary": {
+        "target_interval_milliseconds": 250,
+        "sample_count": 25,
+        "observed_span_milliseconds": 6131.716,
+        "observed_mean_interval_milliseconds": 255.488,
+        "observed_minimum_interval_milliseconds": 250.518,
+        "observed_maximum_interval_milliseconds": 275.01,
+        "peak_vram_used_mib": 8987.0,
+        "minimum_vram_free_mib": 3008.0,
+        "peak_gpu_utilization_percent": 98.0,
+        "peak_gpu_temperature_c": 70.0,
+        "peak_gpu_power_draw_w": 263.41,
+        "peak_process_working_set_bytes": 9013919744.0,
+        "peak_process_private_memory_bytes": 10338783232.0,
+        "peak_process_cpu_percent_of_machine": 3.984
+      },
+      "telemetry_samples": [
+        {
+          "timestamp_utc": "2026-08-16T00:19:30.9673265+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 49,
+            "power_draw_w": 39.24
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 62.453125,
+            "cpu_percent_of_machine": null,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:31.2423360+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 49,
+            "power_draw_w": 39.24
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 62.515625,
+            "cpu_percent_of_machine": 0.812,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:31.4928544+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 86,
+            "temperature_c": 55,
+            "power_draw_w": 62.29
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 62.75,
+            "cpu_percent_of_machine": 3.341,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:31.7469212+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 86,
+            "temperature_c": 55,
+            "power_draw_w": 62.29
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 62.984375,
+            "cpu_percent_of_machine": 3.295,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:32.0008140+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 161.52
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 63.234375,
+            "cpu_percent_of_machine": 3.517,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:32.2529434+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 67,
+            "power_draw_w": 161.52
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 63.515625,
+            "cpu_percent_of_machine": 3.984,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:32.5058410+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 251.17
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 63.765625,
+            "cpu_percent_of_machine": 3.531,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:32.7599901+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 68,
+            "power_draw_w": 251.17
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 64.0,
+            "cpu_percent_of_machine": 3.294,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:33.0129624+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 260.31
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 64.25,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:33.2669801+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 260.31
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 64.5,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:33.5209986+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 260.76
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 64.765625,
+            "cpu_percent_of_machine": 3.735,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:33.7731438+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 260.76
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 65.015625,
+            "cpu_percent_of_machine": 3.541,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:34.0264415+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 261.72
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 65.265625,
+            "cpu_percent_of_machine": 3.525,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:34.2802168+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 261.72
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 65.515625,
+            "cpu_percent_of_machine": 3.518,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:34.5343669+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 261.95
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 65.78125,
+            "cpu_percent_of_machine": 3.733,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:34.8035784+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 261.95
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 66.046875,
+            "cpu_percent_of_machine": 3.524,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:35.0575745+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.5
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 66.296875,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:35.3105648+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.5
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 66.546875,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:35.5635827+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 89,
+            "temperature_c": 69,
+            "power_draw_w": 259.91
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 66.796875,
+            "cpu_percent_of_machine": 3.529,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:35.8167589+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 89,
+            "temperature_c": 69,
+            "power_draw_w": 259.91
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 67.0625,
+            "cpu_percent_of_machine": 3.747,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:36.0718041+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 260.3
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 67.3125,
+            "cpu_percent_of_machine": 3.501,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:36.3257643+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 70,
+            "power_draw_w": 261.67
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 67.5625,
+            "cpu_percent_of_machine": 3.516,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:36.5798017+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 70,
+            "power_draw_w": 261.67
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 67.8125,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:36.8320604+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 263.41
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 68.078125,
+            "cpu_percent_of_machine": 3.761,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:37.0990425+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 263.41
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 68.34375,
+            "cpu_percent_of_machine": 3.553,
+            "thread_count": 35
+          }
+        }
+      ],
+      "validation": {
+        "request_succeeded": true,
+        "first_content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "minimum_completion_tokens_met": true,
+        "expected_finish_reason": true,
+        "reasoning_empty": true,
+        "telemetry_observed": true
+      }
+    },
+    {
+      "run_label": "measured-3",
+      "warmup": false,
+      "repetition": 3,
+      "status": "completed",
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 3.868,
+        "time_to_first_content_token_ms": 93.935,
+        "total_latency_ms": 5996.504
+      },
+      "server_measurements": {
+        "usage": {
+          "completion_tokens": 256,
+          "prompt_tokens": 84,
+          "total_tokens": 340,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 84,
+          "prompt_ms": 89.814,
+          "prompt_per_token_ms": 1.0692142857142857,
+          "prompt_per_second": 935.2662168481529,
+          "predicted_n": 256,
+          "predicted_ms": 5902.429,
+          "predicted_per_token_ms": 23.146780392156863,
+          "predicted_per_second": 43.20255271177341
+        },
+        "system_fingerprint": "b10448-ad1de39e0"
+      },
+      "response": {
+        "finish_reason": "length",
+        "content": "The lifecycle of a database transaction is a rigorous sequence of operations designed to maintain data integrity, consistency, and durability amidst the constant threat of hardware failure or system crashes. It begins with the initiation of a transaction, where the database management system allocates a unique transaction identifier and establishes a logical context. At this stage, the system does not immediately write changes to the primary data files; instead, it enters a phase of validation and logical checking. The database verifies that the user has the appropriate permissions to perform the requested operations and checks for potential logical violations, such as foreign key constraints or unique index constraints, often using temporary memory structures to track these dependencies. This initial validation ensures that the transaction is legally sound before any physical state is altered.\n\nOnce the transaction is deemed valid, the system proceeds to the write-ahead logging (WAL) protocol, which is the cornerstone of modern relational database reliability. Before any actual data modification is applied to the main data pages, the system generates a log record describing the operation. This record includes the transaction identifier, the type of operation (insert, update, delete), and the specific data values involved. This log record is then written to a sequential log file, often buffered in memory but aggressively flushed to disk or a dedicated log volume. The critical",
+        "reasoning_content": null
+      },
+      "telemetry_summary": {
+        "target_interval_milliseconds": 250,
+        "sample_count": 25,
+        "observed_span_milliseconds": 6156.192,
+        "observed_mean_interval_milliseconds": 256.508,
+        "observed_minimum_interval_milliseconds": 250.458,
+        "observed_maximum_interval_milliseconds": 272.8,
+        "peak_vram_used_mib": 8987.0,
+        "minimum_vram_free_mib": 3008.0,
+        "peak_gpu_utilization_percent": 98.0,
+        "peak_gpu_temperature_c": 71.0,
+        "peak_gpu_power_draw_w": 264.1,
+        "peak_process_working_set_bytes": 9013923840.0,
+        "peak_process_private_memory_bytes": 10338787328.0,
+        "peak_process_cpu_percent_of_machine": 4.191
+      },
+      "telemetry_samples": [
+        {
+          "timestamp_utc": "2026-08-16T00:19:39.6272942+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 0,
+            "temperature_c": 51,
+            "power_draw_w": 42.28
+          },
+          "process": {
+            "working_set_bytes": 9013919744,
+            "private_memory_bytes": 10338783232,
+            "cpu_total_seconds": 68.359375,
+            "cpu_percent_of_machine": null,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:39.9000940+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 30,
+            "temperature_c": 51,
+            "power_draw_w": 41.79
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 68.453125,
+            "cpu_percent_of_machine": 1.227,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:40.1505524+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 30,
+            "temperature_c": 51,
+            "power_draw_w": 41.79
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 68.71875,
+            "cpu_percent_of_machine": 3.788,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:40.4044377+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 68,
+            "power_draw_w": 128.4
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 68.96875,
+            "cpu_percent_of_machine": 3.517,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:40.6584364+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 68,
+            "power_draw_w": 128.4
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 69.234375,
+            "cpu_percent_of_machine": 3.735,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:40.9098306+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 231.8
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 69.484375,
+            "cpu_percent_of_machine": 3.552,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:41.1636725+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 69,
+            "power_draw_w": 231.8
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 69.734375,
+            "cpu_percent_of_machine": 3.517,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:41.4176730+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.37
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 69.984375,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:41.6716725+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.37
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 70.234375,
+            "cpu_percent_of_machine": 3.515,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:41.9247885+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.49
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 70.5,
+            "cpu_percent_of_machine": 3.748,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:42.1788382+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.49
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 70.765625,
+            "cpu_percent_of_machine": 3.734,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:42.4330631+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.94
+          },
+          "process": {
+            "working_set_bytes": 9013907456,
+            "private_memory_bytes": 10338770944,
+            "cpu_total_seconds": 71.015625,
+            "cpu_percent_of_machine": 3.512,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:42.6989274+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 98,
+            "temperature_c": 70,
+            "power_draw_w": 262.94
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 71.28125,
+            "cpu_percent_of_machine": 3.568,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:42.9522770+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.38
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 71.546875,
+            "cpu_percent_of_machine": 3.744,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:43.2062206+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.38
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 71.796875,
+            "cpu_percent_of_machine": 3.516,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:43.4762461+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.53
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 72.0625,
+            "cpu_percent_of_machine": 3.513,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:43.7283013+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.53
+          },
+          "process": {
+            "working_set_bytes": 9013911552,
+            "private_memory_bytes": 10338775040,
+            "cpu_total_seconds": 72.3125,
+            "cpu_percent_of_machine": 3.542,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:43.9806557+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.5
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 72.578125,
+            "cpu_percent_of_machine": 3.759,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:44.2351500+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 263.5
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 72.8125,
+            "cpu_percent_of_machine": 3.289,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:44.4881468+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 260.66
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 73.109375,
+            "cpu_percent_of_machine": 4.191,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:44.7541453+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 260.66
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 73.375,
+            "cpu_percent_of_machine": 3.566,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:45.0234450+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 260.98
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 73.65625,
+            "cpu_percent_of_machine": 3.73,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:45.2764137+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 260.98
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 73.890625,
+            "cpu_percent_of_machine": 3.309,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:45.5294625+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 264.1
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 74.140625,
+            "cpu_percent_of_machine": 3.528,
+            "thread_count": 35
+          }
+        },
+        {
+          "timestamp_utc": "2026-08-16T00:19:45.7834858+00:00",
+          "target_process_id": 17348,
+          "process_running": true,
+          "gpu": {
+            "vram_total_mib": 12282,
+            "vram_used_mib": 8987,
+            "vram_free_mib": 3008,
+            "utilization_percent": 97,
+            "temperature_c": 71,
+            "power_draw_w": 264.1
+          },
+          "process": {
+            "working_set_bytes": 9013923840,
+            "private_memory_bytes": 10338787328,
+            "cpu_total_seconds": 74.375,
+            "cpu_percent_of_machine": 3.295,
+            "thread_count": 35
+          }
+        }
+      ],
+      "validation": {
+        "request_succeeded": true,
+        "first_content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "minimum_completion_tokens_met": true,
+        "expected_finish_reason": true,
+        "reasoning_empty": true,
+        "telemetry_observed": true
+      }
+    }
+  ],
+  "measured_summary": {
+    "expected_repetitions": 3,
+    "completed_repetitions": 3,
+    "time_to_first_content_token_ms": {
+      "count": 3,
+      "mean": 94.95,
+      "sample_standard_deviation": 1.527,
+      "coefficient_of_variation_percent": 1.608,
+      "minimum": 93.935,
+      "maximum": 96.706
+    },
+    "total_latency_ms": {
+      "count": 3,
+      "mean": 6001.517,
+      "sample_standard_deviation": 6.525,
+      "coefficient_of_variation_percent": 0.109,
+      "minimum": 5996.504,
+      "maximum": 6008.894
+    },
+    "server_prompt_tokens_per_second": {
+      "count": 3,
+      "mean": 935.648,
+      "sample_standard_deviation": 0.441,
+      "coefficient_of_variation_percent": 0.047,
+      "minimum": 935.266,
+      "maximum": 936.131
+    },
+    "server_generation_tokens_per_second": {
+      "count": 3,
+      "mean": 43.171,
+      "sample_standard_deviation": 0.041,
+      "coefficient_of_variation_percent": 0.096,
+      "minimum": 43.124,
+      "maximum": 43.203
+    },
+    "peak_vram_used_mib": {
+      "count": 3,
+      "mean": 8987.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 8987.0,
+      "maximum": 8987.0
+    },
+    "minimum_vram_free_mib": {
+      "count": 3,
+      "mean": 3008.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 3008.0,
+      "maximum": 3008.0
+    },
+    "peak_gpu_utilization_percent": {
+      "count": 3,
+      "mean": 98.0,
+      "sample_standard_deviation": 0.0,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 98.0,
+      "maximum": 98.0
+    },
+    "peak_process_working_set_bytes": {
+      "count": 3,
+      "mean": 9013918378.667,
+      "sample_standard_deviation": 6256.743,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 9013911552.0,
+      "maximum": 9013923840.0
+    },
+    "peak_process_private_memory_bytes": {
+      "count": 3,
+      "mean": 10338781866.667,
+      "sample_standard_deviation": 6256.743,
+      "coefficient_of_variation_percent": 0.0,
+      "minimum": 10338775040.0,
+      "maximum": 10338787328.0
+    },
+    "peak_process_cpu_percent_of_machine": {
+      "count": 3,
+      "mean": 3.975,
+      "sample_standard_deviation": 0.221,
+      "coefficient_of_variation_percent": 5.551,
+      "minimum": 3.75,
+      "maximum": 4.191
+    },
+    "all_expected_runs_completed": true
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schema_version": "phase4-baseline-summary-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "completed",
+  "classification": "repeated_single_workload_iq2_baseline_not_cross_quant_comparison",
+  "canonical_raw_result": "results/raw/phase4-iq2-baseline-20260816T001913Z.json",
+  "harness_git_commit": "25e51a01be6bcda5efbcb852ad77c32064290e5c",
+  "runtime_fingerprint": "b10448-ad1de39e0",
+  "model": {
+    "filename": "Qwen3.8-27B-UD-IQ2_XXS.gguf",
+    "quantization": "UD-IQ2_XXS",
+    "repository_revision": "1cff334a4a228324d4ee1f76d55d372588f0d556",
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524"
+  },
+  "methodology": {
+    "workload": "prompts/phase4-baseline.json",
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "prompt_tokens_per_run": 84,
+    "completion_tokens_per_run": 256,
+    "finish_reason": "length",
+    "streaming": true,
+    "prompt_cache_disabled": true,
+    "server_cache_tokens_per_run": 0,
+    "telemetry_target_interval_ms": 250,
+    "telemetry_observed_mean_interval_ms": 256.151,
+    "telemetry_observed_global_minimum_interval_ms": 250.458,
+    "telemetry_observed_global_maximum_interval_ms": 275.01,
+    "telemetry_samples_per_measured_run": 25,
+    "inter_run_delay_seconds": 2,
+    "statistics": "Arithmetic mean, sample standard deviation with n-1 denominator, coefficient of variation, minimum, and maximum over measured runs only.",
+    "warmup_scope": "The warm-up prepares the fixed workload and reusable HTTP client in an already-loaded server session; it is not a cold model-load measurement."
+  },
+  "measured_results": {
+    "time_to_first_content_token_ms": {
+      "mean": 94.95,
+      "sample_standard_deviation": 1.527,
+      "coefficient_of_variation_percent": 1.608,
+      "minimum": 93.935,
+      "maximum": 96.706
+    },
+    "total_latency_ms": {
+      "mean": 6001.517,
+      "sample_standard_deviation": 6.525,
+      "coefficient_of_variation_percent": 0.109,
+      "minimum": 5996.504,
+      "maximum": 6008.894
+    },
+    "server_prompt_tokens_per_second": {
+      "mean": 935.648,
+      "sample_standard_deviation": 0.441,
+      "coefficient_of_variation_percent": 0.047,
+      "minimum": 935.266,
+      "maximum": 936.131
+    },
+    "server_generation_tokens_per_second": {
+      "mean": 43.171,
+      "sample_standard_deviation": 0.041,
+      "coefficient_of_variation_percent": 0.096,
+      "minimum": 43.124,
+      "maximum": 43.203
+    }
+  },
+  "telemetry": {
+    "peak_vram_used_mib": 8987,
+    "minimum_vram_free_mib": 3008,
+    "peak_gpu_utilization_percent": 98,
+    "maximum_gpu_temperature_c": 71,
+    "maximum_gpu_power_draw_w": 264.1,
+    "mean_peak_process_working_set_bytes": 9013918378.667,
+    "mean_peak_process_working_set_gib": 8.395,
+    "mean_peak_process_private_memory_bytes": 10338781866.667,
+    "mean_peak_process_private_memory_gib": 9.629,
+    "mean_peak_process_cpu_percent_of_machine": 3.975,
+    "mean_peak_process_cpu_equivalent_logical_cores": 1.113,
+    "notes": [
+      "GPU memory is an nvidia-smi point sample under Windows WDDM, not a framework allocator peak.",
+      "Working set and private memory are different Windows process-memory views and should not be added together.",
+      "Process CPU percentage uses all 28 logical processors as 100 percent."
+    ]
+  },
+  "superseded_attempt": {
+    "raw_result": "results/raw/phase4-iq2-baseline-20260816T001639Z.json",
+    "harness_git_commit": "d89fd0d6feddf8f57d1786642b60f396fd491ba6",
+    "reason": "The sampler slept 250 ms after collection work, producing an observed 300 ms cadence while the record labeled the interval as 250 ms. Throughput and TTFT remained valid, but the telemetry label was not precise enough for the canonical result.",
+    "preserved": true
+  },
+  "interpretation": {
+    "variation_understood": true,
+    "finding": "For this fixed 84-token prompt and 256-token decode, generation throughput and total latency were highly stable across three measured repetitions. TTFT varied more in relative terms but remained within 2.771 ms from minimum to maximum.",
+    "limits": "This baseline does not estimate quality, cold-start latency, other prompts, larger contexts, simultaneous users, or Q2_K_XL performance."
+  },
+  "exit_condition": {
+    "warmup_completed": true,
+    "measured_repetitions_completed": 3,
+    "machine_readable_raw_result_saved": true,
+    "variation_quantified": true,
+    "phase4_complete": true
+  }
+}

@@ -11,5 +11,7 @@ Current records:
 - `quant-triage-ud-iq2-xxs-20260815T232512Z.json` — IQ2_XXS pass@1 result on the identical triage suite; 3/10 passed.
 - `native-smoke-iq2-xxs-20260815T234723Z.json` — preserved Phase 3 native run from revision `37b844a`; 1/3 passed because the initial parser setting left empty reasoning tags in strict answer content.
 - `native-smoke-iq2-xxs-20260815T234835Z.json` — canonical Phase 3 native OpenAI-compatible smoke run from revision `924554a`; 3/3 passed.
+- `phase4-iq2-baseline-20260816T001639Z.json` — preserved Phase 4 attempt from revision `d89fd0d`; performance data completed, but the nominal 250 ms telemetry interval was actually 300 ms and the record is superseded.
+- `phase4-iq2-baseline-20260816T001913Z.json` — canonical Phase 4 IQ2 baseline from corrected revision `25e51a0`; one warm-up and three measured repetitions completed with observed telemetry cadence recorded.
 
 This file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead.

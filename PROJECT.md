@@ -6,6 +6,7 @@
 - Phase 1 completed on 2026-08-15 with the pinned `UD-IQ2_XXS` model and a 3/3 passing proof-of-life suite.
 - Phase 2 is complete. `UD-IQ2_XXS` is the provisional speed configuration and `UD-Q2_K_XL` is the provisional quality-oriented configuration after a controlled 3/10 versus 5/10 quant-triage result. `UD-Q3_K_XL` is deferred.
 - Phase 3 completed on 2026-08-15 with official llama.cpp `b10448`: both release archives were checksum-validated, CUDA0 startup logs reported 66/66 layers offloaded to the RTX 4070 Ti, and the native OpenAI-compatible smoke suite passed 3/3.
+- Phase 4 completed on 2026-08-15. One excluded warm-up and three measured 256-token IQ2 repetitions produced 43.171 generation tok/s mean with 0.096% CV, while streaming TTFT averaged 94.950 ms with 1.608% CV.
 
 ## Objective
 
@@ -98,6 +99,8 @@ Status: completed on 2026-08-15. The canonical runtime record is `environment/ph
 - Record prompt processing, generation, TTFT, latency, VRAM, RAM, CPU, GPU, context, KV cache, and offload.
 
 Exit condition: repeated runs are saved in a machine-readable format and variation is understood.
+
+Status: completed on 2026-08-15 for the IQ2 baseline. The canonical raw result is `results/raw/phase4-iq2-baseline-20260816T001913Z.json`; the derived checkpoint is `results/summaries/phase4-iq2-baseline.md`. Q2 comparison remains Phase 6.
 
 ### Phase 5 — Benchmark harness
 
