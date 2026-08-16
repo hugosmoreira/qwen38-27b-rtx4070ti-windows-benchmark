@@ -163,7 +163,7 @@ Status: completed on 2026-08-15 for MTP off versus `draft-mtp` on with IQ2 at 4K
 - Tag a versioned release only after review.
 - Never commit model weights.
 
-Status: in progress on 2026-08-15. The frozen local release criteria are in `environment/phase10-release-protocol-2026-08-15.json`. The first audit found no tracked weights, private learning files, or absolute local paths, but licensing, public citation identity, and GitHub owner/repository naming require owner decisions before publication.
+Status: in progress on 2026-08-15. The frozen local release criteria are in `environment/phase10-release-protocol-2026-08-15.json`. The first audit found no tracked weights, private learning files, or absolute local paths. Apache-2.0 was subsequently approved; public citation identity, a private Code of Conduct contact, and GitHub owner/repository naming still require owner decisions before publication.
 
 ### Phase 11 — Hugging Face Community report
 

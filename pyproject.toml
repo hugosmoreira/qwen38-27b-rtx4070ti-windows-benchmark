@@ -9,6 +9,7 @@ description = "Auditable Windows benchmark harness for local Qwen3.8 GGUF infere
 readme = "README.md"
 requires-python = ">=3.11,<3.15"
 authors = [{ name = "Qwen3.8 RTX 4070 Ti study" }]
+license = { file = "LICENSE" }
 dependencies = []
 keywords = ["benchmark", "gguf", "llama.cpp", "qwen", "windows"]
 classifiers = [
@@ -16,6 +17,7 @@ classifiers = [
   "Environment :: GPU :: NVIDIA CUDA",
   "Intended Audience :: Developers",
   "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
   "Operating System :: Microsoft :: Windows",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",

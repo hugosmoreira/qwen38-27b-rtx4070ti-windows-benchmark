@@ -1,7 +1,7 @@
 {
   "schema_version": "release-manifest-1.0",
   "candidate_version": "0.1.0",
-  "status": "local_release_candidate_in_progress",
+  "status": "local_release_candidate_identity_pending",
   "technical_required_files": [
     ".gitattributes",
     ".editorconfig",
@@ -23,7 +23,6 @@
     "LICENSE"
   ],
   "pending_owner_decisions": [
-    "license",
     "public_author_and_citation_identity",
     "github_owner_and_repository_name"
   ],

@@ -4,7 +4,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 
 ## [Unreleased]
 
-- Owner-selected license, citation identity, and final GitHub URLs remain pending.
+- Public citation identity and final GitHub URLs remain pending.
 
 ## [0.1.0] — Release candidate
 

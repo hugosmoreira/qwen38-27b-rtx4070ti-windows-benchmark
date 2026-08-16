@@ -43,4 +43,4 @@ $env:PYTHONPATH = (Resolve-Path .\src).Path
 
 Keep pull requests focused. Explain controlled variables, deviations, and interpretation limits. Include the commands used for validation and link each numerical claim to raw or derived evidence. GPU measurements are not required for ordinary software changes, and CI must not be presented as hardware reproduction.
 
-By contributing, you confirm that you have the right to submit the material under the repository's owner-selected license once published.
+By contributing, you confirm that you have the right to submit the material under the repository's [Apache License 2.0](LICENSE).
