@@ -1,0 +1,123 @@
+{
+  "schema_version": "phase9-mtp-environment-1.0",
+  "recorded_date": "2026-08-15",
+  "status": "completed",
+  "protocol": {
+    "path": "environment/phase9-mtp-protocol-2026-08-15.json",
+    "git_commit": "e3c950f15407182e45de778071c9ff4c94dac7c6",
+    "size_bytes": 5367,
+    "sha256": "a3548baa6a60b17f2c9da1d98711368dcc58e2b9e4eab17d878ca9878f450fc9"
+  },
+  "model": {
+    "manifest": "environment/model-download-manifest.json",
+    "quantization": "UD-IQ2_XXS",
+    "sha256_revalidated_before_every_launch": true,
+    "target_layers_offloaded_each_launch": "66/66"
+  },
+  "canonical_launches": [
+    {
+      "order": 1,
+      "workload": "prose",
+      "mtp": false,
+      "server_run_id": "native-server-20260816T041433868Z",
+      "loaded_vram_used_mib": 8989,
+      "loaded_vram_free_mib": 3006,
+      "launch_record_size_bytes": 2640,
+      "launch_record_sha256": "1c939b94542e7b9e6e3d70aea8bd6d2ebdb4c7278d511ce3e4b37d0c525a6562",
+      "closed_log_size_bytes": 33520,
+      "closed_log_sha256": "e3ff904cb78ddd5bfaa7ee63cf24995743503f71a9bf8bee5198a0e553df8954",
+      "raw_result": "results/raw/phase9-mtp-off-prose-20260816T041445808671Z-76083f38.json"
+    },
+    {
+      "order": 2,
+      "workload": "prose",
+      "mtp": true,
+      "server_run_id": "native-server-20260816T041551930Z",
+      "loaded_vram_used_mib": 9549,
+      "loaded_vram_free_mib": 2446,
+      "launch_record_size_bytes": 2840,
+      "launch_record_sha256": "fa8677776896883b2036b0b920951317d64e234799562d334dc8e0929f1d64a9",
+      "closed_log_size_bytes": 37535,
+      "closed_log_sha256": "816f74fb9097a271dced34259fe7606e1fb5b5adc29775468f4bc4326b61bcdb",
+      "raw_result": "results/raw/phase9-mtp-on-prose-20260816T041603771264Z-9c3f8aca.json"
+    },
+    {
+      "order": 3,
+      "workload": "code",
+      "mtp": true,
+      "server_run_id": "native-server-20260816T041658902Z",
+      "loaded_vram_used_mib": 9549,
+      "loaded_vram_free_mib": 2446,
+      "launch_record_size_bytes": 2840,
+      "launch_record_sha256": "47620a26f2d1a5483aad32550dde34478bb6da7a36922644a98a84f539387900",
+      "closed_log_size_bytes": 37551,
+      "closed_log_sha256": "28e97cba722cd916505b53155d841c05659bb26ccac6734f5b4c461d91360e77",
+      "raw_result": "results/raw/phase9-mtp-on-code-20260816T041709353404Z-221a5138.json"
+    },
+    {
+      "order": 4,
+      "workload": "code",
+      "mtp": false,
+      "server_run_id": "native-server-20260816T041759716Z",
+      "loaded_vram_used_mib": 8989,
+      "loaded_vram_free_mib": 3006,
+      "launch_record_size_bytes": 2641,
+      "launch_record_sha256": "16f6cbb049eee9bd1e424f37404cbdfbe83328a38b94a2472a51b26d1541a73f",
+      "closed_log_size_bytes": 32912,
+      "closed_log_sha256": "b62822fd18f79987b53289a68693a2679a6e4d92207bc688df12433b5ddbaba8",
+      "raw_result": "results/raw/phase9-mtp-off-code-20260816T041809117916Z-bdba6559.json"
+    }
+  ],
+  "observed_mtp_allocations": {
+    "target_cuda_kv_buffer_mib": 136.0,
+    "target_cuda_compute_buffer_mib": 37.27,
+    "draft_cuda_kv_buffer_mib": 16.0,
+    "draft_cuda_compute_buffer_mib": 31.5,
+    "loaded_vram_increase_mib": 560
+  },
+  "validation": {
+    "raw_records_valid": 4,
+    "raw_records_expected": 4,
+    "all_records_use_protocol_commit": true,
+    "all_expected_runs_completed": true,
+    "warmups_excluded": 4,
+    "measured_repetitions_total": 20,
+    "mtp_on_responses_with_valid_draft_activity": 12,
+    "mtp_off_responses_without_draft_activity": 12,
+    "offline_tests_passed": 58,
+    "comparison_rejects_control_drift": true
+  },
+  "comparison": {
+    "machine_readable_path": "results/summaries/phase9-mtp-comparison.json",
+    "machine_readable_size_bytes": 6219,
+    "machine_readable_sha256": "a6bce491fd2259c0ea27b98a74f6087a4d42a74cfb6cb2cb52c2e2b23be9cfef",
+    "human_readable_path": "results/summaries/phase9-mtp-comparison.md",
+    "human_readable_size_bytes": 4021,
+    "human_readable_sha256": "f5aa50c1525177c62e9fa965b770d1bf29565cd123a3b263810b97d6809070c4"
+  },
+  "finding": {
+    "prose_speed_change_percent": 47.28364015942304,
+    "code_speed_change_percent": 92.65101145848068,
+    "prose_acceptance_percent": 55.18672199170125,
+    "code_acceptance_percent": 90.10989010989012,
+    "prose_output_equivalent": false,
+    "code_output_equivalent": true,
+    "default_mtp_state": "off"
+  },
+  "restored_default_server": {
+    "server_run_id": "native-server-20260816T042026003Z",
+    "process_id_at_recording": 10896,
+    "launch_record_size_bytes": 2641,
+    "launch_record_sha256": "067a793d944d46138e81d118b7c7bce133345521cbe70c73d175c3b61cc64534",
+    "model_hash_validated": true,
+    "mtp": false,
+    "health": "ok",
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "target_layers_offloaded": "66/66",
+    "loaded_vram_used_mib": 8989,
+    "loaded_vram_free_mib": 3006
+  },
+  "deferred": ["Q3", "Q4", "vision/mmproj", "Unsloth Desktop versus native runtime"],
+  "publication_state": "Local evidence only; no push, upload, or Hugging Face publication was performed."
+}

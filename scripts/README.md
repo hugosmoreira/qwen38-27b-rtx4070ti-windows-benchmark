@@ -47,6 +47,8 @@ Current scripts:
 
 `start_native_llama_server.ps1` additionally accepts `-SpeculativeType draft-mtp` with bounded draft-token controls. `run_phase9_measurement.ps1` accepts only the four frozen MTP configurations, matches the selected PID to one ignored launch record, verifies the expected MTP mode and F16 draft-cache controls, and then delegates to the Python harness. Every response must contain draft counters when MTP is on and no draft activity when it is off.
 
+The `qwen-bench mtp-compare` command accepts the prose-off, prose-on, code-off, and code-on raw records in that order. It independently validates every record, rejects pairwise control drift or invalid draft counters, calculates per-workload changes and acceptance, and compares SHA-256 hashes of every measured response.
+
 For the Phase 2 quant-triage suite, add:
 
 ```powershell

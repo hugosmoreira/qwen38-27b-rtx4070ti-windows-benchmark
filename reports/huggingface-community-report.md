@@ -10,6 +10,8 @@ In a separate 24-task objective pass@1 evaluation, Q2 passed 10 tasks and IQ2 pa
 
 In a separate IQ2 context ladder, the tested 16K configuration processed 12,831 prompt tokens plus 128 completion tokens with 11.119-second mean TTFT, 39.201 generation tok/s, and 2,507 MiB minimum sampled VRAM free. All 66 layers remained on the GPU.
 
+An isolated IQ2 `draft-mtp` experiment increased 256-token generation throughput by 47.284% on prose and 92.651% on Python code while adding 554–568 MiB sampled peak VRAM. Code output matched exactly across MTP states, but deterministic prose diverged at generated token 16. MTP therefore remains off by default for this pinned runtime.
+
 ## Hardware
 
 | Component | Value |
@@ -30,6 +32,7 @@ In a separate IQ2 context ladder, the tested 16K configuration processed 12,831 
 | Quant files | `UD-IQ2_XXS` and `UD-Q2_K_XL` |
 | Performance protocol commit | `94a27359f287ac5915f6b90664aa7e47844f3560` |
 | Quality protocol / amendment commits | `ee64b11e048bc1a15c063cc41910cccad1e66017` / `87faba489917eb2140a4ac6702f94d54b0580543` |
+| MTP protocol commit | `e3c950f15407182e45de778071c9ff4c94dac7c6` |
 
 ## Controlled settings
 
@@ -89,6 +92,17 @@ Q2 led by one task, or 4.167 percentage points. Only five pairs were discordant:
 
 The first Q2 attempt exposed a pre-write preservation bug when one request completed with an empty answer. The server log showed 24/24 requests completed, but the validator disagreed with the runner's failure-reason label and no raw score was written. A public protocol amendment hashes that local log and freezes a narrow correction: a received empty answer is a completed request with zero quality credit. No prompt, expected answer, grader, or inference control changed. The model is stateless and caches were disabled, but the repeated Q2 prompt exposure remains disclosed as a limitation.
 
+## IQ2 in-model MTP experiment
+
+The MTP comparison used the same IQ2 GGUF at 4K with one slot and all 66 target layers on CUDA0. Both workload pairs used greedy decoding, seed 42, 256 output tokens, one excluded warm-up, and five measured repetitions per state from fresh processes. MTP activated the embedded NextN layer with `draft-mtp`, `n_max = 2`, `n_min = 0`, and an F16 draft K/V cache.
+
+| Workload | Off tok/s | On tok/s | Speed change | Draft acceptance | Peak VRAM change | Exact output match |
+|---|---:|---:|---:|---:|---:|---:|
+| Prose | 42.152 | 62.083 | +47.284% | 55.187% | +568 MiB | 0/5 |
+| Python code | 42.414 | 81.711 | +92.651% | 90.110% | +554 MiB | 5/5 |
+
+Every response was internally deterministic within its own state. The code hashes matched across both states. The prose hashes did not, and the first difference appeared at zero-based generated token 16 even though both responses contained 256 tokens. These prompts were not quality-graded, so this is evidence of output non-equivalence, not evidence that either prose response was better. The workload-specific speeds are not pooled.
+
 ## Failed configurations
 
 Neither Phase 6 configuration failed or ran out of memory. Both fully offloaded 66/66 layers to CUDA0. Failed and superseded configurations from earlier phases remain preserved in the repository, but they were not part of this controlled pair.
@@ -99,6 +113,8 @@ IQ2 is the practical default for this setup: it decoded 14.759% faster than Q2, 
 
 Q2's perfect 5/5 structured-output score makes it an optional candidate for strict-output experiments, but its 10/24 versus 9/24 overall result does not justify calling it generally higher quality. Because both models fit fully on the GPU, these measurements also do not support a GPU-versus-CPU layer-offload claim.
 
+MTP remains off by default because it did not preserve output across both deterministic workloads. The large code speedup makes it a useful opt-in candidate only after application-specific correctness and output regression tests.
+
 ## Limitations
 
 - One Windows desktop and one GPU.
@@ -107,4 +123,5 @@ Q2's perfect 5/5 structured-output score makes it an optional candidate for stri
 - The first Q2 task exposure was superseded after a disclosed pre-write preservation bug; the corrected raw comparison restarted Q2 from a fresh process.
 - The 16K context result used 12,831 prompt tokens and 128 completion tokens; it is not a full-window capacity or retrieval-quality claim.
 - Results depend on runtime, model revision, context, cache precision, sampling, and offload.
+- The MTP experiment used two synthetic workloads and draft depth two; one prose mismatch prevents treating MTP as a transparent optimization in this build.
 - This is a community benchmark, not an official Qwen or Unsloth evaluation.

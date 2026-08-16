@@ -1,0 +1,155 @@
+{
+  "schema_version": "phase9-mtp-comparison-1.0",
+  "recorded_date": "2026-08-15",
+  "protocol": "environment/phase9-mtp-protocol-2026-08-15.json",
+  "protocol_commit": "e3c950f15407182e45de778071c9ff4c94dac7c6",
+  "model": "Qwen3.8-27B-UD-IQ2_XXS",
+  "runtime": "llama.cpp b10448 (ad1de39e0708e3ced9c71bb3c82d93a2c046a73f)",
+  "controls": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "target_kv_cache": "q8_0",
+    "mtp_type": "draft-mtp",
+    "draft_n_max": 2,
+    "draft_n_min": 0,
+    "draft_kv_cache": "f16",
+    "max_completion_tokens": 256,
+    "temperature": 0.0,
+    "seed": 42,
+    "warmup_runs_per_state": 1,
+    "measured_repetitions_per_state": 5
+  },
+  "sources": [
+    {
+      "state": "prose_off",
+      "path": "results/raw/phase9-mtp-off-prose-20260816T041445808671Z-76083f38.json",
+      "size_bytes": 129696,
+      "sha256": "73e76ba04f93ee1e94e468d1a51ee63889aa531b07b62b4c7b94eb0be0964cc8"
+    },
+    {
+      "state": "prose_on",
+      "path": "results/raw/phase9-mtp-on-prose-20260816T041603771264Z-9c3f8aca.json",
+      "size_bytes": 99038,
+      "sha256": "3eb3ec5dfd79cd7e13f78514ebfbee1bc7f23229015ae333871faf035214dbe5"
+    },
+    {
+      "state": "code_on",
+      "path": "results/raw/phase9-mtp-on-code-20260816T041709353404Z-221a5138.json",
+      "size_bytes": 80700,
+      "sha256": "91a06ff8e4af4ac78dee356ca0a0308c5869662add2b483c7156e6f11db0308a"
+    },
+    {
+      "state": "code_off",
+      "path": "results/raw/phase9-mtp-off-code-20260816T041809117916Z-bdba6559.json",
+      "size_bytes": 127264,
+      "sha256": "d6d2619c9917e75c9e32826e23a074f0e869f0de1dba58cca7d2260b5471317e"
+    }
+  ],
+  "workloads": {
+    "prose": {
+      "prompt_suite": "prompts/phase9-mtp-prose.json",
+      "generation_tokens_per_second": {
+        "mtp_off_mean": 42.152,
+        "mtp_off_cv_percent": 0.046,
+        "mtp_on_mean": 62.083,
+        "mtp_on_cv_percent": 0.128,
+        "relative_change_percent_vs_off": 47.28364015942304
+      },
+      "total_latency_ms": {
+        "mtp_off_mean": 6141.735,
+        "mtp_on_mean": 4201.684,
+        "relative_change_percent_vs_off": -31.587995900181294
+      },
+      "time_to_first_content_token_ms": {
+        "mtp_off_mean": 92.054,
+        "mtp_on_mean": 94.193,
+        "relative_change_percent_vs_off": 2.3236361266213263
+      },
+      "peak_vram_used_mib": {
+        "mtp_off_mean": 9007.0,
+        "mtp_on_mean": 9575.0,
+        "absolute_change_mib": 568.0
+      },
+      "peak_process_private_memory_bytes": {
+        "mtp_off_mean": 10334248140.8,
+        "mtp_on_mean": 11631164620.8,
+        "absolute_change_bytes": 1296916480.0
+      },
+      "speculation": {
+        "draft_tokens_total": 1205,
+        "accepted_draft_tokens_total": 665,
+        "pooled_token_acceptance_percent": 55.18672199170125
+      },
+      "output_equivalence": {
+        "paired_measured_outputs_matching": 0,
+        "paired_measured_outputs_total": 5,
+        "first_different_character_index_zero_based": 102,
+        "first_different_generated_token_index_zero_based": 16,
+        "mtp_off_utf8_sha256": "b1bbe27cc45eff8f048daf6eb0cccbbaca99a089b95bb8082f47ca80afa3c6ab",
+        "mtp_on_utf8_sha256": "042cf50125425abe3bf40b85d6b44ab10a7e85de2d5d2378b7a9c8500790aeea",
+        "internally_deterministic_within_each_state": true
+      }
+    },
+    "code": {
+      "prompt_suite": "prompts/phase9-mtp-code.json",
+      "generation_tokens_per_second": {
+        "mtp_off_mean": 42.414,
+        "mtp_off_cv_percent": 0.032,
+        "mtp_on_mean": 81.711,
+        "mtp_on_cv_percent": 0.04,
+        "relative_change_percent_vs_off": 92.65101145848068
+      },
+      "total_latency_ms": {
+        "mtp_off_mean": 6113.984,
+        "mtp_on_mean": 3227.396,
+        "relative_change_percent_vs_off": -47.212881158995515
+      },
+      "time_to_first_content_token_ms": {
+        "mtp_off_mean": 101.695,
+        "mtp_on_mean": 106.507,
+        "relative_change_percent_vs_off": 4.7317960568366315
+      },
+      "peak_vram_used_mib": {
+        "mtp_off_mean": 9021.0,
+        "mtp_on_mean": 9575.0,
+        "absolute_change_mib": 554.0
+      },
+      "peak_process_private_memory_bytes": {
+        "mtp_off_mean": 10335928320.0,
+        "mtp_on_mean": 11631226880.0,
+        "absolute_change_bytes": 1295298560.0
+      },
+      "speculation": {
+        "draft_tokens_total": 910,
+        "accepted_draft_tokens_total": 820,
+        "pooled_token_acceptance_percent": 90.10989010989012
+      },
+      "output_equivalence": {
+        "paired_measured_outputs_matching": 5,
+        "paired_measured_outputs_total": 5,
+        "first_different_character_index_zero_based": null,
+        "first_different_generated_token_index_zero_based": null,
+        "mtp_off_utf8_sha256": "5106ec441adbb47779beacc5b67b4af87118792ad2ad8bd47ce2de138efcd96c",
+        "mtp_on_utf8_sha256": "5106ec441adbb47779beacc5b67b4af87118792ad2ad8bd47ce2de138efcd96c",
+        "internally_deterministic_within_each_state": true
+      }
+    }
+  },
+  "formulas": {
+    "relative_change_percent_vs_off": "((MTP on mean - MTP off mean) / MTP off mean) * 100",
+    "pooled_token_acceptance_percent": "sum(accepted draft tokens) / sum(draft tokens) * 100"
+  },
+  "decision": {
+    "default_mtp_state": "off",
+    "reason": "MTP changed the deterministic prose output at generated token index 16, so this runtime and setting did not preserve output across both tested workloads.",
+    "conditional_use": "MTP may be tested as an opt-in accelerator for constrained coding workloads after application-specific output and correctness regression tests.",
+    "pooled_speed_claim": null
+  },
+  "limitations": [
+    "Two synthetic workloads on one Windows desktop do not characterize all prompts.",
+    "The prose and code responses were not graded for answer quality; output hashes test equivalence only.",
+    "MTP-on and MTP-off used fresh processes in a fixed counterbalanced order, which does not remove every thermal or time-order effect.",
+    "The result applies to llama.cpp b10448, this Qwen GGUF revision, draft depth two, greedy decoding, one slot, and 4K context.",
+    "No speed result is pooled across workloads because acceptance and output behavior differed materially."
+  ]
+}

@@ -4,11 +4,11 @@
 
 ## Status
 
-**Phase 9 is in progress locally as of 2026-08-15.** The frozen experiment compares IQ2 with MTP off and in-model `draft-mtp` on across deterministic prose and Python-code workloads. A separate excluded capability probe confirmed 66/66 target layers on CUDA, activated the embedded NextN layer, and accepted 36 of 52 drafted tokens. The current package passes 55 offline tests. Q3 and Q4 downloads remain deferred.
+**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 58 offline tests; Q3 and Q4 downloads remain deferred.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
-No Phase 9 speed claim is published yet. The 64-token capability probe used different conditions and exists only to validate MTP operation and identify `draft_n` and `draft_n_accepted`; canonical results require the four committed five-repetition records.
+The Phase 9 speed claims come only from four committed five-repetition records. The earlier 64-token capability probe remains excluded and was used only to validate MTP operation and identify `draft_n` and `draft_n_accepted`.
 
 ## Phase 1 proof of life
 
@@ -236,3 +236,16 @@ Only five tasks were discordant: Q2 won three and IQ2 won two. The exact paired 
 The first Q2 attempt exposed a pre-write empty-answer preservation bug. Its 24 server completions and local log hash are disclosed, but it has no usable score. A narrow amendment separated request completion from answer correctness, added two regression tests, and froze the correction before a fresh Q2 restart; prompts, expected answers, graders, and model controls did not change.
 
 See the [original protocol](environment/phase8-quality-protocol-2026-08-15.json), [protocol amendment](environment/phase8-quality-protocol-amendment-2026-08-15.json), [completed environment record](environment/phase8-quality-2026-08-15.json), [human summary](results/summaries/phase8-quality-comparison.md), and [machine-readable comparison](results/summaries/phase8-quality-comparison.json).
+
+## Phase 9 IQ2 in-model MTP
+
+The isolated MTP experiment used two greedy 256-token workloads, one excluded warm-up, and five measured repetitions per state from fresh 4K IQ2 processes.
+
+| Workload | MTP off | MTP on | Speed change | Draft acceptance | Peak VRAM change | Exact output match |
+|---|---:|---:|---:|---:|---:|---:|
+| Prose | 42.152 tok/s | 62.083 tok/s | +47.284% | 55.187% | +568 MiB | 0/5 |
+| Python code | 42.414 tok/s | 81.711 tok/s | +92.651% | 90.110% | +554 MiB | 5/5 |
+
+The code response hashes matched across states. The prose was deterministic within each state but diverged at generated token 16, so this build's MTP path is not treated as a transparent accelerator. Keep MTP off by default; consider it only as an opt-in mode after workload-specific correctness testing.
+
+See the [frozen protocol](environment/phase9-mtp-protocol-2026-08-15.json), [completed environment record](environment/phase9-mtp-2026-08-15.json), [human summary](results/summaries/phase9-mtp-comparison.md), and [machine-readable comparison](results/summaries/phase9-mtp-comparison.json).

@@ -11,7 +11,7 @@
 - Phase 6 completed on 2026-08-15. Under frozen 4K controls, IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2 and used 1,583 MiB less peak VRAM. Both configurations reported 66/66 GPU layers, so this is not a CPU layer-offload comparison.
 - Phase 7 completed on 2026-08-15. IQ2 passed the 4K, 8K, and 16K ladder with proportionally scaled prompts. At 16K, the 12,831-token prompt plus 128-token output averaged 11.119 seconds TTFT, 39.201 generation tok/s, and 2,507 MiB minimum free VRAM.
 - Phase 8 completed on 2026-08-15. Q2 passed 10/24 objective tasks and IQ2 passed 9/24; paired counts were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 edge is not a meaningful general-quality win, so IQ2 remains the practical default.
-- Phase 9 started on 2026-08-15 as an isolated IQ2 MTP experiment. The pinned runtime activated the embedded NextN layer in a non-canonical probe, accepted 36 of 52 drafted tokens, and exposed the response counters needed for the frozen two-workload comparison. Q3 and Q4 remain deferred.
+- Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; Q3 and Q4 remain deferred.
 
 ## Objective
 
@@ -154,7 +154,7 @@ Status: completed on 2026-08-15. Both models completed all 24 requests under the
 
 These experiments must not silently change the baseline.
 
-Status: in progress on 2026-08-15. The current scope is only MTP off versus `draft-mtp` on for IQ2 at 4K across matched prose and code workloads. The protocol is `environment/phase9-mtp-protocol-2026-08-15.json`; Q3, Q4, vision, and runtime-convenience comparisons are explicitly deferred.
+Status: completed on 2026-08-15 for MTP off versus `draft-mtp` on with IQ2 at 4K across matched prose and code workloads. The protocol is `environment/phase9-mtp-protocol-2026-08-15.json`, and the result is `results/summaries/phase9-mtp-comparison.md`. Q3, Q4, vision, and runtime-convenience comparisons are explicitly deferred.
 
 ### Phase 10 — GitHub study release
 

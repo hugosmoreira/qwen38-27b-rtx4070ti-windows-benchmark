@@ -22,6 +22,7 @@ from qwen_bench.quality_result_validation import (
     validate_quality_result,
 )
 from qwen_bench.quality_runner import execute_quality_evaluation
+from qwen_bench.mtp_comparison import compare_mtp_results
 from qwen_bench.result_validation import require_valid_result, validate_result
 from qwen_bench.runner import execute_benchmark
 from qwen_bench.storage import write_result_exclusive
@@ -64,6 +65,14 @@ def build_parser() -> argparse.ArgumentParser:
     quality_compare.add_argument("q2_result", type=Path)
     quality_compare.add_argument("iq2_result", type=Path)
     quality_compare.add_argument("--repository-root", type=Path, default=_default_repository_root())
+
+    mtp_compare = subparsers.add_parser(
+        "mtp-compare", help="derive the controlled Phase 9 MTP comparison"
+    )
+    mtp_compare.add_argument("prose_off", type=Path)
+    mtp_compare.add_argument("prose_on", type=Path)
+    mtp_compare.add_argument("code_off", type=Path)
+    mtp_compare.add_argument("code_on", type=Path)
     return parser
 
 
@@ -78,6 +87,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         if arguments.command == "quality-compare":
             return _quality_compare_command(
                 arguments.repository_root, arguments.q2_result, arguments.iq2_result
+            )
+        if arguments.command == "mtp-compare":
+            return _mtp_compare_command(
+                arguments.prose_off,
+                arguments.prose_on,
+                arguments.code_off,
+                arguments.code_on,
             )
         if arguments.command == "quality-run":
             return _quality_run_command(
@@ -169,6 +185,20 @@ def _quality_suite_for_result(repository_root: Path, record: dict) -> dict:
     root = repository_root.resolve()
     suite_path = resolve_repository_path(root, str(record.get("prompt_suite", "")), must_exist=True)
     return load_json_object(suite_path)
+
+
+def _mtp_compare_command(
+    prose_off_path: Path,
+    prose_on_path: Path,
+    code_off_path: Path,
+    code_on_path: Path,
+) -> int:
+    records = [
+        load_json_object(path.resolve())
+        for path in (prose_off_path, prose_on_path, code_off_path, code_on_path)
+    ]
+    print(json.dumps(compare_mtp_results(*records), indent=2))
+    return 0
 
 
 def _default_repository_root() -> Path:
