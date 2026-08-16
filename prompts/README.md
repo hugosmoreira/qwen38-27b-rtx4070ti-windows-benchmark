@@ -6,6 +6,7 @@ Current suite:
 
 - `phase1-smoke.json` contains three proof-of-life checks for exact text, arithmetic, and strict JSON. It confirms basic local inference and constraint following; it is not a quality benchmark.
 - `phase2-quant-triage.json` contains ten objective exact-answer and JSON checks used only to decide whether the first two quants show an obvious pass@1 difference before another large download.
+- `phase4-baseline.json` defines the fixed 256-token long-form streaming workload used for one warm-up and repeated IQ2 baseline measurements. It disables prompt caching and is a performance workload, not a quality test.
 
 Each prompt definition should eventually identify:
 

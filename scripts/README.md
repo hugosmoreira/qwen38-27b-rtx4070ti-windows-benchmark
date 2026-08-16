@@ -11,6 +11,7 @@ Current scripts:
     -RuntimeRecord environment/phase2-q2-k-xl-runtime-2026-08-15.json
 .\scripts\start_native_llama_server.ps1
 .\scripts\run_native_smoke.ps1
+.\scripts\run_phase4_baseline.ps1
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -22,6 +23,8 @@ Current scripts:
 `start_native_llama_server.ps1` validates the pinned IQ2 model by size and SHA-256, verifies the official `b10448` executable and `CUDA0` device probe, and starts a hidden loopback-only server on port 8090 with localhost-only CORS. Trace-level startup logging retains CUDA allocation and layer-offload evidence. It creates non-overwriting logs and a launch record under the ignored `runtimes/` tree. Pass `-SkipModelHashValidation` only for later routine restarts after the canonical validation has been recorded.
 
 `run_native_smoke.ps1` calls the native server's OpenAI-compatible `/v1/chat/completions` endpoint with thinking, built-in tools, MCP, and vision disabled. The server uses the `deepseek` reasoning parser only to keep Qwen's empty `<think>` wrapper out of answer content; it does not enable reasoning generation. The script writes a unique Phase 3 proof-of-life record; this is not the repeated Phase 4 baseline.
+
+`run_phase4_baseline.ps1` verifies the active model and material Phase 3 launch arguments, then runs the committed long-form workload once as warm-up and three times as measured repetitions. It uses streaming SSE to measure time to first non-empty content token, retains llama.cpp's prompt/decode timings, disables prompt caching, and starts `collect_run_telemetry.ps1` in a hidden helper process to sample GPU, VRAM, llama-server CPU, and process RAM every 250 ms. Raw output is unique and append-only.
 
 For the Phase 2 quant-triage suite, add:
 
