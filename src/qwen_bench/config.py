@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from qwen_bench.client import require_loopback_uri
+from qwen_bench.fixtures import NUMBERED_RECORDS_GENERATOR
 
 
 class ConfigurationError(ValueError):
@@ -83,6 +84,15 @@ def load_benchmark_config(repository_root: Path, config_path: Path) -> Benchmark
     runtime_record = load_json_object(runtime_path)
     _validate_prompt(prompt)
     _validate_manifest(manifest)
+
+    acceptance = prompt["workload"]["acceptance"]
+    maximum_prompt_tokens = acceptance.get("maximum_prompt_tokens")
+    if maximum_prompt_tokens is not None:
+        reserved = int(prompt["settings"]["max_tokens"])
+        if maximum_prompt_tokens + reserved > int(server["expected_context_size"]):
+            raise ConfigurationError(
+                "Maximum accepted prompt tokens plus output reservation exceed the server context."
+            )
 
     runtime = data["runtime"]
     for key in ("name", "release_tag", "backend"):
@@ -183,6 +193,30 @@ def _validate_prompt(prompt: dict[str, Any]) -> None:
     if minimum > settings["max_tokens"]:
         raise ConfigurationError("Minimum completion tokens exceed max_tokens.")
     _require_nonempty_string(acceptance, "expected_finish_reason")
+    minimum_prompt_tokens = acceptance.get("minimum_prompt_tokens")
+    maximum_prompt_tokens = acceptance.get("maximum_prompt_tokens")
+    if (minimum_prompt_tokens is None) != (maximum_prompt_tokens is None):
+        raise ConfigurationError("Prompt-token acceptance bounds must be supplied together.")
+    if minimum_prompt_tokens is not None:
+        minimum_prompt_tokens = _require_integer(
+            acceptance, "minimum_prompt_tokens", minimum=1
+        )
+        maximum_prompt_tokens = _require_integer(
+            acceptance, "maximum_prompt_tokens", minimum=minimum_prompt_tokens
+        )
+
+    synthetic_context = workload.get("synthetic_context")
+    if synthetic_context is not None:
+        if not isinstance(synthetic_context, dict):
+            raise ConfigurationError("Synthetic context must be an object.")
+        if set(synthetic_context) != {"generator", "record_count"}:
+            raise ConfigurationError(
+                "Synthetic context must contain only generator and record_count."
+            )
+        _require_exact_value(
+            synthetic_context, "generator", NUMBERED_RECORDS_GENERATOR
+        )
+        _require_integer(synthetic_context, "record_count", minimum=1, maximum=100_000)
 
 
 def _validate_manifest(manifest: dict[str, Any]) -> None:

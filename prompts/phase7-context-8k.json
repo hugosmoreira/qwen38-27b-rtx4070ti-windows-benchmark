@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "phase7-context-8k-v1",
+  "purpose": "A deterministic synthetic long-context workload for the Phase 7 IQ2 context-sensitivity ladder; this is not a quality evaluation.",
+  "settings": {
+    "max_tokens": 128,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "workload": {
+    "task_id": "synthetic-context-prefill-8k",
+    "system": "You are completing a controlled local context-sensitivity performance run. Read all supplied synthetic records, then follow the final instruction. Do not use headings or bullet lists.",
+    "user": "After reading all records, explain how a database transaction moves through validation, write-ahead logging, commit, crash recovery, and rollback. Write continuous prose and continue until the response limit is reached.",
+    "synthetic_context": {
+      "generator": "numbered-records-v1",
+      "record_count": 264
+    },
+    "acceptance": {
+      "minimum_completion_tokens": 120,
+      "expected_finish_reason": "length",
+      "minimum_prompt_tokens": 6380,
+      "maximum_prompt_tokens": 6460
+    }
+  }
+}

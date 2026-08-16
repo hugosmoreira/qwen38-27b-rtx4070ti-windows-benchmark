@@ -14,6 +14,7 @@ from typing import Any
 
 from qwen_bench.client import LlamaCppClient, StreamResult
 from qwen_bench.config import BenchmarkConfig, repository_relative
+from qwen_bench.fixtures import build_user_content, synthetic_context_metadata
 from qwen_bench.statistics import descriptive_statistics
 from qwen_bench.telemetry import TelemetryCollector, summarize_telemetry
 
@@ -135,6 +136,21 @@ def _execute_one(
         "process_telemetry_observed": any(isinstance(sample.get("process"), dict) for sample in samples),
         "telemetry_error_free": not collector_errors,
     }
+    if "minimum_prompt_tokens" in acceptance:
+        prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+        validation["prompt_tokens_in_expected_range"] = (
+            isinstance(prompt_tokens, int)
+            and int(acceptance["minimum_prompt_tokens"])
+            <= prompt_tokens
+            <= int(acceptance["maximum_prompt_tokens"])
+        )
+        completion_tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
+        validation["context_budget_respected"] = (
+            isinstance(prompt_tokens, int)
+            and isinstance(completion_tokens, int)
+            and prompt_tokens + completion_tokens
+            <= int(config.data["configuration"]["context_size"])
+        )
     completed = all(validation.values())
     return {
         "run_label": label,
@@ -182,6 +198,7 @@ def _base_record(config: BenchmarkConfig, run_id: str, started: datetime) -> dic
             "prompt_cache": False,
         }
     )
+    controlled_configuration.update(synthetic_context_metadata(config.prompt["workload"]))
     return {
         "schema_version": "benchmark-result-1.0.0",
         "run_id": run_id,
@@ -243,7 +260,7 @@ def _request_body(config: BenchmarkConfig) -> dict[str, Any]:
         "model": config.model_alias,
         "messages": [
             {"role": "system", "content": str(workload["system"])},
-            {"role": "user", "content": str(workload["user"])},
+            {"role": "user", "content": build_user_content(workload)},
         ],
         "stream": True,
         "stream_options": {"include_usage": True},
@@ -293,6 +310,12 @@ def _measured_summary(
         ),
         "peak_process_cpu_percent_of_machine": descriptive_statistics(
             run["telemetry_summary"]["peak_process_cpu_percent_of_machine"] for run in runs
+        ),
+        "prompt_tokens": descriptive_statistics(
+            _nested(run, "server_measurements", "usage", "prompt_tokens") for run in runs
+        ),
+        "completion_tokens": descriptive_statistics(
+            _nested(run, "server_measurements", "usage", "completion_tokens") for run in runs
         ),
         "all_expected_runs_completed": all_expected,
     }

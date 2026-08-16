@@ -1,4 +1,5 @@
 import copy
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -41,6 +42,50 @@ class ConfigurationTests(unittest.TestCase):
             data["inputs"].pop("model_manifest")
             data["model"].pop("quantization")
         self.assertEqual(iq2_data, q2_data)
+
+    def test_phase7_context_ladder_loads_with_scaled_public_fixtures(self) -> None:
+        expected = {
+            4096: ("configs/phase7-iq2-context-4k.json", 131),
+            8192: ("configs/phase7-iq2-context-8k.json", 264),
+            16384: ("configs/phase7-iq2-context-16k.json", 531),
+        }
+        loaded = []
+        for context_size, (path, record_count) in expected.items():
+            config = load_benchmark_config(self.repository_root, Path(path))
+            loaded.append(config)
+            self.assertEqual(config.data["configuration"]["context_size"], context_size)
+            self.assertEqual(config.data["model"]["quantization"], "UD-IQ2_XXS")
+            self.assertEqual(
+                config.prompt["workload"]["synthetic_context"]["record_count"],
+                record_count,
+            )
+            acceptance = config.prompt["workload"]["acceptance"]
+            self.assertLessEqual(
+                acceptance["maximum_prompt_tokens"] + config.prompt["settings"]["max_tokens"],
+                context_size,
+            )
+
+        settings = [config.prompt["settings"] for config in loaded]
+        self.assertTrue(all(value == settings[0] for value in settings[1:]))
+        instructions = [config.prompt["workload"]["user"] for config in loaded]
+        self.assertEqual(len(set(instructions)), 1)
+
+    def test_phase7_rejects_prompt_budget_that_exceeds_context(self) -> None:
+        config_path = Path("configs/phase7-iq2-context-4k.json")
+        source = load_json_object(self.repository_root / config_path)
+        prompt_path = self.repository_root / source["inputs"]["prompt_suite"]
+        prompt = load_json_object(prompt_path)
+        prompt["workload"]["acceptance"]["maximum_prompt_tokens"] = 4000
+        with tempfile.TemporaryDirectory(dir=self.repository_root) as directory:
+            directory_path = Path(directory)
+            temporary_prompt = directory_path / "prompt.json"
+            temporary_config = directory_path / "config.json"
+            temporary_prompt.write_text(json.dumps(prompt), encoding="utf-8")
+            source["inputs"]["prompt_suite"] = temporary_prompt.relative_to(self.repository_root).as_posix()
+            source["inputs"]["runtime_record"] = "environment/phase7-context-protocol-2026-08-15.json"
+            temporary_config.write_text(json.dumps(source), encoding="utf-8")
+            with self.assertRaises(ConfigurationError):
+                load_benchmark_config(self.repository_root, temporary_config.relative_to(self.repository_root))
 
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):

@@ -1,0 +1,54 @@
+{
+  "schema_version": "benchmark-config-1.0",
+  "run": {
+    "classification": "phase7_context_sensitivity_iq2_4k",
+    "result_prefix": "phase7-iq2-context-4k",
+    "output_directory": "results/raw",
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "inter_run_delay_seconds": 2
+  },
+  "server": {
+    "base_uri": "http://127.0.0.1:8090",
+    "model_alias": "Qwen3.8-27B-UD-IQ2_XXS",
+    "expected_context_size": 4096,
+    "expected_parallel_slots": 1
+  },
+  "inputs": {
+    "prompt_suite": "prompts/phase7-context-4k.json",
+    "model_manifest": "environment/model-download-manifest.json",
+    "runtime_record": "environment/phase7-context-protocol-2026-08-15.json"
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA"
+  },
+  "model": { "quantization": "UD-IQ2_XXS" },
+  "configuration": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": -1,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false
+  },
+  "telemetry": { "interval_milliseconds": 250, "gpu_index": 0 }
+}

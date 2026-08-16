@@ -1,0 +1,125 @@
+{
+  "schema_version": "phase7-context-protocol-1.0",
+  "recorded_date": "2026-08-15",
+  "purpose": "Freeze the IQ2 4K, 8K, and 16K context-sensitivity ladder before canonical measurement.",
+  "comparison_group": "phase7-iq2-context-ladder-v1",
+  "selected_model": {
+    "role": "phase6_speed_default",
+    "quantization": "UD-IQ2_XXS",
+    "manifest": "environment/model-download-manifest.json",
+    "size_bytes": 9010048064,
+    "sha256": "8d1b37297d6cf98303cd396896f35e01089ddcc904053a9c6997f7a1c35b8524"
+  },
+  "hypotheses": [
+    "Increasing actual prompt length with context allocation will increase TTFT and total latency.",
+    "Longer active KV context will reduce decode throughput and increase allocated VRAM.",
+    "IQ2 is expected to remain fully GPU-offloaded and technically viable at 16K with Q8 K/V cache."
+  ],
+  "measurement_order": {
+    "context_sizes": [4096, 8192, 16384],
+    "fresh_server_process_per_context": true,
+    "order_randomized": false,
+    "limitation": "The fixed ascending order can correlate model temperature and time with context size; continuous telemetry is retained."
+  },
+  "workload_scaling": {
+    "generator": "numbered-records-v1",
+    "line": "Record NNNNN: amber cedar delta frost harbor juniper lunar meadow quartz river summit violet.",
+    "public_synthetic_data": true,
+    "output_tokens": 128,
+    "target_window_utilization_percent": 78,
+    "levels": [
+      {
+        "context_size": 4096,
+        "records": 131,
+        "prompt_suite": "prompts/phase7-context-4k.json",
+        "configuration": "configs/phase7-iq2-context-4k.json",
+        "accepted_prompt_tokens": [3200, 3260],
+        "expected_user_utf8_bytes": 12534,
+        "expected_user_sha256": "612ccb75d8fd93e69b257d2acd1bc97e1b8dca3dab79b2ee5a828acb2eb8ddeb"
+      },
+      {
+        "context_size": 8192,
+        "records": 264,
+        "prompt_suite": "prompts/phase7-context-8k.json",
+        "configuration": "configs/phase7-iq2-context-8k.json",
+        "accepted_prompt_tokens": [6380, 6460],
+        "expected_user_utf8_bytes": 25036,
+        "expected_user_sha256": "326848425faf996c9aa0f1211c1ec43dfc036aef2dc94c424a87ba9e29cf9c5f"
+      },
+      {
+        "context_size": 16384,
+        "records": 531,
+        "prompt_suite": "prompts/phase7-context-16k.json",
+        "configuration": "configs/phase7-iq2-context-16k.json",
+        "accepted_prompt_tokens": [12760, 12900],
+        "expected_user_utf8_bytes": 50134,
+        "expected_user_sha256": "b98a15dbe45c581d9208356da13d53921f3c8ca783617be5714b29493253a741"
+      }
+    ]
+  },
+  "calibration_before_protocol": {
+    "endpoint": "local llama.cpp tokenizer and one non-canonical one-token chat request",
+    "tokenizer_observation": "The fixed record line added 24 tokens per record over the tested range.",
+    "observed_4k_chat_prompt_tokens": 3231,
+    "observed_4k_records": 131,
+    "chat_template_overhead_vs_combined_raw_tokenization": 16,
+    "cache_prompt": false,
+    "canonical_evidence": false
+  },
+  "held_constant": {
+    "runtime_release": "llama.cpp b10448",
+    "runtime_commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "model": "UD-IQ2_XXS",
+    "device": "CUDA0",
+    "parallel_slots": 1,
+    "gpu_layers_requested": -1,
+    "automatic_fit": "off",
+    "flash_attention": "on",
+    "batch_size": 512,
+    "micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_shift": false,
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false,
+    "thinking": false,
+    "mtp": false,
+    "tools": false,
+    "mcp": false,
+    "vision": false,
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "inter_run_delay_seconds": 2,
+    "telemetry_target_interval_milliseconds": 250
+  },
+  "pre_measurement_gates": {
+    "generated_user_content_hash_and_size_recorded": true,
+    "actual_prompt_tokens_must_match_level_acceptance_range": true,
+    "prompt_plus_completion_tokens_must_not_exceed_context": true,
+    "server_preflight_requires_model_path_alias_context_and_slots": true,
+    "startup_log_must_report_cuda0_and_observed_layer_placement": true,
+    "raw_results_are_unique_and_append_only": true
+  },
+  "sensible_context_criteria": {
+    "technical_viability": "Server starts without OOM, all 66 layers remain on CUDA0, and all canonical runs pass.",
+    "minimum_vram_headroom_mib": 1024,
+    "maximum_mean_ttft_ms": 30000,
+    "minimum_mean_generation_tokens_per_second": 30,
+    "scope": "These are study-specific interactive-use thresholds, not universal hardware requirements."
+  },
+  "comparison_rules": {
+    "primary_prefill_metrics": "actual prompt tokens, prompt tokens per second, and streaming TTFT",
+    "decode_metric": "mean server generation tokens per second for 128 completion tokens",
+    "memory_metric": "startup KV allocation plus sampled peak VRAM and minimum free VRAM",
+    "relative_change_denominator": "4K result",
+    "quality_claim": "None; the synthetic fixture is not graded for model quality."
+  },
+  "exit_condition": "All attempted contexts are preserved and the largest tested context meeting the frozen viability and sensible-use criteria is identified without claiming untested full-window input capacity."
+}

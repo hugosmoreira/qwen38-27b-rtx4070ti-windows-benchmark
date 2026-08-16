@@ -2,6 +2,8 @@
 
 `benchmark-result.schema.json` is the formal JSON Schema Draft 2020-12 contract for Python harness result files.
 
+The result summary permits optional prompt-token and completion-token aggregates for context experiments while remaining compatible with earlier Phase 5 and Phase 6 records.
+
 The Python package also applies semantic checks that span multiple fields, including:
 
 - completed run status agrees with all per-run validation booleans;

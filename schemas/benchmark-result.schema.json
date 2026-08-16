@@ -347,6 +347,8 @@
         "peak_process_working_set_bytes": { "$ref": "#/$defs/nullableStatistics" },
         "peak_process_private_memory_bytes": { "$ref": "#/$defs/nullableStatistics" },
         "peak_process_cpu_percent_of_machine": { "$ref": "#/$defs/nullableStatistics" },
+        "prompt_tokens": { "$ref": "#/$defs/nullableStatistics" },
+        "completion_tokens": { "$ref": "#/$defs/nullableStatistics" },
         "all_expected_runs_completed": { "type": "boolean" }
       }
     },

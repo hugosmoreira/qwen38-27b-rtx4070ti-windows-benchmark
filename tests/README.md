@@ -5,6 +5,7 @@ The test suite validates our benchmark software, not the language model. It uses
 Current coverage includes:
 
 - controlled configuration and path validation;
+- deterministic synthetic-context expansion and context-budget validation;
 - duplicate JSON key rejection;
 - loopback-only client safety;
 - local HTTP preflight and streamed SSE parsing;

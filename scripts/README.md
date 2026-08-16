@@ -16,6 +16,7 @@ Current scripts:
 .\scripts\run_python_tests.ps1
 .\scripts\run_phase5_harness.ps1
 .\scripts\run_phase6_measurement.ps1 -Config configs/phase6-iq2-comparison.json
+.\scripts\run_phase7_measurement.ps1 -Config configs/phase7-iq2-context-4k.json
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -37,6 +38,8 @@ Current scripts:
 `run_phase5_harness.ps1` finds exactly one pinned llama.cpp `b10448` process, passes its PID to the Python CLI, and executes `configs/phase5-iq2-smoke.json`. The Python preflight independently verifies loopback scope, model alias, context, slots, and manifest model path before sending the request. A result is created exclusively under `results/raw/`; existing files are never overwritten.
 
 `run_phase6_measurement.ps1` accepts only one of the two frozen Phase 6 configurations, verifies the selected PID belongs to the pinned native server, and delegates the repeated measurement to the tested Python package. Model switching remains an explicit operator action so a failed launch cannot silently benchmark the wrong quant.
+
+`run_phase7_measurement.ps1` accepts only one of the frozen 4K, 8K, or 16K IQ2 configurations. A fresh server with the matching context must already be running. Python preflight rejects an alias, path, slot count, or context mismatch before a canonical request is sent.
 
 For the Phase 2 quant-triage suite, add:
 
