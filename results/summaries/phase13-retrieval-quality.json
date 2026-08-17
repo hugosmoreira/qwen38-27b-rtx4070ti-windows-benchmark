@@ -1,0 +1,88 @@
+{
+  "schema_version": "phase13-retrieval-quality-1.0",
+  "recorded_date": "2026-08-16",
+  "protocol": {
+    "original": "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+    "protocol_commit": "fc0dc7eef7ee677b8dd9e788b41d94626551f42f",
+    "amendment": "environment/phase13-mtp-quality-protocol-amendment-2026-08-16.json",
+    "amendment_commit": "209a594671f61e6150c670e2ae2dfc4012202228"
+  },
+  "model": "Qwen3.8-27B-IQ4_XS",
+  "runtime": "llama.cpp b10448 (ad1de39e0708e3ced9c71bb3c82d93a2c046a73f)",
+  "controls": {
+    "gpu_layers": "40/66",
+    "mtp_enabled": false,
+    "thinking_enabled": false,
+    "temperature": 0.0,
+    "seed": 42,
+    "prompt_cache": false,
+    "positions": ["early", "middle", "late"],
+    "grader": "exact_match"
+  },
+  "results": [
+    {
+      "profile": "16k_q4",
+      "path": "results/raw/phase13-iq4-xs-retrieval-16k-q4-20260817T054034873652Z-d790e8aa.json",
+      "size_bytes": 7936,
+      "sha256": "2390b438fc5eb564dfd4935fbb94ac83c6f6444575689d702459076fa4e8f8e2",
+      "context_size": 16384,
+      "kv_cache": "q4_0",
+      "prompt_tokens": [12809, 12806, 12808],
+      "answers": ["COBALT-731", "MARBLE-482", "ZEPHYR-915"],
+      "passes": 3,
+      "tasks": 3,
+      "mean_ttft_ms": 61042.708,
+      "mean_prompt_tokens_per_second": 209.879,
+      "mean_generation_tokens_per_second": 3.628,
+      "independent_validation": "passed"
+    },
+    {
+      "profile": "16k_q8",
+      "path": "results/raw/phase13-iq4-xs-retrieval-16k-q8-20260817T054452284165Z-e2e4d630.json",
+      "size_bytes": 7946,
+      "sha256": "f76ae6713c7152da92ce6fa123a6228119243a8be33e392047c992792f25090e",
+      "context_size": 16384,
+      "kv_cache": "q8_0",
+      "prompt_tokens": [12809, 12806, 12808],
+      "answers": ["COBALT-731", "MARBLE-482", "ZEPHYR-915"],
+      "passes": 3,
+      "tasks": 3,
+      "mean_ttft_ms": 61162.917,
+      "mean_prompt_tokens_per_second": 209.440,
+      "mean_generation_tokens_per_second": 3.591,
+      "independent_validation": "passed"
+    },
+    {
+      "profile": "near_64k_q4",
+      "path": "results/raw/phase13-iq4-xs-retrieval-64k-q4-20260817T060655092578Z-f1c92188.json",
+      "size_bytes": 7946,
+      "sha256": "7c02bc884fccc340d8eceae21aa3b7f4baeed35033d1746bb12fb9b67f690409",
+      "context_size": 65536,
+      "kv_cache": "q4_0",
+      "prompt_tokens": [60016, 60015, 60015],
+      "answers": ["TOPAZ-164", "ONYX-583", "SAFFRON-927"],
+      "passes": 3,
+      "tasks": 3,
+      "mean_ttft_ms": 301023.604,
+      "mean_prompt_tokens_per_second": 199.395,
+      "mean_generation_tokens_per_second": 1.571,
+      "independent_validation": "passed"
+    }
+  ],
+  "superseded_attempt": {
+    "path": "results/raw/phase13-iq4-xs-retrieval-64k-q4-20260817T054905078480Z-ef45775c.json",
+    "classification": "superseded",
+    "reason": "All exact answers were correct, but the observed 59,991-59,992 prompt tokens missed the frozen 60,000-token gate. The preserved amendment changed only the filler-record count before a fresh run."
+  },
+  "decision": {
+    "q4_kv_status": "validated_candidate_for_long_context",
+    "near_64k_status": "research_capacity_profile",
+    "reason": "Q4_0 and Q8_0 both passed all three matched 16K needles, and Q4_0 passed all three near-window needles, but the sample contains only nine deterministic retrieval requests and near-64K TTFT was about five minutes."
+  },
+  "limitations": [
+    "Three deterministic needle positions per profile are a convenience sample, not a broad long-context benchmark.",
+    "Exact retrieval does not measure synthesis, multi-hop reasoning, distractor robustness, or arbitrary user documents.",
+    "The 16K Q4_0 and Q8_0 3/3 tie cannot establish quality equivalence.",
+    "Near-64K applies to the fixed 40/66 Q4_0 profile and is not an interactive-speed recommendation."
+  ]
+}

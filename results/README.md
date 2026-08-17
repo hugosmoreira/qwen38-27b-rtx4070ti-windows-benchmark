@@ -40,4 +40,6 @@ The separate 64K/Q4_0 capacity frontier used only 38 prompt tokens and therefore
 
 Stage 13E supplies the missing active-prompt evidence. Four canonical fixed-placement Q4_0 records completed at 3,231, 12,831, 25,623, and 60,015 actual prompt tokens. The near-64K level averaged 301.27 s TTFT, 1.569 generation tok/s, and 1,036 MiB measured free VRAM; `summaries/phase13-active-context.md` and `.json` preserve the bounded interpretation.
 
+Stage 13F closes the study with four IQ4_XS MTP records, three canonical exact-retrieval records, and one 24-task objective-quality record. MTP remains off by default; Q4_0 K/V is the tested long-context candidate; near-64K remains a capacity/research profile; and IQ4_XS's 13/24 objective score is reported as a descriptive lead rather than a general quality claim. See `summaries/phase13-mtp-comparison.*`, `summaries/phase13-retrieval-quality.*`, and `summaries/phase13-objective-quality.*`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

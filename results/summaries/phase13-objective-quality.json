@@ -1,0 +1,80 @@
+{
+  "schema_version": "phase13-objective-quality-1.0",
+  "recorded_date": "2026-08-16",
+  "protocol": "environment/phase13-objective-quality-protocol-2026-08-16.json",
+  "protocol_commit": "2409cd188e27627fc77122caa01efe96ba8efebc",
+  "suite": "prompts/phase8-quality-evaluation.json",
+  "comparison_boundary": "These are complete operating points: IQ4_XS used hybrid 45/66 placement while IQ2 and Q2 used full-GPU placement. The result is not a quantization-only causal estimate.",
+  "raw_results": {
+    "iq4_xs": {
+      "path": "results/raw/phase13-quality-iq4-xs-20260817T064903504447Z-d2eedc30.json",
+      "run_id": "phase13-quality-iq4-xs-20260817T064903504447Z-d2eedc30",
+      "git_commit": "2409cd188e27627fc77122caa01efe96ba8efebc",
+      "size_bytes": 37187,
+      "sha256": "f081d013f878cd18218d4737c05b70f92a566483d8b93cc265d49275bc9f5aee"
+    },
+    "q2": {
+      "path": "results/raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json",
+      "size_bytes": 37862,
+      "sha256": "b8edf1c0713baf180fa3ff6472e219971ea50a14d11d75fbd5dc580c503edbaf"
+    },
+    "iq2": {
+      "path": "results/raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json",
+      "size_bytes": 38185,
+      "sha256": "f2213bc2e6c6952b9509efd4915c9278fb60409b736e89453fff0862d840c945"
+    }
+  },
+  "validation": {
+    "iq4_xs_suite_backed_independent_regrade": "passed",
+    "requests_completed": 24,
+    "finish_reason_stop": 24,
+    "offline_tests": "71/71 passed"
+  },
+  "scores": {
+    "iq4_xs": {
+      "passes": 13,
+      "tasks": 24,
+      "pass_rate_percent": 54.167,
+      "categories": {
+        "arithmetic": {"passes": 2, "tasks": 5},
+        "logic": {"passes": 3, "tasks": 5},
+        "python_trace": {"passes": 2, "tasks": 5},
+        "structured_output": {"passes": 4, "tasks": 5},
+        "text_data": {"passes": 2, "tasks": 4}
+      }
+    },
+    "q2": {"passes": 10, "tasks": 24, "pass_rate_percent": 41.667},
+    "iq2": {"passes": 9, "tasks": 24, "pass_rate_percent": 37.500}
+  },
+  "paired_analysis": {
+    "iq4_xs_vs_q2": {
+      "both_pass": 9,
+      "iq4_xs_only": 4,
+      "q2_only": 1,
+      "neither_pass": 10,
+      "iq4_xs_minus_q2_passes": 3,
+      "two_sided_exact_mcnemar_p": 0.375
+    },
+    "iq4_xs_vs_iq2": {
+      "both_pass": 7,
+      "iq4_xs_only": 6,
+      "iq2_only": 2,
+      "neither_pass": 9,
+      "iq4_xs_minus_iq2_passes": 4,
+      "two_sided_exact_mcnemar_p": 0.289062
+    },
+    "interpretation": "IQ4_XS led descriptively in this 24-task suite, but neither paired exact test was statistically significant."
+  },
+  "decision": {
+    "daily_default": "UD-IQ2_XXS",
+    "quality_candidate": "IQ4_XS",
+    "reason": "IQ4_XS produced promising directional quality evidence but its repeated 4K decode was 7.302 times slower than the full-GPU IQ2 operating point. Use it selectively when quality matters more than latency; do not describe it as generally superior from 24 custom tasks."
+  },
+  "limitations": [
+    "The 24 inspectable custom tasks are not a validated or randomly sampled benchmark population.",
+    "Pass@1 exact grading gives no partial credit and measures format adherence as well as correctness.",
+    "One deterministic attempt per task does not estimate sampling or order variance.",
+    "Model quantization and GPU placement changed together across operating points.",
+    "Quality-run timings are audit metadata, not the controlled speed comparison."
+  ]
+}

@@ -192,6 +192,32 @@ After the separate 64K/Q4_0 capacity frontier selects 40/66 layers, run each act
 
 Repeat with the committed 4K, 16K, and 32K configs and matching fresh server context sizes. Do not reuse the 45-layer 4K/Q8 baseline server: the active ladder intentionally fixes 40 layers and Q4_0 K/V at every level. The 64K config requires 60,000–60,100 tokenizer-observed prompt tokens; a successful allocation with a short prompt is not a reproduction of the active-context result.
 
+Reproduce Stage 13F from fresh matching servers. MTP uses the four `phase13-iq4-xs-mtp-*.json` configs with 40/66 layers and Q4_0 K/V:
+
+```powershell
+.\scripts\run_phase13_mtp_measurement.ps1 `
+    -Config configs/phase13-iq4-xs-mtp-off-prose.json `
+    -ServerProcessId <verified-llama-server-pid>
+```
+
+Retrieval uses the committed 16K Q4_0/Q8_0 pair and near-64K Q4_0 config:
+
+```powershell
+.\scripts\run_phase13_retrieval.ps1 `
+    -Config configs/phase13-iq4-xs-retrieval-16k-q4.json `
+    -ServerProcessId <verified-llama-server-pid>
+```
+
+The objective-quality run requires IQ4_XS at 4K, 45/66 layers, Q8_0 K/V, and MTP off:
+
+```powershell
+.\scripts\run_phase13_objective_quality.ps1 `
+    -Config configs/phase13-iq4-xs-quality-4k-q8.json `
+    -ServerProcessId <verified-llama-server-pid>
+```
+
+Each wrapper rejects a server whose pinned executable, model manifest, model hash, context, observed layer placement, K/V type, or MTP state differs from its frozen config. Start a fresh server for every configuration and stop only the verified process after its result validates.
+
 ## Reporting a reproduction
 
 Retain raw JSON, exact prompts, runtime and model revisions, launch flags, startup layer placement, hash checks, failed attempts, telemetry cadence, and interpretation limits. Report measured facts separately from estimates. If you change a controlled input, call the result a related experiment rather than an exact reproduction.

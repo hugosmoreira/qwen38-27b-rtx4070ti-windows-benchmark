@@ -22,3 +22,6 @@ Current summary:
 - `phase13-iq4-xs-kv-cache.md` and `.json` isolate Q8_0 versus Q4_0 target K/V allocation, speed, memory, and output equivalence at 45/66 layers.
 - `phase13-active-context-capacity.md` selects 40/66 layers for the fixed-placement Q4_0 ladder and explicitly distinguishes 64K allocation from a near-64K active prompt.
 - `phase13-active-context.md` and `.json` report the completed fixed-placement 4K/16K/32K/64K ladder, including 60,015-token near-window evidence, latency, decode slowdown, tight VRAM boundary, and the remaining retrieval-quality limitation.
+- `phase13-mtp-comparison.md` and `.json` report IQ4_XS MTP off/on performance, draft acceptance, memory cost, and deterministic output divergence for prose and code.
+- `phase13-retrieval-quality.md` and `.json` report exact early/middle/late retrieval at matched 16K Q4_0/Q8_0 and near-64K Q4_0, including the preserved token-gate amendment.
+- `phase13-objective-quality.md` and `.json` compare the final 13/24 IQ4_XS result with the existing Q2 and IQ2 operating points using paired exact statistics and bounded claims.

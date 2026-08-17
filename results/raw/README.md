@@ -29,6 +29,12 @@ Current records:
 - `phase13-iq4-xs-context-16k-q4-20260817T041351163881Z-550fffc2.json` — canonical fixed-placement record with 12,831 prompt tokens.
 - `phase13-iq4-xs-context-32k-q4-20260817T042130693295Z-644d82c6.json` — canonical fixed-placement record with 25,623 prompt tokens.
 - `phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json` — canonical near-window record with 60,015 prompt tokens, three completed measured repetitions, and continuous telemetry.
+- `phase13-iq4-xs-mtp-off-prose-20260817T051528425055Z-586d72a9.json` and `phase13-iq4-xs-mtp-on-prose-20260817T052153843582Z-de02d82c.json` — canonical IQ4_XS prose MTP pair with five measured repetitions per state.
+- `phase13-iq4-xs-mtp-on-code-20260817T052802617317Z-33960077.json` and `phase13-iq4-xs-mtp-off-code-20260817T053337744219Z-d25ca37a.json` — canonical IQ4_XS Python-code MTP pair.
+- `phase13-iq4-xs-retrieval-16k-q4-20260817T054034873652Z-d790e8aa.json` and `phase13-iq4-xs-retrieval-16k-q8-20260817T054452284165Z-e2e4d630.json` — canonical matched-cache exact-retrieval records; both passed 3/3.
+- `phase13-iq4-xs-retrieval-64k-q4-20260817T054905078480Z-ef45775c.json` — preserved superseded near-window attempt; all answers were exact, but 59,991–59,992 prompt tokens missed the frozen 60,000-token gate.
+- `phase13-iq4-xs-retrieval-64k-q4-20260817T060655092578Z-f1c92188.json` — canonical near-window exact-retrieval record at 60,015–60,016 actual prompt tokens; 3/3 passed.
+- `phase13-quality-iq4-xs-20260817T064903504447Z-d2eedc30.json` — canonical IQ4_XS run on the unchanged Phase 8 objective suite; 24/24 requests completed and 13/24 passed independent re-grading.
 
 Phase 5's file is a smoke result, not a repeated benchmark. Its short end-to-end rates include local API and orchestration overhead. The Phase 6 pair supersedes Phase 4 for the controlled quant comparison while Phase 4 remains the earlier standalone IQ2 baseline.
 

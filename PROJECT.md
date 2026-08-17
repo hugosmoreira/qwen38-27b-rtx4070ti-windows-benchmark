@@ -11,11 +11,11 @@
 - Phase 6 completed on 2026-08-15. Under frozen 4K controls, IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2 and used 1,583 MiB less peak VRAM. Both configurations reported 66/66 GPU layers, so this is not a CPU layer-offload comparison.
 - Phase 7 completed on 2026-08-15. IQ2 passed the 4K, 8K, and 16K ladder with proportionally scaled prompts. At 16K, the 12,831-token prompt plus 128-token output averaged 11.119 seconds TTFT, 39.201 generation tok/s, and 2,507 MiB minimum free VRAM.
 - Phase 8 completed on 2026-08-15. Q2 passed 10/24 objective tasks and IQ2 passed 9/24; paired counts were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 edge is not a meaningful general-quality win, so IQ2 remains the practical default.
-- Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; Q3 and Q4 remain deferred.
+- Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; `UD-Q3_K_XL` and `UD-Q4_K_XL` remain deferred, while `IQ4_XS` is covered separately by Phase 13.
 - Phase 10 passed its strict local `v0.1.0` gate and was published to `hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark` on 2026-08-16. The first Windows CI run exposed a repository-root normalization defect; commit `8ae9061` corrected it, and the Python 3.11/3.14 matrix now passes. The candidate remains untagged and has no GitHub Release.
 - Phase 11 completed on 2026-08-16. The evidence-linked report was published by `Hugosmr` as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65`; the rendered post preserves all 25 GitHub evidence links and the study limitations.
-- Phase 12 started on 2026-08-16 as a local-first publication package. LinkedIn and X drafts, a benchmark card, and a channel checklist will be validated before any account-level publication action.
-- Phase 13 stages A–E completed locally on 2026-08-16. The pinned IQ4_XS artifact, 4K hybrid baseline, Q4_0 cache pair, and fixed-placement active 4K/16K/32K/64K ladder are complete; Stage 13F MTP and objective retrieval/quality validation remain.
+- Phase 12 started on 2026-08-16 as a local-first publication package. LinkedIn and X drafts, a benchmark card, and a channel checklist are validated locally; submission of the prepared posts remains separately approval-gated.
+- Phase 13 completed locally on 2026-08-16. IQ4_XS passed 3/3 exact retrieval tasks at both matched 16K cache profiles and at near-64K Q4_0, led the 24-task objective suite descriptively at 13/24, and retained MTP-off as the default after workload-specific +0.519% prose and +14.958% code gains with output divergence.
 
 ## Objective
 
@@ -158,7 +158,7 @@ Status: completed on 2026-08-15. Both models completed all 24 requests under the
 
 These experiments must not silently change the baseline.
 
-Status: completed on 2026-08-15 for MTP off versus `draft-mtp` on with IQ2 at 4K across matched prose and code workloads. The protocol is `environment/phase9-mtp-protocol-2026-08-15.json`, and the result is `results/summaries/phase9-mtp-comparison.md`. Q3, Q4, vision, and runtime-convenience comparisons are explicitly deferred.
+Status: completed on 2026-08-15 for MTP off versus `draft-mtp` on with IQ2 at 4K across matched prose and code workloads. The protocol is `environment/phase9-mtp-protocol-2026-08-15.json`, and the result is `results/summaries/phase9-mtp-comparison.md`. `UD-Q3_K_XL`, `UD-Q4_K_XL`, vision, and runtime-convenience comparisons are explicitly deferred; Phase 13 later tests the distinct `IQ4_XS` artifact.
 
 ### Phase 10 — GitHub study release
 
@@ -195,7 +195,7 @@ Status: active on 2026-08-16. Drafting and repository publication of the communi
 
 Exit condition: every completed substage retains pinned inputs, startup placement, raw telemetry, failures, and bounded conclusions that distinguish quantization, runtime, layer placement, K/V cache, and active prompt length.
 
-Status: active on 2026-08-16. Stages 13A-E are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, Q4_0 K/V cut direct cache allocation 47.059%, and a fixed 40/66-layer ladder completed at 3,231, 12,831, 25,623, and 60,015 active prompt tokens. Near-64K averaged 301.27 s TTFT and 1.569 generation tok/s with tight memory. Stage 13F MTP and objective retrieval inputs are frozen and await measurement.
+Status: completed locally on 2026-08-16. The artifact, storage preflight, offload frontiers, repeated baseline, K/V pair, active-context ladder, MTP pairs, exact retrieval, and 24-task objective-quality run all completed under frozen controls. IQ2 remains the interactive default; IQ4_XS 4K/Q8 is the selective quality profile; 40/66 Q4_0 is the long-context profile; near-64K remains research-only. External publication of these new Phase 13 results requires separate approval.
 
 ## Success criteria
 

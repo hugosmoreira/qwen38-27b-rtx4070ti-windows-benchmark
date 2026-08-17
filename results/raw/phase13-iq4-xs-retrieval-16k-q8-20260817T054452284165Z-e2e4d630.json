@@ -1,0 +1,274 @@
+{
+  "schema_version": "quality-evaluation-result-1.0.0",
+  "run_id": "phase13-iq4-xs-retrieval-16k-q8-20260817T054452284165Z-e2e4d630",
+  "timestamp": "2026-08-17T05:44:52.284165Z",
+  "git_commit": "fc0dc7eef7ee677b8dd9e788b41d94626551f42f",
+  "classification": "phase13_iq4_xs_retrieval_16k_q8",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+  "model_manifest": "environment/phase13-iq4-xs-download-manifest.json",
+  "prompt_suite": "prompts/phase13-retrieval-16k.json",
+  "quality_config": "configs/phase13-iq4-xs-retrieval-16k-q8.json",
+  "python_runtime": {
+    "implementation": "CPython",
+    "version": "3.13.15",
+    "isolated_environment": true,
+    "runtime_dependencies": []
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "system_fingerprint": "b10448-ad1de39e0"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "f1bfb127c64f7072bdd2cad55f258b9c8b2910fe",
+    "filename": "Qwen3.8-27B-IQ4_XS.gguf",
+    "quantization": "IQ4_XS",
+    "file_size_bytes": 15705861088,
+    "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+    "served_alias": "Qwen3.8-27B-IQ4_XS"
+  },
+  "configuration": {
+    "context_size": 16384,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": 40,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q8_0",
+    "kv_cache_v_type": "q8_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "max_output_tokens": 32,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false
+  },
+  "methodology": {
+    "pass_definition": "First response passes its committed deterministic validator.",
+    "attempts_per_task": 1,
+    "task_order_randomized": false,
+    "prompt_cache_disabled": true,
+    "thinking_disabled": true,
+    "tools_disabled": true,
+    "inter_task_delay_seconds": 0.25,
+    "expected_tasks": 3
+  },
+  "server_preflight": {
+    "status": "passed",
+    "checks": {
+      "health_ok": true,
+      "model_alias_present": true,
+      "context_size_matches": true,
+      "parallel_slots_match": true,
+      "model_path_matches_manifest": true
+    },
+    "served_model_alias": "Qwen3.8-27B-IQ4_XS"
+  },
+  "tasks": [
+    {
+      "sequence": 1,
+      "task_id": "retrieval-16k-early",
+      "category": "retrieval_early",
+      "validator_type": "exact",
+      "status": "completed",
+      "passed": true,
+      "grade": {
+        "passed": true,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 9.265,
+        "time_to_first_content_token_ms": 61496.34,
+        "total_latency_ms": 63447.71
+      },
+      "finish_reason": "stop",
+      "content": "COBALT-731",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 12809,
+        "total_tokens": 12817,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 12809,
+        "prompt_ms": 61486.982,
+        "prompt_per_token_ms": 4.800295261144508,
+        "prompt_per_second": 208.32051896773856,
+        "predicted_n": 8,
+        "predicted_ms": 1951.168,
+        "predicted_per_token_ms": 278.7382857142857,
+        "predicted_per_second": 3.5875947125004104
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": true
+      }
+    },
+    {
+      "sequence": 2,
+      "task_id": "retrieval-16k-middle",
+      "category": "retrieval_middle",
+      "validator_type": "exact",
+      "status": "completed",
+      "passed": true,
+      "grade": {
+        "passed": true,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 9.552,
+        "time_to_first_content_token_ms": 60794.32,
+        "total_latency_ms": 62465.611
+      },
+      "finish_reason": "stop",
+      "content": "MARBLE-482",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 12806,
+        "total_tokens": 12813,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 12806,
+        "prompt_ms": 60784.711,
+        "prompt_per_token_ms": 4.746580587224739,
+        "prompt_per_second": 210.67797788822256,
+        "predicted_n": 7,
+        "predicted_ms": 1671.081,
+        "predicted_per_token_ms": 278.51349999999996,
+        "predicted_per_second": 3.5904902275832233
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": true
+      }
+    },
+    {
+      "sequence": 3,
+      "task_id": "retrieval-16k-late",
+      "category": "retrieval_late",
+      "validator_type": "exact",
+      "status": "completed",
+      "passed": true,
+      "grade": {
+        "passed": true,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 9.439,
+        "time_to_first_content_token_ms": 61198.091,
+        "total_latency_ms": 63424.215
+      },
+      "finish_reason": "stop",
+      "content": "ZEPHYR-915",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 9,
+        "prompt_tokens": 12808,
+        "total_tokens": 12817,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 12808,
+        "prompt_ms": 61188.605,
+        "prompt_per_token_ms": 4.777373906933167,
+        "prompt_per_second": 209.3200196343747,
+        "predicted_n": 9,
+        "predicted_ms": 2225.929,
+        "predicted_per_token_ms": 278.241125,
+        "predicted_per_second": 3.5940050199265112
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": true
+      }
+    }
+  ],
+  "summary": {
+    "tasks_expected": 3,
+    "tasks_attempted": 3,
+    "requests_completed": 3,
+    "tasks_passed": 3,
+    "pass_rate_percent": 100.0,
+    "category_results": {
+      "retrieval_early": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 1,
+        "pass_rate_percent": 100.0
+      },
+      "retrieval_middle": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 1,
+        "pass_rate_percent": 100.0
+      },
+      "retrieval_late": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 1,
+        "pass_rate_percent": 100.0
+      }
+    },
+    "finish_reason_counts": {
+      "stop": 3
+    },
+    "all_expected_requests_completed": true
+  },
+  "outcome": {
+    "status": "completed",
+    "error_type": null,
+    "error_message": null
+  }
+}

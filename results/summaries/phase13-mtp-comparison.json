@@ -1,0 +1,128 @@
+{
+  "schema_version": "phase13-mtp-comparison-1.0",
+  "recorded_date": "2026-08-16",
+  "protocol": "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+  "protocol_commit": "fc0dc7eef7ee677b8dd9e788b41d94626551f42f",
+  "model": "Qwen3.8-27B-IQ4_XS",
+  "runtime": "llama.cpp b10448 (ad1de39e0708e3ced9c71bb3c82d93a2c046a73f)",
+  "controls": {
+    "context_size": 4096,
+    "gpu_layers": "40/66",
+    "target_kv_cache": "q4_0",
+    "mtp_type": "draft-mtp",
+    "draft_n_max": 2,
+    "draft_kv_cache": "f16",
+    "max_completion_tokens": 256,
+    "temperature": 0.0,
+    "seed": 42,
+    "warmup_runs_per_state": 1,
+    "measured_repetitions_per_state": 5
+  },
+  "sources": [
+    {
+      "state": "prose_off",
+      "path": "results/raw/phase13-iq4-xs-mtp-off-prose-20260817T051528425055Z-586d72a9.json",
+      "size_bytes": 849856,
+      "sha256": "eec8147e968537024d3a0f0b4fa5f0456a6fc26aa50094962de6bcf5bc5cdeda"
+    },
+    {
+      "state": "prose_on",
+      "path": "results/raw/phase13-iq4-xs-mtp-on-prose-20260817T052153843582Z-de02d82c.json",
+      "size_bytes": 846116,
+      "sha256": "60d918bba47d96d72c60b70f03f6a759ff5c9f7c7d548027bb2b353f4dc4e9b0"
+    },
+    {
+      "state": "code_on",
+      "path": "results/raw/phase13-iq4-xs-mtp-on-code-20260817T052802617317Z-33960077.json",
+      "size_bytes": 745614,
+      "sha256": "1ce4e112c3ec0c03da64bb8d29e64b1780764b36b0330f93bc6f29ba59c515d6"
+    },
+    {
+      "state": "code_off",
+      "path": "results/raw/phase13-iq4-xs-mtp-off-code-20260817T053337744219Z-d25ca37a.json",
+      "size_bytes": 847677,
+      "sha256": "5ed4d943261a335f77ae7d53c4f3fcdb58109a5b9b994571ebf218a340260a91"
+    }
+  ],
+  "workloads": {
+    "prose": {
+      "generation_tokens_per_second": {
+        "mtp_off_mean": 5.005,
+        "mtp_on_mean": 5.031,
+        "relative_change_percent_vs_off": 0.519
+      },
+      "total_latency_ms": {
+        "mtp_off_mean": 51526.439,
+        "mtp_on_mean": 51287.124,
+        "relative_change_percent_vs_off": -0.464
+      },
+      "time_to_first_content_token_ms": {
+        "mtp_off_mean": 577.719,
+        "mtp_on_mean": 604.301,
+        "relative_change_percent_vs_off": 4.601
+      },
+      "peak_vram_used_mib": {
+        "mtp_off_mean": 9880.8,
+        "mtp_on_mean": 10377.0,
+        "absolute_change_mib": 496.2
+      },
+      "speculation": {
+        "draft_tokens_total": 1075,
+        "accepted_draft_tokens_total": 735,
+        "pooled_token_acceptance_percent": 68.372
+      },
+      "output_equivalence": {
+        "paired_measured_outputs_matching": 0,
+        "paired_measured_outputs_total": 5,
+        "first_different_character_index_zero_based": 329,
+        "mtp_off_utf8_sha256": "932f427076dd1421d2d7ea420f5b1e79b6f65506cbe4f0561a2d8bbd0a5a2f2b",
+        "mtp_on_utf8_sha256": "d7755111303f19a5e989818f8142dd4e474da9d80b165ec291795284723701fb"
+      }
+    },
+    "code": {
+      "generation_tokens_per_second": {
+        "mtp_off_mean": 4.994,
+        "mtp_on_mean": 5.741,
+        "relative_change_percent_vs_off": 14.958
+      },
+      "total_latency_ms": {
+        "mtp_off_mean": 51643.701,
+        "mtp_on_mean": 45033.890,
+        "relative_change_percent_vs_off": -12.799
+      },
+      "time_to_first_content_token_ms": {
+        "mtp_off_mean": 587.269,
+        "mtp_on_mean": 618.374,
+        "relative_change_percent_vs_off": 5.297
+      },
+      "peak_vram_used_mib": {
+        "mtp_off_mean": 9888.6,
+        "mtp_on_mean": 10378.4,
+        "absolute_change_mib": 489.8
+      },
+      "speculation": {
+        "draft_tokens_total": 940,
+        "accepted_draft_tokens_total": 800,
+        "pooled_token_acceptance_percent": 85.106
+      },
+      "output_equivalence": {
+        "paired_measured_outputs_matching": 0,
+        "paired_measured_outputs_total": 5,
+        "first_different_character_index_zero_based": 86,
+        "mtp_off_utf8_sha256": "0cab23fa0e478c453758c3571fc7940d0ce73ac139f7f3a1a1630e64c6d3e755",
+        "mtp_on_utf8_sha256": "9a78fa916649dac1246aaad5461a44f389c24c73c51c7ccebdde3f3f382a3337"
+      }
+    }
+  },
+  "decision": {
+    "default_mtp_state": "off",
+    "reason": "The prose speed change was negligible, both deterministic workloads changed output, and MTP added about 490-496 MiB sampled peak VRAM.",
+    "conditional_use": "MTP may be enabled as an opt-in coding profile after application-specific correctness tests when a roughly 15% workload-specific speed gain is worth the memory cost."
+  },
+  "limitations": [
+    "Two synthetic 256-token workloads do not characterize arbitrary prompts.",
+    "Output hashes establish equivalence or divergence, not which output is better.",
+    "The result applies to the pinned runtime, model revision, 40/66 placement, Q4_0 target cache, draft depth two, greedy decoding, and one slot.",
+    "Speed is reported per workload and is not pooled."
+  ]
+}

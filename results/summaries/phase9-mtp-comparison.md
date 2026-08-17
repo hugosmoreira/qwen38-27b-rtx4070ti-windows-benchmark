@@ -44,4 +44,4 @@ $env:PYTHONPATH = Join-Path (Get-Location) 'src'
 
 ## Interpretation boundary
 
-This is a two-workload compatibility and performance experiment on one machine. It does not establish MTP quality, correctness across arbitrary prompts, performance at other context sizes, or behavior in newer llama.cpp builds. Speed is reported per workload and is not pooled. Q3, Q4, vision, and Unsloth-versus-native experiments remain deferred.
+This is a two-workload compatibility and performance experiment on one machine. It does not establish MTP quality, correctness across arbitrary prompts, performance at other context sizes, or behavior in newer llama.cpp builds. Speed is reported per workload and is not pooled. The `UD-Q3_K_XL`, `UD-Q4_K_XL`, vision, and Unsloth-versus-native experiments remain deferred; Phase 13 separately tests `IQ4_XS`.

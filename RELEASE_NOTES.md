@@ -9,10 +9,14 @@ This release candidate packages an auditable Windows study of Qwen3.8-27B GGUF i
 - On 24 paired objective tasks, Q2 passed 10 and IQ2 passed 9; exact McNemar `p = 1.0` did not support a directional quality claim.
 - IQ2 completed the tested 16K configuration with a 12,831-token prompt plus 128 generated tokens, 39.201 generation tok/s, and 2,507 MiB minimum sampled free VRAM.
 - MTP increased throughput 47.284% for prose and 92.651% for code, but prose output diverged at generated token 16. MTP remains off by default.
+- Hybrid IQ4_XS completed at 5.977 tok/s with 45/66 GPU layers at 4K/Q8; the matched full-GPU IQ2 operating point was 7.302 times faster.
+- IQ4_XS passed 3/3 exact retrieval tasks at matched 16K Q4_0 and Q8_0 profiles, then 3/3 at 60,015–60,016 prompt tokens with Q4_0.
+- IQ4_XS passed 13/24 objective tasks versus Q2 at 10/24 and IQ2 at 9/24. Exact paired p-values of 0.375 and 0.289 make this a descriptive lead, not proof of general superiority.
+- IQ4_XS MTP changed outputs in both workloads, added about 490–496 MiB peak VRAM, and improved decode by only 0.519% for prose and 14.958% for code; it remains off by default.
 
 ## Reproduce and inspect
 
-No GPU or model download is required to run the 61-test software suite, validate canonical Phase 5–9 records, check public links, and audit release boundaries. See [REPRODUCING.md](REPRODUCING.md).
+No GPU or model download is required to run the 71-test software suite, validate canonical records, check public links, and audit release boundaries. See [REPRODUCING.md](REPRODUCING.md).
 
 ## Publication state
 
@@ -20,4 +24,4 @@ The release candidate is public on GitHub, and its Windows CI matrix passes on P
 
 ## Interpretation boundary
 
-The results apply to one declared Windows machine, pinned model files, llama.cpp `b10448`, and the committed workloads. They do not establish general model quality, universal context capacity, or performance on other systems. Q3, Q4, vision, and Unsloth-versus-native convenience comparisons remain deferred.
+The results apply to one declared Windows machine, pinned model files, llama.cpp `b10448`, and the committed workloads. They do not establish general model quality, universal context capacity, or performance on other systems. IQ4_XS is tested, while the differently named `UD-Q3_K_XL`, `UD-Q4_K_XL`, vision, and Unsloth-versus-native convenience comparisons remain deferred.

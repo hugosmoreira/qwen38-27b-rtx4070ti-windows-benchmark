@@ -50,11 +50,19 @@
       "results/raw/phase13-iq4-xs-context-4k-q4-20260817T040950110012Z-6ac3ebe8.json",
       "results/raw/phase13-iq4-xs-context-16k-q4-20260817T041351163881Z-550fffc2.json",
       "results/raw/phase13-iq4-xs-context-32k-q4-20260817T042130693295Z-644d82c6.json",
-      "results/raw/phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json"
+      "results/raw/phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json",
+      "results/raw/phase13-iq4-xs-mtp-off-prose-20260817T051528425055Z-586d72a9.json",
+      "results/raw/phase13-iq4-xs-mtp-on-prose-20260817T052153843582Z-de02d82c.json",
+      "results/raw/phase13-iq4-xs-mtp-on-code-20260817T052802617317Z-33960077.json",
+      "results/raw/phase13-iq4-xs-mtp-off-code-20260817T053337744219Z-d25ca37a.json"
     ],
     "quality_result": [
       "results/raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json",
-      "results/raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json"
+      "results/raw/phase8-quality-iq2-20260816T033811840476Z-8c67331b.json",
+      "results/raw/phase13-iq4-xs-retrieval-16k-q4-20260817T054034873652Z-d790e8aa.json",
+      "results/raw/phase13-iq4-xs-retrieval-16k-q8-20260817T054452284165Z-e2e4d630.json",
+      "results/raw/phase13-iq4-xs-retrieval-64k-q4-20260817T060655092578Z-f1c92188.json",
+      "results/raw/phase13-quality-iq4-xs-20260817T064903504447Z-d2eedc30.json"
     ]
   },
   "noncanonical_evidence": [

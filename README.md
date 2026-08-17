@@ -4,17 +4,17 @@
 
 ## Status
 
-**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. Q3 and Q4 were deferred from the `v0.1.0` evidence bundle.
+**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The named `UD-Q3_K_XL` and `UD-Q4_K_XL` candidates were deferred; the separate `IQ4_XS` study appears in Phase 13.
 
 **Phase 10 is public on GitHub as of 2026-08-16.** The Apache-2.0 `v0.1.0` candidate, citation metadata, canonical evidence, and reproducibility tooling are available at [hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark). The Windows CI matrix passes on Python 3.11 and 3.14 after the hosted-runner path normalization in commit [`8ae9061`](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/commit/8ae9061e54c45e32e906be636bbf2a26275d9a83). The candidate is not yet tagged or published as a GitHub Release.
 
 **Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded.
 
-**Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. No social post has been published, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
+**Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. The prepared thread has not been submitted by this project, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
 
-**Phase 13 stages A–E completed locally on 2026-08-16.** The pinned 14.63 GiB `IQ4_XS` artifact validated, hybrid offload selected 45/66 layers for 4K/Q8 and 40/66 for the fixed Q4_0 active-context ladder, and all four ladder levels completed. The largest request actually ingested 60,015 prompt tokens plus 128 generated tokens; it averaged 301.27 s TTFT, 1.569 generation tok/s, and 1,036 MiB measured free VRAM. This is a near-window capacity demonstration, not the recommended interactive profile. MTP and objective retrieval/quality remain Stage 13F.
+**Phase 13 completed locally on 2026-08-16.** The pinned 14.63 GiB `IQ4_XS` artifact ran through hybrid CPU/GPU offload at 45/66 layers for 4K/Q8 and 40/66 for long-context Q4_0. Exact retrieval passed 3/3 at matched 16K Q4 and Q8, then 3/3 at 60,015–60,016 tokens with Q4. The final objective suite favored IQ4_XS descriptively at 13/24 versus Q2 at 10/24 and IQ2 at 9/24, but paired exact p-values of 0.375 and 0.289 did not establish a general quality advantage.
 
-The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
+The practical recommendation is to keep IQ2 as the interactive default: its controlled 4K decode was 43.643 tok/s versus 5.977 tok/s for IQ4_XS. Use IQ4_XS at 4K/Q8 selectively as the quality-oriented profile; use 40/66 Q4_0 only when long context matters. Near-64K worked, but roughly five-minute TTFT and 1.57 tok/s decode make it a research profile. IQ4_XS MTP remains off by default because prose gained only 0.52%, code gained 14.96%, both outputs changed, and peak VRAM rose about 490–496 MiB.
 
 The Phase 9 speed claims come only from four committed five-repetition records. The earlier 64-token capability probe remains excluded and was used only to validate MTP operation and identify `draft_n` and `draft_n_accepted`.
 
@@ -316,4 +316,12 @@ Stage 13E then held IQ4_XS, 40/66 placement, Q4_0 K/V, runtime, and feature cont
 | 32K | 25,623 | 128.647 s | 2.695 tok/s | 1,584 MiB |
 | 64K | 60,015 | 301.272 s | 1.569 tok/s | 1,036 MiB |
 
-Every row is the mean of three measured repetitions after one excluded warm-up. The 64K warm-up briefly reached 994 MiB free, so the memory boundary is tight even though measured repetitions stayed at or above 1,033 MiB. See the [active-context interpretation](results/summaries/phase13-active-context.md) and [machine-readable summary](results/summaries/phase13-active-context.json). Keep IQ2 as the daily speed default; treat IQ4_XS near-64K as successful research capacity pending Stage 13F retrieval and quality validation.
+Every row is the mean of three measured repetitions after one excluded warm-up. The 64K warm-up briefly reached 994 MiB free, so the memory boundary is tight even though measured repetitions stayed at or above 1,033 MiB. See the [active-context interpretation](results/summaries/phase13-active-context.md) and [machine-readable summary](results/summaries/phase13-active-context.json).
+
+Stage 13F added three final checks:
+
+- [Long-context retrieval](results/summaries/phase13-retrieval-quality.md): Q4_0 and Q8_0 each passed 3/3 exact needles at 16K; Q4_0 passed 3/3 at 60,015–60,016 tokens.
+- [IQ4_XS MTP](results/summaries/phase13-mtp-comparison.md): +0.519% prose and +14.958% code decode, with changed deterministic outputs and about +490–496 MiB peak VRAM; off remains the default.
+- [Objective quality](results/summaries/phase13-objective-quality.md): IQ4_XS passed 13/24 versus Q2 10/24 and IQ2 9/24, a descriptive lead without statistically significant paired evidence.
+
+The [Stage 13F checkpoint](environment/phase13-iq4-xs-stage-f-2026-08-16.json) binds the raw hashes to ignored startup-log evidence and records cleanup. These conclusions apply to complete operating points, not quantization alone.

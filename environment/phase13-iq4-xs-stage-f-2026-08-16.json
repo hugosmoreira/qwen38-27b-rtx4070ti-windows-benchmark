@@ -1,0 +1,41 @@
+{
+  "schema_version": "phase13-stage-f-checkpoint-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "phase_13_complete",
+  "protocols": [
+    "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+    "environment/phase13-mtp-quality-protocol-amendment-2026-08-16.json",
+    "environment/phase13-objective-quality-protocol-2026-08-16.json"
+  ],
+  "launch_evidence": [
+    {"purpose":"mtp_prose_off","server_run_id":"native-server-20260817T051514597Z","observed_gpu_layers":"40/66","context_size":4096,"kv_cache":"q4_0","mtp":"none","startup_free_mib":2148,"launch_size_bytes":2928,"launch_sha256":"8ffef65509265604955d522f2b33255c7a7a9cde7ad90c37839ba26dc9dda38b","server_log_size_bytes":38696,"server_log_sha256":"e2568c898d7f8de7c0a3490c1764522ae4c11476c0dcf88b673a28777c00d9aa"},
+    {"purpose":"mtp_prose_on","server_run_id":"native-server-20260817T052142261Z","observed_gpu_layers":"40/66","context_size":4096,"kv_cache":"q4_0","mtp":"draft-mtp","startup_free_mib":1644,"launch_size_bytes":3128,"launch_sha256":"5b22ab9e33fd05ce7cddd36d01b9e429bbbd602ccfbbb025f6a1d7b988711c2d","server_log_size_bytes":43219,"server_log_sha256":"8c6038899a882874b012163c6f0452b0a8f7358b1683e37f53811b4b1ce71dfe"},
+    {"purpose":"mtp_code_on","server_run_id":"native-server-20260817T052750362Z","observed_gpu_layers":"40/66","context_size":4096,"kv_cache":"q4_0","mtp":"draft-mtp","startup_free_mib":1653,"launch_size_bytes":3127,"launch_sha256":"902faeeed291bbdae881d0e007d77c5d2f7d413e814b2e6f6bfa678f2ae11e95","server_log_size_bytes":42593,"server_log_sha256":"61bfeadaccceac0a00614e9f3c8964a1cffacd7fa8426ba18b87b9396a57ba83"},
+    {"purpose":"mtp_code_off","server_run_id":"native-server-20260817T053325394Z","observed_gpu_layers":"40/66","context_size":4096,"kv_cache":"q4_0","mtp":"none","startup_free_mib":2127,"launch_size_bytes":2928,"launch_sha256":"10413d562051f7a2eccc3f354f150eec5f336e31c940207241f9602e6bea33df","server_log_size_bytes":39253,"server_log_sha256":"3750d8ac1ad72f34f8c225f13e712d7256fe3a4501eac973be9f4c8be11e4f9d"},
+    {"purpose":"retrieval_16k_q4","server_run_id":"native-server-20260817T054020112Z","observed_gpu_layers":"40/66","context_size":16384,"kv_cache":"q4_0","mtp":"none","startup_free_mib":1966,"launch_size_bytes":2931,"launch_sha256":"3b5ae850bdd0b11a80799786fabc30f513c629217401d7bb6adb3ac16687b21a","server_log_size_bytes":44264,"server_log_sha256":"c2a964e7c3040dc09e9afcba44ea774d13939f40f300425fabb7a55c11555c81"},
+    {"purpose":"retrieval_16k_q8","server_run_id":"native-server-20260817T054433280Z","observed_gpu_layers":"40/66","context_size":16384,"kv_cache":"q8_0","mtp":"none","startup_free_mib":1789,"launch_size_bytes":2931,"launch_sha256":"d5ba6bac93ca54f6d18333e415c064e72b5c6a19adcd41c859eb3ceb51c2c426","server_log_size_bytes":44264,"server_log_sha256":"4e533df77d9252f6739b5440be7aceace6324a6b520db106a4f99b22f6181468"},
+    {"purpose":"retrieval_64k_superseded","server_run_id":"native-server-20260817T054849770Z","observed_gpu_layers":"40/66","context_size":65536,"kv_cache":"q4_0","mtp":"none","startup_free_mib":1154,"launch_size_bytes":2930,"launch_sha256":"47f9d60635279349f5fe04c45ab1a173dd3c029d6fa6134df5d39de376edb64d","server_log_size_bytes":114666,"server_log_sha256":"68fa34e22e9ea9300ca8ec760f3916272c6046e1eaae0260f97d963c1087f36e"},
+    {"purpose":"retrieval_64k_canonical","server_run_id":"native-server-20260817T060641409Z","observed_gpu_layers":"40/66","context_size":65536,"kv_cache":"q4_0","mtp":"none","startup_free_mib":1131,"launch_size_bytes":2931,"launch_sha256":"08f5a468c873acb4a5efd26a2137e1dd4ca0e3e0b0038bc6369b9d4bba761fdd","server_log_size_bytes":114664,"server_log_sha256":"d0989fca9c7f14f5ed15d589b2a30db1f50a6894f437e40ce2b21b13857fc40c"},
+    {"purpose":"objective_quality_4k_q8","server_run_id":"native-server-20260817T064847340Z","observed_gpu_layers":"45/66","context_size":4096,"kv_cache":"q8_0","mtp":"none","startup_free_mib":858,"launch_size_bytes":2928,"launch_sha256":"08fd8255b8ecb5896438c41f10a1177e544974f63dbc2cb780d3f3da7027ce3b","server_log_size_bytes":69037,"server_log_sha256":"491db65c07686770d3768237080a3e08ed6caece0aff946173e27dc0ef0703b2"}
+  ],
+  "validation": {
+    "canonical_mtp_records": 4,
+    "canonical_retrieval_records": 3,
+    "canonical_objective_quality_records": 1,
+    "all_raw_records_independently_validated": true,
+    "offline_tests": "71/71 passed"
+  },
+  "decisions": {
+    "daily_default": "UD-IQ2_XXS at 4K or tested 16K, Q8_0 K/V, MTP off",
+    "iq4_interactive_quality_profile": "IQ4_XS at 4K, 45/66 layers, Q8_0 K/V, MTP off",
+    "iq4_long_context_profile": "IQ4_XS at 16K-64K, 40/66 layers, Q4_0 K/V, MTP off",
+    "near_64k_classification": "research_capacity_profile",
+    "mtp_default": "off"
+  },
+  "cleanup": {
+    "server_stopped": true,
+    "pinned_servers_remaining": 0,
+    "gpu_free_mib_after_stop": 11115
+  },
+  "conclusion": "Qwen3.8-27B IQ4_XS runs reliably on the RTX 4070 Ti through hybrid CPU/GPU offload and showed a descriptive quality lead, but its roughly 6 tok/s 4K decode and near-five-minute 60K-token TTFT make IQ2 the practical daily default. Q4_0 K/V is the tested long-context candidate, while MTP remains opt-in and off by default."
+}

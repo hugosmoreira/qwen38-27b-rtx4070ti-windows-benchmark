@@ -17,6 +17,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Freeze Stage 13F with IQ4_XS MTP off/on pairs plus deterministic early/middle/late retrieval fixtures at paired 16K Q8_0/Q4_0 and near-64K Q4_0; add launch guards and token-range validation before measurement.
 - Preserve and amend the first near-64K retrieval attempt after exact answers arrived with only 59,991–59,992 observed prompt tokens; add one filler record while leaving the 60,000-token gate and all needles/graders unchanged.
 - Freeze a final 24-task objective-quality run for the 45/66-layer IQ4_XS Q8_0 operating point, reusing the exact Phase 8 suite and graders before evaluating whether higher-bit inference justifies its speed cost.
+- Complete Phase 13 with validated IQ4_XS MTP pairs, matched 16K Q4_0/Q8_0 retrieval, near-64K Q4_0 retrieval, and a 13/24 objective-quality result; publish bounded human and machine-readable summaries while retaining IQ2 and MTP-off as defaults.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 
