@@ -1,0 +1,72 @@
+{
+  "schema_version": "phase13-iq4-xs-kv-cache-summary-1.0",
+  "recorded_date": "2026-08-16",
+  "comparison_scope": "target K/V cache only at fixed IQ4_XS 45/66 hybrid placement",
+  "sources": {
+    "q8": {
+      "path": "results/raw/phase13-iq4-xs-4k-q8-20260817T034842157169Z-a0322e7c.json",
+      "size_bytes": 479996,
+      "sha256": "9786a02373861f52737ed6edcdbf5f793cdefa83afc265a39eec7de13235a31b"
+    },
+    "q4": {
+      "path": "results/raw/phase13-iq4-xs-4k-q4-kv-20260817T035612020776Z-a4c55979.json",
+      "size_bytes": 481238,
+      "sha256": "57007aae9aba475a681f52d8d1993be8309dce55d2d16209a44f49a6490b2ba7"
+    }
+  },
+  "held_constant": {
+    "model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "gpu_layers": "45/66",
+    "runtime": "llama.cpp b10448",
+    "context_size": 4096,
+    "prompt_suite": "prompts/phase4-baseline.json",
+    "mtp": false,
+    "warmup_runs": 1,
+    "measured_repetitions": 3
+  },
+  "q8": {
+    "generation_tokens_per_second": 5.977,
+    "prompt_tokens_per_second": 176.522,
+    "ttft_ms": 481.603,
+    "total_latency_ms": 43145.679,
+    "cpu_kv_buffer_mib": 42.50,
+    "cuda_kv_buffer_mib": 93.50,
+    "total_kv_buffer_mib": 136.00,
+    "peak_vram_used_mib": 10957,
+    "minimum_vram_free_mib": 1038,
+    "peak_private_memory_bytes": 12277231616,
+    "measured_output_sha256": "e6f3e81bcc479c31be81eb40f075be469f8e133d515ccd1a383f10c1990d3256"
+  },
+  "q4": {
+    "generation_tokens_per_second": 5.965,
+    "prompt_tokens_per_second": 176.760,
+    "ttft_ms": 477.531,
+    "total_latency_ms": 43227.933,
+    "cpu_kv_buffer_mib": 22.50,
+    "cuda_kv_buffer_mib": 49.50,
+    "total_kv_buffer_mib": 72.00,
+    "peak_vram_used_mib": 10949.667,
+    "minimum_vram_free_mib": 1045.333,
+    "peak_private_memory_bytes": 12202085034.667,
+    "measured_output_sha256": "875ebd33247652c65ac63518892f6dde19fa5da9b0603ab72dc3907f0e129f69"
+  },
+  "q4_change_relative_to_q8": {
+    "generation_throughput_percent": -0.201,
+    "prompt_throughput_percent": 0.135,
+    "ttft_percent": -0.846,
+    "total_latency_percent": 0.191,
+    "direct_kv_buffer_mib": -64.0,
+    "direct_kv_buffer_percent": -47.059,
+    "sampled_peak_vram_mib": -7.333,
+    "sampled_minimum_free_vram_mib": 7.333,
+    "private_memory_mib": -71.665
+  },
+  "output_equivalence": {
+    "internally_deterministic_each_state": true,
+    "paired_exact_matches": 0,
+    "paired_total": 3,
+    "first_character_difference": 71,
+    "interpretation": "Output non-equivalence is established for this performance prompt; quality direction is ungraded."
+  },
+  "decision": "Keep Q8_0 as the conservative 4K default and use Q4_0 as the active-context candidate with separate retrieval/quality validation."
+}

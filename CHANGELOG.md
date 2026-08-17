@@ -10,6 +10,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Start a separately scoped Phase 13 IQ4_XS hybrid-offload study with an immutable artifact manifest, storage preflight, frozen protocol, parameterized native launcher, safe resumable downloader, and practical layer-frontier probe.
 - Select 45/66 GPU layers for the Phase 13 repeated baseline after seven successful IQ4_XS placement probes; 46/66 was operational but missed the frozen 1,024 MiB VRAM-headroom gate.
 - Complete the repeated IQ4_XS 4K/Q8 baseline at 5.977 generation tok/s and document that the existing full-GPU IQ2 operating point was 7.302× faster under the shared workload.
+- Isolate Q4_0 target K/V at fixed 45/66 placement: direct K/V buffers fell 47.059%, 4K generation changed −0.201%, and deterministic output was not equivalent to Q8_0.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

@@ -1,0 +1,45 @@
+{
+  "schema_version": "phase13-stage-d-checkpoint-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "stage_13d_complete",
+  "configuration_commit": "024e2a322a8827546a5b5f3a4dd98f554ecb1435",
+  "q8_source": "results/raw/phase13-iq4-xs-4k-q8-20260817T034842157169Z-a0322e7c.json",
+  "q4_launch": {
+    "server_run_id": "native-server-20260817T035601340Z",
+    "launch_record_size_bytes": 2929,
+    "launch_record_sha256": "b68c48dc88c85da69a47e0e2b104fb824e33179177b285cfd4270e2f69e67e36",
+    "server_log_size_bytes": 31807,
+    "server_log_sha256": "ec783e6e3878f8aa66c615a600fcccee85bc9d053c69b3d85a7c8d3b05b75862",
+    "gpu_layers_observed": "45/66",
+    "cpu_mapped_model_buffer_mib": 4964.75,
+    "cuda_model_buffer_mib": 9749.51,
+    "cpu_kv_buffer_mib": 22.50,
+    "cuda_kv_buffer_mib": 49.50,
+    "cuda_compute_buffer_mib": 95.03,
+    "cuda_host_compute_buffer_mib": 8.89
+  },
+  "q4_result": {
+    "path": "results/raw/phase13-iq4-xs-4k-q4-kv-20260817T035612020776Z-a4c55979.json",
+    "size_bytes": 481238,
+    "sha256": "57007aae9aba475a681f52d8d1993be8309dce55d2d16209a44f49a6490b2ba7",
+    "independent_validation": "passed",
+    "generation_tokens_per_second": 5.965,
+    "generation_cv_percent": 0.451,
+    "minimum_vram_free_mib": 1045.333
+  },
+  "comparison": {
+    "direct_kv_buffer_saving_mib": 64.0,
+    "direct_kv_buffer_saving_percent": 47.059,
+    "generation_throughput_change_percent": -0.201,
+    "sampled_free_vram_change_mib": 7.333,
+    "paired_exact_output_matches": "0/3",
+    "first_character_difference": 71
+  },
+  "cleanup": {
+    "server_stopped": true,
+    "pinned_servers_remaining": 0,
+    "gpu_free_mib_after_stop": 11265
+  },
+  "decision": "Use Q4_0 for the active-context candidate because direct K/V allocation fell 47.059% without a material 4K throughput change. Preserve Q8_0 as the conservative short-context default because outputs differed and quality direction is ungraded.",
+  "next_stage": "Select one Q4_0 layer placement with sufficient 64K allocation headroom, then hold that placement constant across an active-prompt context ladder."
+}

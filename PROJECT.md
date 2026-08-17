@@ -195,7 +195,7 @@ Status: active on 2026-08-16. Drafting and repository publication of the communi
 
 Exit condition: every completed substage retains pinned inputs, startup placement, raw telemetry, failures, and bounded conclusions that distinguish quantization, runtime, layer placement, K/V cache, and active prompt length.
 
-Status: active on 2026-08-16. Stages 13A-C are complete: the immutable 14.63 GiB artifact validated, seven probes selected 45/66 layers, and the repeated 4K/Q8 baseline averaged 5.977 generation tok/s. Stage 13D next isolates Q8 versus Q4_0 target K/V cache; active context, MTP, and quality remain open.
+Status: active on 2026-08-16. Stages 13A-D are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, and Q4_0 K/V cut direct cache allocation 47.059% with −0.201% throughput change. Active context, MTP, and quality remain open.
 
 ## Success criteria
 

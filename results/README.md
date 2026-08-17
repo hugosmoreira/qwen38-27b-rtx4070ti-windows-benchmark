@@ -34,4 +34,6 @@ Phase 13 begins with a noncanonical IQ4_XS offload-frontier diagnostic. Seven fr
 
 The selected 45/66 IQ4_XS configuration then completed one excluded warm-up and three measured 256-token repetitions at 5.977 generation tok/s with 0.098% CV. The canonical raw record is classified in the release manifest; `summaries/phase13-iq4-xs-4k-baseline.md` compares the complete hybrid operating point with the earlier full-GPU IQ2 evidence without calling it a quantization-only effect.
 
+Stage 13D changes only the target K/V representation. Q4_0 reduced the direct combined CPU/CUDA K/V buffers from 136 to 72 MiB at 4K while generation changed by −0.201%. Its deterministic output did not match Q8_0, so `summaries/phase13-iq4-xs-kv-cache.md` selects it only as the active-context candidate with later retrieval validation.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.
