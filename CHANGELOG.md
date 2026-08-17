@@ -31,6 +31,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Published the repository and verified the Windows Python 3.11/3.14 CI matrix.
 - Published the evidence-linked report as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65` without uploading model weights or runtime artifacts.
 - Published final GitHub Release `v0.1.0` on 2026-08-17 at commit `d1a6056` with no binary/model assets.
+- Published a Phase 13 IQ4_XS follow-up to Hugging Face Community Discussion `#65`, linking the final release and focused objective-quality, retrieval, and MTP summaries.
 
 ### Known limitations
 

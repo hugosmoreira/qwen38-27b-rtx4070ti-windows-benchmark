@@ -8,7 +8,7 @@
 
 **Version 0.1.0 is public on GitHub.** The Apache-2.0 repository, citation metadata, canonical evidence, and reproducibility tooling are available at [hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark). The final [`v0.1.0` GitHub Release](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/releases/tag/v0.1.0) was published on 2026-08-17 at commit `d1a6056`; its Windows CI matrix passes on Python 3.11 and 3.14.
 
-**Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded.
+**Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 original GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded. A [Phase 13 IQ4_XS follow-up](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65#6a834694f675c7d5eb2d5188) was added on 2026-08-17 with the final release and focused objective-quality, retrieval, and MTP evidence.
 
 **Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. The prepared thread has not been submitted by this project, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
 

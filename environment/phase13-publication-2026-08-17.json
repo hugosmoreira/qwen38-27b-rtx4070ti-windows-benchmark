@@ -1,0 +1,32 @@
+{
+  "schema_version": "phase13-publication-1.0",
+  "recorded_date": "2026-08-17",
+  "status": "published",
+  "github_release": {
+    "repository": "hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark",
+    "tag": "v0.1.0",
+    "target_commit": "d1a60562238c90202bdf431899725f209a418821",
+    "url": "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/releases/tag/v0.1.0",
+    "published_at_utc": "2026-08-17T14:38:42Z",
+    "draft": false,
+    "prerelease": false,
+    "binary_or_model_assets": 0
+  },
+  "hugging_face_update": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "discussion": 65,
+    "author": "Hugosmr",
+    "url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65#6a834694f675c7d5eb2d5188",
+    "format": "follow_up_comment",
+    "claims": [
+      "IQ4_XS 4K/Q8 repeated performance and complete-operating-point comparison",
+      "24-task descriptive objective-quality result with paired exact p-values",
+      "matched 16K and near-64K exact retrieval",
+      "IQ4_XS MTP workload-specific speed, memory, and output divergence",
+      "IQ2 interactive, IQ4_XS quality-oriented, and IQ4_XS long-context profile recommendations"
+    ],
+    "evidence_links": 4,
+    "model_weights_or_runtime_artifacts_uploaded": false
+  },
+  "system_of_record": "The GitHub repository retains frozen protocols, raw evidence, validators, and bounded summaries; the GitHub Release and Hugging Face comment are publication surfaces."
+}
