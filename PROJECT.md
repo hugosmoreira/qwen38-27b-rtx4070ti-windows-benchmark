@@ -14,6 +14,7 @@
 - Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; Q3 and Q4 remain deferred.
 - Phase 10 passed its strict local `v0.1.0` gate and was published to `hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark` on 2026-08-16. The first Windows CI run exposed a repository-root normalization defect; commit `8ae9061` corrected it, and the Python 3.11/3.14 matrix now passes. The candidate remains untagged and has no GitHub Release.
 - Phase 11 completed on 2026-08-16. The evidence-linked report was published by `Hugosmr` as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65`; the rendered post preserves all 25 GitHub evidence links and the study limitations.
+- Phase 12 started on 2026-08-16 as a local-first publication package. LinkedIn and X drafts, a benchmark card, and a channel checklist will be validated before any account-level publication action.
 
 ## Objective
 
@@ -179,6 +180,8 @@ Status: completed on 2026-08-16 as [Hugging Face Community Discussion #65](https
 - Publish an evidence-first LinkedIn post.
 - Publish a concise X/Twitter thread.
 - Optionally share with local-LLM communities for methodology feedback.
+
+Status: active on 2026-08-16. Drafting and repository publication of the communication kit are in scope; every final social submission remains separately approval-gated.
 
 ## Success criteria
 

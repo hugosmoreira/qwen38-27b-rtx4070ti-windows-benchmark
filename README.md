@@ -10,6 +10,8 @@
 
 **Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded.
 
+**Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. No social post has been published, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
+
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
 The Phase 9 speed claims come only from four committed five-repetition records. The earlier 64-token capability probe remains excluded and was used only to validate MTP operation and identify `draft_n` and `draft_n_accepted`.
@@ -80,6 +82,7 @@ IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until 
 ├── CODE_OF_CONDUCT.md
 ├── CITATION.cff
 ├── LICENSE
+├── assets/
 ├── configs/
 ├── environment/
 ├── prompts/
@@ -105,6 +108,7 @@ The benchmark software and repository material are licensed under [Apache-2.0](L
 - [REPRODUCING.md](REPRODUCING.md) — clean-clone evidence verification and hardware reproduction.
 - [RELEASE_NOTES.md](RELEASE_NOTES.md) — `v0.1.0` findings, boundaries, and publication state.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — evidence, test, and pull-request requirements.
+- `assets/` — reviewed publication graphics; these summarize rather than replace evidence.
 - `configs/` — versioned experiment inputs that bind runtime, model, prompt, and controls.
 - `environment/` — machine snapshots and environment collection notes.
 - `prompts/` — version-controlled benchmark prompts.

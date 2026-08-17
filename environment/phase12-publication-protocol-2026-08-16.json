@@ -1,0 +1,81 @@
+{
+  "schema_version": "phase12-publication-protocol-1.0",
+  "date": "2026-08-16",
+  "phase": 12,
+  "purpose": "Publish concise, evidence-first communication for the completed Qwen3.8-27B RTX 4070 Ti study.",
+  "evidence_state": {
+    "github_repository": "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark",
+    "github_commit_before_phase12": "1f0b991dab2021321df394962072c048c37c89e9",
+    "hugging_face_report": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65",
+    "offline_tests": 61,
+    "windows_ci": "passed on Python 3.11 and 3.14"
+  },
+  "channels": [
+    {
+      "name": "LinkedIn",
+      "source": "reports/linkedin-post.md",
+      "purpose": "Professional engineering narrative and portfolio discovery",
+      "publication_status": "draft"
+    },
+    {
+      "name": "X",
+      "source": "reports/x-thread.md",
+      "purpose": "Concise technical result thread and community feedback",
+      "publication_status": "draft"
+    }
+  ],
+  "approved_claims": {
+    "performance": "IQ2 averaged 43.643 generation tok/s versus 38.030 for Q2; IQ2 was 14.759% faster by reciprocal decode-rate comparison and used 1,583 MiB less sampled peak VRAM.",
+    "quality": "Q2 passed 10 of 24 objective tasks versus 9 for IQ2; exact McNemar p = 1.0 did not support a directional general-quality claim.",
+    "context": "The tested 16K IQ2 configuration processed 12,831 prompt tokens plus 128 completion tokens at 39.201 generation tok/s with 11.119-second mean TTFT and 2,507 MiB minimum sampled free VRAM.",
+    "mtp": "MTP improved 256-token throughput by 47.284% for prose and 92.651% for Python code, but deterministic prose diverged at generated token 16, so MTP remains off by default.",
+    "software": "The repository passes 61 offline tests and a Windows Python 3.11/3.14 CI matrix."
+  },
+  "visual": {
+    "source": "assets/phase12-benchmark-card.jpg",
+    "format": "landscape JPEG",
+    "dimensions": "1536x1024",
+    "file_bytes": 295557,
+    "sha256": "6010fda9682196af71eeb5f8783408d7dd46e2e4e615fd612622402fc6a0fcea",
+    "generation_mode": "OpenAI built-in image generation with a reviewed high-quality JPEG export",
+    "required_content": [
+      "RTX 4070 Ti 12GB scope",
+      "IQ2 and Q2 decode rates",
+      "IQ2 relative speed and VRAM advantage",
+      "tested 16K workload metrics",
+      "MTP speedups and output-change warning",
+      "public GitHub repository URL"
+    ]
+  },
+  "channel_validation": {
+    "linkedin_limit_characters": 3000,
+    "linkedin_draft_characters": 1923,
+    "x_standard_limit_characters": 280,
+    "x_draft_characters_by_post": [198, 171, 188, 202, 214, 197, 208, 227]
+  },
+  "publication_rules": [
+    "Link the GitHub repository and Hugging Face report.",
+    "Do not claim general model quality or universal 16K capacity.",
+    "Do not describe MTP as transparent or output-equivalent.",
+    "Do not publish private contact details, learning files, local paths, or model weights.",
+    "Verify the signed-in account and exact rendered content before each final submission.",
+    "Obtain separate action-time approval for LinkedIn, X, and any optional community post."
+  ],
+  "excluded_actions": [
+    "creating or moving the v0.1.0 Git tag",
+    "publishing a GitHub Release",
+    "posting to LinkedIn",
+    "posting to X",
+    "posting to another community",
+    "uploading model weights or runtime artifacts"
+  ],
+  "validation": {
+    "offline_tests": "61 passed",
+    "strict_release_audit": "passed",
+    "tracked_public_files": 171,
+    "markdown_links": "passed",
+    "private_learning_paths": "ignored",
+    "visual_review": "all exact text, metrics, warning, and repository URL verified"
+  },
+  "status": "draft_package_validated_pending_publication_approval"
+}
