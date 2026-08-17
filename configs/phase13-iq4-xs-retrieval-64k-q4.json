@@ -15,7 +15,7 @@
   "inputs": {
     "prompt_suite": "prompts/phase13-retrieval-64k.json",
     "model_manifest": "environment/phase13-iq4-xs-download-manifest.json",
-    "runtime_record": "environment/phase13-mtp-quality-protocol-2026-08-16.json"
+    "runtime_record": "environment/phase13-mtp-quality-protocol-amendment-2026-08-16.json"
   },
   "runtime": {
     "name": "llama.cpp",

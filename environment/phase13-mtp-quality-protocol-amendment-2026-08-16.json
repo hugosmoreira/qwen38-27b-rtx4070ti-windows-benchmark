@@ -1,0 +1,41 @@
+{
+  "schema_version": "phase13-mtp-quality-protocol-amendment-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "pre_canonical_rerun",
+  "parent_protocol": "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+  "original_protocol_commit": "fc0dc7eef7ee677b8dd9e788b41d94626551f42f",
+  "incident": {
+    "result": "results/raw/phase13-iq4-xs-retrieval-64k-q4-20260817T054905078480Z-ef45775c.json",
+    "result_size_bytes": 8021,
+    "result_sha256": "8b0aeda5406e7b6fa74caaa84e93db066d7423da03bb7ff1b835c6b794a97245",
+    "outcome": "failed_run",
+    "observed_prompt_tokens": [59992, 59991, 59991],
+    "minimum_required_prompt_tokens": 60000,
+    "prompt_range_flags": [false, false, false],
+    "transport_and_model_behavior": "All three requests returned the exact planted values, but each remains a failed_request and receives zero credit because the precommitted token gate was missed.",
+    "original_prompt_sha256": "cb8923f9453c77619f80a5b0a26ae4dad6cd8dc3e57bdd04254ace217000c018",
+    "original_config_sha256": "ef7a8fffe77f8475baf19a0d85c97c9e70896de4d7c5e3a8acc953f38ffc4f78"
+  },
+  "root_cause": "Replacing one standard numbered record with a shorter retrieval-needle record reduced tokenizer-observed input below the estimate derived from the Stage 13E fixture.",
+  "correction": {
+    "field_changed": "synthetic_context.record_count",
+    "old_value": 2497,
+    "new_value": 2498,
+    "added_public_content": "one standard numbered-records-v1 filler record per task",
+    "unchanged": [
+      "model and SHA-256",
+      "runtime build",
+      "40/66 GPU-layer placement",
+      "Q4_0 K/V cache",
+      "needle keys, values, and positions",
+      "exact validators",
+      "sampling and feature controls",
+      "60000-token minimum acceptance gate"
+    ]
+  },
+  "rerun_rules": [
+    "Use a fresh hash-validated server.",
+    "Preserve the failed record as superseded evidence.",
+    "Accept the rerun only if every task reports at least 60000 prompt tokens and independently re-grades against the unchanged values."
+  ]
+}

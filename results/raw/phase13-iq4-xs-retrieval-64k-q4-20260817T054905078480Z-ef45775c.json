@@ -1,0 +1,274 @@
+{
+  "schema_version": "quality-evaluation-result-1.0.0",
+  "run_id": "phase13-iq4-xs-retrieval-64k-q4-20260817T054905078480Z-ef45775c",
+  "timestamp": "2026-08-17T05:49:05.078480Z",
+  "git_commit": "fc0dc7eef7ee677b8dd9e788b41d94626551f42f",
+  "classification": "phase13_iq4_xs_retrieval_64k_q4",
+  "hardware_snapshot": "environment/machine-snapshot-2026-08-15.json",
+  "runtime_record": "environment/phase13-mtp-quality-protocol-2026-08-16.json",
+  "model_manifest": "environment/phase13-iq4-xs-download-manifest.json",
+  "prompt_suite": "prompts/phase13-retrieval-64k.json",
+  "quality_config": "configs/phase13-iq4-xs-retrieval-64k-q4.json",
+  "python_runtime": {
+    "implementation": "CPython",
+    "version": "3.13.15",
+    "isolated_environment": true,
+    "runtime_dependencies": []
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "system_fingerprint": "b10448-ad1de39e0"
+  },
+  "model": {
+    "repository": "unsloth/Qwen3.8-27B-GGUF",
+    "revision": "f1bfb127c64f7072bdd2cad55f258b9c8b2910fe",
+    "filename": "Qwen3.8-27B-IQ4_XS.gguf",
+    "quantization": "IQ4_XS",
+    "file_size_bytes": 15705861088,
+    "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+    "served_alias": "Qwen3.8-27B-IQ4_XS"
+  },
+  "configuration": {
+    "context_size": 65536,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": 40,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q4_0",
+    "kv_cache_v_type": "q4_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false,
+    "max_output_tokens": 32,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "seed": 42,
+    "prompt_cache": false
+  },
+  "methodology": {
+    "pass_definition": "First response passes its committed deterministic validator.",
+    "attempts_per_task": 1,
+    "task_order_randomized": false,
+    "prompt_cache_disabled": true,
+    "thinking_disabled": true,
+    "tools_disabled": true,
+    "inter_task_delay_seconds": 0.25,
+    "expected_tasks": 3
+  },
+  "server_preflight": {
+    "status": "passed",
+    "checks": {
+      "health_ok": true,
+      "model_alias_present": true,
+      "context_size_matches": true,
+      "parallel_slots_match": true,
+      "model_path_matches_manifest": true
+    },
+    "served_model_alias": "Qwen3.8-27B-IQ4_XS"
+  },
+  "tasks": [
+    {
+      "sequence": 1,
+      "task_id": "retrieval-64k-early",
+      "category": "retrieval_early",
+      "validator_type": "exact",
+      "status": "failed_request",
+      "passed": false,
+      "grade": {
+        "passed": false,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 36.79,
+        "time_to_first_content_token_ms": 300958.898,
+        "total_latency_ms": 304769.31
+      },
+      "finish_reason": "stop",
+      "content": "TOPAZ-164",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 59992,
+        "total_tokens": 59999,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 59992,
+        "prompt_ms": 300922.06,
+        "prompt_per_token_ms": 5.016036471529537,
+        "prompt_per_second": 199.36059190874875,
+        "predicted_n": 7,
+        "predicted_ms": 3809.76,
+        "predicted_per_token_ms": 634.96,
+        "predicted_per_second": 1.5749023560539248
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": false
+      }
+    },
+    {
+      "sequence": 2,
+      "task_id": "retrieval-64k-middle",
+      "category": "retrieval_middle",
+      "validator_type": "exact",
+      "status": "failed_request",
+      "passed": false,
+      "grade": {
+        "passed": false,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 37.471,
+        "time_to_first_content_token_ms": 300947.137,
+        "total_latency_ms": 304732.545
+      },
+      "finish_reason": "stop",
+      "content": "ONYX-583",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 59991,
+        "total_tokens": 59998,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 59991,
+        "prompt_ms": 300909.66,
+        "prompt_per_token_ms": 5.015913387008051,
+        "prompt_per_second": 199.36548397947743,
+        "predicted_n": 7,
+        "predicted_ms": 3784.84,
+        "predicted_per_token_ms": 630.8066666666667,
+        "predicted_per_second": 1.5852717684235
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": false
+      }
+    },
+    {
+      "sequence": 3,
+      "task_id": "retrieval-64k-late",
+      "category": "retrieval_late",
+      "validator_type": "exact",
+      "status": "failed_request",
+      "passed": false,
+      "grade": {
+        "passed": false,
+        "reason": "exact_match"
+      },
+      "error": null,
+      "client_measurements": {
+        "response_headers_ms": 37.08,
+        "time_to_first_content_token_ms": 301047.395,
+        "total_latency_ms": 305471.767
+      },
+      "finish_reason": "stop",
+      "content": "SAFFRON-927",
+      "reasoning_content": null,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 59991,
+        "total_tokens": 59999,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 59991,
+        "prompt_ms": 301010.298,
+        "prompt_per_token_ms": 5.017590938640796,
+        "prompt_per_second": 199.29882930450438,
+        "predicted_n": 8,
+        "predicted_ms": 4423.798,
+        "predicted_per_token_ms": 631.9711428571428,
+        "predicted_per_second": 1.582350731204273
+      },
+      "system_fingerprint": "b10448-ad1de39e0",
+      "validation": {
+        "request_succeeded": true,
+        "content_observed": true,
+        "usage_observed": true,
+        "timings_observed": true,
+        "prompt_cache_disabled": true,
+        "reasoning_empty": true,
+        "prompt_tokens_in_expected_range": false
+      }
+    }
+  ],
+  "summary": {
+    "tasks_expected": 3,
+    "tasks_attempted": 3,
+    "requests_completed": 0,
+    "tasks_passed": 0,
+    "pass_rate_percent": 0.0,
+    "category_results": {
+      "retrieval_early": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 0,
+        "pass_rate_percent": 0.0
+      },
+      "retrieval_middle": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 0,
+        "pass_rate_percent": 0.0
+      },
+      "retrieval_late": {
+        "attempted": 1,
+        "expected": 1,
+        "passed": 0,
+        "pass_rate_percent": 0.0
+      }
+    },
+    "finish_reason_counts": {
+      "stop": 3
+    },
+    "all_expected_requests_completed": false
+  },
+  "outcome": {
+    "status": "failed_run",
+    "error_type": "QualityRequestError",
+    "error_message": "One or more task requests failed validation."
+  }
+}

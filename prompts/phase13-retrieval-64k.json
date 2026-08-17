@@ -23,7 +23,7 @@
       "user": "Find retrieval key NEEDLE-EARLY-64K. Return only its value.",
       "synthetic_context": {
         "generator": "needle-records-v1",
-        "record_count": 2497,
+        "record_count": 2498,
         "needle_record": 25,
         "needle_key": "NEEDLE-EARLY-64K",
         "needle_value": "TOPAZ-164"
@@ -39,7 +39,7 @@
       "user": "Find retrieval key NEEDLE-MIDDLE-64K. Return only its value.",
       "synthetic_context": {
         "generator": "needle-records-v1",
-        "record_count": 2497,
+        "record_count": 2498,
         "needle_record": 1249,
         "needle_key": "NEEDLE-MIDDLE-64K",
         "needle_value": "ONYX-583"
@@ -55,7 +55,7 @@
       "user": "Find retrieval key NEEDLE-LATE-64K. Return only its value.",
       "synthetic_context": {
         "generator": "needle-records-v1",
-        "record_count": 2497,
+        "record_count": 2498,
         "needle_record": 2475,
         "needle_key": "NEEDLE-LATE-64K",
         "needle_value": "SAFFRON-927"

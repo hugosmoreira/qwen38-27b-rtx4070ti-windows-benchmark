@@ -82,6 +82,11 @@
       "path": "results/raw/phase13-iq4-offload-frontier-65536-q4-0-20260817T040527025Z.json",
       "classification": "diagnostic",
       "reason": "The full 64K Q4_0 cache was allocated, but every placement used only a 38-token prompt; this selects fixed ladder placement and is not active-context evidence."
+    },
+    {
+      "path": "results/raw/phase13-iq4-xs-retrieval-64k-q4-20260817T054905078480Z-ef45775c.json",
+      "classification": "superseded",
+      "reason": "All three exact answers were returned, but observed prompts contained only 59,991-59,992 tokens and therefore failed the frozen 60,000-token acceptance gate; the amendment adds one filler record without changing needles or grading."
     }
   ],
   "artifact_policy": {
