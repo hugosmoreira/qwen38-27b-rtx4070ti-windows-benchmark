@@ -24,6 +24,7 @@ Current scripts:
 .\scripts\run_phase13_measurement.ps1 -Config configs/phase13-iq4-xs-4k-q8.json
 .\scripts\run_phase13_mtp_measurement.ps1 -Config configs/phase13-iq4-xs-mtp-off-prose.json
 .\scripts\run_phase13_retrieval.ps1 -Config configs/phase13-iq4-xs-retrieval-16k-q4.json
+.\scripts\run_phase13_objective_quality.ps1
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -57,6 +58,8 @@ For Phase 13, `start_native_llama_server.ps1` also accepts explicit `-GpuLayers`
 `run_phase13_measurement.ps1` accepts only the frozen Phase 13 baseline, cache-pair, and active-context configurations. It verifies the selected process belongs to the pinned runtime, binds it to one ignored launch record, requires a hash-validated IQ4_XS load, and dynamically requires the config's exact context, MTP-off state, K/V types, requested layers, and observed startup placement before delegating to the Python harness.
 
 `run_phase13_mtp_measurement.ps1` accepts only the four frozen IQ4_XS MTP configs and proves exact model, context, 40/66 placement, Q4_0 K/V, and off/on draft controls before measurement. `run_phase13_retrieval.ps1` applies the same launch binding to the frozen 16K Q8_0/Q4_0 and 64K Q4_0 retrieval configs before objective pass@1 grading.
+
+`run_phase13_objective_quality.ps1` accepts only the 4K/Q8_0/45-layer IQ4_XS quality config, requires matching startup evidence, and runs the unchanged 24-task Phase 8 objective suite once.
 
 The `qwen-bench mtp-compare` command accepts the prose-off, prose-on, code-off, and code-on raw records in that order. It independently validates every record, rejects pairwise control drift or invalid draft counters, calculates per-workload changes and acceptance, and compares SHA-256 hashes of every measured response.
 

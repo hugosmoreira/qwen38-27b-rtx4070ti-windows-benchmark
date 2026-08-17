@@ -81,6 +81,30 @@ class QualityConfigurationTests(unittest.TestCase):
             all(task["acceptance"]["minimum_prompt_tokens"] >= 60000 for task in tasks)
         )
 
+    def test_phase13_objective_quality_reuses_phase8_suite_and_controls(self) -> None:
+        iq4 = load_quality_config(
+            self.root, Path("configs/phase13-iq4-xs-quality-4k-q8.json")
+        )
+        iq2 = load_quality_config(self.root, Path("configs/phase8-quality-iq2.json"))
+        self.assertEqual(iq4.suite_path, iq2.suite_path)
+        self.assertEqual(len(iq4.suite["tasks"]), 24)
+        self.assertEqual(iq4.data["configuration"]["gpu_layers"], 45)
+        self.assertEqual(iq4.data["configuration"]["kv_cache_k_type"], "q8_0")
+        for key in (
+            "context_size",
+            "parallel_slots",
+            "flash_attention",
+            "prompt_batch_size",
+            "prompt_micro_batch_size",
+            "threads",
+            "threads_batch",
+            "kv_cache_k_type",
+            "kv_cache_v_type",
+            "thinking_mode",
+            "mtp_enabled",
+        ):
+            self.assertEqual(iq4.data["configuration"][key], iq2.data["configuration"][key])
+
 
 if __name__ == "__main__":
     unittest.main()

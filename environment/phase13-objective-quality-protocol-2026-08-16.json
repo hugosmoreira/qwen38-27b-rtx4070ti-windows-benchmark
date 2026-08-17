@@ -1,0 +1,33 @@
+{
+  "schema_version": "phase13-objective-quality-protocol-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "pre_measurement",
+  "parent_protocol": "environment/phase13-iq4-xs-protocol-2026-08-16.json",
+  "purpose": "Test whether the higher-bit IQ4_XS complete operating point improves outcomes on the same 24 objective tasks previously used for Q2 and IQ2.",
+  "model": {
+    "manifest": "environment/phase13-iq4-xs-download-manifest.json",
+    "quantization": "IQ4_XS",
+    "gpu_layers": "45/66",
+    "context_size": 4096,
+    "kv_cache_k": "q8_0",
+    "kv_cache_v": "q8_0"
+  },
+  "suite": "prompts/phase8-quality-evaluation.json",
+  "held_constant_with_phase8": [
+    "llama.cpp b10448 runtime",
+    "task text, order, and exact graders",
+    "one pass per task",
+    "4K context and one slot",
+    "Q8_0 target K/V cache",
+    "greedy sampling and seed",
+    "prompt cache off",
+    "thinking, MTP, tools, MCP, and vision off"
+  ],
+  "comparison_boundary": "Model quantization and GPU layer placement both differ from the full-GPU IQ2 and Q2 records, so this is a complete-operating-point quality comparison rather than a quantization-only causal estimate.",
+  "statistics": {
+    "primary": "descriptive pass count out of 24",
+    "paired": "exact McNemar comparison against each existing Phase 8 record",
+    "directional_claim_rule": "Do not claim a general quality advantage from a small or statistically unsupported difference."
+  },
+  "failure_policy": "Attempt every task, preserve empty or wrong answers as zero credit, and independently re-grade the stored result against the committed suite."
+}

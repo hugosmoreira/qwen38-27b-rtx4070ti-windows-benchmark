@@ -16,6 +16,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Add a tested artifact-size policy that keeps the ordinary 1 MiB ceiling while permitting validated raw benchmark JSON up to 5 MiB, allowing full long-run telemetry to remain public.
 - Freeze Stage 13F with IQ4_XS MTP off/on pairs plus deterministic early/middle/late retrieval fixtures at paired 16K Q8_0/Q4_0 and near-64K Q4_0; add launch guards and token-range validation before measurement.
 - Preserve and amend the first near-64K retrieval attempt after exact answers arrived with only 59,991–59,992 observed prompt tokens; add one filler record while leaving the 60,000-token gate and all needles/graders unchanged.
+- Freeze a final 24-task objective-quality run for the 45/66-layer IQ4_XS Q8_0 operating point, reusing the exact Phase 8 suite and graders before evaluating whether higher-bit inference justifies its speed cost.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

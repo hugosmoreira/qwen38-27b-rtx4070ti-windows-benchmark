@@ -35,6 +35,7 @@ This directory records the machine and software environment used for measurement
 - `phase13-iq4-xs-stage-e-2026-08-16.json` closes the four-level active-context ladder with raw-result hashes, ignored launch/log hashes, startup cache allocation, 60,015-token acceptance, memory boundary, cleanup, and Stage 13F handoff.
 - `phase13-mtp-quality-protocol-2026-08-16.json` freezes the final IQ4_XS MTP off/on order, five-repetition prose/code pairs, 16K Q8_0/Q4_0 retrieval pair, near-64K Q4_0 retrieval checks, token gates, and claim boundaries before Stage 13F measurement.
 - `phase13-mtp-quality-protocol-amendment-2026-08-16.json` preserves the first near-64K retrieval run's 59,991–59,992-token gate failure and changes only the fixture record count from 2,497 to 2,498 before a fresh canonical rerun.
+- `phase13-objective-quality-protocol-2026-08-16.json` freezes a final 45/66-layer IQ4_XS run on the existing 24-task Phase 8 suite and limits comparisons to complete operating points.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.

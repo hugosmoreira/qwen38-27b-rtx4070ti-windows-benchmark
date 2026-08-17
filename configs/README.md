@@ -21,3 +21,5 @@ The four `phase13-iq4-xs-context-*-q4.json` files hold IQ4_XS placement at 40/66
 The four `phase13-iq4-xs-mtp-*.json` files repeat the Phase 9 prose/code workloads at the fixed IQ4_XS 40/66-layer Q4_0-cache operating point. Each off/on pair differs only in declared MTP identity, uses one excluded warm-up and five measured repetitions, and requires valid draft counters when enabled.
 
 `phase13-iq4-xs-retrieval-16k-q8.json` and `phase13-iq4-xs-retrieval-16k-q4.json` isolate target K/V representation against the same three-position 16K retrieval suite. `phase13-iq4-xs-retrieval-64k-q4.json` applies the Q4_0 profile to three near-window needles and requires at least 60,000 tokenizer-observed prompt tokens per task.
+
+`phase13-iq4-xs-quality-4k-q8.json` applies the same 24 objective Phase 8 tasks to the conservative 45/66-layer IQ4_XS Q8_0-cache profile. Comparisons with Phase 8 are complete-operating-point results because model quantization and layer placement differ.
