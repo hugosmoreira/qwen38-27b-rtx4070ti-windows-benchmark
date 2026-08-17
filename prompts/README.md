@@ -11,6 +11,7 @@ Current suite:
 - `phase7-context-4k.json`, `phase7-context-8k.json`, and `phase7-context-16k.json` use the compact `numbered-records-v1` generator to create exact, hashable, public synthetic inputs near 78% of each window. The same final instruction and 128-token output reservation are used at every level. These prompts measure context sensitivity, not retrieval quality.
 - `phase8-quality-evaluation.json` freezes 24 previously unseen, inspectable pass@1 tasks across arithmetic, logic, Python tracing, structured output, and text/data transformation. Exact and semantic JSON validators are committed with public grading notes; no partial credit or human override is allowed.
 - `phase9-mtp-prose.json` and `phase9-mtp-code.json` provide two fixed 256-token greedy workloads for measuring MTP acceptance and speed. They share identical sampling settings and are performance workloads, not quality tests.
+- `phase13-context-32k.json` and `phase13-context-64k-near-window.json` extend the same public numbered-record fixture at the fixed Phase 13 placement. The 64K fixture requires at least 60,000 actual prompt tokens; configured capacity alone does not satisfy its acceptance gate.
 
 Each prompt definition should eventually identify:
 

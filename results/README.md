@@ -36,4 +36,6 @@ The selected 45/66 IQ4_XS configuration then completed one excluded warm-up and 
 
 Stage 13D changes only the target K/V representation. Q4_0 reduced the direct combined CPU/CUDA K/V buffers from 136 to 72 MiB at 4K while generation changed by −0.201%. Its deterministic output did not match Q8_0, so `summaries/phase13-iq4-xs-kv-cache.md` selects it only as the active-context candidate with later retrieval validation.
 
+The separate 64K/Q4_0 capacity frontier used only 38 prompt tokens and therefore remains diagnostic. It selected 40/66 layers with 1,143 MiB post-request VRAM free; `summaries/phase13-active-context-capacity.md` explains why this allocation result is not a 64K active-prompt claim.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

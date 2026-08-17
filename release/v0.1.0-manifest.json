@@ -73,6 +73,11 @@
       "path": "results/raw/phase13-iq4-offload-frontier-20260817T034550433Z.json",
       "classification": "diagnostic",
       "reason": "Each layer placement received one short capability request to select the repeated-baseline configuration; the per-probe rates are not canonical performance measurements."
+    },
+    {
+      "path": "results/raw/phase13-iq4-offload-frontier-65536-q4-0-20260817T040527025Z.json",
+      "classification": "diagnostic",
+      "reason": "The full 64K Q4_0 cache was allocated, but every placement used only a 38-token prompt; this selects fixed ladder placement and is not active-context evidence."
     }
   ],
   "artifact_policy": {

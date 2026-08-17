@@ -1,0 +1,328 @@
+{
+  "schema_version": "phase13-offload-frontier-1.0",
+  "run_id": "phase13-iq4-offload-frontier-65536-q4-0-20260817T040527025Z",
+  "recorded_at": "2026-08-16T21:05:27.0256862-07:00",
+  "git_commit": "62f96f89094a1e3d4ce963bd9ad697f7c5c55764",
+  "classification": "phase13_iq4_xs_offload_frontier",
+  "protocol": "environment/phase13-iq4-xs-protocol-2026-08-16.json",
+  "model_manifest": "environment/phase13-iq4-xs-download-manifest.json",
+  "runtime_manifest": "environment/llama-cpp-b10448-manifest.json",
+  "controls": {
+    "context_size": 65536,
+    "kv_cache_k": "q4_0",
+    "kv_cache_v": "q4_0",
+    "mtp": false,
+    "minimum_free_vram_mib": 1024,
+    "initial_gpu_layers": 25,
+    "layer_step": 8,
+    "maximum_gpu_layers": 45,
+    "fresh_process_per_probe": true
+  },
+  "probes": [
+    {
+      "sequence": 1,
+      "started_at": "2026-08-16T21:03:25.6767886-07:00",
+      "gpu_layers_requested": 25,
+      "gpu_layers_offloaded": 25,
+      "total_layers_reported": 66,
+      "practical": true,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": true
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 716,
+        "vram_free_mib": 11279,
+        "utilization_percent": 0,
+        "temperature_c": 46,
+        "power_draw_w": 32.27
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 7487,
+        "vram_free_mib": 4508,
+        "utilization_percent": 14,
+        "temperature_c": 46,
+        "power_draw_w": 39.95
+      },
+      "process_private_bytes_after_request": 9370767360,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 42.8272764669751,
+        "generation_tokens_per_second": 3.4470132778951466,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040326046Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.166.592 I load_tensors: offloaded 25/66 layers to GPU",
+        "0.01.166.595 I load_tensors:   CPU_Mapped model buffer size =  9038.99 MiB",
+        "0.01.166.596 I load_tensors:        CUDA0 model buffer size =  5675.26 MiB"
+      ],
+      "failure": null
+    },
+    {
+      "sequence": 2,
+      "started_at": "2026-08-16T21:03:50.4891472-07:00",
+      "gpu_layers_requested": 33,
+      "gpu_layers_offloaded": 33,
+      "total_layers_reported": 66,
+      "practical": true,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": true
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 718,
+        "vram_free_mib": 11277,
+        "utilization_percent": 8,
+        "temperature_c": 46,
+        "power_draw_w": 38.94
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 9281,
+        "vram_free_mib": 2714,
+        "utilization_percent": 0,
+        "temperature_c": 45,
+        "power_draw_w": 43.76
+      },
+      "process_private_bytes_after_request": 11086888960,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 52.17923843028373,
+        "generation_tokens_per_second": 4.158041480621811,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040350783Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.190.625 I load_tensors: offloaded 33/66 layers to GPU",
+        "0.01.190.628 I load_tensors:   CPU_Mapped model buffer size =  7409.29 MiB",
+        "0.01.190.629 I load_tensors:        CUDA0 model buffer size =  7304.96 MiB"
+      ],
+      "failure": null
+    },
+    {
+      "sequence": 3,
+      "started_at": "2026-08-16T21:04:11.8265352-07:00",
+      "gpu_layers_requested": 41,
+      "gpu_layers_offloaded": 41,
+      "total_layers_reported": 66,
+      "practical": false,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": false
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 718,
+        "vram_free_mib": 11277,
+        "utilization_percent": 0,
+        "temperature_c": 45,
+        "power_draw_w": 43.76
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 11077,
+        "vram_free_mib": 918,
+        "utilization_percent": 2,
+        "temperature_c": 45,
+        "power_draw_w": 48.84
+      },
+      "process_private_bytes_after_request": 12804644864,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 65.51001268825509,
+        "generation_tokens_per_second": 5.2432283705594225,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040412131Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.194.755 I load_tensors: offloaded 41/66 layers to GPU",
+        "0.01.194.758 I load_tensors:   CPU_Mapped model buffer size =  5779.60 MiB",
+        "0.01.194.759 I load_tensors:        CUDA0 model buffer size =  8934.66 MiB"
+      ],
+      "failure": null
+    },
+    {
+      "sequence": 4,
+      "started_at": "2026-08-16T21:04:29.9255155-07:00",
+      "gpu_layers_requested": 37,
+      "gpu_layers_offloaded": 37,
+      "total_layers_reported": 66,
+      "practical": true,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": true
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 718,
+        "vram_free_mib": 11277,
+        "utilization_percent": 22,
+        "temperature_c": 46,
+        "power_draw_w": 48.83
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10164,
+        "vram_free_mib": 1831,
+        "utilization_percent": 20,
+        "temperature_c": 45,
+        "power_draw_w": 44.84
+      },
+      "process_private_bytes_after_request": 11948920832,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 58.007208158866476,
+        "generation_tokens_per_second": 4.639472484614258,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040430229Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.189.242 I load_tensors: offloaded 37/66 layers to GPU",
+        "0.01.189.245 I load_tensors:   CPU_Mapped model buffer size =  6594.45 MiB",
+        "0.01.189.246 I load_tensors:        CUDA0 model buffer size =  8119.81 MiB"
+      ],
+      "failure": null
+    },
+    {
+      "sequence": 5,
+      "started_at": "2026-08-16T21:04:49.6378670-07:00",
+      "gpu_layers_requested": 39,
+      "gpu_layers_offloaded": 39,
+      "total_layers_reported": 66,
+      "practical": true,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": true
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 705,
+        "vram_free_mib": 11290,
+        "utilization_percent": 20,
+        "temperature_c": 45,
+        "power_draw_w": 44.84
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10640,
+        "vram_free_mib": 1355,
+        "utilization_percent": 3,
+        "temperature_c": 45,
+        "power_draw_w": 45.72
+      },
+      "process_private_bytes_after_request": 12366045184,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 61.29210202876858,
+        "generation_tokens_per_second": 4.910645734324712,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040449932Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.198.433 I load_tensors: offloaded 39/66 layers to GPU",
+        "0.01.198.436 I load_tensors:   CPU_Mapped model buffer size =  6196.55 MiB",
+        "0.01.198.437 I load_tensors:        CUDA0 model buffer size =  8517.70 MiB"
+      ],
+      "failure": null
+    },
+    {
+      "sequence": 6,
+      "started_at": "2026-08-16T21:05:08.5510024-07:00",
+      "gpu_layers_requested": 40,
+      "gpu_layers_offloaded": 40,
+      "total_layers_reported": 66,
+      "practical": true,
+      "gates": {
+        "startup_and_request_succeeded": true,
+        "requested_placement_evidenced": true,
+        "minimum_free_vram_mib": 1024,
+        "vram_headroom_passed": true
+      },
+      "gpu_before": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 705,
+        "vram_free_mib": 11290,
+        "utilization_percent": 3,
+        "temperature_c": 45,
+        "power_draw_w": 45.72
+      },
+      "gpu_after_request": {
+        "name": "NVIDIA GeForce RTX 4070 Ti",
+        "driver_version": "610.88",
+        "vram_total_mib": 12282,
+        "vram_used_mib": 10852,
+        "vram_free_mib": 1143,
+        "utilization_percent": 4,
+        "temperature_c": 45,
+        "power_draw_w": 47.79
+      },
+      "process_private_bytes_after_request": 12589039616,
+      "request": {
+        "prompt_tokens": 38,
+        "completion_tokens": 64,
+        "prompt_tokens_per_second": 63.456226892748965,
+        "generation_tokens_per_second": 5.073653748258348,
+        "finish_reason": "length"
+      },
+      "startup_log": "runtimes/llama.cpp/b10448/runs/native-server-20260817T040508847Z/llama-server.log",
+      "startup_evidence": [
+        "0.01.199.178 I load_tensors: offloaded 40/66 layers to GPU",
+        "0.01.199.181 I load_tensors:   CPU_Mapped model buffer size =  5988.08 MiB",
+        "0.01.199.182 I load_tensors:        CUDA0 model buffer size =  8726.18 MiB"
+      ],
+      "failure": null
+    }
+  ],
+  "selection": {
+    "largest_practical_gpu_layers": 40.0,
+    "first_non_practical_gpu_layers": 41,
+    "practical_definition": "Healthy request, exact startup-log layer evidence, and at least the frozen post-request VRAM headroom.",
+    "baseline_authorized": true
+  },
+  "limitations": [
+    "The frontier is local to this driver, WDDM state, runtime build, IQ4_XS artifact, 65536 context, and q4_0 K/V cache.",
+    "Each probe contains one short request and is placement evidence, not a repeated performance benchmark.",
+    "A higher layer count that starts but misses the VRAM-headroom gate is classified as non-practical rather than as an out-of-memory failure."
+  ]
+}

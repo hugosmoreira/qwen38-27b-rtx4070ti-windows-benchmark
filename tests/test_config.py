@@ -166,6 +166,35 @@ class ConfigurationTests(unittest.TestCase):
             data["configuration"].pop("kv_cache_v_type")
         self.assertEqual(q8_data, q4_data)
 
+    def test_phase13_active_context_ladder_uses_fixed_placement(self) -> None:
+        expected = {
+            4096: ("configs/phase13-iq4-xs-context-4k-q4.json", 131),
+            16384: ("configs/phase13-iq4-xs-context-16k-q4.json", 531),
+            32768: ("configs/phase13-iq4-xs-context-32k-q4.json", 1064),
+            65536: ("configs/phase13-iq4-xs-context-64k-q4.json", 2497),
+        }
+        for context_size, (path, record_count) in expected.items():
+            config = load_benchmark_config(self.repository_root, Path(path))
+            self.assertEqual(config.data["configuration"]["context_size"], context_size)
+            self.assertEqual(config.data["configuration"]["gpu_layers"], 40)
+            self.assertEqual(config.data["configuration"]["kv_cache_k_type"], "q4_0")
+            self.assertEqual(config.data["configuration"]["kv_cache_v_type"], "q4_0")
+            self.assertEqual(
+                config.prompt["workload"]["synthetic_context"]["record_count"],
+                record_count,
+            )
+            acceptance = config.prompt["workload"]["acceptance"]
+            self.assertLessEqual(
+                acceptance["maximum_prompt_tokens"] + config.prompt["settings"]["max_tokens"],
+                context_size,
+            )
+        near_window = load_benchmark_config(
+            self.repository_root, Path("configs/phase13-iq4-xs-context-64k-q4.json")
+        )
+        self.assertGreaterEqual(
+            near_window.prompt["workload"]["acceptance"]["minimum_prompt_tokens"], 60000
+        )
+
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):
             resolve_repository_path(self.repository_root, "../outside.json")
