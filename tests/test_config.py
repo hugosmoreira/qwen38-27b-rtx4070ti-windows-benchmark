@@ -195,6 +195,29 @@ class ConfigurationTests(unittest.TestCase):
             near_window.prompt["workload"]["acceptance"]["minimum_prompt_tokens"], 60000
         )
 
+    def test_phase13_mtp_pairs_hold_iq4_operating_point_constant(self) -> None:
+        for workload in ("prose", "code"):
+            off = load_benchmark_config(
+                self.repository_root,
+                Path(f"configs/phase13-iq4-xs-mtp-off-{workload}.json"),
+            )
+            on = load_benchmark_config(
+                self.repository_root,
+                Path(f"configs/phase13-iq4-xs-mtp-on-{workload}.json"),
+            )
+            self.assertEqual(off.prompt_path, on.prompt_path)
+            self.assertEqual(off.data["configuration"]["gpu_layers"], 40)
+            self.assertEqual(off.data["configuration"]["kv_cache_k_type"], "q4_0")
+            off_data = copy.deepcopy(off.data)
+            on_data = copy.deepcopy(on.data)
+            for data in (off_data, on_data):
+                data["run"].pop("classification")
+                data["run"].pop("result_prefix")
+                data["configuration"].pop("mtp_enabled")
+                data["configuration"].pop("speculative_type")
+                data["configuration"].pop("speculative_draft_n_max")
+            self.assertEqual(off_data, on_data)
+
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):
             resolve_repository_path(self.repository_root, "../outside.json")

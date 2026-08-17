@@ -1,0 +1,65 @@
+{
+  "schema_version": "phase13-mtp-quality-protocol-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "pre_measurement",
+  "parent_protocol": "environment/phase13-iq4-xs-protocol-2026-08-16.json",
+  "purpose": "Close Stage 13F with matched IQ4_XS MTP controls and objective long-context retrieval checks after the active-context ladder is stable.",
+  "mtp": {
+    "model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "context_size": 4096,
+    "gpu_layers": 40,
+    "kv_cache_k": "q4_0",
+    "kv_cache_v": "q4_0",
+    "workloads": ["prompts/phase9-mtp-prose.json", "prompts/phase9-mtp-code.json"],
+    "order": ["prose_off", "prose_on", "code_on", "code_off"],
+    "warmup_runs_per_state": 1,
+    "measured_repetitions_per_state": 5,
+    "off": { "speculative_type": "none", "draft_n_max": 0, "draft_n_min": 0 },
+    "on": {
+      "speculative_type": "draft-mtp",
+      "draft_n_max": 2,
+      "draft_n_min": 0,
+      "draft_cache_k": "f16",
+      "draft_cache_v": "f16"
+    },
+    "primary_metrics": [
+      "generation tokens per second",
+      "draft-token acceptance",
+      "paired response SHA-256 equivalence"
+    ],
+    "claim_boundary": "Speedup is workload-specific. Default enablement requires output equivalence and valid draft activity; a fast non-equivalent state remains opt-in."
+  },
+  "retrieval": {
+    "model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "gpu_layers": 40,
+    "mtp": false,
+    "prompt_cache": false,
+    "thinking": false,
+    "attempts_per_task": 1,
+    "sixteen_k_pair": {
+      "context_size": 16384,
+      "prompt_suite": "prompts/phase13-retrieval-16k.json",
+      "order": ["q4_0", "q8_0"],
+      "factor_changed": "target K/V cache representation only",
+      "needle_positions": [25, 266, 507]
+    },
+    "near_sixty_four_k": {
+      "context_size": 65536,
+      "prompt_suite": "prompts/phase13-retrieval-64k.json",
+      "kv_cache_k": "q4_0",
+      "kv_cache_v": "q4_0",
+      "needle_positions": [25, 1249, 2475],
+      "minimum_observed_prompt_tokens_per_task": 60000
+    },
+    "pass_definition": "The first response must equal the planted value exactly after outer whitespace normalization.",
+    "claim_boundary": "Three deterministic needles at declared positions are an inspectable retrieval check, not a general long-context benchmark population."
+  },
+  "measurement_rules": [
+    "Use a fresh hash-validated server process for every MTP state and K/V state.",
+    "Require startup-log proof of 40/66 observed GPU layers.",
+    "Retain every failed request and zero-credit quality answer.",
+    "Do not pool prose and code MTP speedups.",
+    "Do not describe 64K retrieval unless every task reports at least 60000 tokenizer-observed prompt tokens."
+  ],
+  "exit_condition": "Four validated MTP records and three validated retrieval records have bounded summaries, objective re-grading, startup evidence, cleanup, and a final Phase 13 recommendation."
+}

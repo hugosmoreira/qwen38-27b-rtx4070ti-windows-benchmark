@@ -12,6 +12,7 @@ Current suite:
 - `phase8-quality-evaluation.json` freezes 24 previously unseen, inspectable pass@1 tasks across arithmetic, logic, Python tracing, structured output, and text/data transformation. Exact and semantic JSON validators are committed with public grading notes; no partial credit or human override is allowed.
 - `phase9-mtp-prose.json` and `phase9-mtp-code.json` provide two fixed 256-token greedy workloads for measuring MTP acceptance and speed. They share identical sampling settings and are performance workloads, not quality tests.
 - `phase13-context-32k.json` and `phase13-context-64k-near-window.json` extend the same public numbered-record fixture at the fixed Phase 13 placement. The 64K fixture requires at least 60,000 actual prompt tokens; configured capacity alone does not satisfy its acceptance gate.
+- `phase13-retrieval-16k.json` and `phase13-retrieval-64k.json` use deterministic `needle-records-v1` fixtures with exact planted values at early, middle, and late positions. The 16K suite pairs Q8_0 and Q4_0 target K/V; the 64K suite requires at least 60,000 observed prompt tokens for every task.
 
 Each prompt definition should eventually identify:
 

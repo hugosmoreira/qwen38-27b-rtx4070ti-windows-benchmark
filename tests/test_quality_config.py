@@ -49,6 +49,38 @@ class QualityConfigurationTests(unittest.TestCase):
         )
         self.assertTrue(all(task["grading_notes"].strip() for task in suite["tasks"]))
 
+    def test_phase13_retrieval_pair_loads_and_differs_only_by_cache_identity(self) -> None:
+        q8 = load_quality_config(
+            self.root, Path("configs/phase13-iq4-xs-retrieval-16k-q8.json")
+        )
+        q4 = load_quality_config(
+            self.root, Path("configs/phase13-iq4-xs-retrieval-16k-q4.json")
+        )
+        self.assertEqual(q8.suite["suite_type"], "retrieval")
+        self.assertEqual(len(q8.suite["tasks"]), 3)
+        self.assertEqual(q8.suite_path, q4.suite_path)
+        q8_data = copy.deepcopy(q8.data)
+        q4_data = copy.deepcopy(q4.data)
+        for data in (q8_data, q4_data):
+            data["run"].pop("classification")
+            data["run"].pop("result_prefix")
+            data["configuration"].pop("kv_cache_k_type")
+            data["configuration"].pop("kv_cache_v_type")
+        self.assertEqual(q8_data, q4_data)
+
+    def test_phase13_near_window_retrieval_has_three_needle_positions(self) -> None:
+        config = load_quality_config(
+            self.root, Path("configs/phase13-iq4-xs-retrieval-64k-q4.json")
+        )
+        tasks = config.suite["tasks"]
+        self.assertEqual(
+            [task["synthetic_context"]["needle_record"] for task in tasks],
+            [25, 1249, 2475],
+        )
+        self.assertTrue(
+            all(task["acceptance"]["minimum_prompt_tokens"] >= 60000 for task in tasks)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

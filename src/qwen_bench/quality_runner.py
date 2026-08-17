@@ -15,6 +15,7 @@ from typing import Any
 
 from qwen_bench.client import LlamaCppClient, StreamResult
 from qwen_bench.config import repository_relative
+from qwen_bench.fixtures import build_user_content
 from qwen_bench.quality_config import QualityConfig
 from qwen_bench.quality_grading import GradeResult, grade_response
 
@@ -101,6 +102,16 @@ def _execute_task(
         "prompt_cache_disabled": isinstance(timings, dict) and timings.get("cache_n") == 0,
         "reasoning_empty": stream_result is not None and stream_result.reasoning_content is None,
     }
+    acceptance = task.get("acceptance")
+    if isinstance(acceptance, dict):
+        prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+        validation["prompt_tokens_in_expected_range"] = (
+            isinstance(prompt_tokens, int)
+            and not isinstance(prompt_tokens, bool)
+            and int(acceptance["minimum_prompt_tokens"])
+            <= prompt_tokens
+            <= int(acceptance["maximum_prompt_tokens"])
+        )
     completed = _request_completed(validation)
     return {
         "sequence": sequence,
@@ -134,7 +145,7 @@ def _request_body(config: QualityConfig, task: dict[str, Any]) -> dict[str, Any]
         "model": config.model_alias,
         "messages": [
             {"role": "system", "content": str(task["system"])},
-            {"role": "user", "content": str(task["user"])},
+            {"role": "user", "content": build_user_content(task)},
         ],
         "stream": True,
         "stream_options": {"include_usage": True},
@@ -151,7 +162,10 @@ def _request_body(config: QualityConfig, task: dict[str, Any]) -> dict[str, Any]
 
 def _request_completed(validation: dict[str, bool]) -> bool:
     """Return whether transport/control evidence is complete, independent of answer quality."""
-    return all(validation.get(check) is True for check in _REQUEST_COMPLETION_CHECKS)
+    required = list(_REQUEST_COMPLETION_CHECKS)
+    if "prompt_tokens_in_expected_range" in validation:
+        required.append("prompt_tokens_in_expected_range")
+    return all(validation.get(check) is True for check in required)
 
 
 def _summarize(results: list[dict[str, Any]], declared_tasks: list[dict[str, Any]]) -> dict[str, Any]:

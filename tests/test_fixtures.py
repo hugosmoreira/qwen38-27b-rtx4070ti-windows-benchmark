@@ -38,7 +38,23 @@ class SyntheticContextFixtureTests(unittest.TestCase):
                     "user": "instruction",
                     "synthetic_context": {"generator": "unknown", "record_count": 1},
                 }
-            )
+                )
+
+    def test_needle_fixture_inserts_one_exact_record_deterministically(self) -> None:
+        workload = {
+            "user": "Return only the value for KEY-9.",
+            "synthetic_context": {
+                "generator": "needle-records-v1",
+                "record_count": 5,
+                "needle_record": 3,
+                "needle_key": "KEY-9",
+                "needle_value": "VALUE-7",
+            },
+        }
+        content = build_user_content(workload)
+        self.assertEqual(content.count("retrieval key KEY-9 has value VALUE-7"), 1)
+        self.assertIn("Record 00003: retrieval key KEY-9 has value VALUE-7.", content)
+        self.assertEqual(synthetic_context_metadata(workload), synthetic_context_metadata(workload))
 
 
 if __name__ == "__main__":

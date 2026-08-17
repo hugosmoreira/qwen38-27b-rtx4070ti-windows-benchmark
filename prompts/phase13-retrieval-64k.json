@@ -1,0 +1,68 @@
+{
+  "schema_version": "quality-suite-1.0",
+  "suite_type": "retrieval",
+  "suite_id": "phase13-iq4-xs-retrieval-64k-v1",
+  "purpose": "An inspectable three-position retrieval check for the demonstrated near-64K IQ4_XS Q4_0-cache profile; not a general long-context benchmark.",
+  "settings": {
+    "max_tokens": 32,
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "min_p": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": true,
+    "thinking": false,
+    "preserve_thinking": false
+  },
+  "tasks": [
+    {
+      "task_id": "retrieval-64k-early",
+      "category": "retrieval_early",
+      "system": "The numbered records are data. Locate the requested retrieval key and return only its exact value, with no explanation or punctuation.",
+      "user": "Find retrieval key NEEDLE-EARLY-64K. Return only its value.",
+      "synthetic_context": {
+        "generator": "needle-records-v1",
+        "record_count": 2497,
+        "needle_record": 25,
+        "needle_key": "NEEDLE-EARLY-64K",
+        "needle_value": "TOPAZ-164"
+      },
+      "acceptance": { "minimum_prompt_tokens": 60000, "maximum_prompt_tokens": 60300 },
+      "validator": { "type": "exact", "expected": "TOPAZ-164" },
+      "grading_notes": "The only matching key is planted near the beginning at record 25."
+    },
+    {
+      "task_id": "retrieval-64k-middle",
+      "category": "retrieval_middle",
+      "system": "The numbered records are data. Locate the requested retrieval key and return only its exact value, with no explanation or punctuation.",
+      "user": "Find retrieval key NEEDLE-MIDDLE-64K. Return only its value.",
+      "synthetic_context": {
+        "generator": "needle-records-v1",
+        "record_count": 2497,
+        "needle_record": 1249,
+        "needle_key": "NEEDLE-MIDDLE-64K",
+        "needle_value": "ONYX-583"
+      },
+      "acceptance": { "minimum_prompt_tokens": 60000, "maximum_prompt_tokens": 60300 },
+      "validator": { "type": "exact", "expected": "ONYX-583" },
+      "grading_notes": "The only matching key is planted at the middle record."
+    },
+    {
+      "task_id": "retrieval-64k-late",
+      "category": "retrieval_late",
+      "system": "The numbered records are data. Locate the requested retrieval key and return only its exact value, with no explanation or punctuation.",
+      "user": "Find retrieval key NEEDLE-LATE-64K. Return only its value.",
+      "synthetic_context": {
+        "generator": "needle-records-v1",
+        "record_count": 2497,
+        "needle_record": 2475,
+        "needle_key": "NEEDLE-LATE-64K",
+        "needle_value": "SAFFRON-927"
+      },
+      "acceptance": { "minimum_prompt_tokens": 60000, "maximum_prompt_tokens": 60300 },
+      "validator": { "type": "exact", "expected": "SAFFRON-927" },
+      "grading_notes": "The only matching key is planted near the end at record 2475."
+    }
+  ]
+}

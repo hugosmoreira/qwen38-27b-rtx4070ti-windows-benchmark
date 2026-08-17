@@ -13,6 +13,7 @@ from qwen_bench.config import (
     load_json_object,
     resolve_repository_path,
 )
+from qwen_bench.fixtures import NEEDLE_RECORDS_GENERATOR
 
 
 _CATEGORIES = {
@@ -22,6 +23,7 @@ _CATEGORIES = {
     "structured_output",
     "text_data",
 }
+_RETRIEVAL_CATEGORIES = {"retrieval_early", "retrieval_middle", "retrieval_late"}
 
 
 @dataclass(frozen=True)
@@ -137,8 +139,17 @@ def validate_quality_suite(suite: dict[str, Any]) -> None:
     tasks = suite.get("tasks")
     if not isinstance(settings, dict) or not isinstance(tasks, list):
         raise ConfigurationError("Quality settings must be an object and tasks must be an array.")
-    if not 15 <= len(tasks) <= 30:
-        raise ConfigurationError("Quality suite must contain between 15 and 30 tasks.")
+    suite_type = suite.get("suite_type", "objective_quality")
+    if suite_type == "objective_quality":
+        allowed_categories = _CATEGORIES
+        if not 15 <= len(tasks) <= 30:
+            raise ConfigurationError("Objective quality suite must contain between 15 and 30 tasks.")
+    elif suite_type == "retrieval":
+        allowed_categories = _RETRIEVAL_CATEGORIES
+        if not 3 <= len(tasks) <= 12:
+            raise ConfigurationError("Retrieval suite must contain between 3 and 12 tasks.")
+    else:
+        raise ConfigurationError("Unsupported quality suite type.")
     _integer(settings, "max_tokens", minimum=1, maximum=1024)
     _number_in_range(settings, "temperature", minimum=0, maximum=2)
     _number_in_range(settings, "top_p", minimum=0, maximum=1)
@@ -152,7 +163,7 @@ def validate_quality_suite(suite: dict[str, Any]) -> None:
             raise ConfigurationError(f"Quality setting '{key}' must be false.")
 
     task_ids: set[str] = set()
-    category_counts = {category: 0 for category in _CATEGORIES}
+    category_counts = {category: 0 for category in allowed_categories}
     for index, task in enumerate(tasks):
         if not isinstance(task, dict):
             raise ConfigurationError(f"Quality task {index} must be an object.")
@@ -163,7 +174,7 @@ def validate_quality_suite(suite: dict[str, Any]) -> None:
             raise ConfigurationError(f"Duplicate quality task ID '{task_id}'.")
         task_ids.add(task_id)
         category = _string(task, "category")
-        if category not in _CATEGORIES:
+        if category not in allowed_categories:
             raise ConfigurationError(f"Unsupported quality category '{category}'.")
         category_counts[category] += 1
         for key in ("system", "user", "grading_notes"):
@@ -181,8 +192,40 @@ def validate_quality_suite(suite: dict[str, Any]) -> None:
                 raise ConfigurationError("json_exact expected value must be an object or array.")
         else:
             raise ConfigurationError(f"Unsupported quality validator '{validator_type}'.")
+        if suite_type == "retrieval":
+            _validate_retrieval_task(task, task_id)
     if any(count == 0 for count in category_counts.values()):
         raise ConfigurationError("Every declared quality category must contain at least one task.")
+
+
+def _validate_retrieval_task(task: dict[str, Any], task_id: str) -> None:
+    fixture = task.get("synthetic_context")
+    if not isinstance(fixture, dict):
+        raise ConfigurationError(f"Retrieval task '{task_id}' requires synthetic_context.")
+    expected_fields = {
+        "generator",
+        "record_count",
+        "needle_record",
+        "needle_key",
+        "needle_value",
+    }
+    if set(fixture) != expected_fields:
+        raise ConfigurationError(f"Retrieval task '{task_id}' has invalid fixture fields.")
+    _exact(fixture, "generator", NEEDLE_RECORDS_GENERATOR)
+    record_count = _integer(fixture, "record_count", minimum=3, maximum=100_000)
+    _integer(fixture, "needle_record", minimum=1, maximum=record_count)
+    for key in ("needle_key", "needle_value"):
+        value = _string(fixture, key)
+        if not re.fullmatch(r"[A-Z0-9-]{4,40}", value):
+            raise ConfigurationError(f"Retrieval fixture '{key}' has unsupported characters.")
+    acceptance = task.get("acceptance")
+    if not isinstance(acceptance, dict) or set(acceptance) != {
+        "minimum_prompt_tokens",
+        "maximum_prompt_tokens",
+    }:
+        raise ConfigurationError(f"Retrieval task '{task_id}' requires prompt-token bounds.")
+    minimum = _integer(acceptance, "minimum_prompt_tokens", minimum=1)
+    _integer(acceptance, "maximum_prompt_tokens", minimum=minimum)
 
 
 def _validate_manifest(manifest: dict[str, Any]) -> None:

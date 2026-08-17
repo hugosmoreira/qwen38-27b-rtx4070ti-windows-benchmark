@@ -148,7 +148,10 @@ def _validate_task(
         for check in _REQUEST_COMPLETION_CHECKS:
             if check not in validation:
                 issues.append(ValidationIssue(f"{path}.validation.{check}", "required check is missing"))
-        validation_passed = all(validation.get(check) is True for check in _REQUEST_COMPLETION_CHECKS)
+        required_checks = list(_REQUEST_COMPLETION_CHECKS)
+        if "prompt_tokens_in_expected_range" in validation:
+            required_checks.append("prompt_tokens_in_expected_range")
+        validation_passed = all(validation.get(check) is True for check in required_checks)
         if (task.get("status") == "completed") != validation_passed:
             issues.append(ValidationIssue(f"{path}.status", "must agree with request-completion checks"))
     if task.get("status") != "completed" and task.get("passed") is True:
@@ -310,6 +313,27 @@ def _validate_against_suite(
                 issues.append(ValidationIssue(f"{path}.{key}", "must match the referenced suite"))
         if not isinstance(declared_validator, dict) or not isinstance(task.get("content"), str):
             continue
+        acceptance = declared.get("acceptance")
+        if isinstance(acceptance, dict):
+            usage = task.get("usage")
+            prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+            in_range = (
+                isinstance(prompt_tokens, int)
+                and not isinstance(prompt_tokens, bool)
+                and int(acceptance["minimum_prompt_tokens"])
+                <= prompt_tokens
+                <= int(acceptance["maximum_prompt_tokens"])
+            )
+            validation = task.get("validation")
+            if not isinstance(validation, dict) or validation.get(
+                "prompt_tokens_in_expected_range"
+            ) is not in_range:
+                issues.append(
+                    ValidationIssue(
+                        f"{path}.validation.prompt_tokens_in_expected_range",
+                        "must match the suite's prompt-token bounds",
+                    )
+                )
         if task.get("error") is not None and not task["content"]:
             regrade = GradeResult(False, "no_response")
         else:

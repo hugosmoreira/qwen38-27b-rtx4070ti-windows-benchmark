@@ -7,6 +7,7 @@ from typing import Any
 
 
 NUMBERED_RECORDS_GENERATOR = "numbered-records-v1"
+NEEDLE_RECORDS_GENERATOR = "needle-records-v1"
 _NUMBERED_RECORD_LINE = (
     "Record {index:05d}: amber cedar delta frost harbor juniper lunar meadow "
     "quartz river summit violet.\n"
@@ -20,13 +21,27 @@ def build_user_content(workload: dict[str, Any]) -> str:
     fixture = workload.get("synthetic_context")
     if fixture is None:
         return instruction
-    if fixture.get("generator") != NUMBERED_RECORDS_GENERATOR:
+    generator = fixture.get("generator")
+    if generator not in {NUMBERED_RECORDS_GENERATOR, NEEDLE_RECORDS_GENERATOR}:
         raise ValueError("Unsupported synthetic-context generator.")
     record_count = int(fixture["record_count"])
-    records = "".join(
-        _NUMBERED_RECORD_LINE.format(index=index)
-        for index in range(1, record_count + 1)
-    )
+    if generator == NUMBERED_RECORDS_GENERATOR:
+        records = "".join(
+            _NUMBERED_RECORD_LINE.format(index=index)
+            for index in range(1, record_count + 1)
+        )
+    else:
+        needle_record = int(fixture["needle_record"])
+        needle_key = str(fixture["needle_key"])
+        needle_value = str(fixture["needle_value"])
+        records = "".join(
+            (
+                f"Record {index:05d}: retrieval key {needle_key} has value {needle_value}.\n"
+                if index == needle_record
+                else _NUMBERED_RECORD_LINE.format(index=index)
+            )
+            for index in range(1, record_count + 1)
+        )
     return f"{records}\n{instruction}"
 
 

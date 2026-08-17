@@ -195,7 +195,7 @@ Status: active on 2026-08-16. Drafting and repository publication of the communi
 
 Exit condition: every completed substage retains pinned inputs, startup placement, raw telemetry, failures, and bounded conclusions that distinguish quantization, runtime, layer placement, K/V cache, and active prompt length.
 
-Status: active on 2026-08-16. Stages 13A-E are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, Q4_0 K/V cut direct cache allocation 47.059%, and a fixed 40/66-layer ladder completed at 3,231, 12,831, 25,623, and 60,015 active prompt tokens. Near-64K averaged 301.27 s TTFT and 1.569 generation tok/s with tight memory, so it is capacity evidence rather than the interactive recommendation. MTP and objective retrieval/quality remain Stage 13F.
+Status: active on 2026-08-16. Stages 13A-E are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, Q4_0 K/V cut direct cache allocation 47.059%, and a fixed 40/66-layer ladder completed at 3,231, 12,831, 25,623, and 60,015 active prompt tokens. Near-64K averaged 301.27 s TTFT and 1.569 generation tok/s with tight memory. Stage 13F MTP and objective retrieval inputs are frozen and await measurement.
 
 ## Success criteria
 

@@ -14,6 +14,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Select 40/66 layers for a fixed-placement Q4_0 active-context ladder after a separate 64K-capacity diagnostic; require at least 60,000 actual prompt tokens for the near-64K level.
 - Complete the fixed 4K/16K/32K/64K IQ4_XS active-context ladder. The 64K level ingested 60,015 prompt tokens in every repetition at 1.569 generation tok/s and 301.27 s TTFT, with 1,033–1,041 MiB measured free VRAM and a 994 MiB excluded-warm-up minimum.
 - Add a tested artifact-size policy that keeps the ordinary 1 MiB ceiling while permitting validated raw benchmark JSON up to 5 MiB, allowing full long-run telemetry to remain public.
+- Freeze Stage 13F with IQ4_XS MTP off/on pairs plus deterministic early/middle/late retrieval fixtures at paired 16K Q8_0/Q4_0 and near-64K Q4_0; add launch guards and token-range validation before measurement.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

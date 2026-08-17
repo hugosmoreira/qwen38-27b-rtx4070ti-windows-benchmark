@@ -1,0 +1,51 @@
+{
+  "schema_version": "quality-config-1.0",
+  "run": {
+    "classification": "phase13_iq4_xs_retrieval_64k_q4",
+    "result_prefix": "phase13-iq4-xs-retrieval-64k-q4",
+    "output_directory": "results/raw",
+    "inter_task_delay_seconds": 0.25
+  },
+  "server": {
+    "base_uri": "http://127.0.0.1:8090",
+    "model_alias": "Qwen3.8-27B-IQ4_XS",
+    "expected_context_size": 65536,
+    "expected_parallel_slots": 1
+  },
+  "inputs": {
+    "prompt_suite": "prompts/phase13-retrieval-64k.json",
+    "model_manifest": "environment/phase13-iq4-xs-download-manifest.json",
+    "runtime_record": "environment/phase13-mtp-quality-protocol-2026-08-16.json"
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release_tag": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA"
+  },
+  "model": { "quantization": "IQ4_XS" },
+  "configuration": {
+    "context_size": 65536,
+    "parallel_slots": 1,
+    "device": "CUDA0",
+    "gpu_layers": 40,
+    "fit": "off",
+    "flash_attention": "on",
+    "prompt_batch_size": 512,
+    "prompt_micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "kv_cache_k_type": "q4_0",
+    "kv_cache_v_type": "q4_0",
+    "cache_ram_mib": 0,
+    "context_checkpoints": 0,
+    "context_shift": false,
+    "thinking_mode": false,
+    "preserve_thinking": false,
+    "reasoning_format": "deepseek",
+    "mtp_enabled": false,
+    "tools_enabled": false,
+    "mcp_enabled": false,
+    "vision_enabled": false
+  }
+}

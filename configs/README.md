@@ -17,3 +17,7 @@ The four `phase9-mtp-*.json` files form two controlled IQ2 pairs: MTP off versus
 `phase13-iq4-xs-4k-q4-kv.json` forms the isolated target-cache pair with the Q8 baseline. Only run identity and K/V representation change to Q4_0; model, 45/66 placement, prompt, context, sampling, MTP-off state, warm-up, repetitions, and telemetry remain fixed.
 
 The four `phase13-iq4-xs-context-*-q4.json` files hold IQ4_XS placement at 40/66 and Q4_0 target K/V while configured context and deterministic active prompt grow from 4K through 64K. The first three use approximately 78% of their windows; the 64K configuration requires at least 60,000 observed prompt tokens plus 128 output tokens. Every level freezes one warm-up and three measured repetitions from a fresh process.
+
+The four `phase13-iq4-xs-mtp-*.json` files repeat the Phase 9 prose/code workloads at the fixed IQ4_XS 40/66-layer Q4_0-cache operating point. Each off/on pair differs only in declared MTP identity, uses one excluded warm-up and five measured repetitions, and requires valid draft counters when enabled.
+
+`phase13-iq4-xs-retrieval-16k-q8.json` and `phase13-iq4-xs-retrieval-16k-q4.json` isolate target K/V representation against the same three-position 16K retrieval suite. `phase13-iq4-xs-retrieval-64k-q4.json` applies the Q4_0 profile to three near-window needles and requires at least 60,000 tokenizer-observed prompt tokens per task.
