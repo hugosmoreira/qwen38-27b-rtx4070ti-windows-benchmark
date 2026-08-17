@@ -18,3 +18,4 @@ Current summary:
 - `phase9-mtp-comparison.md` reports the controlled IQ2 MTP speed, acceptance, memory, and output-equivalence result and explains why MTP remains opt-in.
 - `phase9-mtp-comparison.json` preserves the same per-workload result, raw-source hashes, formulas, output hashes, decision, and limitations in machine-readable form.
 - `phase13-offload-frontier.md` reports the seven short IQ4_XS placement probes, practical headroom boundary, selected 45/66 baseline placement, and the reason these diagnostic speeds are not repeated benchmark claims.
+- `phase13-iq4-xs-4k-baseline.md` and `.json` report the repeated 45/66 IQ4_XS baseline and the bounded complete-operating-point comparison with full-GPU IQ2.

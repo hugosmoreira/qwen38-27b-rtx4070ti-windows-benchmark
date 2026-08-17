@@ -29,6 +29,7 @@ This directory records the machine and software environment used for measurement
 - `phase13-iq4-xs-download-manifest.json` pins the separately authorized IQ4_XS revision, exact size, SHA-256, ignored destination, and download URL.
 - `phase13-iq4-xs-preflight-2026-08-16.json` records the official metadata check, conservative storage calculation, machine suitability, clean-GPU measurement gate, and quant/runtime naming boundary.
 - `phase13-iq4-xs-protocol-2026-08-16.json` freezes the hybrid-offload research questions, ordered substages, practical-frontier definition, active-context rules, metrics, and claim boundaries before measurement.
+- `phase13-iq4-xs-stage-c-2026-08-16.json` closes artifact validation, the seven-probe layer frontier, and the repeated 45/66 4K/Q8 IQ4_XS baseline while leaving K/V, active-context, MTP, and quality substages open.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.

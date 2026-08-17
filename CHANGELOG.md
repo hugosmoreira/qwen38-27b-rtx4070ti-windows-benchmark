@@ -9,6 +9,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Prepare evidence-checked Phase 12 LinkedIn and X drafts plus a reusable benchmark card.
 - Start a separately scoped Phase 13 IQ4_XS hybrid-offload study with an immutable artifact manifest, storage preflight, frozen protocol, parameterized native launcher, safe resumable downloader, and practical layer-frontier probe.
 - Select 45/66 GPU layers for the Phase 13 repeated baseline after seven successful IQ4_XS placement probes; 46/66 was operational but missed the frozen 1,024 MiB VRAM-headroom gate.
+- Complete the repeated IQ4_XS 4K/Q8 baseline at 5.977 generation tok/s and document that the existing full-GPU IQ2 operating point was 7.302× faster under the shared workload.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

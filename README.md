@@ -302,3 +302,5 @@ The first two gates are versioned before measurement:
 - the [protocol](environment/phase13-iq4-xs-protocol-2026-08-16.json) freezes the practical 4K offload frontier before later K/V-cache, active-context, MTP, and quality stages.
 
 The offload frontier begins at 25 requested GPU layers, uses Q8 K/V and MTP off, and requires a successful short request, exact startup-log placement evidence, and at least 1,024 MiB post-request VRAM headroom. Frontier probes are capability and placement evidence—not repeated performance benchmarks.
+
+The completed frontier selected 45/66 layers; 46/66 still ran but left only 856 MiB free and therefore missed the frozen safety gate. At the selected placement, the repeated IQ4_XS baseline averaged 5.977 generation tok/s with 0.098% CV. The matched Phase 6 IQ2 operating point was 7.302× faster, but it also fully offloaded 66/66 layers. See the [frontier](results/summaries/phase13-offload-frontier.md) and [repeated baseline](results/summaries/phase13-iq4-xs-4k-baseline.md). Quality, Q4 K/V, active-context, and MTP conclusions remain open.

@@ -32,4 +32,6 @@ Phase 9 adds two IQ2 MTP off/on workload pairs. MTP accelerated both fixed-lengt
 
 Phase 13 begins with a noncanonical IQ4_XS offload-frontier diagnostic. Seven fresh-process short probes selected 45/66 GPU layers under a frozen 1,024 MiB VRAM-headroom rule. The raw diagnostic is classified separately from repeated performance evidence; its bounded interpretation is `summaries/phase13-offload-frontier.md`.
 
+The selected 45/66 IQ4_XS configuration then completed one excluded warm-up and three measured 256-token repetitions at 5.977 generation tok/s with 0.098% CV. The canonical raw record is classified in the release manifest; `summaries/phase13-iq4-xs-4k-baseline.md` compares the complete hybrid operating point with the earlier full-GPU IQ2 evidence without calling it a quantization-only effect.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

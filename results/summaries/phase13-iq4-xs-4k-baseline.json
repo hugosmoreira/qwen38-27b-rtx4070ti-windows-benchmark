@@ -1,0 +1,77 @@
+{
+  "schema_version": "phase13-iq4-xs-4k-summary-1.0",
+  "recorded_date": "2026-08-16",
+  "comparison_scope": "complete operating points under the shared Phase 4 workload",
+  "sources": {
+    "iq2": {
+      "path": "results/raw/phase6-iq2-comparison-20260816T014219897578Z-05ff3bf0.json",
+      "size_bytes": 84976,
+      "sha256": "ab2106d687f909ae6850e1309236d52f9e5bdb03f6645e788d9309dc0a7ff864"
+    },
+    "iq4_xs": {
+      "path": "results/raw/phase13-iq4-xs-4k-q8-20260817T034842157169Z-a0322e7c.json",
+      "size_bytes": 479996,
+      "sha256": "9786a02373861f52737ed6edcdbf5f793cdefa83afc265a39eec7de13235a31b"
+    }
+  },
+  "held_constant": {
+    "runtime": "llama.cpp b10448 ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "prompt_suite": "prompts/phase4-baseline.json",
+    "prompt_tokens": 84,
+    "completion_tokens": 256,
+    "kv_cache_k": "q8_0",
+    "kv_cache_v": "q8_0",
+    "mtp": false,
+    "warmup_runs": 1,
+    "measured_repetitions": 3
+  },
+  "configurations": {
+    "iq2": {
+      "quantization": "UD-IQ2_XXS",
+      "gpu_layers": "66/66",
+      "generation_tokens_per_second": 43.643,
+      "prompt_tokens_per_second": 943.278,
+      "ttft_ms": 91.272,
+      "total_latency_ms": 5934.130,
+      "peak_vram_used_mib": 8976,
+      "minimum_vram_free_mib": 3019,
+      "peak_private_memory_bytes": 10330333184,
+      "peak_cpu_percent_of_machine": 3.884
+    },
+    "iq4_xs": {
+      "quantization": "IQ4_XS",
+      "gpu_layers": "45/66",
+      "generation_tokens_per_second": 5.977,
+      "generation_sample_sd": 0.006,
+      "generation_cv_percent": 0.098,
+      "prompt_tokens_per_second": 176.522,
+      "ttft_ms": 481.603,
+      "total_latency_ms": 43145.679,
+      "peak_vram_used_mib": 10957,
+      "minimum_vram_free_mib": 1038,
+      "peak_private_memory_bytes": 12277231616,
+      "peak_cpu_percent_of_machine": 7.553
+    }
+  },
+  "iq4_xs_change_relative_to_iq2": {
+    "generation_throughput_percent": -86.305,
+    "prompt_throughput_percent": -81.286,
+    "ttft_percent": 427.657,
+    "total_latency_percent": 627.077,
+    "peak_vram_mib": 1981,
+    "minimum_free_vram_mib": -1981,
+    "private_memory_gib": 1.813,
+    "cpu_share_percentage_points": 3.669
+  },
+  "reciprocal_comparison": {
+    "iq2_generation_speed_multiple_over_iq4_xs": 7.302
+  },
+  "decision": "Retain IQ2 as the speed default. Continue IQ4_XS only to measure the separately hypothesized K/V-cache, active-context, MTP, and objective-quality tradeoffs.",
+  "limitations": [
+    "Quantization and layer placement both differ, so this is not a quantization-only causal estimate.",
+    "The fixed 84-prompt-token workload does not measure long-context behavior.",
+    "No quality benefit is inferred from a higher-bit artifact without objective evaluation."
+  ]
+}

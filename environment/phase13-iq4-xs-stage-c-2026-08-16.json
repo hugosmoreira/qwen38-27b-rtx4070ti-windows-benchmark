@@ -1,0 +1,59 @@
+{
+  "schema_version": "phase13-stage-c-checkpoint-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "stages_13a_through_13c_complete",
+  "protocol": "environment/phase13-iq4-xs-protocol-2026-08-16.json",
+  "protocol_commit": "cca873db89392fd11534b906e80861c0e6e1d860",
+  "stage_13a": {
+    "artifact_downloaded_and_validated": true,
+    "size_bytes": 15705861088,
+    "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+    "storage_gate_passed": true
+  },
+  "stage_13b": {
+    "raw_result": "results/raw/phase13-iq4-offload-frontier-20260817T034550433Z.json",
+    "raw_size_bytes": 13931,
+    "raw_sha256": "3567f53529e9693129a6c83e692c2e41c8c7849ce2ad187cfada9771ad5c2ee7",
+    "probes": 7,
+    "all_startup_request_and_placement_gates_passed": true,
+    "largest_practical_gpu_layers": 45,
+    "first_non_practical_gpu_layers": 46,
+    "non_practical_reason": "46/66 left 856 MiB free, below the frozen 1024 MiB headroom gate; it did not fail or run out of memory."
+  },
+  "stage_13c": {
+    "server_run_id": "native-server-20260817T034828008Z",
+    "launch_record_size_bytes": 2930,
+    "launch_record_sha256": "ac929a2bbaf03e349daa36a01ce674b3f75e8906abbeb905e9d4fb4beca9a460",
+    "server_log_size_bytes": 31807,
+    "server_log_sha256": "d967124deeb84e3b2cd79a67c75a7d6424b731f79b8618d7c32dbddcde98c715",
+    "model_hash_validated": true,
+    "gpu_layers_observed": "45/66",
+    "cpu_mapped_model_buffer_mib": 4964.75,
+    "cuda_model_buffer_mib": 9749.51,
+    "cpu_kv_buffer_mib": 42.50,
+    "cuda_kv_buffer_mib": 93.50,
+    "cuda_compute_buffer_mib": 101.28,
+    "cuda_host_compute_buffer_mib": 8.89,
+    "raw_result": "results/raw/phase13-iq4-xs-4k-q8-20260817T034842157169Z-a0322e7c.json",
+    "raw_size_bytes": 479996,
+    "raw_sha256": "9786a02373861f52737ed6edcdbf5f793cdefa83afc265a39eec7de13235a31b",
+    "independent_validation": "passed",
+    "completed_repetitions": 3,
+    "generation_tokens_per_second": 5.977,
+    "generation_cv_percent": 0.098,
+    "prompt_tokens_per_second": 176.522,
+    "ttft_ms": 481.603,
+    "total_latency_ms": 43145.679,
+    "peak_vram_used_mib": 10957,
+    "minimum_vram_free_mib": 1038,
+    "server_stopped_after_validation": true,
+    "pinned_servers_remaining": 0
+  },
+  "comparison_to_full_gpu_iq2": {
+    "iq2_generation_tokens_per_second": 43.643,
+    "iq2_speed_multiple": 7.302,
+    "iq4_xs_generation_throughput_change_percent": -86.305,
+    "interpretation": "This compares complete operating points. IQ2 is full-GPU and IQ4_XS is hybrid, so quantization and placement both differ."
+  },
+  "next_stage": "13D isolates Q8_0 versus Q4_0 target K/V cache at the selected model and layer placement before any active-context extension."
+}
