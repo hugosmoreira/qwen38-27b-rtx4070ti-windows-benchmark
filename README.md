@@ -8,7 +8,7 @@
 
 **Phase 10 is public on GitHub as of 2026-08-16.** The Apache-2.0 `v0.1.0` candidate, citation metadata, canonical evidence, and reproducibility tooling are available at [hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark). The Windows CI matrix passes on Python 3.11 and 3.14 after the hosted-runner path normalization in commit [`8ae9061`](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/commit/8ae9061e54c45e32e906be636bbf2a26275d9a83). The candidate is not yet tagged or published as a GitHub Release.
 
-**Phase 11 publication preparation started on 2026-08-16.** The Hugging Face Community report links its performance, quality, context, and MTP claims directly to the corresponding public evidence. Creating the discussion on `unsloth/Qwen3.8-27B-GGUF` remains the only Phase 11 external publication step.
+**Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 

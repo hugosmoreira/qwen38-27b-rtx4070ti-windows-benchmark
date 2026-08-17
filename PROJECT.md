@@ -13,7 +13,7 @@
 - Phase 8 completed on 2026-08-15. Q2 passed 10/24 objective tasks and IQ2 passed 9/24; paired counts were 7 both-pass, 3 Q2-only, 2 IQ2-only, and 12 neither-pass, with two-sided exact McNemar p = 1.0. The one-task Q2 edge is not a meaningful general-quality win, so IQ2 remains the practical default.
 - Phase 9 completed on 2026-08-15 for the selected IQ2 MTP scope. `draft-mtp` increased decode throughput 47.284% for prose and 92.651% for code, but deterministic prose diverged at generated token 16. MTP therefore remains off by default; Q3 and Q4 remain deferred.
 - Phase 10 passed its strict local `v0.1.0` gate and was published to `hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark` on 2026-08-16. The first Windows CI run exposed a repository-root normalization defect; commit `8ae9061` corrected it, and the Python 3.11/3.14 matrix now passes. The candidate remains untagged and has no GitHub Release.
-- Phase 11 started on 2026-08-16. The Community report is being reconciled with the live repository and linked directly to the Phase 6–9 evidence before submission to `unsloth/Qwen3.8-27B-GGUF`.
+- Phase 11 completed on 2026-08-16. The evidence-linked report was published by `Hugosmr` as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65`; the rendered post preserves all 25 GitHub evidence links and the study limitations.
 
 ## Objective
 
@@ -172,7 +172,7 @@ Status: strict local gate passed on 2026-08-16. The frozen criteria are in `envi
 - Link every headline number to the public GitHub results.
 - Post to `unsloth/Qwen3.8-27B-GGUF` only after explicit approval.
 
-Status: active on 2026-08-16. The target is a Community discussion, not a model or artifact upload. The report body is the single publication source, and GitHub remains the evidence system of record.
+Status: completed on 2026-08-16 as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). The publication is a Community discussion, not a model or artifact upload, and GitHub remains the evidence system of record.
 
 ### Phase 12 — Public communication
 

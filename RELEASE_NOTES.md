@@ -16,7 +16,7 @@ No GPU or model download is required to run the 61-test software suite, validate
 
 ## Publication state
 
-The release candidate is public on GitHub, and its Windows CI matrix passes on Python 3.11 and 3.14. It remains untagged and has not been published as a GitHub Release. The Phase 11 Hugging Face Community discussion is prepared separately so its claims can point back to this repository as the evidence system of record.
+The release candidate is public on GitHub, and its Windows CI matrix passes on Python 3.11 and 3.14. It remains untagged and has not been published as a GitHub Release. The Phase 11 report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65), with this repository retained as the evidence system of record.
 
 ## Interpretation boundary
 

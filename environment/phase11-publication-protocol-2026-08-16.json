@@ -40,12 +40,20 @@
     "offline_test_count": 61,
     "git_tag": null,
     "github_release": null,
-    "hugging_face_discussion": null
+    "hugging_face_discussion": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65"
   },
   "final_gate": {
     "browser_authentication_required": true,
     "action_time_confirmation_required": true,
     "reason": "Creating the discussion is public representational communication from the authenticated Hugging Face account."
   },
-  "status": "publication_ready_pending_hugging_face_sign_in_and_action_time_confirmation"
+  "publication_result": {
+    "account": "Hugosmr",
+    "discussion_number": 65,
+    "rendered_github_evidence_links": 25,
+    "title_verified": true,
+    "limitations_verified": true,
+    "model_or_artifact_upload_performed": false
+  },
+  "status": "completed"
 }
