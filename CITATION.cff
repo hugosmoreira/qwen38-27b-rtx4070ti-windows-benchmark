@@ -8,6 +8,7 @@ authors:
     email: hugo@webstudiolabs.com
 abstract: "An auditable Windows benchmark harness and evidence bundle for Qwen3.8-27B GGUF inference on an NVIDIA RTX 4070 Ti 12GB."
 version: "0.1.0"
+date-released: "2026-08-17"
 license: Apache-2.0
 repository-code: "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark"
 url: "https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark"

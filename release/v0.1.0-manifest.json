@@ -1,7 +1,7 @@
 {
   "schema_version": "release-manifest-1.0",
   "candidate_version": "0.1.0",
-  "status": "local_release_candidate_strict_gate_passed",
+  "status": "published_github_release",
   "technical_required_files": [
     ".gitattributes",
     ".editorconfig",
