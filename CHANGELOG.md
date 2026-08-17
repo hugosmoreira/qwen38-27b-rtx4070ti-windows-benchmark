@@ -7,6 +7,7 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Publish the repository to GitHub and verify the Windows Python 3.11/3.14 CI matrix.
 - Publish the evidence-linked report as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65` without uploading model weights or runtime artifacts.
 - Prepare evidence-checked Phase 12 LinkedIn and X drafts plus a reusable benchmark card.
+- Start a separately scoped Phase 13 IQ4_XS hybrid-offload study with an immutable artifact manifest, storage preflight, frozen protocol, parameterized native launcher, safe resumable downloader, and practical layer-frontier probe.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

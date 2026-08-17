@@ -1,0 +1,129 @@
+{
+  "schema_version": "phase13-iq4-xs-protocol-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "pre_measurement",
+  "title": "IQ4_XS hybrid-offload and active-context frontier",
+  "purpose": "Measure the speed, memory, and practical-context tradeoff between the existing full-GPU IQ2 configuration and a higher-bit IQ4_XS configuration that requires hybrid CPU/GPU placement on this 12GB GPU.",
+  "research_questions": [
+    "What is the largest practical IQ4_XS GPU-layer request that retains at least 1024 MiB sampled VRAM headroom at 4K context?",
+    "How does the selected hybrid IQ4_XS configuration compare with the existing full-GPU IQ2 baseline under the identical Phase 4 decode workload?",
+    "How much memory does Q4_0 target K/V cache save relative to Q8_0, and does it materially change throughput or objective long-context behavior?",
+    "Which active prompt lengths, rather than configured context capacities, complete reliably at 16K, 32K, and 64K?",
+    "Does draft-mtp improve CPU-bound IQ4_XS decode under matched off/on controls, and are outputs equivalent?"
+  ],
+  "primary_hypotheses": [
+    "IQ4_XS will require partial GPU offload because its 14.627 GiB artifact exceeds physical VRAM before K/V and compute buffers are included.",
+    "Hybrid IQ4_XS will decode more slowly than full-GPU IQ2 but may improve selected objective quality outcomes.",
+    "Q4_0 target K/V cache will enable larger active contexts with a possible long-context quality cost.",
+    "MTP speedup will depend on draft-token acceptance and will not be assumed to preserve output."
+  ],
+  "scope": {
+    "included": [
+      "IQ4_XS artifact preflight and checksum validation",
+      "4K GPU-layer practical-frontier probe",
+      "4K matched IQ2 versus IQ4_XS performance",
+      "Q8_0 versus Q4_0 target K/V cache",
+      "active-prompt context ladder",
+      "matched MTP off/on workloads",
+      "objective output and retrieval checks"
+    ],
+    "excluded": [
+      "Treating community RTX 4060, RTX 3090, RTX 4090, RTX 5090, DGX, or MLX measurements as baselines for this PC",
+      "Claiming that configured context capacity proves active-prompt usability",
+      "Fine-tuning or modifying model weights",
+      "Publishing model weights",
+      "Changing llama.cpp version during a controlled pair"
+    ]
+  },
+  "model": {
+    "manifest": "environment/phase13-iq4-xs-download-manifest.json",
+    "quantization": "IQ4_XS",
+    "size_bytes": 15705861088,
+    "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666"
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "host": "127.0.0.1",
+    "parallel_slots": 1,
+    "automatic_fit": "off"
+  },
+  "stage_order": [
+    {
+      "stage": "13A",
+      "name": "artifact and storage preflight",
+      "exit_condition": "Pinned artifact identity, storage safety, checksum, and clean-Git exclusions pass."
+    },
+    {
+      "stage": "13B",
+      "name": "4K practical offload frontier",
+      "method": "Probe ascending GPU-layer requests from 25, then refine the first practical/non-practical bracket. Each probe uses Q8_0 K/V, MTP off, a fresh process, one short request, and captured startup evidence.",
+      "practical_gate": "Healthy startup, successful request, requested placement evidenced in the startup log, and at least 1024 MiB GPU memory free after the probe."
+    },
+    {
+      "stage": "13C",
+      "name": "matched 4K performance baseline",
+      "method": "Run one excluded warm-up and three measured 256-token repetitions using the Phase 4 prompt, first at the selected IQ4_XS placement and then compare against existing canonical IQ2 evidence."
+    },
+    {
+      "stage": "13D",
+      "name": "target K/V cache comparison",
+      "method": "Compare Q8_0 and Q4_0 K/V at fixed model, layer placement, prompt, seed, and context before extending context."
+    },
+    {
+      "stage": "13E",
+      "name": "active-context ladder",
+      "method": "Test approximately 78% active prompts at 16K, 32K, and 64K with explicit output reservation; retain failures and paging evidence."
+    },
+    {
+      "stage": "13F",
+      "name": "MTP and quality validation",
+      "method": "Run matched MTP off/on prose and code workloads, acceptance accounting, output hashes, and objective long-context retrieval checks."
+    }
+  ],
+  "held_constant_for_4k_frontier": {
+    "context_size": 4096,
+    "parallel_slots": 1,
+    "flash_attention": "on",
+    "batch_size": 512,
+    "micro_batch_size": 128,
+    "threads": 2,
+    "threads_batch": 2,
+    "target_kv_cache_k": "q8_0",
+    "target_kv_cache_v": "q8_0",
+    "prompt_cache": false,
+    "thinking": false,
+    "mtp": false,
+    "tools": false,
+    "vision": false
+  },
+  "measurement_rules": {
+    "fresh_process_per_configuration": true,
+    "one_factor_changed_at_a_time": true,
+    "startup_log_layer_evidence_required": true,
+    "raw_results_append_only": true,
+    "failed_and_non_practical_probes_retained": true,
+    "active_prompt_tokens_reported_separately_from_configured_context": true,
+    "primary_performance_metric": "mean server generation tokens per second",
+    "secondary_metrics": [
+      "prompt tokens per second",
+      "streaming TTFT",
+      "total latency",
+      "sampled VRAM used and free",
+      "process private memory",
+      "CPU and GPU utilization",
+      "temperature and power",
+      "pagefile or committed-memory pressure",
+      "MTP acceptance"
+    ]
+  },
+  "claim_boundaries": [
+    "The 4K frontier is local to this GPU driver, WDDM state, runtime build, quant, and cache type.",
+    "Cross-hardware community numbers are context, not a combined benchmark table unless their protocols become comparable.",
+    "A 64K result may be reported only when the actual prompt token count is near the configured limit and the request completes with retained memory and latency evidence.",
+    "Any observed IQ4_XS quality advantage remains limited to the committed tasks."
+  ],
+  "exit_condition": "Every completed stage has pinned inputs, machine-readable evidence, a bounded interpretation, and documented failures; public text distinguishes full-GPU IQ2 from hybrid IQ4_XS and configured context from active prompt length."
+}

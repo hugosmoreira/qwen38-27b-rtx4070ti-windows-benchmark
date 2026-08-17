@@ -26,6 +26,9 @@ This directory records the machine and software environment used for measurement
 - `phase10-release-gate-2026-08-16.json` records the resolved public identity and repository coordinates, validated CFF metadata, passing strict release audit, final wheel metadata, and the remaining approval boundary before any external action.
 - `phase11-publication-protocol-2026-08-16.json` freezes the Hugging Face Community target, report source, public evidence links, excluded upload actions, and the sign-in plus action-time confirmation boundary.
 - `phase12-publication-protocol-2026-08-16.json` freezes the social channels, exact claims, source links, visual specification, and per-channel approval boundaries before any social submission.
+- `phase13-iq4-xs-download-manifest.json` pins the separately authorized IQ4_XS revision, exact size, SHA-256, ignored destination, and download URL.
+- `phase13-iq4-xs-preflight-2026-08-16.json` records the official metadata check, conservative storage calculation, machine suitability, clean-GPU measurement gate, and quant/runtime naming boundary.
+- `phase13-iq4-xs-protocol-2026-08-16.json` freezes the hybrid-offload research questions, ordered substages, practical-frontier definition, active-context rules, metrics, and claim boundaries before measurement.
 - `collect_environment.ps1` in `scripts/` emits a fresh read-only snapshot for later runs.
 
 Environment files must not contain usernames, authentication tokens, full process command lines, or unrelated private paths.

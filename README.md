@@ -4,13 +4,15 @@
 
 ## Status
 
-**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. The package passes 61 offline tests; Q3 and Q4 downloads remain deferred.
+**Phase 9 completed locally on 2026-08-15.** In-model `draft-mtp` increased IQ2 generation throughput by 47.284% on prose and 92.651% on Python code, with 55.187% and 90.110% draft-token acceptance. It also added 554–568 MiB sampled peak VRAM. Code output matched exactly, but prose diverged at generated token 16 under greedy decoding, so MTP remains off by default. Q3 and Q4 were deferred from the `v0.1.0` evidence bundle.
 
 **Phase 10 is public on GitHub as of 2026-08-16.** The Apache-2.0 `v0.1.0` candidate, citation metadata, canonical evidence, and reproducibility tooling are available at [hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark). The Windows CI matrix passes on Python 3.11 and 3.14 after the hosted-runner path normalization in commit [`8ae9061`](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/commit/8ae9061e54c45e32e906be636bbf2a26275d9a83). The candidate is not yet tagged or published as a GitHub Release.
 
 **Phase 11 completed on 2026-08-16.** The evidence-linked report is public as [Hugging Face Community Discussion #65](https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/discussions/65). It was published by `Hugosmr` with all 25 GitHub evidence links and the study limitations intact; no model weights or runtime artifacts were uploaded.
 
 **Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. No social post has been published, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
+
+**Phase 13 started on 2026-08-16.** The owner separately authorized an `IQ4_XS` hybrid-offload study. The official artifact is pinned at 15,705,861,088 bytes (14.63 GiB), revision `f1bfb127…`, and SHA-256 `9fd40d70…`; storage preflight passed with more than 1.5 TiB free on the model drive. No Phase 13 throughput or context result is claimed until the download validates and the frozen offload-frontier protocol runs.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
@@ -67,8 +69,9 @@ This is deliberately different from an RTX 4090 showcase. The 12 GB VRAM limit c
 | `UD-Q2_K_XL` | 9.94 GiB | Tested controlled comparison candidate with tighter VRAM headroom |
 | `UD-Q3_K_XL` | 12.52 GiB | Deferred partial-offload candidate |
 | `UD-Q4_K_XL` | 16.69 GiB | Deferred heavier-offload candidate |
+| `IQ4_XS` | 14.63 GiB | Phase 13 pinned hybrid-offload candidate |
 
-IQ2 and Q2 have been downloaded and tested. Larger quants remain deferred until an evidence gate justifies their storage and offload cost.
+IQ2 and Q2 have been downloaded and tested. Phase 13 authorizes only the pinned `IQ4_XS` artifact; the similarly named `Q4_K_M`, `UD-Q4_K_XL`, and MLX formats are not interchangeable experimental inputs.
 
 ## Repository map
 
@@ -287,3 +290,15 @@ The isolated MTP experiment used two greedy 256-token workloads, one excluded wa
 The code response hashes matched across states. The prose was deterministic within each state but diverged at generated token 16, so this build's MTP path is not treated as a transparent accelerator. Keep MTP off by default; consider it only as an opt-in mode after workload-specific correctness testing.
 
 See the [frozen protocol](environment/phase9-mtp-protocol-2026-08-15.json), [completed environment record](environment/phase9-mtp-2026-08-15.json), [human summary](results/summaries/phase9-mtp-comparison.md), and [machine-readable comparison](results/summaries/phase9-mtp-comparison.json).
+
+## Phase 13 IQ4_XS hybrid-offload study
+
+Phase 13 asks whether the possible quality benefit of a higher-bit quant is worth CPU/GPU hybrid-offload cost on this 12GB GPU. It deliberately separates configured context capacity from actual prompt length and uses community Q4 results only as motivation, not as comparable evidence.
+
+The first two gates are versioned before measurement:
+
+- the [artifact manifest](environment/phase13-iq4-xs-download-manifest.json) pins the immutable revision, exact size, SHA-256, and ignored local destination;
+- the [preflight](environment/phase13-iq4-xs-preflight-2026-08-16.json) records storage, hardware, runtime, and clean-GPU requirements;
+- the [protocol](environment/phase13-iq4-xs-protocol-2026-08-16.json) freezes the practical 4K offload frontier before later K/V-cache, active-context, MTP, and quality stages.
+
+The offload frontier begins at 25 requested GPU layers, uses Q8 K/V and MTP off, and requires a successful short request, exact startup-log placement evidence, and at least 1,024 MiB post-request VRAM headroom. Frontier probes are capability and placement evidence—not repeated performance benchmarks.

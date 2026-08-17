@@ -1,0 +1,23 @@
+{
+  "schema_version": "model-download-manifest-1.0",
+  "verified_date": "2026-08-16",
+  "repository": "unsloth/Qwen3.8-27B-GGUF",
+  "repository_commit": "f1bfb127c64f7072bdd2cad55f258b9c8b2910fe",
+  "repository_last_modified_utc": "2026-08-15T05:48:44Z",
+  "filename": "Qwen3.8-27B-IQ4_XS.gguf",
+  "quantization": "IQ4_XS",
+  "relative_local_path": "models/Qwen3.8-27B-GGUF/Qwen3.8-27B-IQ4_XS.gguf",
+  "size_bytes": 15705861088,
+  "size_decimal_gb": 15.71,
+  "size_gib": 14.63,
+  "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+  "git_lfs_blob_id": "bbc576e7ff34826d5866a2440ff63ba2ca3ce96e",
+  "download_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/f1bfb127c64f7072bdd2cad55f258b9c8b2910fe/Qwen3.8-27B-IQ4_XS.gguf",
+  "download_status": "authorized_not_downloaded",
+  "approval_record": "The project owner explicitly requested the Phase 13 download/storage preflight and continuation on 2026-08-16.",
+  "notes": [
+    "The model file and any partial download are excluded from Git.",
+    "The immutable repository revision, exact byte count, and SHA-256 prevent a later repository update from silently changing the experiment input.",
+    "This is IQ4_XS, not UD-Q4_K_XL, Q4_K_M, or an MLX artifact; those names must not be treated as interchangeable."
+  ]
+}

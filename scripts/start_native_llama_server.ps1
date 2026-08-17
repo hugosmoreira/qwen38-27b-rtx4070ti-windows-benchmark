@@ -5,6 +5,9 @@ param(
     [ValidateRange(1024, 262144)][int]$ContextSize = 4096,
     [ValidateRange(1024, 65535)][int]$Port = 8090,
     [ValidateRange(1, 64)][int]$Threads = 2,
+    [ValidateRange(-1, 66)][int]$GpuLayers = -1,
+    [ValidateSet('f16', 'q8_0', 'q4_0')][string]$KvCacheKType = 'q8_0',
+    [ValidateSet('f16', 'q8_0', 'q4_0')][string]$KvCacheVType = 'q8_0',
     [ValidateSet('none', 'draft-mtp')][string]$SpeculativeType = 'none',
     [ValidateRange(0, 16)][int]$SpeculativeDraftMaximum = 2,
     [ValidateRange(0, 16)][int]$SpeculativeDraftMinimum = 0,
@@ -138,11 +141,11 @@ $arguments = @(
     '--ubatch-size', '128',
     '--threads', [string]$Threads,
     '--threads-batch', [string]$Threads,
-    '--gpu-layers', '-1',
+    '--gpu-layers', [string]$GpuLayers,
     '--fit', 'off',
     '--flash-attn', 'on',
-    '--cache-type-k', 'q8_0',
-    '--cache-type-v', 'q8_0',
+    '--cache-type-k', $KvCacheKType,
+    '--cache-type-v', $KvCacheVType,
     '--cache-ram', '0',
     '--ctx-checkpoints', '0',
     '--no-context-shift',
@@ -215,6 +218,17 @@ $launchRecord = [ordered]@{
     model_manifest = [System.IO.Path]::GetRelativePath($repositoryRoot, $resolvedModelManifest).Replace('\', '/')
     model_alias = $ModelAlias
     model_hash_validated = -not $SkipModelHashValidation
+    controlled_configuration = [ordered]@{
+        context_size = $ContextSize
+        parallel_slots = 1
+        gpu_layers_requested = $GpuLayers
+        kv_cache_k_type = $KvCacheKType
+        kv_cache_v_type = $KvCacheVType
+        threads = $Threads
+        threads_batch = $Threads
+        automatic_fit = 'off'
+        flash_attention = 'on'
+    }
     speculative_decoding = [ordered]@{
         type = $SpeculativeType
         draft_n_max = if ($SpeculativeType -eq 'draft-mtp') { $SpeculativeDraftMaximum } else { 0 }

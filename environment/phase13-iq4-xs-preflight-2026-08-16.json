@@ -1,0 +1,61 @@
+{
+  "schema_version": "phase13-preflight-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "passed_with_clean_gpu_required_before_measurement",
+  "candidate_manifest": "environment/phase13-iq4-xs-download-manifest.json",
+  "artifact_metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.8-27B-GGUF?blobs=true",
+  "artifact": {
+    "repository_revision": "f1bfb127c64f7072bdd2cad55f258b9c8b2910fe",
+    "filename": "Qwen3.8-27B-IQ4_XS.gguf",
+    "size_bytes": 15705861088,
+    "size_gib": 14.627,
+    "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+    "metadata_verified": true
+  },
+  "storage": {
+    "destination_drive": "E:",
+    "free_bytes_at_preflight": 1626476994560,
+    "free_gib_at_preflight": 1514.77,
+    "required_safety_bytes": 42149140416,
+    "required_safety_gib": 39.254,
+    "safety_formula": "two times the model byte size plus 10 GiB",
+    "gate_passed": true
+  },
+  "machine": {
+    "cpu": "Intel(R) Core(TM) i7-14700K",
+    "logical_processors": 28,
+    "physical_memory_gb": 63.77,
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "vram_total_mib": 12282,
+    "driver_version": "610.88",
+    "operating_system": "Windows 11 Home 25H2 build 26200.9168",
+    "source": "environment/machine-snapshot-2026-08-15.json"
+  },
+  "runtime": {
+    "name": "llama.cpp",
+    "release": "b10448",
+    "commit": "ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "backend": "CUDA",
+    "decision": "Retain the pinned runtime for direct comparison with Phases 3-9; any later runtime upgrade must be a separate factor."
+  },
+  "live_state_at_preflight": {
+    "existing_pinned_llama_server_detected": true,
+    "existing_server_process_id": 10896,
+    "gpu_free_mib": 2773,
+    "interpretation": "The restored Phase 9 IQ2 server is still active. Protocol and download work may continue, but no Phase 13 measurement may begin until that exact pinned process is stopped and a clean GPU snapshot is recorded."
+  },
+  "gates": {
+    "official_artifact_identity": "pass",
+    "immutable_revision_and_sha256": "pass",
+    "destination_storage": "pass",
+    "model_weights_ignored_by_git": "pass",
+    "private_learning_files_ignored_by_git": "pass",
+    "clean_gpu_before_measurement": "pending",
+    "download_authorization": "pass"
+  },
+  "limitations": [
+    "GGUF file size is not a direct prediction of loaded VRAM or system-memory use.",
+    "A successful 64K allocation would not establish that a near-64K active prompt is usable.",
+    "Community Q4_K_M, IQ4_XS, UD-Q4_K_XL, llama.cpp, and MLX results are different experimental conditions."
+  ]
+}

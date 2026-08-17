@@ -78,6 +78,7 @@ Model weights are intentionally excluded. Obtain the required files from the rep
 
 - `environment/model-download-manifest.json` for `UD-IQ2_XXS`;
 - `environment/phase2-q2-k-xl-download-manifest.json` for `UD-Q2_K_XL`.
+- `environment/phase13-iq4-xs-download-manifest.json` for `IQ4_XS`.
 
 Place files at the repository-relative paths declared by those manifests. Validate filename, byte size, and SHA-256 before measurement. The launch wrapper performs hash validation by default.
 
@@ -153,6 +154,24 @@ Then run the counterbalanced sequence from the committed protocol:
 ```
 
 Use a fresh process for every line. Response-level validation requires positive draft counters when MTP is on and zero or absent draft activity when it is off.
+
+### Phase 13 IQ4_XS preflight and frontier
+
+Inspect the pinned destination, expected size/hash, partial-download state, and conservative free-space gate without transferring bytes:
+
+```powershell
+.\scripts\download_phase13_iq4_xs.ps1 -PreflightOnly
+```
+
+After deliberate download authorization, omit `-PreflightOnly`. The script writes to an ignored `.partial` path, safely resumes that exact partial file, verifies byte size and SHA-256, and only then moves it to the pinned ignored destination.
+
+With no pinned `llama-server` process running, discover the 4K Q8-K/V practical layer frontier:
+
+```powershell
+.\scripts\run_phase13_offload_frontier.ps1
+```
+
+The script validates the model once, starts a fresh process per candidate, records exact startup layer evidence and one short request, stops only the pinned process it owns, and refines the first practical/non-practical bracket. Its 1,024 MiB headroom gate is a study definition, not a universal hardware rule.
 
 ## Reporting a reproduction
 

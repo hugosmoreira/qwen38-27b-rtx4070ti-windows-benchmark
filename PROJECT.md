@@ -15,6 +15,7 @@
 - Phase 10 passed its strict local `v0.1.0` gate and was published to `hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark` on 2026-08-16. The first Windows CI run exposed a repository-root normalization defect; commit `8ae9061` corrected it, and the Python 3.11/3.14 matrix now passes. The candidate remains untagged and has no GitHub Release.
 - Phase 11 completed on 2026-08-16. The evidence-linked report was published by `Hugosmr` as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65`; the rendered post preserves all 25 GitHub evidence links and the study limitations.
 - Phase 12 started on 2026-08-16 as a local-first publication package. LinkedIn and X drafts, a benchmark card, and a channel checklist will be validated before any account-level publication action.
+- Phase 13 started on 2026-08-16 as a separately authorized IQ4_XS hybrid-offload study. Official artifact identity and storage preflight passed; protocol and tooling are being frozen before download and measurement.
 
 ## Objective
 
@@ -182,6 +183,19 @@ Status: completed on 2026-08-16 as [Hugging Face Community Discussion #65](https
 - Optionally share with local-LLM communities for methodology feedback.
 
 Status: active on 2026-08-16. Drafting and repository publication of the communication kit are in scope; every final social submission remains separately approval-gated.
+
+### Phase 13 — IQ4_XS hybrid offload and active context
+
+- Pin and checksum-validate the official `IQ4_XS` artifact.
+- Find the largest practical 4K GPU-layer request with Q8 K/V and at least 1,024 MiB VRAM headroom.
+- Compare the selected hybrid configuration with the existing full-GPU IQ2 evidence under a matched workload.
+- Isolate Q8 versus Q4_0 K/V cache before extending active context.
+- Test active prompt lengths at 16K, 32K, and 64K rather than reporting allocation alone.
+- Run MTP off/on and objective quality checks only after the baseline is stable.
+
+Exit condition: every completed substage retains pinned inputs, startup placement, raw telemetry, failures, and bounded conclusions that distinguish quantization, runtime, layer placement, K/V cache, and active prompt length.
+
+Status: active on 2026-08-16. The immutable 14.63 GiB artifact, storage gate, and pre-measurement protocol are recorded in `environment/phase13-iq4-xs-*.json`. No Phase 13 performance result exists yet.
 
 ## Success criteria
 
