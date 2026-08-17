@@ -30,4 +30,6 @@ The canonical Phase 8 files are `raw/phase8-quality-q2-20260816T033656385280Z-23
 
 Phase 9 adds two IQ2 MTP off/on workload pairs. MTP accelerated both fixed-length workloads but changed the deterministic prose output, so it remains an opt-in experimental mode rather than the default. The canonical raw records and their classification are listed in `release/v0.1.0-manifest.json`; the interpretations are `summaries/phase9-mtp-comparison.md` and `summaries/phase9-mtp-comparison.json`.
 
+Phase 13 begins with a noncanonical IQ4_XS offload-frontier diagnostic. Seven fresh-process short probes selected 45/66 GPU layers under a frozen 1,024 MiB VRAM-headroom rule. The raw diagnostic is classified separately from repeated performance evidence; its bounded interpretation is `summaries/phase13-offload-frontier.md`.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

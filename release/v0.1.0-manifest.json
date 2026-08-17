@@ -66,6 +66,11 @@
       "path": "results/raw/phase4-iq2-baseline-20260816T001639Z.json",
       "classification": "superseded",
       "reason": "The nominal 250 ms telemetry sampler ran at 300 ms; the corrected cadence-aware rerun is canonical."
+    },
+    {
+      "path": "results/raw/phase13-iq4-offload-frontier-20260817T034550433Z.json",
+      "classification": "diagnostic",
+      "reason": "Each layer placement received one short capability request to select the repeated-baseline configuration; the per-probe rates are not canonical performance measurements."
     }
   ],
   "artifact_policy": {

@@ -21,6 +21,7 @@ Current scripts:
 .\scripts\run_phase9_measurement.ps1 -Config configs/phase9-mtp-on-prose.json
 .\scripts\download_phase13_iq4_xs.ps1 -PreflightOnly
 .\scripts\run_phase13_offload_frontier.ps1
+.\scripts\run_phase13_measurement.ps1 -Config configs/phase13-iq4-xs-4k-q8.json
 ```
 
 `collect_environment.ps1` performs read-only inspection and prints JSON to standard output. Saving a new snapshot should be an explicit action so existing environment records are never overwritten silently.
@@ -50,6 +51,8 @@ Current scripts:
 `start_native_llama_server.ps1` additionally accepts `-SpeculativeType draft-mtp` with bounded draft-token controls. `run_phase9_measurement.ps1` accepts only the four frozen MTP configurations, matches the selected PID to one ignored launch record, verifies the expected MTP mode and F16 draft-cache controls, and then delegates to the Python harness. Every response must contain draft counters when MTP is on and no draft activity when it is off.
 
 For Phase 13, `start_native_llama_server.ps1` also accepts explicit `-GpuLayers`, `-KvCacheKType`, and `-KvCacheVType` controls while preserving the Phase 3-9 defaults. `download_phase13_iq4_xs.ps1` enforces the pinned revision, exact byte count, SHA-256, repository-bound ignored destination, conservative free-space gate, resumable `.partial` transfer, and validate-before-move sequence. `run_phase13_offload_frontier.ps1` refuses to run beside an existing pinned server, validates the model once, probes fresh processes, retains failures, and selects the largest layer request that passes the frozen 1,024 MiB VRAM-headroom gate.
+
+`run_phase13_measurement.ps1` accepts only the frozen 4K/Q8 configuration, verifies the selected process belongs to the pinned runtime, binds it to one ignored launch record, requires a hash-validated IQ4_XS load, checks MTP-off/Q8/45-layer controls, and requires explicit `45/66` startup placement before delegating to the Python harness.
 
 The `qwen-bench mtp-compare` command accepts the prose-off, prose-on, code-off, and code-on raw records in that order. It independently validates every record, rejects pairwise control drift or invalid draft counters, calculates per-workload changes and acceptance, and compares SHA-256 hashes of every measured response.
 

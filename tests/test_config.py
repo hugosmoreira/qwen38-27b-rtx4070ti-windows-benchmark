@@ -133,6 +133,20 @@ class ConfigurationTests(unittest.TestCase):
                     self.repository_root, temporary_config.relative_to(self.repository_root)
                 )
 
+    def test_phase13_iq4_baseline_loads_with_selected_frontier_controls(self) -> None:
+        config = load_benchmark_config(
+            self.repository_root, Path("configs/phase13-iq4-xs-4k-q8.json")
+        )
+        self.assertEqual(config.model_alias, "Qwen3.8-27B-IQ4_XS")
+        self.assertEqual(config.data["model"]["quantization"], "IQ4_XS")
+        self.assertEqual(config.data["configuration"]["gpu_layers"], 45)
+        self.assertEqual(config.data["configuration"]["kv_cache_k_type"], "q8_0")
+        self.assertEqual(config.data["configuration"]["kv_cache_v_type"], "q8_0")
+        self.assertEqual(config.expected_speculative_types, "none")
+        self.assertEqual(config.prompt["suite_id"], "phase4-iq2-baseline-v1")
+        self.assertEqual(config.data["run"]["warmup_runs"], 1)
+        self.assertEqual(config.data["run"]["measured_repetitions"], 3)
+
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):
             resolve_repository_path(self.repository_root, "../outside.json")
