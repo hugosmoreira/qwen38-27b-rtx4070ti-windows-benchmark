@@ -2,10 +2,35 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from qwen_bench.release_audit import _validate_markdown_links
+from qwen_bench.release_audit import _maximum_size_for_path, _validate_markdown_links
 
 
 class ReleaseAuditTests(unittest.TestCase):
+    def test_raw_json_size_override_is_narrowly_scoped(self) -> None:
+        policy = {
+            "maximum_tracked_file_bytes": 1_048_576,
+            "maximum_raw_result_file_bytes": 5_242_880,
+        }
+        self.assertEqual(
+            _maximum_size_for_path("results/raw/benchmark.json", policy), 5_242_880
+        )
+        self.assertEqual(
+            _maximum_size_for_path("results/summaries/benchmark.json", policy),
+            1_048_576,
+        )
+        self.assertEqual(
+            _maximum_size_for_path("results/raw/archive.zip", policy), 1_048_576
+        )
+
+    def test_raw_json_size_override_accepts_windows_separators(self) -> None:
+        policy = {
+            "maximum_tracked_file_bytes": 1_048_576,
+            "maximum_raw_result_file_bytes": 5_242_880,
+        }
+        self.assertEqual(
+            _maximum_size_for_path("results\\raw\\benchmark.json", policy), 5_242_880
+        )
+
     def test_unresolved_repository_root_is_normalized(self) -> None:
         working_directory = Path.cwd().resolve()
         with tempfile.TemporaryDirectory(dir=working_directory) as directory:

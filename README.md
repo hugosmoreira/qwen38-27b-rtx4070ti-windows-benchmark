@@ -12,7 +12,7 @@
 
 **Phase 12 communication preparation started on 2026-08-16.** The local-first package includes an evidence-checked LinkedIn draft, an eight-post X thread, and a reusable benchmark card. No social post has been published, and the separate `v0.1.0` GitHub tag/release remains approval-gated.
 
-**Phase 13 started on 2026-08-16.** The owner separately authorized an `IQ4_XS` hybrid-offload study. The official artifact is pinned at 15,705,861,088 bytes (14.63 GiB), revision `f1bfb127…`, and SHA-256 `9fd40d70…`; storage preflight passed with more than 1.5 TiB free on the model drive. No Phase 13 throughput or context result is claimed until the download validates and the frozen offload-frontier protocol runs.
+**Phase 13 stages A–E completed locally on 2026-08-16.** The pinned 14.63 GiB `IQ4_XS` artifact validated, hybrid offload selected 45/66 layers for 4K/Q8 and 40/66 for the fixed Q4_0 active-context ladder, and all four ladder levels completed. The largest request actually ingested 60,015 prompt tokens plus 128 generated tokens; it averaged 301.27 s TTFT, 1.569 generation tok/s, and 1,036 MiB measured free VRAM. This is a near-window capacity demonstration, not the recommended interactive profile. MTP and objective retrieval/quality remain Stage 13F.
 
 The practical recommendation is now stronger: keep IQ2 as the default because Phase 6 measured it 14.759% faster with 1,583 MiB less peak VRAM, while Phase 8 found only a one-task Q2 edge. The largest sensible tested IQ2 context remains 16K under the study's precommitted thresholds; that is not a claim about arbitrary full-window prompts, larger contexts, or long-context retrieval quality.
 
@@ -135,7 +135,7 @@ $env:PYTHONPATH = (Resolve-Path .\src).Path
 .\.venv\Scripts\python.exe -m qwen_bench release-audit --repository-root .
 ```
 
-The audit parses all tracked JSON with duplicate-key rejection, validates canonical Phase 5–9 records, checks every repository-relative Markdown link, classifies every raw record, and rejects tracked private or oversized artifacts. See [REPRODUCING.md](REPRODUCING.md) for exact result-validation and hardware workflows.
+The audit parses all tracked JSON with duplicate-key rejection, validates canonical benchmark and quality records, checks every repository-relative Markdown link, classifies every raw record, and rejects tracked private or oversized artifacts. Ordinary files are capped at 1 MiB; validated `results/raw/*.json` evidence has a separate 5 MiB ceiling for long telemetry runs. See [REPRODUCING.md](REPRODUCING.md) for exact result-validation and hardware workflows.
 
 ## Reproduce the Phase 1 smoke check
 
@@ -303,6 +303,17 @@ The first two gates are versioned before measurement:
 
 The offload frontier begins at 25 requested GPU layers, uses Q8 K/V and MTP off, and requires a successful short request, exact startup-log placement evidence, and at least 1,024 MiB post-request VRAM headroom. Frontier probes are capability and placement evidence—not repeated performance benchmarks.
 
-The completed frontier selected 45/66 layers; 46/66 still ran but left only 856 MiB free and therefore missed the frozen safety gate. At the selected placement, the repeated IQ4_XS baseline averaged 5.977 generation tok/s with 0.098% CV. The matched Phase 6 IQ2 operating point was 7.302× faster, but it also fully offloaded 66/66 layers. See the [frontier](results/summaries/phase13-offload-frontier.md) and [repeated baseline](results/summaries/phase13-iq4-xs-4k-baseline.md). Quality, Q4 K/V, active-context, and MTP conclusions remain open.
+The completed frontier selected 45/66 layers; 46/66 still ran but left only 856 MiB free and therefore missed the frozen safety gate. At the selected placement, the repeated IQ4_XS baseline averaged 5.977 generation tok/s with 0.098% CV. The matched Phase 6 IQ2 operating point was 7.302× faster, but it also fully offloaded 66/66 layers. See the [frontier](results/summaries/phase13-offload-frontier.md) and [repeated baseline](results/summaries/phase13-iq4-xs-4k-baseline.md).
 
 The Stage 13D cache pair found Q4_0 reduced direct target K/V buffers by 64 MiB (47.059%) at 4K while generation changed only −0.201%. Q4_0 and Q8_0 produced different deterministic responses, so Q4_0 is an active-context candidate—not a transparent default replacement. See the [K/V comparison](results/summaries/phase13-iq4-xs-kv-cache.md).
+
+Stage 13E then held IQ4_XS, 40/66 placement, Q4_0 K/V, runtime, and feature controls fixed while active prompt length grew:
+
+| Context | Actual prompt | TTFT | Generation | Minimum free VRAM |
+|---:|---:|---:|---:|---:|
+| 4K | 3,231 | 19.322 s | 4.593 tok/s | 2,025 MiB |
+| 16K | 12,831 | 66.002 s | 3.591 tok/s | 1,831 MiB |
+| 32K | 25,623 | 128.647 s | 2.695 tok/s | 1,584 MiB |
+| 64K | 60,015 | 301.272 s | 1.569 tok/s | 1,036 MiB |
+
+Every row is the mean of three measured repetitions after one excluded warm-up. The 64K warm-up briefly reached 994 MiB free, so the memory boundary is tight even though measured repetitions stayed at or above 1,033 MiB. See the [active-context interpretation](results/summaries/phase13-active-context.md) and [machine-readable summary](results/summaries/phase13-active-context.json). Keep IQ2 as the daily speed default; treat IQ4_XS near-64K as successful research capacity pending Stage 13F retrieval and quality validation.

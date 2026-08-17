@@ -38,4 +38,6 @@ Stage 13D changes only the target K/V representation. Q4_0 reduced the direct co
 
 The separate 64K/Q4_0 capacity frontier used only 38 prompt tokens and therefore remains diagnostic. It selected 40/66 layers with 1,143 MiB post-request VRAM free; `summaries/phase13-active-context-capacity.md` explains why this allocation result is not a 64K active-prompt claim.
 
+Stage 13E supplies the missing active-prompt evidence. Four canonical fixed-placement Q4_0 records completed at 3,231, 12,831, 25,623, and 60,015 actual prompt tokens. The near-64K level averaged 301.27 s TTFT, 1.569 generation tok/s, and 1,036 MiB measured free VRAM; `summaries/phase13-active-context.md` and `.json` preserve the bounded interpretation.
+
 Every summary value must be reproducible from committed raw data and a documented code version. Large diagnostic logs may remain local, but exclusions must be stated.

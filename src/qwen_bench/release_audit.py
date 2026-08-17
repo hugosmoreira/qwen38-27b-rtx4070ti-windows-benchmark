@@ -65,10 +65,17 @@ def audit_repository(repository_root: Path, *, strict: bool = False) -> dict[str
     checks["no_forbidden_artifacts_tracked"] = not artifact_violations
     issues.extend(f"forbidden public artifact is tracked: {path}" for path in artifact_violations)
 
-    maximum_bytes = int(manifest["artifact_policy"]["maximum_tracked_file_bytes"])
-    oversized = [path for path in tracked if (root / path).stat().st_size > maximum_bytes]
+    artifact_policy = manifest["artifact_policy"]
+    oversized = [
+        (path, _maximum_size_for_path(path, artifact_policy))
+        for path in tracked
+        if (root / path).stat().st_size > _maximum_size_for_path(path, artifact_policy)
+    ]
     checks["tracked_files_within_size_limit"] = not oversized
-    issues.extend(f"tracked file exceeds {maximum_bytes} bytes: {path}" for path in oversized)
+    issues.extend(
+        f"tracked file exceeds {maximum_bytes} bytes: {path}"
+        for path, maximum_bytes in oversized
+    )
 
     json_issues = _validate_all_json(root, tracked)
     checks["tracked_json_parses_without_duplicate_keys"] = not json_issues
@@ -137,6 +144,17 @@ def _tracked_files(root: Path) -> list[str]:
     return sorted(
         value.decode("utf-8") for value in completed.stdout.split(b"\0") if value
     )
+
+
+def _maximum_size_for_path(path: str, artifact_policy: dict[str, Any]) -> int:
+    default_maximum = int(artifact_policy["maximum_tracked_file_bytes"])
+    raw_result_maximum = int(
+        artifact_policy.get("maximum_raw_result_file_bytes", default_maximum)
+    )
+    normalized = path.replace("\\", "/")
+    if normalized.startswith("results/raw/") and Path(normalized).suffix.lower() == ".json":
+        return raw_result_maximum
+    return default_maximum
 
 
 def _validate_all_json(root: Path, tracked: list[str]) -> list[str]:

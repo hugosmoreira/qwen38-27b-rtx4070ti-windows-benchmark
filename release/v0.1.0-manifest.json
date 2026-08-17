@@ -46,7 +46,11 @@
       "results/raw/phase9-mtp-on-code-20260816T041709353404Z-221a5138.json",
       "results/raw/phase9-mtp-off-code-20260816T041809117916Z-bdba6559.json",
       "results/raw/phase13-iq4-xs-4k-q8-20260817T034842157169Z-a0322e7c.json",
-      "results/raw/phase13-iq4-xs-4k-q4-kv-20260817T035612020776Z-a4c55979.json"
+      "results/raw/phase13-iq4-xs-4k-q4-kv-20260817T035612020776Z-a4c55979.json",
+      "results/raw/phase13-iq4-xs-context-4k-q4-20260817T040950110012Z-6ac3ebe8.json",
+      "results/raw/phase13-iq4-xs-context-16k-q4-20260817T041351163881Z-550fffc2.json",
+      "results/raw/phase13-iq4-xs-context-32k-q4-20260817T042130693295Z-644d82c6.json",
+      "results/raw/phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json"
     ],
     "quality_result": [
       "results/raw/phase8-quality-q2-20260816T033656385280Z-2359f380.json",
@@ -82,6 +86,7 @@
   ],
   "artifact_policy": {
     "maximum_tracked_file_bytes": 1048576,
+    "maximum_raw_result_file_bytes": 5242880,
     "forbidden_private_paths": ["LEARNING_PATH.md", "LEARNING_LOG.md"],
     "forbidden_extensions": [
       ".gguf",

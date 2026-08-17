@@ -173,6 +173,25 @@ With no pinned `llama-server` process running, discover the 4K Q8-K/V practical 
 
 The script validates the model once, starts a fresh process per candidate, records exact startup layer evidence and one short request, stops only the pinned process it owns, and refines the first practical/non-practical bracket. Its 1,024 MiB headroom gate is a study definition, not a universal hardware rule.
 
+After the separate 64K/Q4_0 capacity frontier selects 40/66 layers, run each active-context level from a fresh server. For example, the near-window level is:
+
+```powershell
+.\scripts\start_native_llama_server.ps1 `
+    -ModelManifest environment/phase13-iq4-xs-download-manifest.json `
+    -ModelAlias Qwen3.8-27B-IQ4_XS `
+    -ContextSize 65536 `
+    -GpuLayers 40 `
+    -KvCacheKType q4_0 `
+    -KvCacheVType q4_0 `
+    -SpeculativeType none
+
+.\scripts\run_phase13_measurement.ps1 `
+    -Config configs/phase13-iq4-xs-context-64k-q4.json `
+    -ServerProcessId <verified-llama-server-pid>
+```
+
+Repeat with the committed 4K, 16K, and 32K configs and matching fresh server context sizes. Do not reuse the 45-layer 4K/Q8 baseline server: the active ladder intentionally fixes 40 layers and Q4_0 K/V at every level. The 64K config requires 60,000–60,100 tokenizer-observed prompt tokens; a successful allocation with a short prompt is not a reproduction of the active-context result.
+
 ## Reporting a reproduction
 
 Retain raw JSON, exact prompts, runtime and model revisions, launch flags, startup layer placement, hash checks, failed attempts, telemetry cadence, and interpretation limits. Report measured facts separately from estimates. If you change a controlled input, call the result a related experiment rather than an exact reproduction.

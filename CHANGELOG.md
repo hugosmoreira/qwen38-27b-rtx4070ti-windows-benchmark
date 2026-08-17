@@ -12,6 +12,8 @@ All notable repository changes are documented here. Versions follow semantic ver
 - Complete the repeated IQ4_XS 4K/Q8 baseline at 5.977 generation tok/s and document that the existing full-GPU IQ2 operating point was 7.302× faster under the shared workload.
 - Isolate Q4_0 target K/V at fixed 45/66 placement: direct K/V buffers fell 47.059%, 4K generation changed −0.201%, and deterministic output was not equivalent to Q8_0.
 - Select 40/66 layers for a fixed-placement Q4_0 active-context ladder after a separate 64K-capacity diagnostic; require at least 60,000 actual prompt tokens for the near-64K level.
+- Complete the fixed 4K/16K/32K/64K IQ4_XS active-context ladder. The 64K level ingested 60,015 prompt tokens in every repetition at 1.569 generation tok/s and 301.27 s TTFT, with 1,033–1,041 MiB measured free VRAM and a 994 MiB excluded-warm-up minimum.
+- Add a tested artifact-size policy that keeps the ordinary 1 MiB ceiling while permitting validated raw benchmark JSON up to 5 MiB, allowing full long-run telemetry to remain public.
 - Tag creation, GitHub Release publication, and final social submissions remain separate actions.
 - Normalize Windows repository roots before Markdown-link containment checks, including short-path and relative-path representations used by hosted runners.
 

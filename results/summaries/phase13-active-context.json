@@ -1,0 +1,135 @@
+{
+  "schema_version": "phase13-iq4-xs-active-context-summary-1.0",
+  "recorded_date": "2026-08-16",
+  "protocol_git_commit": "394eb18d330ec3e648358e4e4e502a3338eaa4ca",
+  "protocol": "environment/phase13-active-context-protocol-2026-08-16.json",
+  "relative_change_definition": "((level - 4K) / 4K) * 100",
+  "held_constant": {
+    "model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "runtime": "llama.cpp b10448 ad1de39e0708e3ced9c71bb3c82d93a2c046a73f",
+    "gpu_layers": "40/66",
+    "kv_cache_k": "q4_0",
+    "kv_cache_v": "q4_0",
+    "parallel_slots": 1,
+    "prompt_cache": false,
+    "mtp": false,
+    "thinking": false,
+    "warmup_runs": 1,
+    "measured_repetitions": 3,
+    "completion_tokens": 128
+  },
+  "levels": {
+    "4k": {
+      "context_size": 4096,
+      "source": "results/raw/phase13-iq4-xs-context-4k-q4-20260817T040950110012Z-6ac3ebe8.json",
+      "source_size_bytes": 517792,
+      "source_sha256": "bc82fafd39dbc4927d2bb16e9410924c2c1f80e1ee560341ff7363fdb66239cb",
+      "prompt_tokens": 3231,
+      "prompt_window_utilization_percent": 78.882,
+      "server_prompt_tokens_per_second": { "mean": 167.255, "sample_sd": 0.050, "cv_percent": 0.030 },
+      "server_generation_tokens_per_second": { "mean": 4.593, "sample_sd": 0.009, "cv_percent": 0.191 },
+      "time_to_first_content_token_ms": { "mean": 19321.946, "sample_sd": 5.844, "cv_percent": 0.030 },
+      "total_latency_ms": 46972.213,
+      "peak_vram_used_mib": 9969.667,
+      "minimum_vram_free_mib": 2025.333,
+      "peak_process_private_memory_bytes": 11265998848.0,
+      "measured_telemetry_sample_counts": [186, 186, 186]
+    },
+    "16k": {
+      "context_size": 16384,
+      "source": "results/raw/phase13-iq4-xs-context-16k-q4-20260817T041351163881Z-550fffc2.json",
+      "source_size_bytes": 1094502,
+      "source_sha256": "d957956bd087a50d9637b5b953dcefcef02529e1b8dde967af8658b71238b70f",
+      "prompt_tokens": 12831,
+      "prompt_window_utilization_percent": 78.314,
+      "server_prompt_tokens_per_second": { "mean": 194.435, "sample_sd": 0.469, "cv_percent": 0.241 },
+      "server_generation_tokens_per_second": { "mean": 3.591, "sample_sd": 0.027, "cv_percent": 0.759 },
+      "time_to_first_content_token_ms": { "mean": 66001.880, "sample_sd": 159.842, "cv_percent": 0.242 },
+      "total_latency_ms": 101367.097,
+      "peak_vram_used_mib": 10164.0,
+      "minimum_vram_free_mib": 1831.0,
+      "peak_process_private_memory_bytes": 11524953429.333,
+      "measured_telemetry_sample_counts": [400, 401, 402]
+    },
+    "32k": {
+      "context_size": 32768,
+      "source": "results/raw/phase13-iq4-xs-context-32k-q4-20260817T042130693295Z-644d82c6.json",
+      "source_size_bytes": 1882924,
+      "source_sha256": "3166799bb339e954dcf4c887d927067295b766f80c47c09d24810be82109ca07",
+      "prompt_tokens": 25623,
+      "prompt_window_utilization_percent": 78.195,
+      "server_prompt_tokens_per_second": { "mean": 199.199, "sample_sd": 0.054, "cv_percent": 0.027 },
+      "server_generation_tokens_per_second": { "mean": 2.695, "sample_sd": 0.003, "cv_percent": 0.120 },
+      "time_to_first_content_token_ms": { "mean": 128646.661, "sample_sd": 34.914, "cv_percent": 0.027 },
+      "total_latency_ms": 175776.914,
+      "peak_vram_used_mib": 10410.667,
+      "minimum_vram_free_mib": 1584.333,
+      "peak_process_private_memory_bytes": 11923266218.667,
+      "measured_telemetry_sample_counts": [695, 695, 694]
+    },
+    "64k": {
+      "context_size": 65536,
+      "source": "results/raw/phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json",
+      "source_size_bytes": 4077861,
+      "source_sha256": "0a1e8a011b0fbf61440d7c23d72da6e8639865d2c585e2c9165e5a04c42ca79f",
+      "prompt_tokens": 60015,
+      "prompt_window_utilization_percent": 91.576,
+      "near_window_minimum_prompt_tokens": 60000,
+      "near_window_acceptance_passed": true,
+      "server_prompt_tokens_per_second": { "mean": 199.230, "sample_sd": 0.168, "cv_percent": 0.084 },
+      "server_generation_tokens_per_second": { "mean": 1.569, "sample_sd": 0.005, "cv_percent": 0.291 },
+      "time_to_first_content_token_ms": { "mean": 301272.353, "sample_sd": 254.572, "cv_percent": 0.084 },
+      "total_latency_ms": 382206.165,
+      "peak_vram_used_mib": 10958.667,
+      "minimum_vram_free_mib": 1036.333,
+      "minimum_measured_run_vram_free_mib": 1033.0,
+      "excluded_warmup_minimum_vram_free_mib": 994.0,
+      "peak_process_private_memory_bytes": 12732396885.333,
+      "measured_telemetry_sample_counts": [1511, 1509, 1504]
+    }
+  },
+  "relative_changes_vs_4k_percent": {
+    "16k": {
+      "server_prompt_tokens_per_second": 16.251,
+      "server_generation_tokens_per_second": -21.816,
+      "time_to_first_content_token_ms": 241.590,
+      "total_latency_ms": 115.802,
+      "peak_vram_used_mib": 194.333,
+      "minimum_vram_free_mib": -194.333,
+      "peak_process_private_memory_gib": 0.241
+    },
+    "32k": {
+      "server_prompt_tokens_per_second": 19.099,
+      "server_generation_tokens_per_second": -41.324,
+      "time_to_first_content_token_ms": 565.806,
+      "total_latency_ms": 274.215,
+      "peak_vram_used_mib": 441.0,
+      "minimum_vram_free_mib": -441.0,
+      "peak_process_private_memory_gib": 0.612
+    },
+    "64k": {
+      "server_prompt_tokens_per_second": 19.118,
+      "server_generation_tokens_per_second": -65.839,
+      "time_to_first_content_token_ms": 1459.224,
+      "total_latency_ms": 713.686,
+      "peak_vram_used_mib": 989.0,
+      "minimum_vram_free_mib": -989.0,
+      "peak_process_private_memory_gib": 1.366
+    }
+  },
+  "decision": {
+    "largest_active_prompt_demonstrated_tokens": 60015,
+    "largest_configured_context_demonstrated": 65536,
+    "daily_default": "Retain full-GPU IQ2; it is substantially faster and has more VRAM headroom.",
+    "iq4_xs_role": "Use the fixed 40/66-layer Q4_0-cache profile for higher-bit research and long-context experiments, not as the everyday speed profile.",
+    "64k_classification": "Successful near-window capacity demonstration with tight memory and multi-minute TTFT; not a comfortable interactive recommendation.",
+    "quality_boundary": "The synthetic fixture measures performance and capacity, not long-context retrieval quality."
+  },
+  "limitations": [
+    "The context order was fixed and ascending rather than randomized.",
+    "The 64K fixture is 91.576% of the configured window while the lower levels are approximately 78%, by precommitted design.",
+    "The excluded 64K warm-up briefly reached 994 MiB free even though all measured repetitions remained at or above 1033 MiB.",
+    "Only one quant, one layer placement, one slot, one runtime build, and one Windows desktop were tested.",
+    "No retrieval or objective quality conclusion follows from successful synthetic prompt ingestion."
+  ]
+}

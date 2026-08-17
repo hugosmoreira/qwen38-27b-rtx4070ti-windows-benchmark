@@ -15,7 +15,7 @@
 - Phase 10 passed its strict local `v0.1.0` gate and was published to `hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark` on 2026-08-16. The first Windows CI run exposed a repository-root normalization defect; commit `8ae9061` corrected it, and the Python 3.11/3.14 matrix now passes. The candidate remains untagged and has no GitHub Release.
 - Phase 11 completed on 2026-08-16. The evidence-linked report was published by `Hugosmr` as `unsloth/Qwen3.8-27B-GGUF` Community Discussion `#65`; the rendered post preserves all 25 GitHub evidence links and the study limitations.
 - Phase 12 started on 2026-08-16 as a local-first publication package. LinkedIn and X drafts, a benchmark card, and a channel checklist will be validated before any account-level publication action.
-- Phase 13 started on 2026-08-16 as a separately authorized IQ4_XS hybrid-offload study. Official artifact identity and storage preflight passed; protocol and tooling are being frozen before download and measurement.
+- Phase 13 stages A–E completed locally on 2026-08-16. The pinned IQ4_XS artifact, 4K hybrid baseline, Q4_0 cache pair, and fixed-placement active 4K/16K/32K/64K ladder are complete; Stage 13F MTP and objective retrieval/quality validation remain.
 
 ## Objective
 
@@ -195,7 +195,7 @@ Status: active on 2026-08-16. Drafting and repository publication of the communi
 
 Exit condition: every completed substage retains pinned inputs, startup placement, raw telemetry, failures, and bounded conclusions that distinguish quantization, runtime, layer placement, K/V cache, and active prompt length.
 
-Status: active on 2026-08-16. Stages 13A-D are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, and Q4_0 K/V cut direct cache allocation 47.059% with −0.201% throughput change. Active context, MTP, and quality remain open.
+Status: active on 2026-08-16. Stages 13A-E are complete: the artifact validated, seven probes selected 45/66 layers, the repeated 4K/Q8 baseline averaged 5.977 generation tok/s, Q4_0 K/V cut direct cache allocation 47.059%, and a fixed 40/66-layer ladder completed at 3,231, 12,831, 25,623, and 60,015 active prompt tokens. Near-64K averaged 301.27 s TTFT and 1.569 generation tok/s with tight memory, so it is capacity evidence rather than the interactive recommendation. MTP and objective retrieval/quality remain Stage 13F.
 
 ## Success criteria
 

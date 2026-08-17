@@ -1,0 +1,124 @@
+{
+  "schema_version": "phase13-stage-e-checkpoint-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "stage_13e_complete",
+  "configuration_commit": "394eb18d330ec3e648358e4e4e502a3338eaa4ca",
+  "protocol": "environment/phase13-active-context-protocol-2026-08-16.json",
+  "selected_operating_point": {
+    "model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "gpu_layers_observed": "40/66",
+    "kv_cache_k": "q4_0",
+    "kv_cache_v": "q4_0",
+    "cpu_mapped_model_buffer_mib": 5988.08,
+    "cuda_model_buffer_mib": 8726.18,
+    "selection_source": "results/raw/phase13-iq4-offload-frontier-65536-q4-0-20260817T040527025Z.json"
+  },
+  "launch_evidence": [
+    {
+      "context_size": 4096,
+      "server_run_id": "native-server-20260817T040938287Z",
+      "launch_size_bytes": 2928,
+      "launch_sha256": "7835e3a7b582e47dfadb0b41b01494fcf762138e793c5877f42f3c67c66610f9",
+      "server_log_size_bytes": 34339,
+      "server_log_sha256": "a4c58396624051a953cbf2497f06948a53871726d5997ea1470592387b8fe26a",
+      "cpu_kv_buffer_mib": 27.0,
+      "cuda_kv_buffer_mib": 45.0,
+      "cuda_compute_buffer_mib": 95.03
+    },
+    {
+      "context_size": 16384,
+      "server_run_id": "native-server-20260817T041340323Z",
+      "launch_size_bytes": 2931,
+      "launch_sha256": "5cda66aa9d9f24d6456e0ed3fa85a562718a2d73b96ba279cb7146aa97310c55",
+      "server_log_size_bytes": 53992,
+      "server_log_sha256": "7c226e2586739c27e7f1a1528fd709f6fc5d9abedba5ab37679a8adf33eee3bf",
+      "cpu_kv_buffer_mib": 108.0,
+      "cuda_kv_buffer_mib": 180.0,
+      "cuda_compute_buffer_mib": 125.66
+    },
+    {
+      "context_size": 32768,
+      "server_run_id": "native-server-20260817T042119676Z",
+      "launch_size_bytes": 2930,
+      "launch_sha256": "7ff4d4c65ca356a6e252a4f028843061e3fee93713ef0eb0cfb31a92d301bd5e",
+      "server_log_size_bytes": 79879,
+      "server_log_sha256": "023ae9683aea599780d5d2d65ff932286e80f1e95cc4ee7e4e97adee6b15a87f",
+      "cpu_kv_buffer_mib": 216.0,
+      "cuda_kv_buffer_mib": 360.0,
+      "cuda_compute_buffer_mib": 207.66
+    },
+    {
+      "context_size": 65536,
+      "server_run_id": "native-server-20260817T043430543Z",
+      "launch_size_bytes": 2931,
+      "launch_sha256": "e4aa016c0a70944f7eab3d3543fd1420ad9ccc7ca5763cde51b188ecb4d2c831",
+      "server_log_size_bytes": 149331,
+      "server_log_sha256": "679087645ad3abde1cbd65744f5a626a5b270033c60fada9aad4413fc5caad64",
+      "cpu_kv_buffer_mib": 432.0,
+      "cuda_kv_buffer_mib": 720.0,
+      "cuda_compute_buffer_mib": 389.66
+    }
+  ],
+  "results": [
+    {
+      "context_size": 4096,
+      "prompt_tokens": 3231,
+      "path": "results/raw/phase13-iq4-xs-context-4k-q4-20260817T040950110012Z-6ac3ebe8.json",
+      "size_bytes": 517792,
+      "sha256": "bc82fafd39dbc4927d2bb16e9410924c2c1f80e1ee560341ff7363fdb66239cb",
+      "generation_tokens_per_second": 4.593,
+      "ttft_ms": 19321.946,
+      "minimum_vram_free_mib": 2025.333,
+      "independent_validation": "passed"
+    },
+    {
+      "context_size": 16384,
+      "prompt_tokens": 12831,
+      "path": "results/raw/phase13-iq4-xs-context-16k-q4-20260817T041351163881Z-550fffc2.json",
+      "size_bytes": 1094502,
+      "sha256": "d957956bd087a50d9637b5b953dcefcef02529e1b8dde967af8658b71238b70f",
+      "generation_tokens_per_second": 3.591,
+      "ttft_ms": 66001.880,
+      "minimum_vram_free_mib": 1831.0,
+      "independent_validation": "passed"
+    },
+    {
+      "context_size": 32768,
+      "prompt_tokens": 25623,
+      "path": "results/raw/phase13-iq4-xs-context-32k-q4-20260817T042130693295Z-644d82c6.json",
+      "size_bytes": 1882924,
+      "sha256": "3166799bb339e954dcf4c887d927067295b766f80c47c09d24810be82109ca07",
+      "generation_tokens_per_second": 2.695,
+      "ttft_ms": 128646.661,
+      "minimum_vram_free_mib": 1584.333,
+      "independent_validation": "passed"
+    },
+    {
+      "context_size": 65536,
+      "prompt_tokens": 60015,
+      "path": "results/raw/phase13-iq4-xs-context-64k-q4-20260817T043450807771Z-ad9ffd86.json",
+      "size_bytes": 4077861,
+      "sha256": "0a1e8a011b0fbf61440d7c23d72da6e8639865d2c585e2c9165e5a04c42ca79f",
+      "generation_tokens_per_second": 1.569,
+      "ttft_ms": 301272.353,
+      "minimum_vram_free_mib": 1036.333,
+      "minimum_measured_run_vram_free_mib": 1033.0,
+      "excluded_warmup_minimum_vram_free_mib": 994.0,
+      "independent_validation": "passed"
+    }
+  ],
+  "acceptance": {
+    "all_expected_runs_completed": true,
+    "near_window_minimum_prompt_tokens": 60000,
+    "near_window_observed_prompt_tokens": 60015,
+    "near_window_acceptance_passed": true,
+    "oom_or_failed_ladder_runs": 0
+  },
+  "cleanup": {
+    "server_stopped": true,
+    "pinned_servers_remaining": 0,
+    "gpu_free_mib_after_stop": 11289
+  },
+  "decision": "The fixed 40/66-layer Q4_0 profile demonstrated 60,015 active prompt tokens, but 301.27-second TTFT, 1.569 tok/s decode, and about 1 GiB measured VRAM margin classify 64K as a capacity/research profile rather than an interactive default.",
+  "next_stage": "Run frozen IQ4_XS MTP off/on controls and objective long-context retrieval checks before making a final higher-bit value judgment."
+}
