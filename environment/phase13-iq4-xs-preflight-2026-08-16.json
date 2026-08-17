@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-preflight-1.0",
   "recorded_date": "2026-08-16",
-  "status": "passed_with_clean_gpu_required_before_measurement",
+  "status": "passed_ready_for_measurement",
   "candidate_manifest": "environment/phase13-iq4-xs-download-manifest.json",
   "artifact_metadata_source": "https://huggingface.co/api/models/unsloth/Qwen3.8-27B-GGUF?blobs=true",
   "artifact": {
@@ -42,7 +42,13 @@
     "existing_pinned_llama_server_detected": true,
     "existing_server_process_id": 10896,
     "gpu_free_mib": 2773,
-    "interpretation": "The restored Phase 9 IQ2 server is still active. Protocol and download work may continue, but no Phase 13 measurement may begin until that exact pinned process is stopped and a clean GPU snapshot is recorded."
+    "validated_model_alias": "Qwen3.8-27B-UD-IQ2_XXS",
+    "validated_health": "ok",
+    "controlled_stop_completed": true,
+    "pinned_servers_remaining_after_stop": 0,
+    "clean_gpu_used_mib_after_stop": 694,
+    "clean_gpu_free_mib_after_stop": 11301,
+    "interpretation": "The restored Phase 9 IQ2 server was verified by executable path, health, and model alias, then stopped before Phase 13 measurement. No pinned llama-server remained."
   },
   "gates": {
     "official_artifact_identity": "pass",
@@ -50,7 +56,7 @@
     "destination_storage": "pass",
     "model_weights_ignored_by_git": "pass",
     "private_learning_files_ignored_by_git": "pass",
-    "clean_gpu_before_measurement": "pending",
+    "clean_gpu_before_measurement": "pass",
     "download_authorization": "pass"
   },
   "limitations": [

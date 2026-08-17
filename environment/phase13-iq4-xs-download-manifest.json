@@ -13,7 +13,12 @@
   "sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
   "git_lfs_blob_id": "bbc576e7ff34826d5866a2440ff63ba2ca3ce96e",
   "download_url": "https://huggingface.co/unsloth/Qwen3.8-27B-GGUF/resolve/f1bfb127c64f7072bdd2cad55f258b9c8b2910fe/Qwen3.8-27B-IQ4_XS.gguf",
-  "download_status": "authorized_not_downloaded",
+  "download_status": "downloaded_and_sha256_validated",
+  "validated_date": "2026-08-16",
+  "observed_size_bytes": 15705861088,
+  "observed_sha256": "9fd40d7036f5e0918e20aaeebf11468fafd06bb53d4d980eef6bb7e4e4ace666",
+  "free_bytes_before_download": 1626476843008,
+  "free_bytes_after_download": 1610770980864,
   "approval_record": "The project owner explicitly requested the Phase 13 download/storage preflight and continuation on 2026-08-16.",
   "notes": [
     "The model file and any partial download are excluded from Git.",

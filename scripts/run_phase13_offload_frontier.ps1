@@ -252,12 +252,17 @@ $outputPath = Join-Path $outputDirectory ($runId + '.json')
 if (Test-Path -LiteralPath $outputPath) {
     throw "Refusing to overwrite an existing frontier result: $outputPath"
 }
+$safeDirectory = 'safe.directory=' + $repositoryRoot.Replace('\', '/')
+$gitCommit = (& git -c $safeDirectory -C $repositoryRoot rev-parse HEAD).Trim()
+if ($LASTEXITCODE -ne 0 -or $gitCommit -notmatch '^[0-9a-f]{40}$') {
+    throw 'Could not record the repository commit for the frontier result.'
+}
 
 $result = [ordered]@{
     schema_version = 'phase13-offload-frontier-1.0'
     run_id = $runId
     recorded_at = $completedAt.ToString('o')
-    git_commit = (& git -C $repositoryRoot rev-parse HEAD).Trim()
+    git_commit = $gitCommit
     classification = 'phase13_iq4_xs_offload_frontier'
     protocol = 'environment/phase13-iq4-xs-protocol-2026-08-16.json'
     model_manifest = 'environment/phase13-iq4-xs-download-manifest.json'
