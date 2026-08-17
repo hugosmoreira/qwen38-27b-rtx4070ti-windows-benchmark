@@ -6,6 +6,7 @@ param(
     [ValidateRange(1, 66)][int]$MaximumGpuLayers = 66,
     [ValidateRange(256, 4096)][int]$MinimumFreeVramMiB = 1024,
     [ValidateRange(1024, 262144)][int]$ContextSize = 4096,
+    [ValidateSet('q8_0', 'q4_0')][string]$KvCacheType = 'q8_0',
     [ValidateRange(1024, 65535)][int]$Port = 8090,
     [ValidateRange(30, 600)][int]$StartupTimeoutSeconds = 300
 )
@@ -114,8 +115,8 @@ function Invoke-OffloadProbe {
             -Port $Port `
             -Threads 2 `
             -GpuLayers $GpuLayers `
-            -KvCacheKType 'q8_0' `
-            -KvCacheVType 'q8_0' `
+            -KvCacheKType $KvCacheType `
+            -KvCacheVType $KvCacheType `
             -SpeculativeType 'none' `
             -StartupTimeoutSeconds $StartupTimeoutSeconds `
             -SkipModelHashValidation | Out-String
@@ -246,7 +247,9 @@ if ($null -ne $lastPractical -and $null -ne $firstNonPractical) {
 }
 
 $completedAt = Get-Date
-$runId = 'phase13-iq4-offload-frontier-' + $completedAt.ToUniversalTime().ToString('yyyyMMddTHHmmssfffZ')
+$contextLabel = [string]$ContextSize
+$kvLabel = $KvCacheType.Replace('_', '-')
+$runId = "phase13-iq4-offload-frontier-$contextLabel-$kvLabel-" + $completedAt.ToUniversalTime().ToString('yyyyMMddTHHmmssfffZ')
 $outputDirectory = Join-Path $repositoryRoot 'results\raw'
 $outputPath = Join-Path $outputDirectory ($runId + '.json')
 if (Test-Path -LiteralPath $outputPath) {
@@ -269,8 +272,8 @@ $result = [ordered]@{
     runtime_manifest = 'environment/llama-cpp-b10448-manifest.json'
     controls = [ordered]@{
         context_size = $ContextSize
-        kv_cache_k = 'q8_0'
-        kv_cache_v = 'q8_0'
+        kv_cache_k = $KvCacheType
+        kv_cache_v = $KvCacheType
         mtp = $false
         minimum_free_vram_mib = $MinimumFreeVramMiB
         initial_gpu_layers = $InitialGpuLayers
@@ -286,7 +289,7 @@ $result = [ordered]@{
         baseline_authorized = $null -ne $lastPractical
     }
     limitations = @(
-        'The frontier is local to this driver, WDDM state, runtime build, IQ4_XS artifact, 4K context, and Q8_0 K/V cache.',
+        "The frontier is local to this driver, WDDM state, runtime build, IQ4_XS artifact, $ContextSize context, and $KvCacheType K/V cache.",
         'Each probe contains one short request and is placement evidence, not a repeated performance benchmark.',
         'A higher layer count that starts but misses the VRAM-headroom gate is classified as non-practical rather than as an out-of-memory failure.'
     )

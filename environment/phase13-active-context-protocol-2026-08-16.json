@@ -1,0 +1,42 @@
+{
+  "schema_version": "phase13-active-context-protocol-1.0",
+  "recorded_date": "2026-08-16",
+  "status": "pre_measurement",
+  "parent_protocol": "environment/phase13-iq4-xs-protocol-2026-08-16.json",
+  "purpose": "Select one 64K-capable Q4_0 layer placement and hold it constant across active-prompt context tests so context is not silently confounded with placement.",
+  "selection_probe": {
+    "configured_context": 65536,
+    "kv_cache_k": "q4_0",
+    "kv_cache_v": "q4_0",
+    "initial_gpu_layers": 25,
+    "layer_step": 8,
+    "maximum_gpu_layers": 45,
+    "minimum_free_vram_mib": 1024,
+    "active_prompt_role": "short capability request only",
+    "claim_boundary": "This selects allocation headroom and placement. It does not prove active 64K prompt usability or produce a context throughput result."
+  },
+  "ladder_design": {
+    "fixed_model": "Qwen3.8-27B-IQ4_XS.gguf",
+    "fixed_runtime": "llama.cpp b10448",
+    "fixed_gpu_layers": "selected by the 64K/Q4_0 capacity frontier before prompt configs are frozen",
+    "fixed_kv_cache": "q4_0",
+    "configured_contexts": [4096, 16384, 32768, 65536],
+    "prompt_construction": "deterministic public numbered-record fixture",
+    "output_reservation_tokens": 128,
+    "prompt_cache": false,
+    "mtp": false,
+    "thinking": false,
+    "parallel_slots": 1
+  },
+  "active_prompt_rules": {
+    "4k_16k_32k": "Use approximately 78% of the configured window to preserve continuity with Phase 7.",
+    "64k": "Use at least 60000 tokenizer-observed prompt tokens plus the declared output reservation before describing the test as near-64K active context.",
+    "report_configured_and_actual_separately": true,
+    "retain_failures_and_paging_evidence": true
+  },
+  "interpretation": [
+    "The capacity frontier and active-prompt ladder are separate evidence types.",
+    "Q4_0 output differed from Q8_0 at 4K, so long-context retrieval quality must be evaluated rather than assumed.",
+    "If near-64K is too slow, pages heavily, or misses headroom, report that operational limit even if allocation succeeds."
+  ]
+}
