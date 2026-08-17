@@ -1,6 +1,6 @@
-# v0.1.0 release candidate
+# v0.1.0
 
-This release candidate packages an auditable Windows study of Qwen3.8-27B GGUF inference on an RTX 4070 Ti 12 GB. It includes the benchmark software, frozen protocols, prompts and graders, machine-readable environment records, canonical raw responses, derived comparisons, and explicit superseded evidence. Model weights and runtime archives are not included.
+This release packages an auditable Windows study of Qwen3.8-27B GGUF inference on an RTX 4070 Ti 12 GB. It includes the benchmark software, frozen protocols, prompts and graders, machine-readable environment records, canonical raw responses, derived comparisons, and explicit superseded evidence. Model weights and runtime archives are not included.
 
 ## Headline findings
 
@@ -16,7 +16,7 @@ This release candidate packages an auditable Windows study of Qwen3.8-27B GGUF i
 
 ## Reproduce and inspect
 
-No GPU or model download is required to run the 71-test software suite, validate canonical records, check public links, and audit release boundaries. See [REPRODUCING.md](REPRODUCING.md).
+No GPU or model download is required to run the 71-test software suite, validate canonical records, check public links, and audit release boundaries. See the [reproduction guide](https://github.com/hugosmoreira/qwen38-27b-rtx4070ti-windows-benchmark/blob/v0.1.0/REPRODUCING.md).
 
 ## Publication state
 
