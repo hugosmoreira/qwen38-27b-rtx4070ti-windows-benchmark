@@ -1,7 +1,10 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
-    [ValidateSet('configs/phase13-iq4-xs-4k-q8.json')]
+    [ValidateSet(
+        'configs/phase13-iq4-xs-4k-q8.json',
+        'configs/phase13-iq4-xs-4k-q4-kv.json'
+    )]
     [string]$Config,
     [ValidateRange(0, 2147483647)][int]$ServerProcessId = 0
 )
@@ -41,15 +44,16 @@ if ($launchRecords.Count -ne 1) {
     throw "Expected one launch record for server PID $ServerProcessId; found $($launchRecords.Count)."
 }
 $launch = $launchRecords[0]
+$expectedKvType = if ($Config.EndsWith('-q4-kv.json', [System.StringComparison]::OrdinalIgnoreCase)) { 'q4_0' } else { 'q8_0' }
 if ([string]$launch.model_manifest -ne 'environment/phase13-iq4-xs-download-manifest.json' -or
     [string]$launch.model_alias -ne 'Qwen3.8-27B-IQ4_XS' -or
     [int]$launch.controlled_configuration.context_size -ne 4096 -or
     [int]$launch.controlled_configuration.gpu_layers_requested -ne 45 -or
-    [string]$launch.controlled_configuration.kv_cache_k_type -ne 'q8_0' -or
-    [string]$launch.controlled_configuration.kv_cache_v_type -ne 'q8_0' -or
+    [string]$launch.controlled_configuration.kv_cache_k_type -ne $expectedKvType -or
+    [string]$launch.controlled_configuration.kv_cache_v_type -ne $expectedKvType -or
     [string]$launch.speculative_decoding.type -ne 'none' -or
     -not [bool]$launch.model_hash_validated) {
-    throw 'The selected server launch record does not match the frozen Phase 13 4K/Q8 baseline.'
+    throw "The selected server launch record does not match the frozen Phase 13 4K/$expectedKvType measurement."
 }
 
 $serverLog = [string]$launch.log_files.server

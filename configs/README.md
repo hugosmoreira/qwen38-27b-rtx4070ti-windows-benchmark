@@ -13,3 +13,5 @@ Configuration files bind a run classification to one server, model manifest, run
 The four `phase9-mtp-*.json` files form two controlled IQ2 pairs: MTP off versus in-model `draft-mtp` for prose and Python code. Each pair differs only in its run identity and declared MTP controls. Both use greedy decoding, one excluded warm-up, five measured repetitions, and response-level checks that draft activity matches the selected state.
 
 `phase13-iq4-xs-4k-q8.json` freezes the first repeated hybrid-offload baseline after the separate frontier selected 45 requested/observed GPU layers under the 1,024 MiB headroom rule. It reuses the Phase 4 256-token workload, Q8 target K/V, MTP off, one excluded warm-up, and three measured repetitions. Its result may be compared with Phase 6 IQ2 only as a complete operating-point comparison because quantization and layer placement both differ.
+
+`phase13-iq4-xs-4k-q4-kv.json` forms the isolated target-cache pair with the Q8 baseline. Only run identity and K/V representation change to Q4_0; model, 45/66 placement, prompt, context, sampling, MTP-off state, warm-up, repetitions, and telemetry remain fixed.

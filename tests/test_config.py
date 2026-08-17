@@ -147,6 +147,25 @@ class ConfigurationTests(unittest.TestCase):
         self.assertEqual(config.data["run"]["warmup_runs"], 1)
         self.assertEqual(config.data["run"]["measured_repetitions"], 3)
 
+    def test_phase13_kv_pair_differs_only_by_run_and_cache_identity(self) -> None:
+        q8 = load_benchmark_config(
+            self.repository_root, Path("configs/phase13-iq4-xs-4k-q8.json")
+        )
+        q4 = load_benchmark_config(
+            self.repository_root, Path("configs/phase13-iq4-xs-4k-q4-kv.json")
+        )
+        self.assertEqual(q8.prompt_path, q4.prompt_path)
+        self.assertEqual(q8.data["configuration"]["kv_cache_k_type"], "q8_0")
+        self.assertEqual(q4.data["configuration"]["kv_cache_k_type"], "q4_0")
+        q8_data = copy.deepcopy(q8.data)
+        q4_data = copy.deepcopy(q4.data)
+        for data in (q8_data, q4_data):
+            data["run"].pop("classification")
+            data["run"].pop("result_prefix")
+            data["configuration"].pop("kv_cache_k_type")
+            data["configuration"].pop("kv_cache_v_type")
+        self.assertEqual(q8_data, q4_data)
+
     def test_repository_path_cannot_escape(self) -> None:
         with self.assertRaises(ConfigurationError):
             resolve_repository_path(self.repository_root, "../outside.json")
